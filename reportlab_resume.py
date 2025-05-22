@@ -12,6 +12,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 import json
 from pathlib import Path
+from datetime import datetime
 
 class ResumeConfig:
     """Configuration class for easy customization"""
@@ -50,9 +51,45 @@ class ResumeConfig:
     BULLET_CHAR = '▸'
 
 class ResumeData:
-    """Resume content data structure"""
+    """Resume content data structure - now loads from JSON"""
 
-    def __init__(self):
+    def __init__(self, data_file=None):
+        if data_file and Path(data_file).exists():
+            self.load_from_json(data_file)
+        else:
+            self._create_default_data()
+
+    def load_from_json(self, data_file):
+        """Load resume data from JSON file"""
+        with open(data_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        self.personal_info = data.get('personal_info', {})
+        self.summary = data.get('summary', '')
+        self.competencies = data.get('competencies', {})
+        self.experience = data.get('experience', [])
+        self.achievements = data.get('achievements', {})
+
+    def save_to_json(self, data_file):
+        """Save resume data to JSON file"""
+        data = {
+            'personal_info': self.personal_info,
+            'summary': self.summary,
+            'competencies': self.competencies,
+            'experience': self.experience,
+            'achievements': self.achievements,
+            '_metadata': {
+                'created': datetime.now().isoformat(),
+                'version': '1.0',
+                'description': 'Resume data for Professional Resume Generator'
+            }
+        }
+
+        with open(data_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
+    def _create_default_data(self):
+        """Create default resume data"""
         self.personal_info = {
             'name': 'DHEERAJ CHAND',
             'title': 'Director of Research and Analysis',
@@ -182,11 +219,59 @@ class ResumeData:
 class ResumeGenerator:
     """Main resume generator class"""
 
-    def __init__(self, config=None, data=None):
+    def __init__(self, config=None, data=None, input_dir=None, output_dir=None, basename="resume"):
         self.config = config or ResumeConfig()
         self.data = data or ResumeData()
+        self.basename = basename
+        self.input_dir = Path(input_dir) if input_dir else Path('inputs') / basename
+        self.output_dir = Path(output_dir) if output_dir else Path('outputs') / basename
         self.styles = self._create_styles()
         self.story = []
+
+        # Create directories if they don't exist
+        self._setup_directories()
+
+    def _setup_directories(self):
+        """Create input and output directory structure"""
+        print(f"🔧 DEBUG: Setting up directories...")
+        print(f"   DEBUG: Input dir path: {self.input_dir}")
+        print(f"   DEBUG: Output dir path: {self.output_dir}")
+
+        # Create main directories with basename subdirectories
+        print(f"   DEBUG: Creating input directory...")
+        self.input_dir.mkdir(parents=True, exist_ok=True)
+        print(f"   DEBUG: ✅ Input directory created/exists: {self.input_dir.exists()}")
+
+        print(f"   DEBUG: Creating output directory...")
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        print(f"   DEBUG: ✅ Output directory created/exists: {self.output_dir.exists()}")
+
+        # Create output subdirectories for each format
+        pdf_dir = self.output_dir / 'pdf'
+        docx_dir = self.output_dir / 'docx'
+        rtf_dir = self.output_dir / 'rtf'
+
+        print(f"   DEBUG: Creating format subdirectories...")
+        pdf_dir.mkdir(exist_ok=True)
+        print(f"   DEBUG: ✅ PDF dir: {pdf_dir} (exists: {pdf_dir.exists()})")
+
+        docx_dir.mkdir(exist_ok=True)
+        print(f"   DEBUG: ✅ DOCX dir: {docx_dir} (exists: {docx_dir.exists()})")
+
+        rtf_dir.mkdir(exist_ok=True)
+        print(f"   DEBUG: ✅ RTF dir: {rtf_dir} (exists: {rtf_dir.exists()})")
+
+        print(f"📁 Directory structure:")
+        print(f"   Input:  {self.input_dir.absolute()}")
+        print(f"   Output: {self.output_dir.absolute()}")
+        print(f"   Subdirs: pdf/, docx/, rtf/")
+
+    def _get_output_path(self, format_type, basename):
+        """Get the appropriate output path for a given format"""
+        format_dir = self.output_dir / format_type
+        output_path = format_dir / f"{basename}.{format_type}"
+        print(f"🔧 DEBUG: Output path for {format_type}: {output_path}")
+        return output_path
 
     def _create_styles(self):
         """Create custom paragraph styles"""
@@ -426,11 +511,13 @@ class ResumeGenerator:
 
             self.story.append(Spacer(1, 4))
 
-    def generate_pdf(self, filename='resume.pdf'):
+    def generate_pdf(self, basename='resume'):
         """Generate the complete PDF resume"""
+        output_path = self._get_output_path('pdf', basename)
+
         # Create document
         doc = SimpleDocTemplate(
-            filename,
+            str(output_path),
             pagesize=letter,
             rightMargin=self.config.PAGE_MARGIN,
             leftMargin=self.config.PAGE_MARGIN,
@@ -447,11 +534,11 @@ class ResumeGenerator:
 
         # Generate PDF
         doc.build(self.story)
-        print(f"Resume generated successfully: {filename}")
+        print(f"📄 PDF generated: {output_path}")
 
-        return filename
+        return str(output_path)
 
-    def generate_docx(self, filename='resume.docx'):
+    def generate_docx(self, basename='resume'):
         """Generate Word document version"""
         try:
             from docx import Document
@@ -462,6 +549,7 @@ class ResumeGenerator:
             print("⚠️  python-docx not installed. Install with: pip install python-docx")
             return None
 
+        output_path = self._get_output_path('docx', basename)
         doc = Document()
 
         # Set margins
@@ -549,9 +637,9 @@ class ResumeGenerator:
             for achievement in achievements:
                 doc.add_paragraph(f"✓ {achievement}", style='List Bullet')
 
-        doc.save(filename)
-        print(f"Word document generated: {filename}")
-        return filename
+        doc.save(str(output_path))
+        print(f"📝 DOCX generated: {output_path}")
+        return str(output_path)
 
     def _add_docx_section(self, doc, title, content):
         """Helper to add a section to Word doc"""
@@ -560,19 +648,10 @@ class ResumeGenerator:
         heading.runs[0].font.color.rgb = RGBColor(184, 134, 11)  # Gold
         doc.add_paragraph(content)
 
-    def generate_pages(self, filename='resume.pages'):
-        """Generate Pages document (via RTF format)"""
-        try:
-            from striprtf.striprtf import rtf_to_text
-            print("⚠️  Pages format not directly supported. Generating RTF instead...")
-            return self.generate_rtf(filename.replace('.pages', '.rtf'))
-        except ImportError:
-            print("⚠️  RTF generation requires striprtf. Install with: pip install striprtf")
-            print("💡 Alternative: Generate DOCX and open in Pages to convert")
-            return None
-
-    def generate_rtf(self, filename='resume.rtf'):
+    def generate_rtf(self, basename='resume'):
         """Generate RTF document (can be opened by Pages)"""
+        output_path = self._get_output_path('rtf', basename)
+
         rtf_content = r"""{\rtf1\ansi\deff0
 {\fonttbl{\f0 Times New Roman;}}
 {\colortbl;\red0\green0\blue0;\red34\green139\blue34;\red184\green134\blue11;}
@@ -619,35 +698,88 @@ class ResumeGenerator:
 
         rtf_content += "}"
 
-        with open(filename, 'w', encoding='utf-8') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(rtf_content)
 
-        print(f"RTF document generated: {filename}")
+        print(f"📄 RTF generated: {output_path}")
         print("💡 Open this RTF file in Pages and save as .pages format")
-        return filename
+        return str(output_path)
 
-def load_config_from_json(config_file):
-    """Load configuration from JSON file"""
-    if Path(config_file).exists():
+
+def load_config_from_json(input_dir, basename):
+    """Load configuration from JSON file in input directory"""
+    config_file = Path(input_dir) / 'config.json'
+    print(f"🔧 DEBUG: Looking for config at: {config_file}")
+    print(f"   DEBUG: Config file exists: {config_file.exists()}")
+
+    if config_file.exists():
+        print(f"   DEBUG: Loading existing config file...")
         with open(config_file, 'r') as f:
             config_data = json.load(f)
 
         config = ResumeConfig()
         for key, value in config_data.items():
-            if hasattr(config, key):
+            if hasattr(config, key) and not key.startswith('_'):
                 setattr(config, key, value)
 
+        print(f"📄 Loaded config: {config_file}")
         return config
     else:
+        print(f"   DEBUG: Creating new config file...")
         # Create default config file
         config = ResumeConfig()
-        config_dict = {attr: getattr(config, attr) for attr in dir(config) if not attr.startswith('_')}
+        config_dict = {attr: getattr(config, attr) for attr in dir(config)
+                      if not attr.startswith('_') and not callable(getattr(config, attr))}
 
+        # Add metadata
+        config_dict['_metadata'] = {
+            'basename': basename,
+            'created': datetime.now().isoformat(),
+            'version': '1.0',
+            'description': f'Configuration for {basename} resume'
+        }
+
+        # Ensure input directory exists
+        print(f"   DEBUG: Ensuring input directory exists: {input_dir}")
+        Path(input_dir).mkdir(parents=True, exist_ok=True)
+        print(f"   DEBUG: Input directory created/exists: {Path(input_dir).exists()}")
+
+        print(f"   DEBUG: Writing config to: {config_file}")
         with open(config_file, 'w') as f:
             json.dump(config_dict, f, indent=2, default=str)
+        print(f"   DEBUG: Config file written, exists now: {config_file.exists()}")
 
-        print(f"Created default config file: {config_file}")
+        print(f"📄 Created default config: {config_file}")
         return config
+
+
+def load_resume_data(input_dir, basename):
+    """Load resume data from JSON file in input directory"""
+    data_file = Path(input_dir) / 'resume_data.json'
+    print(f"🔧 DEBUG: Looking for resume data at: {data_file}")
+    print(f"   DEBUG: Resume data file exists: {data_file.exists()}")
+
+    if data_file.exists():
+        print(f"   DEBUG: Loading existing resume data file...")
+        print(f"📄 Loading resume data: {data_file}")
+        return ResumeData(data_file)
+    else:
+        print(f"   DEBUG: Creating new resume data file...")
+        # Create default data file
+        data = ResumeData()
+
+        # Ensure input directory exists
+        print(f"   DEBUG: Ensuring input directory exists: {input_dir}")
+        Path(input_dir).mkdir(parents=True, exist_ok=True)
+        print(f"   DEBUG: Input directory created/exists: {Path(input_dir).exists()}")
+
+        print(f"   DEBUG: Writing resume data to: {data_file}")
+        data.save_to_json(data_file)
+        print(f"   DEBUG: Resume data file written, exists now: {data_file.exists()}")
+
+        print(f"📄 Created default resume data: {data_file}")
+        return data
+
 
 def main():
     """Main function to generate resume"""
@@ -656,53 +788,115 @@ def main():
     parser = argparse.ArgumentParser(description='Generate professional resume in multiple formats')
     parser.add_argument('--format', choices=['pdf', 'docx', 'rtf', 'all'], default='pdf',
                        help='Output format (default: pdf)')
-    parser.add_argument('--basename', default='dheeraj_chand_resume',
-                       help='Base filename (default: dheeraj_chand_resume)')
+    parser.add_argument('--basename', default='resume',
+                       help='Base filename and directory name (default: resume)')
+    parser.add_argument('--input-dir', default=None,
+                       help='Custom input directory (default: inputs/{basename})')
+    parser.add_argument('--output-dir', default=None,
+                       help='Custom output directory (default: outputs/{basename})')
 
     args = parser.parse_args()
 
-    # Load configuration
-    config = load_config_from_json('resume_config.json')
+    print(f"🔧 DEBUG: Command line args:")
+    print(f"   DEBUG: basename = {args.basename}")
+    print(f"   DEBUG: format = {args.format}")
+    print(f"   DEBUG: input-dir = {args.input_dir}")
+    print(f"   DEBUG: output-dir = {args.output_dir}")
+    print()
 
-    # Load data
-    data = ResumeData()
+    # Set up directory paths
+    if args.input_dir:
+        input_path = Path(args.input_dir)
+        print(f"🔧 DEBUG: Using custom input directory: {input_path}")
+    else:
+        input_path = Path('inputs') / args.basename
+        print(f"🔧 DEBUG: Using default input path: inputs/{args.basename} = {input_path}")
+
+    if args.output_dir:
+        output_path = Path(args.output_dir)
+        print(f"🔧 DEBUG: Using custom output directory: {output_path}")
+    else:
+        output_path = Path('outputs') / args.basename
+        print(f"🔧 DEBUG: Using default output path: outputs/{args.basename} = {output_path}")
+
+    print(f"🔧 DEBUG: Final paths:")
+    print(f"   DEBUG: input_path = {input_path} (absolute: {input_path.absolute()})")
+    print(f"   DEBUG: output_path = {output_path} (absolute: {output_path.absolute()})")
+    print()
+
+    print(f"🚀 Professional Resume Generator")
+    print(f"📋 Resume: {args.basename}")
+    print(f"📁 Input:  {input_path}")
+    print(f"📁 Output: {output_path}")
+    print()
+
+    # Load configuration and data
+    print(f"🔧 DEBUG: Loading configuration and data...")
+    config = load_config_from_json(input_path, args.basename)
+    data = load_resume_data(input_path, args.basename)
+    print(f"🔧 DEBUG: Configuration and data loaded successfully")
+    print()
 
     # Generate resume
-    generator = ResumeGenerator(config, data)
+    print(f"🔧 DEBUG: Creating ResumeGenerator...")
+    generator = ResumeGenerator(
+        config=config,
+        data=data,
+        input_dir=input_path,
+        output_dir=output_path,
+        basename=args.basename
+    )
+    print(f"🔧 DEBUG: ResumeGenerator created successfully")
+    print()
 
     generated_files = []
 
     if args.format == 'all':
-        # Generate all formats
         formats = ['pdf', 'docx', 'rtf']
     else:
         formats = [args.format]
 
-    for fmt in formats:
-        filename = f"{args.basename}.{fmt}"
+    print(f"🎨 Generating {len(formats)} format(s): {formats}")
+    print()
 
+    for fmt in formats:
+        print(f"🔧 DEBUG: Generating {fmt} format...")
         if fmt == 'pdf':
-            result = generator.generate_pdf(filename)
+            result = generator.generate_pdf(args.basename)
         elif fmt == 'docx':
-            result = generator.generate_docx(filename)
+            result = generator.generate_docx(args.basename)
         elif fmt == 'rtf':
-            result = generator.generate_rtf(filename)
+            result = generator.generate_rtf(args.basename)
 
         if result:
             generated_files.append(result)
+            print(f"🔧 DEBUG: ✅ {fmt} generation successful: {result}")
+        else:
+            print(f"🔧 DEBUG: ❌ {fmt} generation failed")
+        print()
 
-    print(f"\n✅ Resume generation complete!")
-    for file in generated_files:
-        print(f"📄 Generated: {file}")
+    print()
+    print(f"✅ Resume generation complete!")
+    print(f"📄 Generated {len(generated_files)} file(s)")
 
-    print("\n🎨 Colors: Green name, Gold headers")
-    print("📏 Optimized spacing for 2-page target")
-    print("⚙️  Edit 'resume_config.json' to customize formatting")
+    print("\n🎯 Quick tips:")
+    print(f"  • Edit {input_path}/config.json to customize colors and fonts")
+    print(f"  • Edit {input_path}/resume_data.json to update content")
+    print("  • PDF format recommended for applications")
+    print("  • DOCX format good for ATS systems")
+    print("  • RTF format can be opened in Pages")
+
     print("\n💡 Usage examples:")
-    print("  python reportlab_resume.py --format pdf")
-    print("  python reportlab_resume.py --format docx")
-    print("  python reportlab_resume.py --format all")
-    print("  python reportlab_resume.py --format pdf --basename my_resume")
+    print(f"  python {Path(__file__).name} --format pdf --basename john_doe")
+    print(f"  python {Path(__file__).name} --format all --basename data_scientist")
+    print(f"  python {Path(__file__).name} --basename senior_dev --input-dir custom/input")
+
+    print(f"\n📂 Your files are organized in:")
+    print(f"   {input_path}/ (config & content)")
+    print(f"   {output_path}/ (generated resumes)")
+
+    return generated_files
+
 
 if __name__ == "__main__":
     main()
