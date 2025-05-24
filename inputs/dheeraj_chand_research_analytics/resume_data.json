@@ -1,0 +1,128 @@
+{
+  "personal_info": {
+    "name": "DHEERAJ CHAND",
+    "title": "Director of Research and Analysis",
+    "phone": "(202) 550-7110",
+    "email": "Dheeraj.Chand@gmail.com",
+    "website": "https://www.dheerajchand.com",
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+  },
+  "summary": "Research and Data Analytics Leader with 20+ years of experience directing applied research projects from conception to completion focused on economic mobility, community development, and social impact. Proven track record of leading cross-functional teams, translating complex research insights for diverse stakeholders including elected officials and community organizations, and implementing evidence-based solutions that drive meaningful outcomes. Expert in research methodology design, statistical analysis, and community partnership development with extensive experience serving vulnerable populations and addressing systemic poverty challenges.",
+  "competencies": {
+    "Applied Research Leadership": [
+      "Applied Research Project Management (Conception to Completion)",
+      "Research Methodology Design and Implementation",
+      "Economic Mobility and Community Development Research",
+      "Statistical Analysis and Data Validation",
+      "Cross-functional Team Leadership and Mentoring",
+      "Stakeholder Communication and Translation of Complex Findings",
+      "Evidence-Based Framework Development"
+    ],
+    "Technical Proficiency": [
+      "Programming: Python (Pandas, SciKit, TensorFlow, Django), R, SQL, Scala, JavaScript",
+      "Data Platforms: PostgreSQL, MySQL, Snowflake, Spark, MongoDB, Oracle",
+      "Analysis Tools: Excel (Advanced), Tableau, PowerBI, SPSS, SAS",
+      "Research Tools: Survey Design, Sampling Methodology, Statistical Modeling",
+      "Visualization: d3.js, Seaborn, MatplotLib, Tableau, PowerBI"
+    ],
+    "Community Impact and Strategic Operations": [
+      "Community Partnership Development",
+      "Government Relations and Policy Analysis",
+      "Public Systems Integration",
+      "Multi-million Dollar Project Management",
+      "Performance Measurement and Evaluation",
+      "Poverty Alleviation Program Assessment",
+      "Data-Driven Decision Making for Social Impact"
+    ]
+  },
+  "experience": [
+    {
+      "title": "PARTNER",
+      "company": "Siege Analytics, Austin, TX",
+      "dates": "2005 – Present",
+      "subtitle": "Leading Applied Research Projects with Community Development and Social Impact Focus",
+      "responsibilities": [
+        "Direct and execute comprehensive applied research projects from conception to completion for organizations focused on economic mobility, community development, and social outcomes",
+        "Lead multi-million dollar research initiatives involving sensitive demographic and economic data addressing poverty, housing, and community health challenges",
+        "Translate complex research findings for diverse stakeholder groups including elected officials, NGO leadership, community organizations, and frontline service providers",
+        "Collaborate with government agencies, community partners, and research institutions to develop evidence-based solutions addressing systemic poverty and economic mobility barriers",
+        "Manage client relationships across public sector, nonprofit, and community organizations, consistently delivering research that drives strategic decision-making for vulnerable populations",
+        "Develop and deploy custom analytical tools processing billions of records to identify patterns in economic mobility, demographic trends, and service delivery outcomes"
+      ]
+    },
+    {
+      "title": "DATA PRODUCTS MANAGER",
+      "company": "Helm/Murmuration, Austin, TX",
+      "dates": "2021 – 2023",
+      "subtitle": "Research Team Leadership and Community-Focused Methodology Innovation",
+      "responsibilities": [
+        "Led cross-functional team of eleven data engineers and analysts focused on community organizing and social justice research, establishing best practices for applied research methodology",
+        "Managed national research team of five analysts specializing in community engagement and demographic analysis for social impact organizations",
+        "Overhauled organization research methodology and data collection operations for community-focused studies, significantly improving accuracy and response rates",
+        "Designed and implemented comprehensive data warehouse integrating demographic, economic, and behavioral data to support evidence-based decision making for community organizations",
+        "Developed advanced analytical pipelines for research applications that enhanced community segmentation and outcome prediction capabilities for social impact programs",
+        "Trained staff in data visualization and communication techniques to improve research deliverable quality for diverse audiences including community leaders and government officials"
+      ]
+    },
+    {
+      "title": "ANALYTICS SUPERVISOR",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2018 – 2019",
+      "subtitle": "Research Operations and Team Development",
+      "responsibilities": [
+        "Restructured research department to scale capabilities from small-scale analysis to comprehensive applied research operations",
+        "Managed three analysts, mentoring them in advanced research techniques, methodology design, and stakeholder communication",
+        "Implemented spatial analysis and segmentation methodologies that revealed new insights about community needs and service delivery",
+        "Introduced version control and Agile project management methodologies, improving research project delivery timelines by 40%",
+        "Developed standardized research reporting frameworks to ensure consistent, high-quality deliverables for diverse stakeholder groups"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Mautinoa Technologies, Austin, TX",
+      "dates": "2016 – 2018",
+      "subtitle": "Applied Research in Humanitarian and Crisis Context",
+      "responsibilities": [
+        "Conceived, architected, and engineered econometric simulation software for measuring humanitarian crisis intervention effectiveness and resource allocation optimization",
+        "Collaborated with data and engineering directors at multinational NGOs (UNICEF, IFRC) to develop evidence-based intervention frameworks for vulnerable populations",
+        "Conducted geospatial analysis on vulnerable populations to assess intervention impact and optimize resource allocation for maximum community benefit",
+        "Designed research methodologies for measuring complex social outcomes in crisis environments, focusing on economic mobility and community resilience"
+      ]
+    },
+    {
+      "title": "RESEARCH DIRECTOR",
+      "company": "PCCC, Austin, TX",
+      "dates": "2011 – 2012",
+      "subtitle": "Large-Scale Applied Research Initiative Leadership",
+      "responsibilities": [
+        "Led all aspects of applied research design, implementation, analysis, and reporting for major national studies focused on social and economic outcomes",
+        "Engineered innovative data collection system facilitating thousands of simultaneous surveys, significantly increasing research scale and efficiency",
+        "Developed new statistical methods for geographic boundary estimation, enhancing community-level analysis capabilities",
+        "Created comprehensive data visualization solutions that improved stakeholder understanding of complex research findings related to economic mobility",
+        "Managed research projects addressing policy questions related to economic mobility and community development"
+      ]
+    }
+  ],
+  "achievements": {
+    "Research Leadership and Community Impact": [
+      "Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders on economic mobility and poverty alleviation",
+      "Research analysis used in court cases addressing housing, redistricting, and community development, demonstrating rigorous methodology and credible findings",
+      "Conceived and deployed cloud-based analytical software used by thousands of researchers and analysts nationwide for community-focused research"
+    ],
+    "Systems and Infrastructure Development": [
+      "Designed and implemented multi-tenant data warehouse tracking decades of demographic, economic, and policy changes affecting vulnerable populations",
+      "Developed comprehensive research frameworks for measuring complex social outcomes and community intervention effectiveness",
+      "Created scalable research methodologies supporting evidence-based decision making for multi-billion dollar public systems focused on poverty alleviation"
+    ],
+    "Community and Stakeholder Engagement": [
+      "Extensive experience briefing elected officials, NGO leadership, and senior staff on research findings and policy implications for economic mobility",
+      "Proven track record translating complex research for diverse audiences including community organizations, government agencies, and frontline service providers",
+      "Successfully managed research partnerships across public sector, nonprofit, and community-based organizations focused on addressing systemic poverty"
+    ]
+  },
+  "_metadata": {
+    "created": "2025-05-21T22:16:32.863017",
+    "version": "1.0",
+    "description": "Resume data for Professional Resume Generator"
+  }
+}

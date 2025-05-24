@@ -1,0 +1,96 @@
+{
+  "personal_info": {
+    "name": "DHEERAJ CHAND",
+    "title": "Data Analytics & Technology Consultant",
+    "phone": "(202) 550-7110",
+    "email": "Dheeraj.Chand@gmail.com",
+    "website": "https://www.dheerajchand.com",
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+  },
+  "summary": "Strategic data and technology consultant with 20+ years solving complex problems through analytics and software development. Specializes in transforming organizational data capabilities from concept to production. Expert in translating business requirements into technical solutions, with proven success across political, nonprofit, and technology sectors. Currently building scalable data platforms while modernizing legacy systems for improved performance and maintainability.",
+  "competencies": {
+    "Consulting Expertise": [
+      "Strategic Data Analysis (Exploratory, Predictive, Explanatory)",
+      "Data Engineering and Infrastructure Development",
+      "Systems Integration and Architecture Consulting",
+      "Project Management and Product Management",
+      "Team Leadership and Technical Mentoring",
+      "Stakeholder Communication and Requirements Gathering"
+    ],
+    "Technical Solutions": [
+      "Programming: Python (Django, Pandas, PySpark), Scala (Spark), JavaScript",
+      "Data Platforms: PostgreSQL/PostGIS, Snowflake, MongoDB, AWS, GCP",
+      "Analytics: Tableau, PowerBI, Statistical Modeling, Machine Learning",
+      "Integration: APIs, ETL/ELT pipelines, Cloud migrations, Legacy modernization"
+    ],
+    "Industry Focus": [
+      "Political and Electoral Data Analytics",
+      "Nonprofit and Community Organization Solutions",
+      "Technology Startup and Scale-up Consulting",
+      "Geospatial Analysis and Demographic Intelligence",
+      "Survey Research and Consumer Behavior Analysis"
+    ]
+  },
+  "experience": [
+    {
+      "title": "PRINCIPAL CONSULTANT",
+      "company": "Siege Analytics, Austin, TX",
+      "dates": "2005 – Present",
+      "subtitle": "Data, Technology and Strategy Consulting",
+      "responsibilities": [
+        "Provide comprehensive data analysis, engineering, and strategic planning for diverse client portfolio",
+        "Develop custom software solutions and data pipeline architectures for complex integration requirements",
+        "Lead digital transformation initiatives including cloud migrations and legacy system modernization",
+        "Deliver management consulting including project planning, team building, and operational optimization",
+        "Maintain long-term strategic partnerships with clients across political, nonprofit, and technology sectors"
+      ]
+    },
+    {
+      "title": "DATA PRODUCTS MANAGER",
+      "company": "Helm/Murmuration, Austin, TX",
+      "dates": "2021 – 2023",
+      "subtitle": "Enterprise Platform Development Leadership",
+      "responsibilities": [
+        "Conceived and developed integrated data platform combining government, NGO, and proprietary datasets",
+        "Led engineering team building multi-tenant data warehouse from Census and economic statistics",
+        "Designed longitudinal analysis capabilities across demographic, economic, and geographic dimensions",
+        "Managed polling operations focusing on modern survey methodologies and text-based engagement",
+        "Trained technical staff on open source geospatial technologies and analytical best practices"
+      ]
+    },
+    {
+      "title": "TECHNICAL CONSULTANT",
+      "company": "Various Clients, Austin, TX",
+      "dates": "2016 – 2021",
+      "subtitle": "Specialized Project Consulting",
+      "responsibilities": [
+        "Developed SimCrisis humanitarian modeling platform for international NGO collaboration",
+        "Created RACSO survey operations platform through vendor management and technical leadership",
+        "Built advanced analytics capabilities for advertising and customer intelligence applications",
+        "Implemented scalable telephony integration systems for large-scale data collection"
+      ]
+    }
+  ],
+  "achievements": {
+    "Technology Innovation": [
+      "Developed proprietary B2B SaaS solutions for data analytics and geospatial applications",
+      "Created open source frameworks for political and social behavior prediction",
+      "Pioneered integration of advanced mapping techniques into standard consulting deliverables"
+    ],
+    "Client Impact": [
+      "Maintained 15+ year consulting relationships across political, nonprofit, and technology sectors",
+      "Delivered complex systems integrations and data platform solutions for enterprise clients",
+      "Provided strategic planning resulting in measurable operational improvements and cost savings"
+    ],
+    "Methodological Innovation": [
+      "Developed statistical methods for boundary estimation and geographic segmentation",
+      "Created frameworks for comprehensive technology audits and modernization planning",
+      "Established best practices for multi-tenant data architecture and security compliance"
+    ]
+  },
+  "_metadata": {
+    "version": "consulting_minimal",
+    "created": "2025-05-24T09:59:48.263446",
+    "description": "Minimal consulting-focused version emphasizing strategic advisory and technical expertise"
+  }
+}

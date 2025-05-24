@@ -1,0 +1,32 @@
+{
+  "PRIMARY_GREEN": "#228B22",
+  "SECONDARY_GOLD": "#B8860B",
+  "ACCENT_BLUE": "#1F4E79",
+  "LIGHT_GOLD": "#DAA520",
+  "LIGHT_BLUE": "#4682B4",
+  "DARK_GRAY": "#333333",
+  "MEDIUM_GRAY": "#666666",
+  "LIGHT_GRAY": "#999999",
+  "FONT_MAIN": "Helvetica",
+  "FONT_BOLD": "Helvetica-Bold",
+  "FONT_ITALIC": "Helvetica-Oblique",
+  "NAME_SIZE": 24,
+  "TITLE_SIZE": 14,
+  "SECTION_HEADER_SIZE": 12,
+  "JOB_TITLE_SIZE": 11,
+  "BODY_SIZE": 9,
+  "CONTACT_SIZE": 9,
+  "PAGE_MARGIN": 0.6,
+  "SECTION_SPACING": 0.12,
+  "PARAGRAPH_SPACING": 0.06,
+  "LINE_SPACING": 1.15,
+  "JOB_SPACING": 6,
+  "CATEGORY_SPACING": 4,
+  "MAX_PAGES": 2,
+  "BULLET_CHAR": "▸",
+  "_metadata": {
+    "version": "research_focused",
+    "created": "2025-05-23T22:58:09.433765",
+    "description": "Configuration for research_focused resume version with green, gold, and blue branding"
+  }
+}

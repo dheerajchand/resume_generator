@@ -1,0 +1,138 @@
+{
+  "personal_info": {
+    "name": "DHEERAJ CHAND",
+    "title": "Research, Data Analytics & Engineering Professional",
+    "phone": "(202) 550-7110",
+    "email": "Dheeraj.Chand@gmail.com",
+    "website": "https://www.dheerajchand.com",
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+  },
+  "summary": "Research & Data Professional with 20+ years of comprehensive experience spanning applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions. Proven track record leading cross-functional teams, architecting data platforms, and delivering insights that drive strategic decision-making across political, nonprofit, and technology sectors. Deep expertise in survey methodology, geospatial analysis, and building production systems for sensitive data applications.",
+  "competencies": {
+    "Research and Analytics": [
+      "Survey Methodology: Design, sampling, weighting, longitudinal analysis",
+      "Statistical Analysis: Regression modeling, clustering, segmentation, machine learning",
+      "Geospatial Analysis: Spatial clustering, boundary estimation, demographic mapping",
+      "Data Visualization: Tableau, PowerBI, d3.js, Matplotlib, Seaborn, choropleth mapping",
+      "Research Management: Team leadership, methodology design, stakeholder communication"
+    ],
+    "Programming and Development": [
+      "Python: Django/GeoDjango, Flask, Pandas, PySpark, SciKit-Learn, TensorFlow",
+      "JVM Languages: Scala (Spark), Java, Groovy",
+      "Web Technologies: JavaScript, React, d3.js, PHP, HTML/CSS",
+      "Database Languages: SQL, T-SQL, PostgreSQL/PostGIS",
+      "Statistical Computing: R, SPSS, SAS, Stata"
+    ],
+    "Data Infrastructure": [
+      "Cloud Platforms: AWS (EC2, RDS, S3), Google Cloud Platform, Microsoft Azure",
+      "Big Data: Apache Spark, PySpark, Hadoop, Snowflake, dbt",
+      "Databases: PostgreSQL/PostGIS, MySQL, Oracle, MongoDB, Neo4j",
+      "Geospatial: ESRI ArcGIS, Quantum GIS, GeoServer, OSGeo, GRASS",
+      "DevOps: Docker, Git, CI/CD pipelines, automated testing, version control"
+    ]
+  },
+  "experience": [
+    {
+      "title": "PARTNER",
+      "company": "Siege Analytics, Austin, TX",
+      "dates": "2005 – Present",
+      "subtitle": "Data, Technology and Strategy Consulting",
+      "responsibilities": [
+        "Conduct comprehensive quantitative and qualitative research studies for political candidates and organizations",
+        "Architect cloud-based data warehouse solutions processing billions of records for electoral analytics",
+        "Design scalable ETL pipelines using PySpark and dbt for large-scale geospatial and demographic datasets",
+        "Develop custom analytical tools and algorithms for fraud detection and spatial clustering",
+        "Manage complex client relationships across political, nonprofit, and technology sectors",
+        "Lead technical architecture decisions for data-intensive applications and platforms"
+      ]
+    },
+    {
+      "title": "DATA PRODUCTS MANAGER",
+      "company": "Helm/Murmuration, Austin, TX",
+      "dates": "2021 – 2023",
+      "subtitle": "Enterprise Data Platform Development",
+      "responsibilities": [
+        "Led design and implementation of enterprise-scale multi-tenant data warehouse",
+        "Managed engineering team of 11 professionals setting technical direction",
+        "Modernized legacy ETL processes implementing dbt and PySpark workflows",
+        "Overhauled survey methodology using Random Device Engagement and text messaging",
+        "Developed data governance framework and quality control measures",
+        "Built meta-analytical dataset for longitudinal analysis standardizing survey instruments"
+      ]
+    },
+    {
+      "title": "ANALYTICS SUPERVISOR",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2018 – 2019",
+      "subtitle": "Big Data Transformation and Advanced Analytics",
+      "responsibilities": [
+        "Transformed small data team into big data engineering operation scaling to Hadoop clusters",
+        "Managed accounts including US Air Force, Southwest Airlines/Chase, and Indeed",
+        "Implemented spatial analysis and consumer segmentation methodologies",
+        "Applied advanced statistical and ML techniques for behavioral clustering",
+        "Introduced version control and Agile methodologies improving delivery by 40%"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Mautinoa Technologies, Austin, TX",
+      "dates": "2016 – 2018",
+      "subtitle": "Financial Technology and Humanitarian Crisis Modeling",
+      "responsibilities": [
+        "Conceived and engineered SimCrisis: GeoDjango application for econometric crisis simulations",
+        "Collaborated with International Federation of Red Cross, UNICEF, and humanitarian organizations",
+        "Implemented geospatial analysis for population impact assessment and resource optimization",
+        "Developed agent-based modeling and statistical analysis systems for crisis prediction"
+      ]
+    },
+    {
+      "title": "SENIOR ANALYST",
+      "company": "Myers Research, Austin, TX",
+      "dates": "2012 – 2014",
+      "subtitle": "Strategic Research and Survey Operations",
+      "responsibilities": [
+        "Co-developed RACSO web application for comprehensive survey operations management",
+        "Designed survey instruments for specialized voting segments and niche markets",
+        "Introduced geospatial techniques enhancing market segmentation capabilities",
+        "Managed RFP process analyzing bids from 1,200+ vendors for platform development"
+      ]
+    },
+    {
+      "title": "RESEARCH DIRECTOR",
+      "company": "Progressive Change Campaign Committee, Austin, TX",
+      "dates": "2011 – 2012",
+      "subtitle": "Large-Scale Survey Systems and Method Development",
+      "responsibilities": [
+        "Engineered FLEEM web application using Twilio API for thousands of simultaneous IVR surveys",
+        "Led all aspects of survey design, implementation, data analysis, and reporting",
+        "Developed new statistical methods for boundary estimation and geographic segmentation",
+        "Created comprehensive data visualization solutions for complex research findings"
+      ]
+    }
+  ],
+  "achievements": {
+    "Software Development and Innovation": [
+      "Conceived and deployed BALLISTA redistricting software used by thousands of analysts nationwide",
+      "Developed DAMON boundary estimation system using incomplete data without ML requirements",
+      "Created SimCrisis econometric simulation platform for humanitarian intervention modeling",
+      "Built RACSO comprehensive survey operations platform from RFP through deployment"
+    ],
+    "Data Architecture and Engineering": [
+      "Designed multi-dimensional data warehouse tracking decades of political and economic change",
+      "Implemented scalable ETL pipelines achieving 57% performance improvement",
+      "Developed fraud detection systems across multi-terabyte campaign finance datasets",
+      "Created spatial clustering algorithms achieving 88% improved targeting efficacy"
+    ],
+    "Research Impact and Recognition": [
+      "Research analysis used in court cases for redistricting, housing, and community development",
+      "Regular expert testimony on methodology for journalists and elected officials",
+      "Built foundational polling consortium infrastructure adopted by major research organizations",
+      "Pioneered integration of geospatial techniques into political and market research"
+    ]
+  },
+  "_metadata": {
+    "version": "comprehensive_full",
+    "created": "2025-05-23T22:58:09.434470",
+    "description": "Comprehensive version with complete work history and technical depth"
+  }
+}

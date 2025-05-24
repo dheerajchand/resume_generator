@@ -1,902 +1,661 @@
 #!/usr/bin/env python3
 """
-Resume Data Generator for ReportLab Script
-Creates structured JSON input files for multiple resume versions
+Professional Resume Generator using ReportLab
+Generates resumes from JSON data files with multiple format support and configurable color schemes
 """
 
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.lib.colors import HexColor, black, white
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 import json
 from pathlib import Path
-from datetime import datetime
+import argparse
 
-def create_directory_structure():
-    """Create the directory structure for all resume versions"""
+class ResumeGenerator:
+    """Main resume generator class that loads data from JSON"""
 
-    resume_versions = [
-        "dheeraj_research_focused",
-        "dheeraj_technical_detailed",
-        "dheeraj_comprehensive_full",
-        "dheeraj_consulting_minimal",
-        "dheeraj_software_engineer"
-    ]
+    def __init__(self, data_file, config_file=None):
+        self.data = self.load_resume_data(data_file)
+        self.config = self.load_config(config_file)
+        self.styles = self._create_styles()
+        self.story = []
 
-    base_inputs = Path("inputs")
-    base_outputs = Path("outputs")
+    def load_resume_data(self, data_file):
+        """Load resume data from JSON file"""
+        try:
+            with open(data_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            print(f"✅ Loaded resume data from: {data_file}")
+            return data
+        except Exception as e:
+            print(f"❌ Error loading resume data from {data_file}: {e}")
+            raise
 
-    for version in resume_versions:
-        # Create input directories
-        input_dir = base_inputs / version
-        input_dir.mkdir(parents=True, exist_ok=True)
+    def load_config(self, config_file):
+        """Load configuration from JSON file"""
+        if config_file and Path(config_file).exists():
+            try:
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                print(f"✅ Loaded config from: {config_file}")
+                return config
+            except Exception as e:
+                print(f"❌ Error loading config from {config_file}: {e}")
 
-        # Create output directories with format subdirs
-        output_dir = base_outputs / version
-        (output_dir / "pdf").mkdir(parents=True, exist_ok=True)
-        (output_dir / "docx").mkdir(parents=True, exist_ok=True)
-        (output_dir / "rtf").mkdir(parents=True, exist_ok=True)
-
-        print(f"✅ Created directories for: {version}")
-
-def create_research_focused_data():
-    """Create data for research-focused version"""
-
-    data = {
-        'personal_info': {
-            'name': 'DHEERAJ CHAND',
-            'title': 'Director of Research and Analysis',
-            'phone': '(202) 550-7110',
-            'email': 'Dheeraj.Chand@gmail.com',
-            'website': 'https://www.dheerajchand.com',
-            'linkedin': 'https://www.linkedin.com/in/dheerajchand/'
-        },
-
-        'summary': """Research and Data Analytics Leader with 20+ years of experience directing applied research projects from conception to completion focused on economic mobility, community development, and social impact. Proven track record of leading cross-functional teams, translating complex research insights for diverse stakeholders including elected officials and community organizations, and implementing evidence-based solutions that drive meaningful outcomes. Expert in research methodology design, statistical analysis, and community partnership development with extensive experience serving vulnerable populations and addressing systemic poverty challenges.""",
-
-        'competencies': {
-            'Applied Research Leadership': [
-                'Applied Research Project Management (Conception to Completion)',
-                'Research Methodology Design and Implementation',
-                'Cross-functional Team Leadership and Mentoring',
-                'Stakeholder Communication and Translation of Complex Findings',
-                'Evidence-Based Framework Development',
-                'Survey Methodology and Consumer Insights',
-                'Statistical Analysis and Data Validation'
-            ],
-            'Technical Proficiency': [
-                'Programming: Python (Pandas, SciKit, TensorFlow, Django), R, SQL, Scala',
-                'Data Platforms: PostgreSQL, MySQL, Snowflake, Spark, MongoDB, Oracle',
-                'Analysis Tools: Excel (Advanced), Tableau, PowerBI, SPSS, SAS',
-                'Research Tools: Survey Design, Sampling Methodology, Statistical Modeling',
-                'Geospatial Analysis: ESRI ArcGIS, Quantum GIS, PostGIS, OSGeo'
-            ],
-            'Strategic Operations': [
-                'Community Partnership Development',
-                'Government Relations and Policy Analysis',
-                'Multi-million Dollar Project Management',
-                'Performance Measurement and Evaluation',
-                'Data-Driven Decision Making for Social Impact',
-                'Public Systems Integration',
-                'Stakeholder Briefing and Expert Testimony'
-            ]
-        },
-
-        'experience': [
-            {
-                'title': 'PARTNER',
-                'company': 'Siege Analytics, Austin, TX',
-                'dates': '2005 – Present',
-                'subtitle': 'Leading Applied Research Projects with Community Development Focus',
-                'responsibilities': [
-                    'Direct comprehensive applied research projects from conception to completion for organizations focused on economic mobility and community development',
-                    'Lead multi-million dollar research initiatives involving sensitive demographic and economic data addressing poverty and community health challenges',
-                    'Translate complex research findings for diverse stakeholder groups including elected officials, NGO leadership, and community organizations',
-                    'Collaborate with government agencies and research institutions to develop evidence-based solutions addressing systemic poverty',
-                    'Manage client relationships across public sector and nonprofit organizations, consistently delivering research that drives strategic decision-making',
-                    'Develop custom analytical tools processing billions of records to identify patterns in economic mobility and demographic trends'
-                ]
-            },
-            {
-                'title': 'DATA PRODUCTS MANAGER',
-                'company': 'Helm/Murmuration, Austin, TX',
-                'dates': '2021 – 2023',
-                'subtitle': 'Research Team Leadership and Methodology Innovation',
-                'responsibilities': [
-                    'Led cross-functional team of eleven data engineers and analysts focused on community organizing and social justice research',
-                    'Managed national research team of five analysts specializing in community engagement and demographic analysis',
-                    'Overhauled organization research methodology and data collection operations, significantly improving accuracy and response rates',
-                    'Designed comprehensive data warehouse integrating demographic, economic, and behavioral data for evidence-based decision making',
-                    'Developed advanced analytical pipelines enhancing community segmentation and outcome prediction capabilities',
-                    'Trained staff in data visualization and communication techniques to improve research deliverable quality'
-                ]
-            },
-            {
-                'title': 'ANALYTICS SUPERVISOR',
-                'company': 'GSD&M, Austin, TX',
-                'dates': '2018 – 2019',
-                'subtitle': 'Research Operations and Team Development',
-                'responsibilities': [
-                    'Restructured research department to scale capabilities from small-scale analysis to comprehensive applied research operations',
-                    'Managed three analysts, mentoring them in advanced research techniques and stakeholder communication',
-                    'Implemented spatial analysis and segmentation methodologies revealing new insights about community needs',
-                    'Introduced version control and Agile project management methodologies, improving delivery timelines by 40%',
-                    'Developed standardized research reporting frameworks ensuring consistent, high-quality deliverables'
-                ]
-            },
-            {
-                'title': 'SOFTWARE ENGINEER',
-                'company': 'Mautinoa Technologies, Austin, TX',
-                'dates': '2016 – 2018',
-                'subtitle': 'Applied Research in Humanitarian Context',
-                'responsibilities': [
-                    'Conceived and engineered econometric simulation software for measuring humanitarian crisis intervention effectiveness',
-                    'Collaborated with data directors at multinational NGOs (UNICEF, IFRC) to develop evidence-based intervention frameworks',
-                    'Conducted geospatial analysis on vulnerable populations to assess intervention impact and optimize resource allocation',
-                    'Designed research methodologies for measuring complex social outcomes in crisis environments'
-                ]
-            },
-            {
-                'title': 'RESEARCH DIRECTOR',
-                'company': 'PCCC, Austin, TX',
-                'dates': '2011 – 2012',
-                'subtitle': 'Large-Scale Applied Research Initiative Leadership',
-                'responsibilities': [
-                    'Led all aspects of applied research design, implementation, analysis, and reporting for major national studies',
-                    'Engineered data collection system facilitating thousands of simultaneous surveys, significantly increasing research scale',
-                    'Developed new statistical methods for geographic boundary estimation, enhancing community-level analysis capabilities',
-                    'Created data visualization solutions improving stakeholder understanding of complex research findings'
-                ]
-            }
-        ],
-
-        'achievements': {
-            'Research Leadership and Community Impact': [
-                'Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders',
-                'Research analysis used in court cases addressing housing, redistricting, and community development with rigorous methodology',
-                'Conceived and deployed cloud-based analytical software used by thousands of researchers nationwide for community-focused research'
-            ],
-            'Systems and Infrastructure Development': [
-                'Designed multi-tenant data warehouse tracking decades of demographic, economic, and policy changes affecting vulnerable populations',
-                'Developed comprehensive research frameworks for measuring complex social outcomes and community intervention effectiveness',
-                'Created scalable research methodologies supporting evidence-based decision making for multi-billion dollar public systems'
-            ],
-            'Community and Stakeholder Engagement': [
-                'Extensive experience briefing elected officials, NGO leadership, and senior staff on research findings and policy implications',
-                'Proven track record translating complex research for diverse audiences including community organizations and government agencies',
-                'Successfully managed research partnerships across public sector and community-based organizations focused on addressing systemic poverty'
-            ]
-        },
-
-        '_metadata': {
-            'version': 'research_focused',
-            'created': datetime.now().isoformat(),
-            'description': 'Research-focused version emphasizing applied research leadership and community impact'
+        # Return default config if no config file or error
+        print("📝 Using default configuration")
+        return {
+            'NAME_COLOR': '#228B22',
+            'TITLE_COLOR': '#B8860B',
+            'SECTION_HEADER_COLOR': '#B8860B',
+            'JOB_TITLE_COLOR': '#722F37',
+            'ACCENT_COLOR': '#722F37',
+            'COMPETENCY_HEADER_COLOR': '#228B22',
+            'SUBTITLE_COLOR': '#228B22',
+            'LINK_COLOR': '#B8860B',
+            'DARK_TEXT_COLOR': '#333333',
+            'MEDIUM_TEXT_COLOR': '#666666',
+            'LIGHT_TEXT_COLOR': '#999999',
+            'FONT_MAIN': 'Helvetica',
+            'FONT_BOLD': 'Helvetica-Bold',
+            'FONT_ITALIC': 'Helvetica-Oblique',
+            'NAME_SIZE': 24,
+            'TITLE_SIZE': 14,
+            'SECTION_HEADER_SIZE': 12,
+            'JOB_TITLE_SIZE': 11,
+            'BODY_SIZE': 9,
+            'CONTACT_SIZE': 9,
+            'PAGE_MARGIN': 0.6,
+            'SECTION_SPACING': 0.12,
+            'PARAGRAPH_SPACING': 0.06,
+            'LINE_SPACING': 1.15,
+            'JOB_SPACING': 6,
+            'CATEGORY_SPACING': 4,
+            'MAX_PAGES': 2,
+            'BULLET_CHAR': '▸'
         }
-    }
 
-    return data
+    def _create_styles(self):
+        """Create custom paragraph styles using configurable colors"""
+        styles = getSampleStyleSheet()
 
-def create_technical_detailed_data():
-    """Create data for technical detailed version"""
+        # Convert color strings to HexColor objects
+        name_color = HexColor(self.config.get('NAME_COLOR', '#228B22'))
+        title_color = HexColor(self.config.get('TITLE_COLOR', '#B8860B'))
+        section_header_color = HexColor(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+        job_title_color = HexColor(self.config.get('JOB_TITLE_COLOR', '#722F37'))
+        competency_header_color = HexColor(self.config.get('COMPETENCY_HEADER_COLOR', '#228B22'))
+        subtitle_color = HexColor(self.config.get('SUBTITLE_COLOR', '#228B22'))
+        dark_text_color = HexColor(self.config.get('DARK_TEXT_COLOR', '#333333'))
+        medium_text_color = HexColor(self.config.get('MEDIUM_TEXT_COLOR', '#666666'))
 
-    data = {
-        'personal_info': {
-            'name': 'DHEERAJ CHAND',
-            'title': 'Senior Geospatial Data Engineer & Technical Architect',
-            'phone': '(202) 550-7110',
-            'email': 'Dheeraj.Chand@gmail.com',
-            'website': 'https://www.dheerajchand.com',
-            'linkedin': 'https://www.linkedin.com/in/dheerajchand/'
-        },
+        # Name style
+        styles.add(ParagraphStyle(
+            name='NameStyle',
+            parent=styles['Heading1'],
+            fontSize=self.config.get('NAME_SIZE', 24),
+            textColor=name_color,
+            fontName=self.config.get('FONT_BOLD', 'Helvetica-Bold'),
+            alignment=TA_CENTER,
+            spaceAfter=4,
+            spaceBefore=0
+        ))
 
-        'summary': """Senior Data Engineer with 20+ years of expertise in geospatial data platforms, big data processing, and distributed systems architecture. Deep specialist in Apache Spark/Sedona for large-scale geospatial analytics, with fluency across ESRI, OSGeo, and SAFE FME technology stacks. Proven track record architecting production systems like BALLISTA and DAMON serving thousands of users, implementing PySpark pipelines processing billions of spatial records, and leading engineering teams. Expert in full-stack geospatial development from PostGIS database optimization to React-based mapping interfaces.""",
+        # Title style
+        styles.add(ParagraphStyle(
+            name='TitleStyle',
+            parent=styles['Normal'],
+            fontSize=self.config.get('TITLE_SIZE', 14),
+            textColor=title_color,
+            fontName=self.config.get('FONT_BOLD', 'Helvetica-Bold'),
+            alignment=TA_CENTER,
+            spaceAfter=8,
+            spaceBefore=0
+        ))
 
-        'competencies': {
-            'Big Data & Geospatial Processing': [
-                'Apache Spark: PySpark, Spark SQL, Scala Spark, Sedona (geospatial), distributed processing',
-                'Geospatial Databases: PostGIS (advanced), Oracle Spatial, spatial indexing, query optimization',
-                'ETL/ELT: dbt, Informatica, CDAP, custom PySpark pipelines, data governance frameworks',
-                'Cloud Platforms: AWS (EC2, RDS, S3), Snowflake, Hadoop clusters, distributed computing',
-                'Streaming: Real-time data processing, Kafka integration, event-driven architectures'
-            ],
-            'GIS Technology Stack': [
-                'ESRI: ArcGIS Server, ArcGIS Pro, enterprise geodatabases, ModelBuilder, ArcPy scripting',
-                'OSGeo: QGIS, GRASS GIS, GDAL/OGR, GeoServer, spatial analysis workflows',
-                'SAFE FME: Data transformation, format conversion, spatial ETL, enterprise integration',
-                'Web Mapping: OpenLayers, Leaflet, MapBox, tile servers, WMS/WFS services',
-                'Spatial Analysis: Clustering algorithms, boundary estimation, network analysis, geostatistics'
-            ],
-            'Software Development & Architecture': [
-                'Python: Django/GeoDjango, Flask, Pandas, NumPy, SciKit-Learn, spatial libraries',
-                'JVM: Scala (Spark), Java (GeoTools, enterprise), Groovy scripting',
-                'Web Technologies: React, JavaScript, d3.js, RESTful APIs, microservices',
-                'Databases: PostgreSQL/PostGIS, Oracle, MySQL, MongoDB, spatial optimization',
-                'DevOps: Docker, Kubernetes, CI/CD (GitLab, GitHub), Airflow, Celery, nginx'
-            ]
-        },
+        # Contact style
+        styles.add(ParagraphStyle(
+            name='ContactStyle',
+            parent=styles['Normal'],
+            fontSize=self.config.get('CONTACT_SIZE', 9),
+            textColor=medium_text_color,
+            fontName=self.config.get('FONT_MAIN', 'Helvetica'),
+            alignment=TA_CENTER,
+            spaceAfter=12,
+            spaceBefore=0
+        ))
 
-        'experience': [
-            {
-                'title': 'PARTNER & SENIOR DATA ARCHITECT',
-                'company': 'Siege Analytics, Austin, TX',
-                'dates': '2005 – Present',
-                'subtitle': 'Geospatial Data Platform Architecture and Big Data Engineering',
-                'responsibilities': [
-                    'Architected and engineered production geospatial platforms including BALLISTA (redistricting) and DAMON (boundary estimation) serving thousands of analysts',
-                    'Built enterprise-scale ETL pipelines using PySpark and Sedona processing billions of geospatial records with advanced spatial clustering algorithms',
-                    'Developed multi-tenant data warehouse integrating Census, electoral, and demographic data using PostGIS and Spark SQL optimization',
-                    'Implemented fraud detection systems processing multi-terabyte campaign finance datasets with real-time spatial analysis capabilities',
-                    'Created parametric boundary estimation algorithms using PostGIS and GRASS without machine learning dependencies',
-                    'Led integration of ESRI ArcGIS Server, OSGeo tools (QGIS, GRASS), and SAFE FME for enterprise geospatial workflows'
-                ]
-            },
-            {
-                'title': 'DATA PRODUCTS MANAGER',
-                'company': 'Helm/Murmuration, Austin, TX',
-                'dates': '2021 – 2023',
-                'subtitle': 'Enterprise Geospatial Data Engineering and Team Leadership',
-                'responsibilities': [
-                    'Led team of 11 engineers building multi-dimensional data warehouse using Spark/Sedona for longitudinal geospatial analysis',
-                    'Designed scalable architecture integrating Census Bureau, Bureau of Labor Statistics data using advanced PostGIS and dbt transformations',
-                    'Modernized legacy ETL systems implementing Scala/Spark and Sedona workflows, achieving 57% performance improvement',
-                    'Built comprehensive data governance framework with PostGIS quality validation and GRASS-based spatial analysis pipelines',
-                    'Developed Random Device Engagement (RDE) survey platform with real-time geospatial aggregation and visualization',
-                    'Trained engineering staff on OSGeo technologies (QGIS, GRASS) and advanced PostGIS spatial analysis techniques'
-                ]
-            },
-            {
-                'title': 'ANALYTICS SUPERVISOR & BIG DATA ENGINEER',
-                'company': 'GSD&M, Austin, TX',
-                'dates': '2018 – 2019',
-                'subtitle': 'Big Data Infrastructure Transformation and Geospatial Analytics',
-                'responsibilities': [
-                    'Transformed desktop GIS operations into distributed Hadoop/Spark clusters on AWS with ESRI ArcGIS Server integration',
-                    'Developed customer segmentation platform using Spark/PySpark with advanced spatial analysis and machine learning',
-                    'Built real-time geospatial dashboards using React, d3.js, and OpenLayers for Fortune 500 client analytics',
-                    'Integrated ESRI and OSGeo technology stacks for scalable geospatial processing of advertising and customer data',
-                    'Implemented spatial clustering algorithms and demographic analysis workflows improving targeting efficacy by 40%'
-                ]
-            },
-            {
-                'title': 'SOFTWARE ENGINEER & GEOSPATIAL DEVELOPER',
-                'company': 'Mautinoa Technologies, Austin, TX',
-                'dates': '2016 – 2018',
-                'subtitle': 'GeoDjango Platform and Multi-Agent Geospatial Modeling',
-                'responsibilities': [
-                    'Architected SimCrisis: GeoDjango web application with NetLogo multi-agent modeling for econometric crisis simulations',
-                    'Implemented advanced PostGIS spatial algorithms for population analysis and humanitarian intervention optimization',
-                    'Built modular geospatial architecture accepting custom rule extensions for crisis modeling and supply chain analysis',
-                    'Collaborated with UNICEF and IFRC technical teams on geospatial requirements and validation workflows',
-                    'Developed RESTful APIs and React interfaces for complex geospatial simulation visualization and analysis'
-                ]
-            },
-            {
-                'title': 'SENIOR DATA ANALYST & GIS DEVELOPER',
-                'company': 'Myers Research, Austin, TX',
-                'dates': '2012 – 2014',
-                'subtitle': 'Survey Platform Development with Integrated Geospatial Analysis',
-                'responsibilities': [
-                    'Co-developed RACSO: comprehensive GeoDjango platform for survey operations with advanced PostGIS spatial analysis',
-                    'Implemented geospatial market segmentation using ESRI and OSGeo tools for location-based demographic insights',
-                    'Built survey instrument design tools with integrated spatial sampling and geographic targeting capabilities',
-                    'Optimized PostGIS database schemas for large-scale spatial survey data storage and complex geographic queries',
-                    'Led technical evaluation of 1,200+ vendor proposals, selecting optimal geospatial technology stack'
-                ]
-            }
-        ],
+        # Section header style
+        styles.add(ParagraphStyle(
+            name='SectionHeader',
+            parent=styles['Heading2'],
+            fontSize=self.config.get('SECTION_HEADER_SIZE', 12),
+            textColor=section_header_color,
+            fontName=self.config.get('FONT_BOLD', 'Helvetica-Bold'),
+            alignment=TA_LEFT,
+            spaceAfter=6,
+            spaceBefore=8
+        ))
 
-        'achievements': {
-            'Geospatial Platform Engineering': [
-                'Architected BALLISTA redistricting platform processing Census data for thousands of analysts with real-time PostGIS collaborative editing',
-                'Built DAMON boundary estimation system using advanced PostGIS algorithms and incomplete data without machine learning requirements',
-                'Developed SimCrisis geospatial simulation platform integrating NetLogo multi-agent modeling with GeoDjango web interface',
-                'Created production-scale survey platform RACSO with integrated ESRI and OSGeo geospatial analysis capabilities'
-            ],
-            'Big Data & Performance Engineering': [
-                'Implemented Spark/Sedona ETL pipelines achieving 57% performance improvement processing billions of geospatial records',
-                'Built distributed geospatial systems using AWS Hadoop clusters with ESRI ArcGIS Server and PostGIS integration',
-                'Developed fraud detection algorithms processing multi-terabyte datasets with real-time PostGIS spatial analysis',
-                'Created spatial clustering algorithms using PySpark and Sedona achieving 88% improvement in targeting efficacy'
-            ],
-            'Technical Innovation & Leadership': [
-                'Pioneered integration of ESRI, OSGeo (QGIS, GRASS), and SAFE FME technologies in production web applications',
-                'Led engineering teams up to 11 developers specializing in geospatial data architecture and Spark/Sedona optimization',
-                'Established technical standards for PostGIS database design, spatial indexing, and distributed geospatial processing',
-                'Developed comprehensive spatial data governance frameworks ensuring quality across petabyte-scale geospatial warehouses'
-            ]
-        },
+        # Job title style
+        styles.add(ParagraphStyle(
+            name='JobTitle',
+            parent=styles['Normal'],
+            fontSize=self.config.get('JOB_TITLE_SIZE', 11),
+            textColor=job_title_color,
+            fontName=self.config.get('FONT_BOLD', 'Helvetica-Bold'),
+            spaceAfter=2,
+            spaceBefore=4
+        ))
 
-        '_metadata': {
-            'version': 'technical_detailed',
-            'created': datetime.now().isoformat(),
-            'description': 'Technical version emphasizing engineering skills, data architecture, and platform development'
-        }
-    }
+        # Company info style
+        styles.add(ParagraphStyle(
+            name='CompanyInfo',
+            parent=styles['Normal'],
+            fontSize=self.config.get('BODY_SIZE', 9),
+            textColor=medium_text_color,
+            fontName=self.config.get('FONT_MAIN', 'Helvetica'),
+            spaceAfter=2
+        ))
 
-    return data
+        # Subtitle style
+        styles.add(ParagraphStyle(
+            name='SubtitleStyle',
+            parent=styles['Normal'],
+            fontSize=self.config.get('BODY_SIZE', 9),
+            textColor=subtitle_color,
+            fontName=self.config.get('FONT_ITALIC', 'Helvetica-Oblique'),
+            spaceAfter=4
+        ))
 
-def create_comprehensive_full_data():
-    """Create comprehensive version with complete work history"""
+        # Body text style
+        styles.add(ParagraphStyle(
+            name='ResumeBodyText',
+            parent=styles['Normal'],
+            fontSize=self.config.get('BODY_SIZE', 9),
+            textColor=dark_text_color,
+            fontName=self.config.get('FONT_MAIN', 'Helvetica'),
+            alignment=TA_JUSTIFY,
+            spaceAfter=2,
+            leading=self.config.get('BODY_SIZE', 9) * self.config.get('LINE_SPACING', 1.15)
+        ))
 
-    data = {
-        'personal_info': {
-            'name': 'DHEERAJ CHAND',
-            'title': 'Research, Data Analytics & Engineering Professional',
-            'phone': '(202) 550-7110',
-            'email': 'Dheeraj.Chand@gmail.com',
-            'website': 'https://www.dheerajchand.com',
-            'linkedin': 'https://www.linkedin.com/in/dheerajchand/'
-        },
+        # Bullet style
+        styles.add(ParagraphStyle(
+            name='ResumeBulletStyle',
+            parent=styles['Normal'],
+            fontSize=self.config.get('BODY_SIZE', 9),
+            textColor=dark_text_color,
+            fontName=self.config.get('FONT_MAIN', 'Helvetica'),
+            leftIndent=12,
+            bulletIndent=0,
+            spaceAfter=1.5,
+            leading=self.config.get('BODY_SIZE', 9) * self.config.get('LINE_SPACING', 1.15)
+        ))
 
-        'summary': """Research & Data Professional with 20+ years of comprehensive experience spanning applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions. Proven track record leading cross-functional teams, architecting data platforms, and delivering insights that drive strategic decision-making across political, nonprofit, and technology sectors. Deep expertise in survey methodology, geospatial analysis, and building production systems for sensitive data applications.""",
+        # Competency header style
+        styles.add(ParagraphStyle(
+            name='CompetencyHeader',
+            parent=styles['Normal'],
+            fontSize=self.config.get('BODY_SIZE', 9) + 1,
+            textColor=competency_header_color,
+            fontName=self.config.get('FONT_BOLD', 'Helvetica-Bold'),
+            spaceAfter=3,
+            spaceBefore=4
+        ))
 
-        'competencies': {
-            'Research and Analytics': [
-                'Survey Methodology: Design, sampling, weighting, longitudinal analysis',
-                'Statistical Analysis: Regression modeling, clustering, segmentation, machine learning',
-                'Geospatial Analysis: Spatial clustering, boundary estimation, demographic mapping',
-                'Data Visualization: Tableau, PowerBI, d3.js, Matplotlib, Seaborn, choropleth mapping',
-                'Research Management: Team leadership, methodology design, stakeholder communication'
-            ],
-            'Programming and Development': [
-                'Python: Django/GeoDjango, Flask, Pandas, PySpark, SciKit-Learn, TensorFlow',
-                'JVM Languages: Scala (Spark), Java, Groovy',
-                'Web Technologies: JavaScript, React, d3.js, PHP, HTML/CSS',
-                'Database Languages: SQL, T-SQL, PostgreSQL/PostGIS',
-                'Statistical Computing: R, SPSS, SAS, Stata'
-            ],
-            'Data Infrastructure': [
-                'Cloud Platforms: AWS (EC2, RDS, S3), Google Cloud Platform, Microsoft Azure',
-                'Big Data: Apache Spark, PySpark, Hadoop, Snowflake, dbt',
-                'Databases: PostgreSQL/PostGIS, MySQL, Oracle, MongoDB, Neo4j',
-                'Geospatial: ESRI ArcGIS, Quantum GIS, GeoServer, OSGeo, GRASS',
-                'DevOps: Docker, Git, CI/CD pipelines, automated testing, version control'
-            ]
-        },
+        return styles
 
-        'experience': [
-            {
-                'title': 'PARTNER',
-                'company': 'Siege Analytics, Austin, TX',
-                'dates': '2005 – Present',
-                'subtitle': 'Data, Technology and Strategy Consulting',
-                'responsibilities': [
-                    'Conduct comprehensive quantitative and qualitative research studies for political candidates and organizations',
-                    'Architect cloud-based data warehouse solutions processing billions of records for electoral analytics',
-                    'Design scalable ETL pipelines using PySpark and dbt for large-scale geospatial and demographic datasets',
-                    'Develop custom analytical tools and algorithms for fraud detection and spatial clustering',
-                    'Manage complex client relationships across political, nonprofit, and technology sectors',
-                    'Lead technical architecture decisions for data-intensive applications and platforms'
-                ]
-            },
-            {
-                'title': 'DATA PRODUCTS MANAGER',
-                'company': 'Helm/Murmuration, Austin, TX',
-                'dates': '2021 – 2023',
-                'subtitle': 'Enterprise Data Platform Development',
-                'responsibilities': [
-                    'Led design and implementation of enterprise-scale multi-tenant data warehouse',
-                    'Managed engineering team of 11 professionals setting technical direction',
-                    'Modernized legacy ETL processes implementing dbt and PySpark workflows',
-                    'Overhauled survey methodology using Random Device Engagement and text messaging',
-                    'Developed data governance framework and quality control measures',
-                    'Built meta-analytical dataset for longitudinal analysis standardizing survey instruments'
-                ]
-            },
-            {
-                'title': 'ANALYTICS SUPERVISOR',
-                'company': 'GSD&M, Austin, TX',
-                'dates': '2018 – 2019',
-                'subtitle': 'Big Data Transformation and Advanced Analytics',
-                'responsibilities': [
-                    'Transformed small data team into big data engineering operation scaling to Hadoop clusters',
-                    'Managed accounts including US Air Force, Southwest Airlines/Chase, and Indeed',
-                    'Implemented spatial analysis and consumer segmentation methodologies',
-                    'Applied advanced statistical and ML techniques for behavioral clustering',
-                    'Introduced version control and Agile methodologies improving delivery by 40%'
-                ]
-            },
-            {
-                'title': 'SOFTWARE ENGINEER',
-                'company': 'Mautinoa Technologies, Austin, TX',
-                'dates': '2016 – 2018',
-                'subtitle': 'Financial Technology and Humanitarian Crisis Modeling',
-                'responsibilities': [
-                    'Conceived and engineered SimCrisis: GeoDjango application for econometric crisis simulations',
-                    'Collaborated with International Federation of Red Cross, UNICEF, and humanitarian organizations',
-                    'Implemented geospatial analysis for population impact assessment and resource optimization',
-                    'Developed agent-based modeling and statistical analysis systems for crisis prediction'
-                ]
-            },
-            {
-                'title': 'SENIOR ANALYST',
-                'company': 'Myers Research, Austin, TX',
-                'dates': '2012 – 2014',
-                'subtitle': 'Strategic Research and Survey Operations',
-                'responsibilities': [
-                    'Co-developed RACSO web application for comprehensive survey operations management',
-                    'Designed survey instruments for specialized voting segments and niche markets',
-                    'Introduced geospatial techniques enhancing market segmentation capabilities',
-                    'Managed RFP process analyzing bids from 1,200+ vendors for platform development'
-                ]
-            },
-            {
-                'title': 'RESEARCH DIRECTOR',
-                'company': 'Progressive Change Campaign Committee, Austin, TX',
-                'dates': '2011 – 2012',
-                'subtitle': 'Large-Scale Survey Systems and Method Development',
-                'responsibilities': [
-                    'Engineered FLEEM web application using Twilio API for thousands of simultaneous IVR surveys',
-                    'Led all aspects of survey design, implementation, data analysis, and reporting',
-                    'Developed new statistical methods for boundary estimation and geographic segmentation',
-                    'Created comprehensive data visualization solutions for complex research findings'
-                ]
-            }
-        ],
+    def _add_header(self):
+        """Add the header section with name, title, and contact info"""
+        personal_info = self.data.get('personal_info', {})
 
-        'achievements': {
-            'Software Development and Innovation': [
-                'Conceived and deployed BALLISTA redistricting software used by thousands of analysts nationwide',
-                'Developed DAMON boundary estimation system using incomplete data without ML requirements',
-                'Created SimCrisis econometric simulation platform for humanitarian intervention modeling',
-                'Built RACSO comprehensive survey operations platform from RFP through deployment'
-            ],
-            'Data Architecture and Engineering': [
-                'Designed multi-dimensional data warehouse tracking decades of political and economic change',
-                'Implemented scalable ETL pipelines achieving 57% performance improvement',
-                'Developed fraud detection systems across multi-terabyte campaign finance datasets',
-                'Created spatial clustering algorithms achieving 88% improved targeting efficacy'
-            ],
-            'Research Impact and Recognition': [
-                'Research analysis used in court cases for redistricting, housing, and community development',
-                'Regular expert testimony on methodology for journalists and elected officials',
-                'Built foundational polling consortium infrastructure adopted by major research organizations',
-                'Pioneered integration of geospatial techniques into political and market research'
-            ]
-        },
+        # Name
+        name_para = Paragraph(personal_info.get('name', 'NAME'), self.styles['NameStyle'])
+        self.story.append(name_para)
 
-        '_metadata': {
-            'version': 'comprehensive_full',
-            'created': datetime.now().isoformat(),
-            'description': 'Comprehensive version with complete work history and technical depth'
-        }
-    }
+        # Title
+        title_para = Paragraph(personal_info.get('title', 'Professional Title'), self.styles['TitleStyle'])
+        self.story.append(title_para)
 
-    return data
+        # Contact info - using configurable link color
+        link_color = self.config.get('LINK_COLOR', '#B8860B')
+        contact_text = f"""
+        <b>{personal_info.get('phone', '')} | {personal_info.get('email', '')}</b><br/>
+        <a href="{personal_info.get('website', '')}" color="{link_color}">{personal_info.get('website', '')}</a> |
+        <a href="{personal_info.get('linkedin', '')}" color="{link_color}">{personal_info.get('linkedin', '')}</a>
+        """
+        contact_para = Paragraph(contact_text, self.styles['ContactStyle'])
+        self.story.append(contact_para)
 
-def create_consulting_minimal_data():
-    """Create minimal consulting-focused version"""
+        # Header separator
+        self.story.append(Spacer(1, 4))
 
-    data = {
-        'personal_info': {
-            'name': 'DHEERAJ CHAND',
-            'title': 'Data Analytics & Technology Consultant',
-            'phone': '(202) 550-7110',
-            'email': 'Dheeraj.Chand@gmail.com',
-            'website': 'https://www.dheerajchand.com',
-            'linkedin': 'https://www.linkedin.com/in/dheerajchand/'
-        },
+    def _add_section_header(self, title):
+        """Add a section header with underline"""
+        header_text = f'<u>{title.upper()}</u>'
+        header_para = Paragraph(header_text, self.styles['SectionHeader'])
+        self.story.append(header_para)
 
-        'summary': """Strategic data and technology consultant with 20+ years solving complex problems through analytics and software development. Specializes in transforming organizational data capabilities from concept to production. Expert in translating business requirements into technical solutions, with proven success across political, nonprofit, and technology sectors. Currently building scalable data platforms while modernizing legacy systems for improved performance and maintainability.""",
+    def _add_summary(self):
+        """Add professional summary section"""
+        summary = self.data.get('summary', '')
+        if summary:
+            self._add_section_header('Professional Summary')
+            summary_para = Paragraph(summary, self.styles['ResumeBodyText'])
+            self.story.append(summary_para)
+            self.story.append(Spacer(1, self.config.get('SECTION_SPACING', 0.12) * inch))
 
-        'competencies': {
-            'Consulting Expertise': [
-                'Strategic Data Analysis (Exploratory, Predictive, Explanatory)',
-                'Data Engineering and Infrastructure Development',
-                'Systems Integration and Architecture Consulting',
-                'Project Management and Product Management',
-                'Team Leadership and Technical Mentoring',
-                'Stakeholder Communication and Requirements Gathering'
-            ],
-            'Technical Solutions': [
-                'Programming: Python (Django, Pandas, PySpark), Scala (Spark), JavaScript',
-                'Data Platforms: PostgreSQL/PostGIS, Snowflake, MongoDB, AWS, GCP',
-                'Analytics: Tableau, PowerBI, Statistical Modeling, Machine Learning',
-                'Integration: APIs, ETL/ELT pipelines, Cloud migrations, Legacy modernization'
-            ],
-            'Industry Focus': [
-                'Political and Electoral Data Analytics',
-                'Nonprofit and Community Organization Solutions',
-                'Technology Startup and Scale-up Consulting',
-                'Geospatial Analysis and Demographic Intelligence',
-                'Survey Research and Consumer Behavior Analysis'
-            ]
-        },
+    def _add_competencies(self):
+        """Add core competencies section"""
+        competencies = self.data.get('competencies', {})
+        if competencies:
+            self._add_section_header('Core Competencies')
 
-        'experience': [
-            {
-                'title': 'PRINCIPAL CONSULTANT',
-                'company': 'Siege Analytics, Austin, TX',
-                'dates': '2005 – Present',
-                'subtitle': 'Data, Technology and Strategy Consulting',
-                'responsibilities': [
-                    'Provide comprehensive data analysis, engineering, and strategic planning for diverse client portfolio',
-                    'Develop custom software solutions and data pipeline architectures for complex integration requirements',
-                    'Lead digital transformation initiatives including cloud migrations and legacy system modernization',
-                    'Deliver management consulting including project planning, team building, and operational optimization',
-                    'Maintain long-term strategic partnerships with clients across political, nonprofit, and technology sectors'
-                ]
-            },
-            {
-                'title': 'DATA PRODUCTS MANAGER',
-                'company': 'Helm/Murmuration, Austin, TX',
-                'dates': '2021 – 2023',
-                'subtitle': 'Enterprise Platform Development Leadership',
-                'responsibilities': [
-                    'Conceived and developed integrated data platform combining government, NGO, and proprietary datasets',
-                    'Led engineering team building multi-tenant data warehouse from Census and economic statistics',
-                    'Designed longitudinal analysis capabilities across demographic, economic, and geographic dimensions',
-                    'Managed polling operations focusing on modern survey methodologies and text-based engagement',
-                    'Trained technical staff on open source geospatial technologies and analytical best practices'
-                ]
-            },
-            {
-                'title': 'TECHNICAL CONSULTANT',
-                'company': 'Various Clients, Austin, TX',
-                'dates': '2016 – 2021',
-                'subtitle': 'Specialized Project Consulting',
-                'responsibilities': [
-                    'Developed SimCrisis humanitarian modeling platform for international NGO collaboration',
-                    'Created RACSO survey operations platform through vendor management and technical leadership',
-                    'Built advanced analytics capabilities for advertising and customer intelligence applications',
-                    'Implemented scalable telephony integration systems for large-scale data collection'
-                ]
-            }
-        ],
+            for category, skills in competencies.items():
+                # Category header
+                cat_para = Paragraph(category, self.styles['CompetencyHeader'])
+                self.story.append(cat_para)
 
-        'achievements': {
-            'Technology Innovation': [
-                'Developed proprietary B2B SaaS solutions for data analytics and geospatial applications',
-                'Created open source frameworks for political and social behavior prediction',
-                'Pioneered integration of advanced mapping techniques into standard consulting deliverables'
-            ],
-            'Client Impact': [
-                'Maintained 15+ year consulting relationships across political, nonprofit, and technology sectors',
-                'Delivered complex systems integrations and data platform solutions for enterprise clients',
-                'Provided strategic planning resulting in measurable operational improvements and cost savings'
-            ],
-            'Methodological Innovation': [
-                'Developed statistical methods for boundary estimation and geographic segmentation',
-                'Created frameworks for comprehensive technology audits and modernization planning',
-                'Established best practices for multi-tenant data architecture and security compliance'
-            ]
-        },
+                # Skills list
+                if isinstance(skills, list):
+                    if any('Programming:' in skill or 'Data Platforms:' in skill for skill in skills):
+                        # Technical skills with better formatting
+                        for skill in skills:
+                            skill_para = Paragraph(skill, self.styles['ResumeBodyText'])
+                            self.story.append(skill_para)
+                    else:
+                        # Other competencies as a flowing paragraph
+                        skills_text = ' • '.join(skills)
+                        skills_para = Paragraph(skills_text, self.styles['ResumeBodyText'])
+                        self.story.append(skills_para)
+                else:
+                    # Handle string values
+                    skills_para = Paragraph(str(skills), self.styles['ResumeBodyText'])
+                    self.story.append(skills_para)
 
-        '_metadata': {
-            'version': 'consulting_minimal',
-            'created': datetime.now().isoformat(),
-            'description': 'Minimal consulting-focused version emphasizing strategic advisory and technical expertise'
-        }
-    }
+                self.story.append(Spacer(1, self.config.get('CATEGORY_SPACING', 4)))
 
-    return data
+            self.story.append(Spacer(1, self.config.get('SECTION_SPACING', 0.12) * inch))
 
-def create_software_engineer_data():
-    """Create software engineer focused version"""
+    def _add_experience(self):
+        """Add professional experience section"""
+        experience = self.data.get('experience', [])
+        if experience:
+            self._add_section_header('Professional Experience')
 
-    data = {
-        'personal_info': {
-            'name': 'DHEERAJ CHAND',
-            'title': 'Senior Software Engineer & Geospatial Platform Architect',
-            'phone': '(202) 550-7110',
-            'email': 'Dheeraj.Chand@gmail.com',
-            'website': 'https://www.dheerajchand.com',
-            'linkedin': 'https://www.linkedin.com/in/dheerajchand/'
-        },
+            for i, job in enumerate(experience):
+                job_content = []
 
-        'summary': """Senior Software Engineer with 20+ years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms like BALLISTA and DAMON used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.""",
+                # Job title
+                title_para = Paragraph(job.get('title', ''), self.styles['JobTitle'])
+                job_content.append(title_para)
 
-        'competencies': {
-            'Programming & Development': [
-                'Python: Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn',
-                'JVM: Scala (Spark/Sedona), Java (GeoTools, enterprise applications), Groovy',
-                'Web Technologies: JavaScript, React, d3.js, OpenLayers, jQuery, HTML/CSS',
-                'Database Languages: SQL, T-SQL, PostgreSQL/PostGIS, Oracle, MySQL',
-                'Statistical/Analysis: R, SPSS, NetLogo (agent-based modeling)'
-            ],
-            'Big Data & Geospatial Platforms': [
-                'Apache Spark: PySpark, Spark SQL, Sedona (geospatial), distributed processing',
-                'Geospatial Stack: PostGIS, ESRI ArcGIS, Quantum GIS, GRASS, OSGeo, SAFE FME',
-                'Cloud Platforms: AWS (EC2, RDS, S3), Snowflake, Google Cloud, Microsoft Azure',
-                'Data Engineering: ETL/ELT pipelines, dbt, Hadoop, Informatica, CDAP',
-                'Databases: PostgreSQL/PostGIS, Oracle, MongoDB, Neo4j, MySQL'
-            ],
-            'Software Architecture & DevOps': [
-                'Distributed Systems: Multi-tenant SaaS, microservices, API design, scalability',
-                'Geospatial Applications: Spatial algorithms, boundary estimation, clustering analysis',
-                'Web Applications: Full-stack development, RESTful APIs, real-time collaboration',
-                'DevOps: Docker, Vagrant, CI/CD (GitLab, GitHub), Celery, Airflow, nginx',
-                'Integration: Twilio API, WMS tile servers, CRM/DMP integration, OAuth'
-            ]
-        },
+                # Company and dates
+                company_para = Paragraph(f"{job.get('company', '')} | {job.get('dates', '')}", self.styles['CompanyInfo'])
+                job_content.append(company_para)
 
-        'experience': [
-            {
-                'title': 'PARTNER & SENIOR SOFTWARE ENGINEER',
-                'company': 'Siege Analytics, Austin, TX',
-                'dates': '2005 – Present',
-                'subtitle': 'Geospatial Platform Architecture and Full-Stack Development',
-                'responsibilities': [
-                    'Architected and engineered BALLISTA: GeoDjango redistricting platform serving thousands of analysts with real-time collaborative editing, Census integration, and legal compliance analysis',
-                    'Developed DAMON: Flask/PostGIS microservice using incomplete data for boundary estimation without machine learning, processing geographies at national scale',
-                    'Built scalable ETL pipelines using PySpark and Sedona processing billions of geospatial records with sub-hour latency requirements',
-                    'Implemented advanced spatial clustering algorithms achieving 88% improvement in analytical targeting efficacy for political applications',
-                    'Created fraud detection systems processing multi-terabyte campaign finance datasets with real-time alerting capabilities',
-                    'Led technical architecture decisions integrating ESRI, OSGeo, and SAFE FME technologies for Fortune 500 and political clients'
-                ]
-            },
-            {
-                'title': 'DATA PRODUCTS MANAGER',
-                'company': 'Helm/Murmuration, Austin, TX',
-                'dates': '2021 – 2023',
-                'subtitle': 'Enterprise Geospatial Data Platform Development and Team Leadership',
-                'responsibilities': [
-                    'Led engineering team of 11 developers building enterprise-scale geospatial data platform for political organizing and issue advocacy',
-                    'Designed multi-tenant data warehouse integrating Census, Bureau of Labor Statistics, and National Council of Educational Statistics using Spark/PySpark',
-                    'Modernized legacy ETL systems using Scala/Spark and dbt, achieving 57% performance improvement in geospatial data processing',
-                    'Built comprehensive data governance framework with automated PostGIS quality validation and GRASS-based analysis pipelines',
-                    'Trained analytical and engineering staff on OSGeo technologies (QGIS, GRASS) for geospatial analysis and visualization',
-                    'Implemented Spark/Sedona pipelines for longitudinal analysis across demographic, economic, and geographical dimensions'
-                ]
-            },
-            {
-                'title': 'ANALYTICS SUPERVISOR',
-                'company': 'GSD&M, Austin, TX',
-                'dates': '2018 – 2019',
-                'subtitle': 'Big Data Infrastructure and Geospatial Analytics Platform',
-                'responsibilities': [
-                    'Transformed small data team into big data engineering operation, migrating from desktop GIS to Hadoop/Spark clusters on AWS',
-                    'Developed customer segmentation platform using Spark/PySpark with advanced spatial analysis and machine learning integration',
-                    'Built real-time data visualization dashboards using React, d3.js, and OpenLayers for executive reporting and client presentations',
-                    'Implemented version control workflows and Agile development practices improving team delivery timelines by 40%',
-                    'Integrated ESRI ArcGIS Server with custom web applications for high-volume advertising and customer analytics workloads'
-                ]
-            },
-            {
-                'title': 'SOFTWARE ENGINEER',
-                'company': 'Mautinoa Technologies, Austin, TX',
-                'dates': '2016 – 2018',
-                'subtitle': 'GeoDjango Platform Development and Multi-Agent Modeling',
-                'responsibilities': [
-                    'Conceived and engineered SimCrisis: GeoDjango web application with NetLogo multi-agent modeling for econometric crisis simulations',
-                    'Implemented modular architecture supporting extensible rule systems for crisis scenario modeling and humanitarian intervention analysis',
-                    'Built geospatial analysis tools using PostGIS and GRASS for population impact assessment and resource optimization',
-                    'Collaborated with UNICEF and International Federation of Red Cross technical teams for requirements validation and deployment',
-                    'Created RESTful APIs and React interfaces for complex simulation parameter configuration and geospatial results visualization'
-                ]
-            },
-            {
-                'title': 'SENIOR ANALYST & PLATFORM DEVELOPER',
-                'company': 'Myers Research, Austin, TX',
-                'dates': '2012 – 2014',
-                'subtitle': 'Survey Platform Development and Geospatial Market Analysis',
-                'responsibilities': [
-                    'Co-developed RACSO: comprehensive GeoDjango web application for survey lifecycle management from instrument design to analysis',
-                    'Implemented survey design tools, data collection interfaces, and automated reporting with integrated geospatial analysis capabilities',
-                    'Built PostGIS-based market segmentation features enhancing demographic analysis with location-based consumer insights',
-                    'Designed database schemas and PostGIS optimization strategies for large-scale survey data storage and spatial queries',
-                    'Led RFP process analyzing 1,200+ vendor proposals for platform development, selecting optimal technology stack'
-                ]
-            },
-            {
-                'title': 'RESEARCH DIRECTOR & PLATFORM ARCHITECT',
-                'company': 'Progressive Change Campaign Committee, Austin, TX',
-                'dates': '2011 – 2012',
-                'subtitle': 'Telephony Integration and Real-Time Survey Systems',
-                'responsibilities': [
-                    'Engineered FLEEM: GeoDjango platform integrating Twilio API for thousands of simultaneous IVR phone surveys with real-time processing',
-                    'Developed statistical boundary estimation methods using PostGIS and GRASS, enhancing geographic targeting for political research',
-                    'Implemented real-time data collection and processing systems with live result visualization using d3.js and OpenLayers',
-                    'Built foundational polling consortium database infrastructure later adopted by The Analyst Institute',
-                    'Created comprehensive geospatial data visualization solutions improving stakeholder understanding of complex research findings'
-                ]
-            }
-        ],
+                # Subtitle
+                if job.get('subtitle'):
+                    subtitle_para = Paragraph(job['subtitle'], self.styles['SubtitleStyle'])
+                    job_content.append(subtitle_para)
 
-        'achievements': {
-            'Geospatial Platform Development': [
-                'Architected BALLISTA redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration',
-                'Built DAMON boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms',
-                'Developed SimCrisis econometric simulation platform with NetLogo multi-agent modeling and GeoDjango web interface',
-                'Created RACSO comprehensive survey platform managing complete research lifecycle with integrated geospatial market segmentation'
-            ],
-            'Big Data & Performance Engineering': [
-                'Implemented Spark/Sedona ETL optimizations achieving 57% performance improvement in geospatial data processing pipelines',
-                'Built systems processing billions of spatial records with sub-hour latency using distributed Spark clusters on AWS',
-                'Developed fraud detection algorithms processing multi-terabyte campaign finance datasets with real-time PostGIS spatial analysis',
-                'Created spatial clustering algorithms achieving 88% improvement in analytical targeting efficacy using custom PySpark implementations'
-            ],
-            'Technical Leadership & Integration': [
-                'Led engineering teams up to 11 developers specializing in scalable geospatial architecture and OSGeo/ESRI technology integration',
-                'Pioneered integration of ESRI, OSGeo (QGIS, GRASS), and SAFE FME technologies into production web applications',
-                'Established technical standards for GeoDjango, PostGIS, and Spark/Sedona development across distributed teams',
-                'Mentored developers in advanced geospatial software engineering, spatial algorithms, and big data processing principles'
-            ]
-        },
+                # Responsibilities
+                responsibilities = job.get('responsibilities', [])
+                for responsibility in responsibilities:
+                    bullet_text = f"{self.config.get('BULLET_CHAR', '▸')} {responsibility}"
+                    bullet_para = Paragraph(bullet_text, self.styles['ResumeBulletStyle'])
+                    job_content.append(bullet_para)
 
-        '_metadata': {
-            'version': 'software_engineer',
-            'created': datetime.now().isoformat(),
-            'description': 'Software engineer focused version emphasizing technical skills and platform development'
-        }
-    }
+                # Keep job together on same page if possible
+                job_group = KeepTogether(job_content)
+                self.story.append(job_group)
 
-    return data
+                # Add spacing between jobs
+                if i < len(experience) - 1:
+                    self.story.append(Spacer(1, self.config.get('JOB_SPACING', 6)))
 
-def create_config_file(version_name, primary_color='#228B22', secondary_color='#B8860B', accent_blue='#1F4E79'):
-    """Create a config file for a resume version with green, gold, and blue branding"""
+            # Add LinkedIn reference
+            personal_info = self.data.get('personal_info', {})
+            linkedin_url = personal_info.get('linkedin', '')
+            if linkedin_url:
+                link_color = self.config.get('LINK_COLOR', '#B8860B')
+                linkedin_text = f'<i>Additional experience and project details available on <a href="{linkedin_url}" color="{link_color}">LinkedIn</a></i>'
+                linkedin_para = Paragraph(linkedin_text, self.styles['ResumeBodyText'])
+                self.story.append(Spacer(1, 4))
+                self.story.append(linkedin_para)
+                self.story.append(Spacer(1, self.config.get('SECTION_SPACING', 0.12) * inch))
 
-    config = {
-        'PRIMARY_GREEN': '#228B22',        # Forest Green for name and primary accents
-        'SECONDARY_GOLD': '#B8860B',       # Dark Goldenrod for section headers
-        'ACCENT_BLUE': '#1F4E79',          # Professional Blue for job titles and highlights
-        'LIGHT_GOLD': '#DAA520',           # Goldenrod for lighter accents
-        'LIGHT_BLUE': '#4682B4',           # Steel Blue for secondary highlights
-        'DARK_GRAY': '#333333',            # Main text
-        'MEDIUM_GRAY': '#666666',          # Secondary text
-        'LIGHT_GRAY': '#999999',           # Tertiary text
+    def _add_achievements(self):
+        """Add key achievements section"""
+        achievements = self.data.get('achievements', {})
+        if achievements:
+            self._add_section_header('Key Achievements and Impact')
 
-        'FONT_MAIN': 'Helvetica',
-        'FONT_BOLD': 'Helvetica-Bold',
-        'FONT_ITALIC': 'Helvetica-Oblique',
+            for category, achievement_list in achievements.items():
+                # Category header
+                cat_para = Paragraph(category, self.styles['CompetencyHeader'])
+                self.story.append(cat_para)
 
-        'NAME_SIZE': 24,
-        'TITLE_SIZE': 14,
-        'SECTION_HEADER_SIZE': 12,
-        'JOB_TITLE_SIZE': 11,
-        'BODY_SIZE': 9,
-        'CONTACT_SIZE': 9,
+                # Achievements list
+                if isinstance(achievement_list, list):
+                    for achievement in achievement_list:
+                        bullet_text = f"✓ {achievement}"
+                        bullet_para = Paragraph(bullet_text, self.styles['ResumeBulletStyle'])
+                        self.story.append(bullet_para)
 
-        'PAGE_MARGIN': 0.6,
-        'SECTION_SPACING': 0.12,
-        'PARAGRAPH_SPACING': 0.06,
-        'LINE_SPACING': 1.15,
-        'JOB_SPACING': 6,
-        'CATEGORY_SPACING': 4,
+                self.story.append(Spacer(1, 4))
 
-        'MAX_PAGES': 2,
-        'BULLET_CHAR': '▸',
+    def generate_pdf(self, filename='resume.pdf'):
+        """Generate the complete PDF resume"""
+        # Create document
+        doc = SimpleDocTemplate(
+            filename,
+            pagesize=letter,
+            rightMargin=self.config.get('PAGE_MARGIN', 0.6) * inch,
+            leftMargin=self.config.get('PAGE_MARGIN', 0.6) * inch,
+            topMargin=self.config.get('PAGE_MARGIN', 0.6) * inch,
+            bottomMargin=self.config.get('PAGE_MARGIN', 0.6) * inch
+        )
 
-        '_metadata': {
-            'version': version_name,
-            'created': datetime.now().isoformat(),
-            'description': f'Configuration for {version_name} resume version with green, gold, and blue branding'
-        }
-    }
+        # Build content
+        self._add_header()
+        self._add_summary()
+        self._add_competencies()
+        self._add_experience()
+        self._add_achievements()
 
-    return config
+        # Generate PDF
+        doc.build(self.story)
+        print(f"✅ PDF generated: {filename}")
+        return filename
 
-def save_resume_data(version_name, data, config):
-    """Save resume data and config to appropriate directories"""
+    def generate_docx(self, filename='resume.docx'):
+        """Generate Word document version"""
+        try:
+            from docx import Document
+            from docx.shared import Inches, RGBColor
+            from docx.enum.text import WD_ALIGN_PARAGRAPH
+        except ImportError:
+            print("⚠️  python-docx not installed. Install with: pip install python-docx")
+            return None
 
-    input_dir = Path("inputs") / version_name
-    input_dir.mkdir(parents=True, exist_ok=True)
+        doc = Document()
 
-    # Save resume data
-    data_file = input_dir / "resume_data.json"
-    with open(data_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        # Set margins
+        sections = doc.sections
+        for section in sections:
+            margin = self.config.get('PAGE_MARGIN', 0.6)
+            section.top_margin = Inches(margin)
+            section.bottom_margin = Inches(margin)
+            section.left_margin = Inches(margin)
+            section.right_margin = Inches(margin)
 
-    # Save config
-    config_file = input_dir / "config.json"
-    with open(config_file, 'w', encoding='utf-8') as f:
-        json.dump(config, f, indent=2, ensure_ascii=False)
+        personal_info = self.data.get('personal_info', {})
 
-    print(f"✅ Saved {version_name}: {data_file} and {config_file}")
+        # Helper function to convert hex to RGB
+        def hex_to_rgb(hex_color):
+            hex_color = hex_color.lstrip('#')
+            return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-def create_generation_script():
-    """Create a shell script to generate all resume versions"""
+        # Header
+        name_para = doc.add_paragraph()
+        name_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        name_run = name_para.add_run(personal_info.get('name', 'NAME'))
+        name_run.font.size = Inches(0.3)  # Approximate 24pt
+        name_run.font.bold = True
+        name_rgb = hex_to_rgb(self.config.get('NAME_COLOR', '#228B22'))
+        name_run.font.color.rgb = RGBColor(*name_rgb)
 
-    script_content = '''#!/bin/bash
+        title_para = doc.add_paragraph()
+        title_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        title_run = title_para.add_run(personal_info.get('title', 'Professional Title'))
+        title_run.font.size = Inches(0.17)  # Approximate 14pt
+        title_run.font.bold = True
+        title_rgb = hex_to_rgb(self.config.get('TITLE_COLOR', '#B8860B'))
+        title_run.font.color.rgb = RGBColor(*title_rgb)
 
-# Resume Generation Script
-# Generates all resume versions using the ReportLab script
+        contact_para = doc.add_paragraph()
+        contact_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        contact_text = f"{personal_info.get('phone', '')} | {personal_info.get('email', '')}\n{personal_info.get('website', '')} | {personal_info.get('linkedin', '')}"
+        contact_para.add_run(contact_text)
 
-echo "🚀 Generating all resume versions..."
-echo
+        # Summary
+        summary = self.data.get('summary', '')
+        if summary:
+            self._add_docx_section(doc, 'PROFESSIONAL SUMMARY', summary)
 
-# Array of resume versions
-versions=(
-    "dheeraj_research_focused"
-    "dheeraj_technical_detailed"
-    "dheeraj_comprehensive_full"
-    "dheeraj_consulting_minimal"
-    "dheeraj_software_engineer"
-)
+        # Competencies
+        competencies = self.data.get('competencies', {})
+        if competencies:
+            comp_heading = doc.add_heading('CORE COMPETENCIES', level=2)
+            section_rgb = hex_to_rgb(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+            comp_heading.runs[0].font.color.rgb = RGBColor(*section_rgb)
 
-# Generate each version in all formats
-for version in "${versions[@]}"; do
-    echo "📄 Generating: $version"
+            for category, skills in competencies.items():
+                cat_para = doc.add_paragraph()
+                cat_run = cat_para.add_run(category)
+                cat_run.font.bold = True
+                comp_rgb = hex_to_rgb(self.config.get('COMPETENCY_HEADER_COLOR', '#228B22'))
+                cat_run.font.color.rgb = RGBColor(*comp_rgb)
 
-    # Generate PDF
-    python reportlab_resume.py --format pdf --basename "$version"
+                if isinstance(skills, list):
+                    if any('Programming:' in skill or 'Data Platforms:' in skill for skill in skills):
+                        for skill in skills:
+                            doc.add_paragraph(skill, style='List Bullet')
+                    else:
+                        skills_text = ' • '.join(skills)
+                        doc.add_paragraph(skills_text)
 
-    # Generate DOCX
-    python reportlab_resume.py --format docx --basename "$version"
+        # Experience
+        experience = self.data.get('experience', [])
+        if experience:
+            exp_heading = doc.add_heading('PROFESSIONAL EXPERIENCE', level=2)
+            section_rgb = hex_to_rgb(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+            exp_heading.runs[0].font.color.rgb = RGBColor(*section_rgb)
 
-    # Generate RTF
-    python reportlab_resume.py --format rtf --basename "$version"
+            for job in experience:
+                job_para = doc.add_paragraph()
+                job_run = job_para.add_run(job.get('title', ''))
+                job_run.font.bold = True
+                job_rgb = hex_to_rgb(self.config.get('JOB_TITLE_COLOR', '#722F37'))
+                job_run.font.color.rgb = RGBColor(*job_rgb)
 
-    echo "✅ Completed: $version"
-    echo
-done
+                company_para = doc.add_paragraph(f"{job.get('company', '')} | {job.get('dates', '')}")
 
-echo "🎉 All resume versions generated successfully!"
-echo
-echo "📁 Find your resumes in:"
-echo "   outputs/dheeraj_research_focused/"
-echo "   outputs/dheeraj_technical_detailed/"
-echo "   outputs/dheeraj_comprehensive_full/"
-echo "   outputs/dheeraj_consulting_minimal/"
-echo "   outputs/dheeraj_software_engineer/"
-echo
-echo "💡 Each directory contains PDF, DOCX, and RTF versions"
-'''
+                if job.get('subtitle'):
+                    subtitle_para = doc.add_paragraph()
+                    subtitle_run = subtitle_para.add_run(job['subtitle'])
+                    subtitle_run.font.italic = True
+                    subtitle_rgb = hex_to_rgb(self.config.get('SUBTITLE_COLOR', '#228B22'))
+                    subtitle_run.font.color.rgb = RGBColor(*subtitle_rgb)
 
-    script_file = Path("generate_all_resumes.sh")
-    with open(script_file, 'w') as f:
-        f.write(script_content)
+                responsibilities = job.get('responsibilities', [])
+                for responsibility in responsibilities:
+                    doc.add_paragraph(f"▸ {responsibility}", style='List Bullet')
 
-    # Make script executable
-    import stat
-    script_file.chmod(script_file.stat().st_mode | stat.S_IEXEC)
+        # Achievements
+        achievements = self.data.get('achievements', {})
+        if achievements:
+            ach_heading = doc.add_heading('KEY ACHIEVEMENTS AND IMPACT', level=2)
+            section_rgb = hex_to_rgb(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+            ach_heading.runs[0].font.color.rgb = RGBColor(*section_rgb)
 
-    print(f"✅ Created generation script: {script_file}")
+            for category, achievement_list in achievements.items():
+                cat_para = doc.add_paragraph()
+                cat_run = cat_para.add_run(category)
+                cat_run.font.bold = True
+                comp_rgb = hex_to_rgb(self.config.get('COMPETENCY_HEADER_COLOR', '#228B22'))
+                cat_run.font.color.rgb = RGBColor(*comp_rgb)
+
+                if isinstance(achievement_list, list):
+                    for achievement in achievement_list:
+                        doc.add_paragraph(f"✓ {achievement}", style='List Bullet')
+
+        doc.save(filename)
+        print(f"✅ DOCX generated: {filename}")
+        return filename
+
+    def _add_docx_section(self, doc, title, content):
+        """Helper to add a section to Word doc"""
+        from docx.shared import RGBColor
+
+        def hex_to_rgb(hex_color):
+            hex_color = hex_color.lstrip('#')
+            return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+
+        heading = doc.add_heading(title, level=2)
+        section_rgb = hex_to_rgb(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+        heading.runs[0].font.color.rgb = RGBColor(*section_rgb)
+        doc.add_paragraph(content)
+
+    def generate_rtf(self, filename='resume.rtf'):
+        """Generate RTF document"""
+        personal_info = self.data.get('personal_info', {})
+
+        # Helper function to convert hex to RGB for RTF
+        def hex_to_rtf_rgb(hex_color):
+            hex_color = hex_color.lstrip('#')
+            r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+            return f"\\red{r}\\green{g}\\blue{b}"
+
+        # Build color table
+        name_rgb = hex_to_rtf_rgb(self.config.get('NAME_COLOR', '#228B22'))
+        title_rgb = hex_to_rtf_rgb(self.config.get('TITLE_COLOR', '#B8860B'))
+        section_rgb = hex_to_rtf_rgb(self.config.get('SECTION_HEADER_COLOR', '#B8860B'))
+        job_rgb = hex_to_rtf_rgb(self.config.get('JOB_TITLE_COLOR', '#722F37'))
+
+        rtf_content = f"""{{\\rtf1\\ansi\\deff0
+{{\\fonttbl{{\\f0 Times New Roman;}}}}
+{{\\colortbl;\\red0\\green0\\blue0;{name_rgb};{title_rgb};{section_rgb};{job_rgb};}}
+\\f0\\fs24
+{{\\qc\\cf2\\b\\fs36 {personal_info.get('name', 'NAME')}\\par}}
+{{\\qc\\cf3\\b\\fs20 {personal_info.get('title', 'Professional Title')}\\par}}
+{{\\qc {personal_info.get('phone', '')} | {personal_info.get('email', '')}\\par}}
+{{\\qc {personal_info.get('website', '')} | {personal_info.get('linkedin', '')}\\par}}
+\\par
+"""
+
+        # Summary
+        summary = self.data.get('summary', '')
+        if summary:
+            rtf_content += r"{\cf4\b\ul PROFESSIONAL SUMMARY\par}" + summary + r"\par\par"
+
+        # Competencies
+        competencies = self.data.get('competencies', {})
+        if competencies:
+            rtf_content += r"{\cf4\b\ul CORE COMPETENCIES\par}"
+            for category, skills in competencies.items():
+                rtf_content += r"{\cf2\b " + category + r"\par}"
+                if isinstance(skills, list):
+                    if any('Programming:' in skill or 'Data Platforms:' in skill for skill in skills):
+                        for skill in skills:
+                            rtf_content += skill + r"\par"
+                    else:
+                        rtf_content += ' • '.join(skills) + r"\par"
+                rtf_content += r"\par"
+
+        # Experience
+        experience = self.data.get('experience', [])
+        if experience:
+            rtf_content += r"{\cf4\b\ul PROFESSIONAL EXPERIENCE\par}"
+            for job in experience:
+                rtf_content += r"{\cf5\b " + job.get('title', '') + r"\par}"
+                rtf_content += job.get('company', '') + " | " + job.get('dates', '') + r"\par"
+                if job.get('subtitle'):
+                    rtf_content += r"{\cf2\i " + job['subtitle'] + r"\par}"
+                responsibilities = job.get('responsibilities', [])
+                for resp in responsibilities:
+                    rtf_content += "▸ " + resp + r"\par"
+                rtf_content += r"\par"
+
+        # Achievements
+        achievements = self.data.get('achievements', {})
+        if achievements:
+            rtf_content += r"{\cf4\b\ul KEY ACHIEVEMENTS AND IMPACT\par}"
+            for category, achievement_list in achievements.items():
+                rtf_content += r"{\cf2\b " + category + r"\par}"
+                if isinstance(achievement_list, list):
+                    for achievement in achievement_list:
+                        rtf_content += "✓ " + achievement + r"\par"
+                rtf_content += r"\par"
+
+        rtf_content += "}"
+
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(rtf_content)
+
+        print(f"✅ RTF generated: {filename}")
+        return filename
 
 def main():
-    """Main function to generate all resume data files"""
+    """Main function to generate resume"""
+    parser = argparse.ArgumentParser(description='Generate professional resume from JSON data')
+    parser.add_argument('--format', choices=['pdf', 'docx', 'rtf', 'all'], default='pdf',
+                       help='Output format(s) to generate')
+    parser.add_argument('--basename', required=True,
+                       help='Base name for input directory and output files')
+    parser.add_argument('--input-dir', default='inputs',
+                       help='Input directory containing resume data')
+    parser.add_argument('--output-dir', default='outputs',
+                       help='Output directory for generated files')
 
-    print("🚀 Resume Data Generator")
-    print("=" * 50)
+    args = parser.parse_args()
 
-    # Create directory structure
-    print("\n📁 Creating directory structure...")
-    create_directory_structure()
+    # Construct paths
+    input_base = Path(args.input_dir) / args.basename
+    data_file = input_base / 'resume_data.json'
+    config_file = input_base / 'config.json'
 
-    # Create all resume versions
-    print("\n📝 Creating resume data files...")
+    # Check if input files exist
+    if not data_file.exists():
+        print(f"❌ Resume data file not found: {data_file}")
+        print(f"Available directories in {args.input_dir}:")
+        input_dir = Path(args.input_dir)
+        if input_dir.exists():
+            for item in input_dir.iterdir():
+                if item.is_dir():
+                    print(f"   • {item.name}")
+        return 1
 
-    # All versions now use consistent green, gold, and blue branding
+    # Create output directory structure
+    output_base = Path(args.output_dir) / args.basename
+    formats_to_generate = ['pdf', 'docx', 'rtf'] if args.format == 'all' else [args.format]
 
-    # Research-focused version (Green, Gold, Blue)
-    research_data = create_research_focused_data()
-    research_config = create_config_file("research_focused")
-    save_resume_data("dheeraj_research_focused", research_data, research_config)
+    for fmt in formats_to_generate:
+        (output_base / fmt).mkdir(parents=True, exist_ok=True)
 
-    # Technical detailed version (Green, Gold, Blue)
-    technical_data = create_technical_detailed_data()
-    technical_config = create_config_file("technical_detailed")
-    save_resume_data("dheeraj_technical_detailed", technical_data, technical_config)
+    try:
+        # Generate resume
+        generator = ResumeGenerator(data_file, config_file)
+        generated_files = []
 
-    # Comprehensive full version (Green, Gold, Blue)
-    comprehensive_data = create_comprehensive_full_data()
-    comprehensive_config = create_config_file("comprehensive_full")
-    save_resume_data("dheeraj_comprehensive_full", comprehensive_data, comprehensive_config)
+        for fmt in formats_to_generate:
+            output_dir = output_base / fmt
+            filename = output_dir / f"{args.basename}.{fmt}"
 
-    # Consulting minimal version (Green, Gold, Blue)
-    consulting_data = create_consulting_minimal_data()
-    consulting_config = create_config_file("consulting_minimal")
-    save_resume_data("dheeraj_consulting_minimal", consulting_data, consulting_config)
+            if fmt == 'pdf':
+                result = generator.generate_pdf(str(filename))
+            elif fmt == 'docx':
+                result = generator.generate_docx(str(filename))
+            elif fmt == 'rtf':
+                result = generator.generate_rtf(str(filename))
 
-    # Software engineer version (Green, Gold, Blue)
-    engineer_data = create_software_engineer_data()
-    engineer_config = create_config_file("software_engineer")
-    save_resume_data("dheeraj_software_engineer", engineer_data, engineer_config)
+            if result:
+                generated_files.append(result)
 
-    # Create generation script
-    print("\n🔧 Creating generation script...")
-    create_generation_script()
+        print(f"\n🎉 Resume generation complete!")
+        for file in generated_files:
+            print(f"📄 Generated: {file}")
 
-    print("\n✅ Resume data generation complete!")
-    print("\n📋 Generated versions:")
-    print("   • dheeraj_research_focused    - Emphasizes applied research leadership")
-    print("   • dheeraj_technical_detailed  - Shows engineering depth and technical skills")
-    print("   • dheeraj_comprehensive_full  - Complete work history with all details")
-    print("   • dheeraj_consulting_minimal  - Consulting-focused strategic advisor")
-    print("   • dheeraj_software_engineer   - Software engineering and platform development")
-    print("\n🚀 Next steps:")
-    print("   1. Review the generated JSON files in inputs/ directories")
-    print("   2. Customize any content or styling as needed")
-    print("   3. Run: ./generate_all_resumes.sh")
-    print("   4. Or generate individual versions:")
-    print("      python reportlab_resume.py --format all --basename dheeraj_research_focused")
+        return 0
+
+    except Exception as e:
+        print(f"❌ Error generating resume: {e}")
+        return 1
 
 if __name__ == "__main__":
-    main()
+    exit(main())
