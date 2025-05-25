@@ -12,23 +12,23 @@ from pathlib import Path
 
 class ResumeManager:
     """Manages resume generation for multiple versions with color scheme organization"""
-    
+
     def __init__(self):
         self.versions = {
             'research': 'dheeraj_chand_research_focused',
-            'technical': 'dheeraj_chand_technical_detailed', 
+            'technical': 'dheeraj_chand_technical_detailed',
             'comprehensive': 'dheeraj_chand_comprehensive_full',
             'consulting': 'dheeraj_chand_consulting_minimal',
             'software': 'dheeraj_chand_software_engineer',
             'marketing': 'dheeraj_chand_product_marketing'
         }
-        
+
         self.color_schemes = [
             'default_professional',
             'corporate_blue',
             'modern_tech'
         ]
-        
+
         self.formats = ['pdf', 'docx', 'rtf']
         self.current_color_scheme = 'default_professional'  # Track current scheme
 
@@ -45,7 +45,7 @@ class ResumeManager:
         # Check a sample config file to see what color scheme is active
         sample_version = 'dheeraj_chand_software_engineer'
         config_path = Path("inputs") / sample_version / "config.json"
-        
+
         if config_path.exists():
             try:
                 with open(config_path, 'r') as f:
@@ -54,30 +54,30 @@ class ResumeManager:
                     return metadata.get('scheme_name', 'default_professional')
             except:
                 pass
-        
+
         return 'default_professional'
 
     def validate_color_scheme(self, color_scheme):
         """Validate that a color scheme exists (built-in or file)"""
         if not color_scheme:
             return True
-        
+
         # Check built-in schemes
         built_ins = ['default_professional', 'corporate_blue', 'modern_tech']
         if color_scheme in built_ins:
             return True
-        
+
         # Check for JSON file in color_schemes directory
         scheme_file = Path("color_schemes") / f"{color_scheme}.json"
         if scheme_file.exists():
             return True
-        
+
         return False
 
     def get_all_available_schemes(self):
         """Get all available color schemes from all sources"""
         schemes = ['default_professional', 'corporate_blue', 'modern_tech']
-        
+
         # Add schemes from color_schemes directory
         schemes_dir = Path("color_schemes")
         if schemes_dir.exists():
@@ -85,25 +85,25 @@ class ResumeManager:
                 scheme_name = scheme_file.stem
                 if scheme_name not in schemes:
                     schemes.append(scheme_name)
-        
+
         return schemes
 
     def check_setup(self):
         """Check if the system is properly set up"""
         print("🔍 Checking system setup...")
-        
+
         # Check required files
         required_files = ['resume_data_generator.py', 'reportlab_resume.py']
         missing_files = []
-        
+
         for file_path in required_files:
             if not Path(file_path).exists():
                 missing_files.append(file_path)
-        
+
         if missing_files:
             print(f"❌ Missing files: {', '.join(missing_files)}")
             return False
-        
+
         # Check dependencies
         try:
             import reportlab
@@ -111,23 +111,23 @@ class ResumeManager:
         except ImportError:
             print("❌ ReportLab not found. Install with: pip install reportlab")
             return False
-        
+
         try:
             import docx
             print("✅ python-docx found")
         except ImportError:
             print("⚠️  python-docx not found. DOCX generation will be skipped.")
             print("   Install with: pip install python-docx")
-        
+
         print("✅ System setup OK")
         return True
 
     def generate_data(self, color_scheme='default_professional'):
         """Generate resume data using your existing generator"""
         print(f"📝 Generating resume data with {color_scheme} color scheme...")
-        
+
         success, output = self.run_command(f"python resume_data_generator.py --color-scheme {color_scheme}")
-        
+
         if success:
             print("✅ Resume data generated")
             self.current_color_scheme = color_scheme
@@ -143,32 +143,32 @@ class ResumeManager:
             print(f"❌ Unknown version: {version_key}")
             print(f"Available versions: {', '.join(self.versions.keys())}")
             return False
-        
+
         version_name = self.versions[version_key]
-        
+
         # Check if input directory exists
         input_dir = Path("inputs") / version_name
         if not input_dir.exists():
             print(f"❌ Input directory not found: {input_dir}")
             print("Run with --generate-data first")
             return False
-        
+
         # Determine color scheme to use
         if color_scheme is None:
             color_scheme = self.get_current_color_scheme()
-        
+
         print(f"📄 Generating {version_key} resume in {format_type.upper()} format with {color_scheme} colors...")
-        
+
         # Create color-scheme-organized output directory
         output_base = Path("outputs") / version_key / color_scheme / format_type
         output_base.mkdir(parents=True, exist_ok=True)
-        
+
         # Generate with custom output path
         output_file = output_base / f"{version_key}_{color_scheme}.{format_type}"
         cmd = f"python reportlab_resume.py --format {format_type} --basename {version_name} --output-dir outputs_temp"
-        
+
         success, output = self.run_command(cmd)
-        
+
         if success:
             # Move from temp location to organized location
             temp_file = Path(f"outputs_temp/{version_name}/{format_type}/{version_name}.{format_type}")
@@ -192,17 +192,17 @@ class ResumeManager:
         if version_key not in self.versions:
             print(f"❌ Unknown version: {version_key}")
             return False
-        
+
         if color_scheme is None:
             color_scheme = self.get_current_color_scheme()
-        
+
         print(f"🚀 Generating all formats for {version_key} with {color_scheme} colors...")
-        
+
         success_count = 0
         for fmt in self.formats:
             if self.generate_single_resume(version_key, fmt, color_scheme):
                 success_count += 1
-        
+
         print(f"✅ Generated {success_count}/{len(self.formats)} formats for {version_key}")
         return success_count == len(self.formats)
 
@@ -211,50 +211,50 @@ class ResumeManager:
         if version_key not in self.versions:
             print(f"❌ Unknown version: {version_key}")
             return False
-        
+
         print(f"🎨 Generating {version_key} resume with multiple color schemes for comparison...")
-        
+
         successful_schemes = []
-        
+
         for scheme in color_schemes:
             print(f"\n📄 Generating with {scheme} colors...")
-            
+
             # Generate data with this color scheme
             success, _ = self.run_command(f"python resume_data_generator.py --color-scheme {scheme}")
             if not success:
                 print(f"⚠️  Could not generate data with {scheme} scheme")
                 continue
-            
+
             # Generate resume with this scheme
             if self.generate_single_resume(version_key, format_type, scheme):
                 successful_schemes.append(scheme)
-        
+
         print(f"\n🎉 Generated {version_key} resume with {len(successful_schemes)} color schemes:")
         for scheme in successful_schemes:
             output_path = Path("outputs") / version_key / scheme / format_type / f"{version_key}_{scheme}.{format_type}"
             print(f"   📂 {output_path}")
-        
+
         return len(successful_schemes) > 0
 
     def generate_all_versions(self, format_type='pdf'):
         """Generate all versions in specified format with current color scheme"""
         print(f"🚀 Generating all resume versions in {format_type.upper()} format...")
-        
+
         current_scheme = self.get_current_color_scheme()
         success_count = 0
         failed_versions = []
-        
+
         for version_key in self.versions.keys():
             if self.generate_single_resume(version_key, format_type, current_scheme):
                 success_count += 1
             else:
                 failed_versions.append(version_key)
-        
+
         print(f"✅ Generated {success_count}/{len(self.versions)} versions")
-        
+
         if failed_versions:
             print(f"❌ Failed versions: {', '.join(failed_versions)}")
-        
+
         return len(failed_versions) == 0
 
     def generate_everything(self):
@@ -262,27 +262,27 @@ class ResumeManager:
         print("🚀 Generating ALL resume versions in ALL formats...")
         print("This may take a few minutes...")
         print()
-        
+
         current_scheme = self.get_current_color_scheme()
         total_generated = 0
         total_possible = len(self.versions) * len(self.formats)
-        
+
         for version_key in self.versions.keys():
             print(f"📋 Processing {version_key} with {current_scheme} colors...")
             for fmt in self.formats:
                 if self.generate_single_resume(version_key, fmt, current_scheme):
                     total_generated += 1
-        
+
         print()
         print(f"🎉 Generation complete: {total_generated}/{total_possible} files generated")
-        
+
         return total_generated
 
     def list_versions(self):
         """List available resume versions with color scheme status"""
         print("📋 Available resume versions:")
         print()
-        
+
         descriptions = {
             'research': 'Research & Data Analytics Leader - For academic/research roles',
             'technical': 'Senior Geospatial Data Engineer - Technical depth emphasis',
@@ -291,22 +291,22 @@ class ResumeManager:
             'software': 'Senior Software Engineer - Platform development (DEFAULT)',
             'marketing': 'Senior Product Marketing Manager - Go-to-market focus'
         }
-        
+
         current_scheme = self.get_current_color_scheme()
         print(f"🎨 Current color scheme: {current_scheme}")
         print()
-        
+
         for key, description in descriptions.items():
             version_name = self.versions[key]
             input_dir = Path("inputs") / version_name
             status = "✅" if input_dir.exists() else "❌"
-            
+
             # Check for existing outputs with current color scheme
             output_dir = Path("outputs") / key / current_scheme
             has_outputs = "📄" if output_dir.exists() and any(output_dir.rglob("*")) else "  "
-            
+
             print(f"  {status} {has_outputs} {key:12} - {description}")
-        
+
         print()
         print("🎨 Available color schemes:")
         schemes_dir = Path("color_schemes")
@@ -353,7 +353,7 @@ class ResumeManager:
 def get_available_color_schemes():
     """Get list of available color schemes from files and built-ins"""
     schemes = ['default_professional', 'corporate_blue', 'modern_tech']  # Built-ins
-    
+
     # Add schemes from color_schemes directory
     schemes_dir = Path("color_schemes")
     if schemes_dir.exists():
@@ -361,15 +361,15 @@ def get_available_color_schemes():
             scheme_name = scheme_file.stem
             if scheme_name not in schemes:
                 schemes.append(scheme_name)
-    
+
     return schemes
 
 def main():
     """Main function with argument parsing"""
-    
+
     # Get available color schemes dynamically for help text
     available_schemes = get_available_color_schemes()
-    
+
     parser = argparse.ArgumentParser(
         description='Resume Manager for Dheeraj Chand - Generate individual or batch resumes with color scheme organization',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -377,48 +377,48 @@ def main():
 Examples:
   # Setup and generate data
   python resume_manager.py --generate-data
-  
+
   # Generate single resume (uses current color scheme)
   python resume_manager.py --version software --format pdf
-  
+
   # Generate with specific color scheme
   python resume_manager.py --version technical --format pdf --color-scheme data_professional
-  
+
   # Generate all formats for one version
   python resume_manager.py --version technical --all-formats
-  
+
   # Compare same resume with different color schemes
   python resume_manager.py --version software --color-comparison corporate_blue modern_tech data_professional
-  
+
   # Generate all versions in PDF
   python resume_manager.py --all-versions --format pdf
-  
+
   # Generate everything
   python resume_manager.py --everything
-  
+
   # List available versions and current color scheme
   python resume_manager.py --list
 
 Available color schemes: {', '.join(available_schemes)}
         """
     )
-    
+
     # Data generation
     parser.add_argument('--generate-data', action='store_true',
                        help='Generate resume data files using existing generator')
     parser.add_argument('--color-scheme',
                        help=f'Color scheme to use. Available: {", ".join(available_schemes)} (or any custom scheme in color_schemes/)')
-    
+
     # Single resume generation
     parser.add_argument('--version', choices=['research', 'technical', 'comprehensive', 'consulting', 'software', 'marketing'],
                        help='Resume version to generate')
     parser.add_argument('--format', choices=['pdf', 'docx', 'rtf'], default='pdf',
                        help='Output format (default: pdf)')
-    
+
     # Color comparison
     parser.add_argument('--color-comparison', nargs='+', metavar='COLOR_SCHEME',
                        help='Generate version with multiple color schemes for comparison')
-    
+
     # Batch operations
     parser.add_argument('--all-formats', action='store_true',
                        help='Generate all formats for specified version')
@@ -426,7 +426,7 @@ Available color schemes: {', '.join(available_schemes)}
                        help='Generate all versions in specified format')
     parser.add_argument('--everything', action='store_true',
                        help='Generate all versions in all formats')
-    
+
     # Utility
     parser.add_argument('--list', action='store_true',
                        help='List available resume versions and color schemes')
@@ -434,11 +434,11 @@ Available color schemes: {', '.join(available_schemes)}
                        help='Clean output directories (optional: specify version and/or color scheme)')
     parser.add_argument('--check', action='store_true',
                        help='Check system setup')
-    
+
     args = parser.parse_args()
-    
+
     manager = ResumeManager()
-    
+
     # Validate color scheme if provided
     if args.color_scheme and not manager.validate_color_scheme(args.color_scheme):
         available = manager.get_all_available_schemes()
@@ -446,19 +446,19 @@ Available color schemes: {', '.join(available_schemes)}
         print(f"Available schemes: {', '.join(available)}")
         print(f"Generate custom schemes with: python color_scheme_generator_tool.py")
         return 1
-    
+
     # Check system setup
     if args.check or not any(vars(args).values()):
         if not manager.check_setup():
             return 1
         if args.check:
             return 0
-    
+
     # List versions
     if args.list:
         manager.list_versions()
         return 0
-    
+
     # Clean outputs
     if args.clean is not None:
         if len(args.clean) == 0:
@@ -471,13 +471,13 @@ Available color schemes: {', '.join(available_schemes)}
             print("❌ Clean accepts 0, 1, or 2 arguments: [version] [color_scheme]")
             return 1
         return 0
-    
+
     # Generate data
     if args.generate_data:
         color_scheme = args.color_scheme or 'default_professional'
         if not manager.generate_data(color_scheme):
             return 1
-    
+
     # Color comparison
     if args.color_comparison:
         if not args.version:
@@ -485,33 +485,33 @@ Available color schemes: {', '.join(available_schemes)}
             return 1
         success = manager.generate_color_comparison(args.version, args.color_comparison, args.format)
         return 0 if success else 1
-    
+
     # Generate everything
     if args.everything:
         if not manager.check_setup():
             return 1
         total = manager.generate_everything()
         return 0 if total > 0 else 1
-    
+
     # Generate all versions in one format
     if args.all_versions:
         if not manager.check_setup():
             return 1
         success = manager.generate_all_versions(args.format)
         return 0 if success else 1
-    
+
     # Generate single version
     if args.version:
         if not manager.check_setup():
             return 1
-        
+
         if args.all_formats:
             success = manager.generate_all_formats(args.version, args.color_scheme)
         else:
             success = manager.generate_single_resume(args.version, args.format, args.color_scheme)
-        
+
         return 0 if success else 1
-    
+
     # Default: show help
     parser.print_help()
     return 0

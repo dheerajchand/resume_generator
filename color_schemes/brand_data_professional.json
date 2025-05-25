@@ -7,8 +7,6 @@
   "COMPETENCY_HEADER_COLOR": "#1F4E79",
   "SUBTITLE_COLOR": "#1F4E79",
   "LINK_COLOR": "#00BCD4",
-  "LIGHT_ACCENT_COLOR": "#8B4444",
-  "LIGHT_SECONDARY_COLOR": "#DAA520",
   "DARK_TEXT_COLOR": "#333333",
   "MEDIUM_TEXT_COLOR": "#666666",
   "LIGHT_TEXT_COLOR": "#999999",
@@ -28,11 +26,10 @@
   "JOB_SPACING": 6,
   "CATEGORY_SPACING": 4,
   "MAX_PAGES": 2,
-  "BULLET_CHAR": "▸",
+  "BULLET_CHAR": "\u25b8",
   "_metadata": {
-    "version": "research_focused",
     "scheme_name": "brand_data_professional",
-    "created": "2025-05-24T19:48:13.542838",
-    "description": "Configuration for research_focused using brand_data_professional color scheme"
+    "description": "brand_data_professional color scheme for professional resume",
+    "generated": true
   }
 }

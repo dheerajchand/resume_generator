@@ -1,14 +1,12 @@
 {
-  "NAME_COLOR": "#1F4E79",
-  "TITLE_COLOR": "#333333",
-  "SECTION_HEADER_COLOR": "#333333",
-  "JOB_TITLE_COLOR": "#4682B4",
-  "ACCENT_COLOR": "#4682B4",
-  "COMPETENCY_HEADER_COLOR": "#1F4E79",
-  "SUBTITLE_COLOR": "#1F4E79",
-  "LINK_COLOR": "#4682B4",
-  "LIGHT_ACCENT_COLOR": "#6495ED",
-  "LIGHT_SECONDARY_COLOR": "#666666",
+  "NAME_COLOR": "#2E7D32",
+  "TITLE_COLOR": "#03A9F4",
+  "SECTION_HEADER_COLOR": "#03A9F4",
+  "JOB_TITLE_COLOR": "#757575",
+  "ACCENT_COLOR": "#757575",
+  "COMPETENCY_HEADER_COLOR": "#2E7D32",
+  "SUBTITLE_COLOR": "#2E7D32",
+  "LINK_COLOR": "#03A9F4",
   "DARK_TEXT_COLOR": "#333333",
   "MEDIUM_TEXT_COLOR": "#666666",
   "LIGHT_TEXT_COLOR": "#999999",
@@ -30,8 +28,8 @@
   "MAX_PAGES": 2,
   "BULLET_CHAR": "\u25b8",
   "_metadata": {
-    "scheme_name": "corporate_blue",
-    "created": "2025-05-24T19:48:13.542358",
-    "description": "corporate_blue color scheme for professional resume"
+    "scheme_name": "brand_gis_expert",
+    "description": "brand_gis_expert color scheme for professional resume",
+    "generated": true
   }
 }
