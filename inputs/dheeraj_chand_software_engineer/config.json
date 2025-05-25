@@ -1,12 +1,12 @@
 {
-  "NAME_COLOR": "#1F4E79",
-  "TITLE_COLOR": "#00BCD4",
-  "SECTION_HEADER_COLOR": "#00BCD4",
-  "JOB_TITLE_COLOR": "#FF9800",
-  "ACCENT_COLOR": "#FF9800",
-  "COMPETENCY_HEADER_COLOR": "#1F4E79",
-  "SUBTITLE_COLOR": "#1F4E79",
-  "LINK_COLOR": "#00BCD4",
+  "NAME_COLOR": "#228B22",
+  "TITLE_COLOR": "#8B4513",
+  "SECTION_HEADER_COLOR": "#8B4513",
+  "JOB_TITLE_COLOR": "#4169E1",
+  "ACCENT_COLOR": "#4169E1",
+  "COMPETENCY_HEADER_COLOR": "#228B22",
+  "SUBTITLE_COLOR": "#228B22",
+  "LINK_COLOR": "#8B4513",
   "LIGHT_ACCENT_COLOR": "#8B4444",
   "LIGHT_SECONDARY_COLOR": "#DAA520",
   "DARK_TEXT_COLOR": "#333333",
@@ -31,8 +31,8 @@
   "BULLET_CHAR": "▸",
   "_metadata": {
     "version": "software_engineer",
-    "scheme_name": "brand_data_professional",
-    "created": "2025-05-24T19:48:13.544017",
-    "description": "Configuration for software_engineer using brand_data_professional color scheme"
+    "scheme_name": "topographic_classic",
+    "created": "2025-05-24T20:48:58.053055",
+    "description": "Configuration for software_engineer using topographic_classic color scheme"
   }
 }

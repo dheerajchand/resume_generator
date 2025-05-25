@@ -232,7 +232,7 @@ class ColorSchemeGenerator:
         scheme['JOB_TITLE_COLOR'] = colors['accent']
         scheme['ACCENT_COLOR'] = colors['accent']
 
-        return self.create_scheme_dict(f"{industry}_{scheme_name}", scheme)
+        return self.create_scheme_dict(scheme_name, scheme)
 
     def generate_brand_scheme(self, brand_colors, scheme_name):
         """Generate scheme from brand colors (list of 2-3 hex colors)"""
@@ -260,7 +260,7 @@ class ColorSchemeGenerator:
             scheme['JOB_TITLE_COLOR'] = muted
             scheme['ACCENT_COLOR'] = muted
 
-        return self.create_scheme_dict(f"brand_{scheme_name}", scheme)
+        return self.create_scheme_dict(scheme_name, scheme)
 
     def create_scheme_dict(self, scheme_name, scheme):
         """Create properly formatted scheme dictionary"""
