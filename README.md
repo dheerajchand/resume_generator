@@ -1,17 +1,17 @@
-# Professional Resume Generator
+# Professional Resume Generator System
 
-A Python-based resume generation system that creates professional, multi-format resumes from structured JSON data. Generates PDF, DOCX, and RTF formats with configurable color schemes and precise typography for maximum impact and ATS compatibility.
+A comprehensive Python-based resume generation system that creates professional, multi-format resumes from structured JSON data. Generates PDF, DOCX, and RTF formats with configurable color schemes and precise typography for maximum impact and ATS compatibility.
 
 ## Features
 
-- **Multiple Resume Versions**: Generate different versions targeting specific roles (Research, Technical, Software Engineer, Consulting, Comprehensive, Product Marketing)
+- **Multiple Resume Versions**: Six targeted versions (Research, Technical, Software Engineer, Consulting, Comprehensive, Product Marketing)
 - **Multi-Format Output**: PDF, DOCX, and RTF formats for maximum compatibility
-- **Configurable Color Schemes**: Professional, Corporate Blue, Modern Tech, and custom themes
-- **Structured Data**: JSON-based content management with detailed professional information
+- **Dynamic Color Schemes**: Professional themes with custom color scheme generation tools
+- **Structured Data Management**: JSON-based content with automated data generation
 - **Professional Layout**: 2-page optimized design with precise typography and spacing
-- **Batch Generation**: Create all resume versions with single commands
-- **Individual Control**: Generate specific versions, formats, or combinations as needed
-- **Error Handling**: Comprehensive validation and fallback configurations
+- **Flexible Generation Options**: Individual, batch, or selective generation capabilities
+- **Color Scheme Comparison**: Generate same resume with different color schemes for A/B testing
+- **Comprehensive Management**: Full lifecycle management from data generation to final output
 
 ## Quick Start
 
@@ -20,244 +20,237 @@ A Python-based resume generation system that creates professional, multi-format 
 pip install reportlab python-docx
 ```
 
-### 2. Generate All Resume Data and Versions
+### 2. Initialize System and Generate Data
 ```bash
-# Generate everything at once (recommended for first-time setup)
-python generate_all_dheeraj_resumes.py
-```
+# Check system setup
+python resume_manager.py --check
 
-### 3. Individual Resume Generation
-```bash
-# Generate specific version
-python resume_manager.py --version software --format pdf
+# Generate all resume data with default color scheme
+python resume_manager.py --generate-data
 
-# Generate all formats for one version
-python resume_manager.py --version technical --all-formats
-
-# List available versions
+# List available versions and status
 python resume_manager.py --list
 ```
 
-## System Overview
+### 3. Generate Your First Resume
+```bash
+# Generate the default software engineer version in PDF
+python resume_manager.py --version software --format pdf
 
-The resume generation system consists of three main scripts:
+# Generate all formats for a specific version
+python resume_manager.py --version software --all-formats
 
-| Script | Purpose | Use Case |
-|--------|---------|----------|
-| `resume_data_generator.py` | Creates JSON data files with professional content | Initial setup, adding new versions |
-| `reportlab_resume.py` | Core resume generation engine | Direct control, custom configurations |
-| `generate_all_dheeraj_resumes.py` | Batch generator for all versions | Complete regeneration, first-time setup |
-| `resume_manager.py` | Individual resume control and management | Daily use, specific version updates |
+# Generate all versions in PDF format
+python resume_manager.py --all-versions --format pdf
+```
+
+## System Architecture
+
+The resume generation system consists of five main components:
+
+| Script | Purpose | Primary Use Case |
+|--------|---------|------------------|
+| `resume_manager.py` | **Main controller** - Individual and batch resume management | Daily use, specific version generation |
+| `resume_data_generator.py` | Creates structured JSON data files with professional content | Initial setup, content updates |
+| `reportlab_resume.py` | Core resume generation engine using ReportLab | Direct generation control |
+| `color_scheme_generator_tool.py` | Custom color scheme creation and preview | Design customization |
+| `generate_all_resumes.py` | Legacy batch generator | Complete system regeneration |
 
 ## Resume Versions
 
 The system generates six distinct resume versions, each optimized for different career focuses:
 
-| Version | Key Focus | Target Audience | Professional Title |
-|---------|-----------|-----------------|-------------------|
-| `research` | Applied research leadership, community impact | Research organizations, NGOs, policy roles | Director of Research and Analysis |
-| `technical` | Data engineering, geospatial platforms, big data | Technical teams, engineering managers | Senior Geospatial Data Engineer & Technical Architect |
-| `software` | Platform development, full-stack engineering | Software engineering roles, tech companies | Senior Software Engineer & Geospatial Platform Architect |
-| `consulting` | Strategic advisory, technology consulting | Consulting firms, strategy roles | Data Analytics & Technology Consultant |
-| `comprehensive` | Complete work history and technical depth | Executive roles, comprehensive review | Research, Data Analytics & Engineering Professional |
-| `marketing` | Product marketing, go-to-market strategy | Marketing roles, product management | Senior Product Marketing Manager |
+| Version Key | Professional Title | Target Roles | Key Emphasis |
+|-------------|-------------------|--------------|--------------|
+| `research` | Director of Research and Analysis | Academic, NGO, Policy | Applied research leadership, community impact |
+| `technical` | Senior Geospatial Data Engineer & Technical Architect | Data engineering, Architecture | Big data, geospatial platforms, system design |
+| `software` | Senior Software Engineer & Geospatial Platform Architect | Software engineering, Development | Full-stack development, platform engineering |
+| `consulting` | Data Analytics & Technology Consultant | Consulting, Strategy | Strategic advisory, technology consulting |
+| `comprehensive` | Research, Data Analytics & Engineering Professional | Executive, Senior roles | Complete career history and technical depth |
+| `marketing` | Senior Product Marketing Manager | Product marketing, Go-to-market | Market research, product positioning |
 
 ## Color Schemes
 
-The system supports multiple professional color schemes:
-
-### Available Schemes
+### Built-in Professional Themes
 
 #### Default Professional (Green, Gold, Burgundy)
 ```bash
-python resume_data_generator.py --color-scheme default_professional
+python resume_manager.py --generate-data --color-scheme default_professional
 ```
-- **Primary**: Forest Green (#228B22) - Name, competency headers
-- **Secondary**: Dark Goldenrod (#B8860B) - Section headers, links
-- **Accent**: Deep Burgundy (#722F37) - Job titles, highlights
 - **Best for**: Creative, consulting, and distinctive professional roles
+- **Colors**: Forest Green (#228B22), Dark Goldenrod (#B8860B), Deep Burgundy (#722F37)
 
 #### Corporate Blue (Navy, Gray, Steel Blue)
 ```bash
-python resume_data_generator.py --color-scheme corporate_blue
+python resume_manager.py --generate-data --color-scheme corporate_blue
 ```
-- **Primary**: Navy Blue (#1F4E79) - Name, competency headers
-- **Secondary**: Charcoal (#333333) - Section headers
-- **Accent**: Steel Blue (#4682B4) - Job titles, links
 - **Best for**: Traditional industries, finance, legal, enterprise roles
+- **Colors**: Navy Blue (#1F4E79), Charcoal (#333333), Steel Blue (#4682B4)
 
 #### Modern Tech (Teal, Orange, Gray)
 ```bash
-python resume_data_generator.py --color-scheme modern_tech
-```
-- **Primary**: Deep Teal (#2C5F5D) - Name, competency headers
-- **Secondary**: Vibrant Orange (#FF6B35) - Section headers, accents
-- **Accent**: Deep Teal (#2C5F5D) - Job titles
-- **Best for**: Startup environments, tech companies, innovative roles
-
-#### Elegant Purple (Purple, Gold, Gray)
-```bash
-python resume_data_generator.py --color-scheme elegant_purple
-```
-- **Primary**: Rebecca Purple (#663399) - Name, competency headers
-- **Secondary**: Goldenrod (#DAA520) - Section headers, accents
-- **Accent**: Rebecca Purple (#663399) - Job titles
-- **Best for**: Creative roles, design positions, marketing roles
-
-### Using Color Schemes
-
-#### Generate Data with Specific Color Schemes
-```bash
-# Generate with default professional colors
-python resume_data_generator.py --color-scheme default_professional
-
-# Generate with corporate blue theme
-python resume_data_generator.py --color-scheme corporate_blue
-
-# Generate with modern tech colors
-python resume_data_generator.py --color-scheme modern_tech
-```
-
-#### Generate Resumes with Different Colors
-```bash
-# Generate research version with corporate colors
-python resume_manager.py --generate-data --color-scheme corporate_blue
-python resume_manager.py --version research --format pdf
-
-# Generate technical version with modern tech colors
 python resume_manager.py --generate-data --color-scheme modern_tech
-python resume_manager.py --version technical --all-formats
+```
+- **Best for**: Startup environments, tech companies, innovative roles
+- **Colors**: Deep Teal (#2C5F5D), Vibrant Orange (#FF6B35)
+
+### Custom Color Scheme Creation
+
+Generate custom color schemes using the color scheme generator tool:
+
+```bash
+# Create industry-specific schemes
+python color_scheme_generator_tool.py --industry finance --name corporate_finance --preview
+
+# Create brand-based schemes
+python color_scheme_generator_tool.py --brand '#1F4E79' '#FF6B35' --name custom_brand --preview
+
+# Create color theory-based schemes
+python color_scheme_generator_tool.py --complementary '#228B22' --name nature_complement --preview
 ```
 
 ## Resume Manager - Complete Usage Guide
 
-The `resume_manager.py` script provides granular control over resume generation:
+### Essential Commands
 
-### Basic Commands
-
-#### Setup and Data Generation
+#### System Setup and Data Management
 ```bash
-# Check system setup
+# Check system configuration and dependencies
 python resume_manager.py --check
 
-# Generate resume data files
+# Generate resume data with default professional color scheme
 python resume_manager.py --generate-data
 
 # Generate data with specific color scheme
 python resume_manager.py --generate-data --color-scheme corporate_blue
 
-# List available resume versions
+# List all available versions, color schemes, and status
 python resume_manager.py --list
+
+# Clean output directories
+python resume_manager.py --clean
 ```
 
-#### Single Resume Generation
+#### Individual Resume Generation
 ```bash
-# Generate specific version in PDF
+# Generate specific version in PDF format
 python resume_manager.py --version software --format pdf
 
-# Generate specific version in DOCX
+# Generate specific version in DOCX format
 python resume_manager.py --version research --format docx
 
-# Generate specific version in RTF
+# Generate specific version in RTF format
 python resume_manager.py --version consulting --format rtf
 ```
 
-#### Multiple Format Generation
+#### Batch Generation Operations
 ```bash
-# Generate all formats for one version
+# Generate all formats (PDF, DOCX, RTF) for one version
 python resume_manager.py --version technical --all-formats
 
 # Generate all versions in PDF format
 python resume_manager.py --all-versions --format pdf
 
-# Generate all versions in all formats
+# Generate all versions in all formats (18 total files)
 python resume_manager.py --everything
 ```
 
-#### Utility Commands
+#### Color Scheme Comparison and Testing
 ```bash
-# Clean output directories
-python resume_manager.py --clean
-
-# Check system status
-python resume_manager.py --check
+# Generate same version with multiple color schemes for comparison
+python resume_manager.py --version software --color-comparison default_professional corporate_blue modern_tech
 ```
 
-### Resume Manager Examples
+### Advanced Workflows
 
-#### Daily Workflow Examples
+#### Job Application Workflow
 ```bash
-# Update software engineer resume for job application
+# For software engineering positions
 python resume_manager.py --version software --format pdf
 
-# Create consulting version for client meeting
-python resume_manager.py --version consulting --all-formats
+# For data engineering roles
+python resume_manager.py --version technical --format pdf
 
-# Generate research version for academic opportunity
+# For research positions
 python resume_manager.py --version research --format pdf
+
+# For consulting opportunities
+python resume_manager.py --version consulting --all-formats
 ```
 
-#### Batch Operations
+#### Color Scheme A/B Testing
 ```bash
-# Regenerate all PDFs (fast)
-python resume_manager.py --all-versions --format pdf
-
-# Regenerate everything (comprehensive)
-python resume_manager.py --everything
-
-# Clean and regenerate specific version
-python resume_manager.py --clean
-python resume_manager.py --generate-data --color-scheme default_professional
-python resume_manager.py --version software --all-formats
-```
-
-#### Color Scheme Testing
-```bash
-# Test different color schemes for same content
+# Test corporate blue for traditional company application
 python resume_manager.py --generate-data --color-scheme corporate_blue
 python resume_manager.py --version software --format pdf
-# Review output, then try different scheme
+
+# Test modern tech for startup application
 python resume_manager.py --generate-data --color-scheme modern_tech
 python resume_manager.py --version software --format pdf
+
+# Compare outputs and select preferred version
 ```
 
-### Resume Manager Command Reference
+#### Complete System Refresh
+```bash
+# Clean slate regeneration
+python resume_manager.py --clean
+python resume_manager.py --generate-data --color-scheme default_professional
+python resume_manager.py --everything
+```
 
-| Command | Options | Description |
-|---------|---------|-------------|
+## Command Reference
+
+### Resume Manager Options
+
+| Command | Arguments | Description |
+|---------|-----------|-------------|
 | `--check` | None | Verify system setup and dependencies |
-| `--generate-data` | `--color-scheme` | Create JSON data files with specified colors |
-| `--list` | None | Show available resume versions and status |
-| `--version` | `research\|technical\|software\|consulting\|comprehensive\|marketing` | Specify resume version |
-| `--format` | `pdf\|docx\|rtf` | Specify output format |
+| `--generate-data` | `--color-scheme SCHEME` | Create JSON data files with specified colors |
+| `--list` | None | Show available resume versions and current status |
+| `--version` | `research\|technical\|software\|consulting\|comprehensive\|marketing` | Specify target resume version |
+| `--format` | `pdf\|docx\|rtf` | Specify output format (default: pdf) |
 | `--all-formats` | None | Generate all formats for specified version |
 | `--all-versions` | None | Generate all versions in specified format |
 | `--everything` | None | Generate all versions in all formats |
-| `--clean` | None | Remove output directories |
-| `--color-scheme` | `default_professional\|corporate_blue\|modern_tech\|elegant_purple` | Color theme selection |
+| `--color-comparison` | `SCHEME1 SCHEME2 ...` | Generate version with multiple color schemes |
+| `--clean` | `[VERSION] [SCHEME]` | Remove output directories (optional: specific targets) |
+
+### Color Scheme Generator Options
+
+| Command | Arguments | Description |
+|---------|----------|-------------|
+| `--monochromatic` | `HEX_COLOR` | Generate monochromatic scheme from base color |
+| `--complementary` | `HEX_COLOR` | Generate complementary color scheme |
+| `--triadic` | `HEX_COLOR` | Generate triadic color scheme |
+| `--industry` | `finance\|legal\|healthcare\|technology\|consulting\|creative\|education\|nonprofit` | Generate industry-appropriate scheme |
+| `--brand` | `HEX_COLOR1 HEX_COLOR2 [HEX_COLOR3]` | Generate scheme from brand colors |
+| `--name` | `SCHEME_NAME` | Required name for the color scheme |
+| `--preview` | None | Show color preview before saving |
 
 ## Project Structure
 
 ```
 resume-generator/
+├── resume_manager.py              # Main controller for resume generation
 ├── resume_data_generator.py       # Professional data generation with color schemes
-├── reportlab_resume.py            # Core resume generation engine (fixed version)
-├── generate_all_dheeraj_resumes.py  # Batch generation script
-├── resume_manager.py              # Individual resume control and management
-├── color_schemes/                 # Predefined color scheme files
-│   ├── default_professional.json  # Green, Gold, Burgundy theme
-│   ├── corporate_blue.json        # Navy, Gray, Steel Blue theme
-│   ├── modern_tech.json           # Teal, Orange, Gray theme
-│   └── elegant_purple.json        # Purple, Gold, Gray theme
-├── inputs/                        # JSON data and configuration
+├── reportlab_resume.py            # Core resume generation engine
+├── color_scheme_generator_tool.py # Custom color scheme creation tool
+├── generate_all_resumes.py        # Legacy batch generation script
+├── color_schemes/                 # Color scheme configuration files
+│   ├── default_professional.json
+│   ├── corporate_blue.json
+│   ├── modern_tech.json
+│   └── [custom_schemes].json
+├── inputs/                        # Generated JSON data and configurations
 │   ├── dheeraj_chand_research_focused/
 │   │   ├── resume_data.json       # Research-focused content
 │   │   └── config.json           # Color and styling configuration
 │   ├── dheeraj_chand_technical_detailed/
 │   │   ├── resume_data.json       # Technical engineering content
 │   │   └── config.json           # Configuration
-│   ├── dheeraj_chand_software_engineer/
-│   │   ├── resume_data.json       # Software engineering content (DEFAULT)
+│   ├── dheeraj_chand_software_engineer/  # DEFAULT VERSION
+│   │   ├── resume_data.json       # Software engineering content
 │   │   └── config.json           # Configuration
 │   ├── dheeraj_chand_consulting_minimal/
 │   │   ├── resume_data.json       # Consulting-focused content
@@ -268,105 +261,61 @@ resume-generator/
 │   └── dheeraj_chand_product_marketing/
 │       ├── resume_data.json       # Product marketing content
 │       └── config.json           # Configuration
-└── outputs/                       # Generated resumes
-    ├── dheeraj_chand_research_focused/
-    │   ├── pdf/resume.pdf
-    │   ├── docx/resume.docx
-    │   └── rtf/resume.rtf
-    ├── dheeraj_chand_technical_detailed/
-    ├── dheeraj_chand_software_engineer/
-    ├── dheeraj_chand_consulting_minimal/
-    ├── dheeraj_chand_comprehensive_full/
-    └── dheeraj_chand_product_marketing/
+└── outputs/                       # Generated resumes (organized by version/scheme/format)
+    ├── research/
+    │   └── default_professional/
+    │       ├── pdf/research_default_professional.pdf
+    │       ├── docx/research_default_professional.docx
+    │       └── rtf/research_default_professional.rtf
+    ├── technical/
+    ├── software/
+    ├── consulting/
+    ├── comprehensive/
+    └── marketing/
 ```
 
-## Data Structure & Configuration
+## Data Structure
 
-### Resume Data JSON (`resume_data.json`)
-
-Each resume version uses structured JSON containing complete professional information:
-
+### Resume Data Structure (`resume_data.json`)
 ```json
 {
   "personal_info": {
     "name": "DHEERAJ CHAND",
-    "title": "Senior Software Engineer & Geospatial Platform Architect",
+    "title": "Professional Title",
     "phone": "(202) 550-7110",
     "email": "Dheeraj.Chand@gmail.com",
     "website": "https://www.dheerajchand.com",
     "linkedin": "https://www.linkedin.com/in/dheerajchand/"
   },
-
-  "summary": "Senior Software Engineer with 20+ years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing...",
-
+  "summary": "Professional summary paragraph...",
   "competencies": {
-    "Programming & Development": [
-      "Python: Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn",
-      "JVM: Scala (Spark/Sedona), Java (GeoTools, enterprise applications), Groovy",
-      "Web Technologies: JavaScript, React, d3.js, OpenLayers, jQuery, HTML/CSS"
-    ],
-    "Big Data & Geospatial Platforms": [
-      "Apache Spark: PySpark, Spark SQL, Sedona (geospatial), distributed processing",
-      "Geospatial Stack: PostGIS, ESRI ArcGIS, Quantum GIS, GRASS, OSGeo, SAFE FME",
-      "Cloud Platforms: AWS (EC2, RDS, S3), Snowflake, Google Cloud, Microsoft Azure"
-    ],
-    "Software Architecture & DevOps": [
-      "Distributed Systems: Multi-tenant SaaS, microservices, API design, scalability",
-      "Geospatial Applications: Spatial algorithms, boundary estimation, clustering",
-      "DevOps: Docker, Vagrant, CI/CD (GitLab, GitHub), Celery, Airflow, nginx"
+    "Category Name": [
+      "Skill or competency item",
+      "Another skill item"
     ]
   },
-
   "experience": [
     {
-      "title": "PARTNER & SENIOR SOFTWARE ENGINEER",
-      "company": "Siege Analytics, Austin, TX",
-      "dates": "2005 – Present",
-      "subtitle": "Geospatial Platform Architecture and Full-Stack Development",
+      "title": "JOB TITLE",
+      "company": "Company Name, Location",
+      "dates": "Start Date – End Date",
+      "subtitle": "Optional job subtitle",
       "responsibilities": [
-        "Architected and engineered BALLISTA: GeoDjango redistricting platform serving thousands of analysts with real-time collaborative editing, Census integration, and legal compliance analysis",
-        "Developed DAMON: Flask/PostGIS microservice using incomplete data for boundary estimation without machine learning, processing geographies at national scale",
-        "Built scalable ETL pipelines using PySpark and Sedona processing billions of geospatial records with sub-hour latency requirements"
-      ]
-    },
-    {
-      "title": "DATA PRODUCTS MANAGER",
-      "company": "Helm/Murmuration, Austin, TX",
-      "dates": "2021 – 2023",
-      "subtitle": "Enterprise Geospatial Data Platform Development and Team Leadership",
-      "responsibilities": [
-        "Led engineering team of 11 developers building enterprise-scale geospatial data platform for political organizing and issue advocacy",
-        "Designed multi-tenant data warehouse integrating Census, Bureau of Labor Statistics, and National Council of Educational Statistics using Spark/PySpark",
-        "Modernized legacy ETL systems using Scala/Spark and dbt, achieving 57% performance improvement in geospatial data processing"
+        "Responsibility or achievement bullet point",
+        "Another responsibility bullet point"
       ]
     }
   ],
-
   "achievements": {
-    "Geospatial Platform Development": [
-      "Architected BALLISTA redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration",
-      "Built DAMON boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms",
-      "Developed SimCrisis econometric simulation platform with NetLogo multi-agent modeling and GeoDjango web interface"
-    ],
-    "Big Data & Performance Engineering": [
-      "Implemented Spark/Sedona ETL optimizations achieving 57% performance improvement in geospatial data processing pipelines",
-      "Built systems processing billions of spatial records with sub-hour latency using distributed Spark clusters on AWS",
-      "Developed fraud detection algorithms processing multi-terabyte campaign finance datasets with real-time PostGIS spatial analysis"
+    "Achievement Category": [
+      "Specific achievement or impact",
+      "Another achievement"
     ]
-  },
-
-  "_metadata": {
-    "version": "software_engineer",
-    "created": "2025-01-20T15:30:00Z",
-    "description": "Software engineer focused version emphasizing technical skills and platform development"
   }
 }
 ```
 
-### Configuration JSON (`config.json`)
-
-Color scheme and styling configuration:
-
+### Color Configuration Structure (`config.json`)
 ```json
 {
   "NAME_COLOR": "#228B22",
@@ -399,134 +348,11 @@ Color scheme and styling configuration:
   "JOB_SPACING": 6,
   "CATEGORY_SPACING": 4,
   "MAX_PAGES": 2,
-  "BULLET_CHAR": "▸",
-
-  "_metadata": {
-    "scheme_name": "default_professional",
-    "created": "2025-01-20T15:30:00Z",
-    "description": "Default professional color scheme for Dheeraj Chand resume"
-  }
+  "BULLET_CHAR": "▸"
 }
 ```
 
-### Configuration Reference
-
-#### Color Role Properties
-| Property | Usage | Default (Professional) | Corporate Blue | Modern Tech |
-|----------|-------|----------------------|----------------|-------------|
-| `NAME_COLOR` | Header name | Forest Green (#228B22) | Navy Blue (#1F4E79) | Deep Teal (#2C5F5D) |
-| `TITLE_COLOR` | Professional title | Dark Goldenrod (#B8860B) | Charcoal (#333333) | Vibrant Orange (#FF6B35) |
-| `SECTION_HEADER_COLOR` | Section headers | Dark Goldenrod (#B8860B) | Charcoal (#333333) | Vibrant Orange (#FF6B35) |
-| `JOB_TITLE_COLOR` | Job position titles | Deep Burgundy (#722F37) | Steel Blue (#4682B4) | Deep Teal (#2C5F5D) |
-| `COMPETENCY_HEADER_COLOR` | Skill category headers | Forest Green (#228B22) | Navy Blue (#1F4E79) | Deep Teal (#2C5F5D) |
-| `SUBTITLE_COLOR` | Job subtitles | Forest Green (#228B22) | Navy Blue (#1F4E79) | Deep Teal (#2C5F5D) |
-| `LINK_COLOR` | Website, LinkedIn links | Dark Goldenrod (#B8860B) | Steel Blue (#4682B4) | Vibrant Orange (#FF6B35) |
-
-#### Typography Properties
-| Property | Default | Description |
-|----------|---------|-------------|
-| `FONT_MAIN` | `Helvetica` | Primary font family |
-| `FONT_BOLD` | `Helvetica-Bold` | Bold text font |
-| `FONT_ITALIC` | `Helvetica-Oblique` | Italic text font |
-| `NAME_SIZE` | `24` | Name header font size (points) |
-| `TITLE_SIZE` | `14` | Professional title font size |
-| `SECTION_HEADER_SIZE` | `12` | Section header font size |
-| `JOB_TITLE_SIZE` | `11` | Job title font size |
-| `BODY_SIZE` | `9` | Body text font size |
-| `CONTACT_SIZE` | `9` | Contact information font size |
-
-#### Layout Properties
-| Property | Default | Description |
-|----------|---------|-------------|
-| `PAGE_MARGIN` | `0.6` | Page margins in inches |
-| `SECTION_SPACING` | `0.12` | Space between sections (inches) |
-| `LINE_SPACING` | `1.15` | Line height multiplier |
-| `JOB_SPACING` | `6` | Space between job entries (points) |
-| `BULLET_CHAR` | `▸` | Character used for bullet points |
-
-## Command Line Usage
-
-### Core Resume Generation
-```bash
-# Basic usage
-python reportlab_resume.py --format [pdf|docx|rtf|all] --basename [version_name]
-
-# Generate PDF for software engineer version
-python reportlab_resume.py --format pdf --basename dheeraj_chand_software_engineer
-
-# Generate all formats for research version
-python reportlab_resume.py --format all --basename dheeraj_chand_research_focused
-
-# Use custom directories
-python reportlab_resume.py --format pdf --basename dheeraj_chand_software_engineer --input-dir ./custom/inputs --output-dir ./custom/outputs
-```
-
-### Batch Generation Commands
-```bash
-# Generate all versions with all formats (18 total files)
-python generate_all_dheeraj_resumes.py
-
-# Generate with specific color scheme first
-python resume_data_generator.py --color-scheme corporate_blue
-python generate_all_dheeraj_resumes.py
-```
-
-### Resume Manager Commands (Recommended)
-```bash
-# Setup and data generation
-python resume_manager.py --generate-data --color-scheme default_professional
-python resume_manager.py --check
-python resume_manager.py --list
-
-# Individual resume generation
-python resume_manager.py --version software --format pdf
-python resume_manager.py --version research --all-formats
-python resume_manager.py --all-versions --format pdf
-
-# Complete regeneration
-python resume_manager.py --clean
-python resume_manager.py --everything
-```
-
-## Workflow Examples
-
-### Job Application Workflow
-```bash
-# For a software engineering position
-python resume_manager.py --version software --format pdf
-
-# For a data engineering role
-python resume_manager.py --version technical --format pdf
-
-# For a research position
-python resume_manager.py --version research --format pdf
-
-# For a consulting opportunity
-python resume_manager.py --version consulting --all-formats
-```
-
-### Color Scheme Testing Workflow
-```bash
-# Test corporate blue for traditional company
-python resume_manager.py --generate-data --color-scheme corporate_blue
-python resume_manager.py --version software --format pdf
-
-# Test modern tech for startup
-python resume_manager.py --generate-data --color-scheme modern_tech
-python resume_manager.py --version software --format pdf
-
-# Compare results and choose preferred scheme
-```
-
-### Complete System Regeneration
-```bash
-# Clean slate regeneration
-python resume_manager.py --clean
-python resume_manager.py --generate-data --color-scheme default_professional
-python resume_manager.py --everything
-```
-
-## Customization
+## Customization and Extension
 
 ### Adding New Resume Versions
 
@@ -534,165 +360,80 @@ python resume_manager.py --everything
 ```python
 def create_new_version_data():
     """Create data for new version"""
-    data = {
+    return {
         'personal_info': {
             'name': 'DHEERAJ CHAND',
             'title': 'New Professional Title',
-            # ... rest of personal info
+            # ... personal details
         },
-        'summary': 'New version summary...',
-        # ... rest of content
+        'summary': 'Targeted professional summary...',
+        'competencies': {
+            'Category': ['Skills list']
+        },
+        'experience': [
+            # Job experience entries
+        ],
+        'achievements': {
+            'Category': ['Achievement list']
+        }
     }
-    return data
 ```
 
-2. **Add to main function**:
-```python
-# In main() function
-new_version_data = create_new_version_data()
-new_version_config = create_config_file("new_version", color_scheme)
-save_resume_data("dheeraj_chand_new_version", new_version_data, new_version_config)
-```
+2. **Update main generation function** to include new version
+3. **Add to resume manager** `self.versions` dictionary
 
-3. **Update resume manager** to include new version in `self.versions` dictionary.
+### Creating Custom Color Schemes
 
-### Custom Color Schemes
+Use the color scheme generator tool for professional results:
 
-Create custom color scheme files in the `color_schemes/` directory:
-
-```json
-{
-  "scheme_name": "custom_theme",
-  "colors": {
-    "NAME_COLOR": "#your_primary_color",
-    "TITLE_COLOR": "#your_secondary_color",
-    "SECTION_HEADER_COLOR": "#your_secondary_color",
-    "JOB_TITLE_COLOR": "#your_accent_color",
-    "ACCENT_COLOR": "#your_accent_color",
-    "COMPETENCY_HEADER_COLOR": "#your_primary_color",
-    "SUBTITLE_COLOR": "#your_primary_color",
-    "LINK_COLOR": "#your_secondary_color"
-  },
-  "typography": {
-    "NAME_SIZE": 26,
-    "BODY_SIZE": 10
-  }
-}
-```
-
-### Content Strategy by Version
-
-#### Research Focused Version (`research`)
-- **Target**: Academic institutions, research organizations, NGOs
-- **Emphasis**: Applied research leadership, community impact, evidence-based decision making
-- **Key Skills**: Research methodology, statistical analysis, stakeholder communication
-- **Experience Focus**: Community partnerships, policy analysis, expert testimony
-
-#### Technical Detailed Version (`technical`)
-- **Target**: Data engineering teams, technical architecture roles
-- **Emphasis**: Big data processing, geospatial platforms, system architecture
-- **Key Skills**: Apache Spark/Sedona, GIS technology stack, performance optimization
-- **Experience Focus**: ETL pipelines, distributed systems, technical leadership
-
-#### Software Engineer Version (`software`) - DEFAULT
-- **Target**: Software engineering roles, platform development positions
-- **Emphasis**: Full-stack development, scalable system architecture, platform engineering
-- **Key Skills**: Python/Django, JavaScript/React, distributed systems, DevOps
-- **Experience Focus**: Platform development (BALLISTA, DAMON), team leadership, production systems
-
-#### Consulting Minimal Version (`consulting`)
-- **Target**: Consulting firms, strategic advisory roles, client-facing positions
-- **Emphasis**: Strategic planning, technology consulting, business transformation
-- **Key Skills**: Project management, stakeholder communication, technology selection
-- **Experience Focus**: Client relationships, strategic initiatives, technology modernization
-
-#### Comprehensive Full Version (`comprehensive`)
-- **Target**: Executive roles, complete career review, senior positions
-- **Emphasis**: Complete career progression, balanced technical and leadership experience
-- **Key Skills**: Full technology stack, research and engineering, strategic planning
-- **Experience Focus**: 20+ year career arc, all major platforms and achievements
-
-#### Product Marketing Version (`marketing`)
-- **Target**: Product marketing roles, go-to-market positions, marketing strategy
-- **Emphasis**: Market research, customer insights, product positioning, competitive analysis
-- **Key Skills**: Market intelligence, customer segmentation, messaging development
-- **Experience Focus**: Product launches, market research, customer development, competitive positioning
-
-## Technical Highlights
-
-### Key Technologies Showcased
-- **Apache Spark/Sedona**: Big data geospatial processing at billion-record scale
-- **GIS Technology Stack**: ESRI ArcGIS, OSGeo (QGIS, GRASS), SAFE FME integration
-- **Programming**: Python (Django/GeoDjango, PySpark), Scala, JavaScript, SQL
-- **Platforms**: AWS, Snowflake, PostgreSQL/PostGIS, MongoDB
-- **Specific Projects**: BALLISTA, DAMON, SimCrisis, RACSO platforms
-
-### Performance Metrics
-- Processing billions of geospatial records with sub-hour latency
-- 57% ETL performance improvements through Spark/Sedona optimization
-- 88% improvement in analytical targeting efficacy
-- Multi-terabyte fraud detection system implementations
-- Platform serving thousands of concurrent analysts
-
-### Professional Experience Highlights
-- **20+ years** comprehensive data and software engineering experience
-- **Partner at Siege Analytics** (2005-Present) - Data, technology and strategy consulting
-- **Team Leadership** - Managed engineering teams up to 11 professionals
-- **Platform Architecture** - Designed multi-tenant SaaS platforms used by thousands
-- **Research Integration** - Applied research projects focused on economic mobility and community development
-
-## Dependencies
-
-### Required Python Packages
 ```bash
-pip install reportlab>=3.5.0
-pip install python-docx>=0.8.11  # For DOCX generation
+# Industry-based schemes
+python color_scheme_generator_tool.py --industry healthcare --name medical_professional --preview
+
+# Brand color schemes
+python color_scheme_generator_tool.py --brand '#FF0000' '#0000FF' --name company_colors --preview
+
+# Color theory schemes
+python color_scheme_generator_tool.py --triadic '#8B4513' --name earth_tones --preview
 ```
 
-### System Requirements
-- Python 3.7+
-- ReportLab library (PDF generation)
-- python-docx (DOCX generation)
-- Standard library modules: json, pathlib, argparse, subprocess, datetime
+## Professional Usage Guidelines
 
-### Optional Dependencies
-- For RTF generation: Built-in (no additional packages required)
-- For custom fonts: Additional ReportLab font setup
+### Resume Version Selection Strategy
+- **Software Engineering**: `software` - Comprehensive technical platform development
+- **Data Engineering**: `technical` - Big data, geospatial systems, architecture
+- **Research Roles**: `research` - Applied research, community impact, methodology
+- **Consulting**: `consulting` - Strategic advisory, technology transformation
+- **Executive Positions**: `comprehensive` - Complete career overview
+- **Product Marketing**: `marketing` - Go-to-market, customer insights, positioning
 
-## Output Examples
+### Color Scheme Selection by Industry
+- **Traditional Industries** (Banking, Legal, Healthcare): `corporate_blue`
+- **Creative and Consulting**: `default_professional`
+- **Technology and Startups**: `modern_tech`
+- **Custom Branding**: Generate custom schemes with brand colors
 
-Each resume version generates three high-quality formats:
-
-### PDF Output
-- **Quality**: High-resolution, print-ready format
-- **Compatibility**: Universal compatibility, ATS-friendly
-- **Usage**: Job applications, professional printing, digital distribution
-
-### DOCX Output
-- **Quality**: Microsoft Word compatible, fully editable
-- **Compatibility**: ATS-optimized, recruiter-friendly
-- **Usage**: Easy customization, collaborative review, ATS systems
-
-### RTF Output
-- **Quality**: Rich Text Format, cross-platform compatible
-- **Compatibility**: Opens in Word, Pages, Google Docs
-- **Usage**: Maximum compatibility, legacy systems
+### Format Selection by Use Case
+- **Online Applications**: PDF (universal compatibility, maintains formatting)
+- **ATS Systems**: DOCX (optimized for parsing, machine-readable)
+- **Print Submissions**: PDF (high-quality printing, consistent rendering)
+- **Collaborative Review**: DOCX (easy editing and comments)
+- **Maximum Compatibility**: RTF (cross-platform, legacy system support)
 
 ## Troubleshooting
 
 ### Common Issues and Solutions
 
-#### Setup Issues
+#### Setup Problems
 ```bash
 # Missing dependencies
 pip install reportlab python-docx
 
-# Permission errors
-chmod +x generate_all_dheeraj_resumes.py
+# System check
 python resume_manager.py --check
 
-# Python version compatibility
-python --version  # Ensure 3.7+
+# Permission issues (Unix/Linux)
+chmod +x *.py
 ```
 
 #### Generation Issues
@@ -701,95 +442,39 @@ python --version  # Ensure 3.7+
 python resume_manager.py --generate-data
 python resume_manager.py --list
 
-# Configuration problems
-python resume_manager.py --check
+# Clean and regenerate
 python resume_manager.py --clean
 python resume_manager.py --generate-data --color-scheme default_professional
-
-# Format-specific issues
-python resume_manager.py --version software --format pdf  # Try PDF first
-python resume_manager.py --version software --format docx  # Then DOCX
+python resume_manager.py --version software --format pdf
 ```
 
-#### Content Issues
-- **Content exceeds 2 pages**: Edit JSON data to reduce content length
-- **Color not appearing**: Verify hex color format in config.json (#RRGGBB)
-- **Font issues**: ReportLab uses built-in fonts; custom fonts require additional setup
-- **Spacing problems**: Adjust layout parameters in config.json
-
-### Debug Mode
-Enable detailed logging by examining script output:
-```bash
-python resume_manager.py --check  # System diagnostic
-python reportlab_resume.py --format pdf --basename dheeraj_chand_software_engineer  # Direct generation
-```
+#### Content and Formatting Issues
+- **Content exceeds 2 pages**: Edit JSON data files to reduce content length
+- **Colors not displaying**: Verify hex color format (#RRGGBB) in config files
+- **Font rendering issues**: ReportLab uses built-in fonts; custom fonts require additional setup
+- **Spacing problems**: Adjust layout parameters in config.json files
 
 ### Performance Optimization
-- **Faster generation**: Use PDF format only for quick iterations
-- **Batch optimization**: Use `generate_all_dheeraj_resumes.py` for complete regeneration
-- **Storage management**: Use `python resume_manager.py --clean` to manage disk space
+- **Quick iterations**: Use PDF format only during development
+- **Batch operations**: Use `--everything` for complete regeneration
+- **Storage management**: Use `--clean` periodically to manage disk space
 
-## Development and Extension
+## Technical Highlights
 
-### Adding Custom Features
+### Professional Experience Showcased
+- **20+ years** comprehensive data engineering and software development
+- **Apache Spark/Sedona**: Billion-record geospatial processing expertise
+- **Platform Architecture**: Multi-tenant SaaS platforms (BALLISTA, DAMON, SimCrisis)
+- **Technology Integration**: ESRI, OSGeo, SAFE FME geospatial technology stacks
+- **Team Leadership**: Engineering teams up to 11 professionals
+- **Performance Engineering**: 57% ETL improvements, 88% targeting efficacy gains
 
-#### New Color Schemes
-1. Create JSON file in `color_schemes/` directory
-2. Add scheme to `PredefinedSchemes` class in `resume_data_generator.py`
-3. Update command-line options and documentation
-
-#### New Resume Sections
-1. Add section data to JSON structure in `resume_data_generator.py`
-2. Implement rendering method in `reportlab_resume.py`
-3. Update template and styling as needed
-
-#### Custom Formatting
-1. Modify `_create_styles()` method in `reportlab_resume.py`
-2. Adjust layout parameters in configuration files
-3. Test across all resume versions
-
-### Version Control Best Practices
-- Keep JSON data files in version control
-- Track configuration changes for color schemes
-- Document custom modifications for maintenance
-
-### Testing New Versions
-```bash
-# Test individual components
-python resume_manager.py --version software --format pdf
-python resume_manager.py --check
-
-# Test batch processing
-python generate_all_dheeraj_resumes.py
-
-# Test color schemes
-python resume_manager.py --generate-data --color-scheme modern_tech
-python resume_manager.py --version software --format pdf
-```
-
-## Professional Usage Guidelines
-
-### Resume Version Selection
-- **Software Engineering Roles**: Use `software` version (comprehensive technical depth)
-- **Data Engineering Positions**: Use `technical` version (big data and geospatial focus)
-- **Research Opportunities**: Use `research` version (applied research and community impact)
-- **Consulting Engagements**: Use `consulting` version (strategic advisory focus)
-- **Executive Positions**: Use `comprehensive` version (complete career overview)
-- **Product/Marketing Roles**: Use `marketing` version (go-to-market expertise)
-
-### Color Scheme Selection
-- **Traditional Industries** (Finance, Legal, Healthcare): `corporate_blue`
-- **Creative and Consulting Roles**: `default_professional`
-- **Tech Startups and Innovation**: `modern_tech`
-- **Design and Marketing Positions**: `elegant_purple`
-
-### Format Selection by Use Case
-- **Online Applications**: PDF (universal compatibility)
-- **ATS Systems**: DOCX (optimized parsing)
-- **Print Submissions**: PDF (high quality)
-- **Collaborative Review**: DOCX (easy editing)
-- **Maximum Compatibility**: RTF (cross-platform)
+### Key Technologies and Achievements
+- **Programming**: Python (Django/GeoDjango, PySpark), Scala (Spark), JavaScript, SQL
+- **Platforms**: AWS, Snowflake, PostgreSQL/PostGIS, MongoDB, distributed systems
+- **Geospatial**: Advanced PostGIS algorithms, spatial clustering, boundary estimation
+- **Big Data**: Multi-terabyte processing, real-time analytics, fraud detection systems
 
 ---
 
-*This resume generation system showcases 20+ years of expertise in data engineering, geospatial platforms, and software development with emphasis on Apache Spark/Sedona, ESRI/OSGeo technologies, and production-scale platform development. The system generates professional resumes optimized for different career focuses while maintaining consistent quality and branding.*
+*This professional resume generation system demonstrates expertise in data engineering, geospatial platforms, and full-stack software development with emphasis on scalable system architecture and production platform development.*
