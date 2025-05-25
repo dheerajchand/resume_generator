@@ -46,7 +46,7 @@ python resume_manager.py --all-versions --format pdf
 
 ## System Architecture
 
-The resume generation system consists of five main components:
+The resume generation system consists of four main components:
 
 | Script | Purpose | Primary Use Case |
 |--------|---------|------------------|
@@ -54,7 +54,6 @@ The resume generation system consists of five main components:
 | `resume_data_generator.py` | Creates structured JSON data files with professional content | Initial setup, content updates |
 | `reportlab_resume.py` | Core resume generation engine using ReportLab | Direct generation control |
 | `color_scheme_generator_tool.py` | Custom color scheme creation and preview | Design customization |
-| `generate_all_resumes.py` | Legacy batch generator | Complete system regeneration |
 
 ## Resume Versions
 
@@ -151,8 +150,11 @@ python resume_manager.py --version technical --all-formats
 # Generate all versions in PDF format
 python resume_manager.py --all-versions --format pdf
 
-# Generate all versions in all formats (18 total files)
+# Generate all versions in all formats with current color scheme (18 total files)
 python resume_manager.py --everything
+
+# ☢️ NUCLEAR OPTION: Generate EVERY version in EVERY format with EVERY color scheme (180+ files)
+python resume_manager.py --nuclear
 ```
 
 #### Color Scheme Comparison and Testing
@@ -199,6 +201,27 @@ python resume_manager.py --generate-data --color-scheme default_professional
 python resume_manager.py --everything
 ```
 
+#### Understanding `--everything` vs `--nuclear`
+
+**`--everything` (18 files)**
+- Generates all versions × all formats × **current color scheme only**
+- Quick generation (few minutes)
+- Perfect for job applications with your preferred color scheme
+
+**`--nuclear` (180+ files)**
+- Generates all versions × all formats × **ALL color schemes**
+- Comprehensive generation (takes longer)
+- Perfect for A/B testing different color schemes across all resume versions
+- Includes confirmation prompt due to large number of files
+
+```bash
+# Current color scheme only (recommended for most use cases)
+python resume_manager.py --everything
+
+# Every possible combination (use when experimenting with color schemes)
+python resume_manager.py --nuclear
+```
+
 ## Command Reference
 
 ### Resume Manager Options
@@ -212,7 +235,8 @@ python resume_manager.py --everything
 | `--format` | `pdf\|docx\|rtf` | Specify output format (default: pdf) |
 | `--all-formats` | None | Generate all formats for specified version |
 | `--all-versions` | None | Generate all versions in specified format |
-| `--everything` | None | Generate all versions in all formats |
+| `--everything` | None | Generate all versions in all formats with current color scheme |
+| `--nuclear` | None | ☢️ Generate EVERY version in EVERY format with EVERY color scheme |
 | `--color-comparison` | `SCHEME1 SCHEME2 ...` | Generate version with multiple color schemes |
 | `--clean` | `[VERSION] [SCHEME]` | Remove output directories (optional: specific targets) |
 
