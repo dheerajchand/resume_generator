@@ -11,6 +11,7 @@ A comprehensive Python-based resume generation system that creates professional,
 - **Professional Layout**: 2-page optimized design with precise typography and spacing
 - **Flexible Generation Options**: Individual, batch, or selective generation capabilities
 - **Color Scheme Comparison**: Generate same resume with different color schemes for A/B testing
+- **Nuclear Option**: Generate every possible combination (180+ files) for comprehensive testing
 - **Comprehensive Management**: Full lifecycle management from data generation to final output
 
 ## Quick Start
@@ -92,6 +93,13 @@ python resume_manager.py --generate-data --color-scheme modern_tech
 ```
 - **Best for**: Startup environments, tech companies, innovative roles
 - **Colors**: Deep Teal (#2C5F5D), Vibrant Orange (#FF6B35)
+
+#### Cartographic Professional (Earth Tones)
+```bash
+python resume_manager.py --generate-data --color-scheme cartographic_professional
+```
+- **Best for**: GIS, geospatial, environmental, and earth sciences roles
+- **Colors**: Deep Forest Green (#2D5016), Warm Sienna Brown (#A0522D), Deep Ocean Blue (#1E3A8A)
 
 ### Custom Color Scheme Creation
 
@@ -260,11 +268,14 @@ resume-generator/
 ├── resume_data_generator.py       # Professional data generation with color schemes
 ├── reportlab_resume.py            # Core resume generation engine
 ├── color_scheme_generator_tool.py # Custom color scheme creation tool
-├── generate_all_resumes.py        # Legacy batch generation script
 ├── color_schemes/                 # Color scheme configuration files
 │   ├── default_professional.json
 │   ├── corporate_blue.json
 │   ├── modern_tech.json
+│   ├── cartographic_professional.json
+│   ├── satellite_imagery.json
+│   ├── terrain_mapping.json
+│   ├── topographic_classic.json
 │   └── [custom_schemes].json
 ├── inputs/                        # Generated JSON data and configurations
 │   ├── dheeraj_chand_research_focused/
@@ -287,11 +298,17 @@ resume-generator/
 │       └── config.json           # Configuration
 └── outputs/                       # Generated resumes (organized by version/scheme/format)
     ├── research/
-    │   └── default_professional/
-    │       ├── pdf/research_default_professional.pdf
-    │       ├── docx/research_default_professional.docx
-    │       └── rtf/research_default_professional.rtf
+    │   ├── default_professional/
+    │   │   ├── pdf/dheeraj_chand_research_default_professional.pdf
+    │   │   ├── docx/dheeraj_chand_research_default_professional.docx
+    │   │   └── rtf/dheeraj_chand_research_default_professional.rtf
+    │   ├── cartographic_professional/
+    │   │   └── pdf/dheeraj_chand_research_cartographic_professional.pdf
+    │   └── corporate_blue/
     ├── technical/
+    │   ├── cartographic_professional/
+    │   │   └── pdf/dheeraj_chand_technical_cartographic_professional.pdf
+    │   └── [other_color_schemes]/
     ├── software/
     ├── consulting/
     ├── comprehensive/
@@ -376,6 +393,17 @@ resume-generator/
 }
 ```
 
+## File Naming Convention
+
+All generated resume files follow the pattern:
+**`dheeraj_chand_{resume_type}_{color_scheme}.{extension}`**
+
+**Examples**:
+- `dheeraj_chand_software_cartographic_professional.pdf`
+- `dheeraj_chand_technical_corporate_blue.docx`
+- `dheeraj_chand_research_default_professional.rtf`
+- `dheeraj_chand_consulting_modern_tech.pdf`
+
 ## Customization and Extension
 
 ### Adding New Resume Versions
@@ -435,6 +463,7 @@ python color_scheme_generator_tool.py --triadic '#8B4513' --name earth_tones --p
 - **Traditional Industries** (Banking, Legal, Healthcare): `corporate_blue`
 - **Creative and Consulting**: `default_professional`
 - **Technology and Startups**: `modern_tech`
+- **GIS and Geospatial**: `cartographic_professional`
 - **Custom Branding**: Generate custom schemes with brand colors
 
 ### Format Selection by Use Case
