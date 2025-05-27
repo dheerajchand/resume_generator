@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Resume Management Script for Dheeraj Chand
-Provides granular control over resume generation using your existing data
+Resume Management Script for Professional Resume Generator
+Provides granular control over resume generation using configurable user data
+Now supports any user configuration!
 """
 
 import subprocess
@@ -9,18 +10,37 @@ import sys
 import argparse
 import json
 from pathlib import Path
+from user_config import UserConfig
 
 class ResumeManager:
     """Manages resume generation for multiple versions with color scheme organization"""
 
     def __init__(self):
+        # Load user configuration
+        try:
+            self.user_config = UserConfig()
+        except FileNotFoundError:
+            print("❌ User configuration not found!")
+            print("🔧 Please run 'python setup_user.py' to create your configuration first.")
+            sys.exit(1)
+        except Exception as e:
+            print(f"❌ Error loading user configuration: {e}")
+            sys.exit(1)
+
+        # Validate user configuration
+        try:
+            self.user_config.validate_config()
+        except ValueError as e:
+            print(f"❌ {e}")
+            sys.exit(1)
+
         self.versions = {
-            'research': 'dheeraj_chand_research_focused',
-            'technical': 'dheeraj_chand_technical_detailed',
-            'comprehensive': 'dheeraj_chand_comprehensive_full',
-            'consulting': 'dheeraj_chand_consulting_minimal',
-            'software': 'dheeraj_chand_software_engineer',
-            'marketing': 'dheeraj_chand_product_marketing'
+            'research': self.user_config.get_version_directory_name('research'),
+            'technical': self.user_config.get_version_directory_name('technical'),
+            'comprehensive': self.user_config.get_version_directory_name('comprehensive'),
+            'consulting': self.user_config.get_version_directory_name('consulting'),
+            'software': self.user_config.get_version_directory_name('software'),
+            'marketing': self.user_config.get_version_directory_name('marketing')
         }
 
         self.color_schemes = [
@@ -164,7 +184,7 @@ class ResumeManager:
         output_base.mkdir(parents=True, exist_ok=True)
 
         # Generate with custom output path
-        output_file = output_base / f"dheeraj_chand_{version_key}_{color_scheme}.{format_type}"
+        output_file = output_base / self.user_config.get_output_filename(version_key, color_scheme, format_type)
         cmd = f"python reportlab_resume.py --format {format_type} --basename {version_name} --output-dir outputs_temp"
 
         success, output = self.run_command(cmd)
@@ -231,7 +251,7 @@ class ResumeManager:
 
         print(f"\n🎉 Generated {version_key} resume with {len(successful_schemes)} color schemes:")
         for scheme in successful_schemes:
-            output_path = Path("outputs") / version_key / scheme / format_type / f"dheeraj_chand_{version_key}_{scheme}.{format_type}"
+            output_path = Path("outputs") / version_key / scheme / format_type / self.user_config.get_output_filename(version_key, scheme, format_type)
             print(f"   📂 {output_path}")
 
         return len(successful_schemes) > 0
@@ -344,7 +364,7 @@ class ResumeManager:
         print()
         print(f"📁 Find your nuclear arsenal in the outputs/ directory!")
         print(f"   Organized by: outputs/[version]/[color_scheme]/[format]/")
-        print(f"   Files named: dheeraj_chand_[version]_[color_scheme].[extension]")
+        print(f"   Files named: {self.user_config.file_base_name}_[version]_[color_scheme].[extension]")
 
         return total_generated
 
@@ -441,7 +461,7 @@ def main():
     available_schemes = get_available_color_schemes()
 
     parser = argparse.ArgumentParser(
-        description='Resume Manager for Dheeraj Chand - Generate individual or batch resumes with color scheme organization',
+        description='Professional Resume Manager - Generate individual or batch resumes with color scheme organization',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
 Examples:

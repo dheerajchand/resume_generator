@@ -1,0 +1,37 @@
+{
+  "personal_info": {
+    "name": "YOUR FULL NAME",
+    "phone": "(XXX) XXX-XXXX", 
+    "email": "your.email@example.com",
+    "website": "https://www.yourwebsite.com",
+    "linkedin": "https://www.linkedin.com/in/yourusername/"
+  },
+  "file_naming": {
+    "base_name": "your_name"
+  },
+  "directory_naming": {
+    "prefix": "your_name"
+  },
+  "titles": {
+    "research": "Director of Research and Analysis",
+    "technical": "Senior Data Engineer & Technical Architect", 
+    "software": "Senior Software Engineer",
+    "consulting": "Data Analytics & Technology Consultant",
+    "comprehensive": "Research, Data & Engineering Professional",
+    "marketing": "Senior Product Marketing Manager"
+  },
+  "resume_content": {
+    "industry_focus": "technology",
+    "years_experience": "10+",
+    "specializations": [
+      "Data Engineering",
+      "Software Development", 
+      "System Architecture"
+    ]
+  },
+  "_metadata": {
+    "created": "2024-01-01T00:00:00Z",
+    "version": "1.0",
+    "description": "User configuration template for Professional Resume Generator"
+  }
+}

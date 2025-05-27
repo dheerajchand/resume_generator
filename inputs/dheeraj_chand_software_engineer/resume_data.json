@@ -1,13 +1,12 @@
 {
   "personal_info": {
-    "name": "DHEERAJ CHAND",
-    "title": "Senior Software Engineer & Geospatial Platform Architect",
-    "phone": "(202) 550-7110",
-    "email": "Dheeraj.Chand@gmail.com",
+    "name": "Dheeraj Chand",
+    "phone": "202.550.7110",
+    "email": "dheeraj.chand@gmail.com",
     "website": "https://www.dheerajchand.com",
     "linkedin": "https://www.linkedin.com/in/dheerajchand/"
   },
-  "summary": "Senior Software Engineer with 20+ years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms like BALLISTA and DAMON used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.",
+  "summary": "Senior Software Engineer with 21 years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.",
   "competencies": {
     "Programming & Development": [
       "Python: Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn",
@@ -34,108 +33,31 @@
   "experience": [
     {
       "title": "PARTNER & SENIOR SOFTWARE ENGINEER",
-      "company": "Siege Analytics, Austin, TX",
+      "company": "Your Company Name, Your City, ST",
       "dates": "2005 – Present",
       "subtitle": "Geospatial Platform Architecture and Full-Stack Development",
       "responsibilities": [
-        "Architected and engineered BALLISTA: GeoDjango redistricting platform serving thousands of analysts with real-time collaborative editing, Census integration, and legal compliance analysis",
-        "Developed DAMON: Flask/PostGIS microservice using incomplete data for boundary estimation without machine learning, processing geographies at national scale",
+        "Architected and engineered redistricting platform serving thousands of analysts with real-time collaborative editing, Census integration, and legal compliance analysis",
+        "Developed boundary estimation microservice using incomplete data for boundary estimation without machine learning, processing geographies at national scale",
         "Built scalable ETL pipelines using PySpark and Sedona processing billions of geospatial records with sub-hour latency requirements",
         "Implemented advanced spatial clustering algorithms achieving 88% improvement in analytical targeting efficacy for political applications",
         "Created fraud detection systems processing multi-terabyte campaign finance datasets with real-time alerting capabilities",
         "Led technical architecture decisions integrating ESRI, OSGeo, and SAFE FME technologies for Fortune 500 and political clients"
       ]
-    },
-    {
-      "title": "DATA PRODUCTS MANAGER",
-      "company": "Helm/Murmuration, Austin, TX",
-      "dates": "2021 – 2023",
-      "subtitle": "Enterprise Geospatial Data Platform Development and Team Leadership",
-      "responsibilities": [
-        "Led engineering team of 11 developers building enterprise-scale geospatial data platform for political organizing and issue advocacy",
-        "Designed multi-tenant data warehouse integrating Census, Bureau of Labor Statistics, and National Council of Educational Statistics using Spark/PySpark",
-        "Modernized legacy ETL systems using Scala/Spark and dbt, achieving 57% performance improvement in geospatial data processing",
-        "Built comprehensive data governance framework with automated PostGIS quality validation and GRASS-based analysis pipelines",
-        "Trained analytical and engineering staff on OSGeo technologies (QGIS, GRASS) for geospatial analysis and visualization",
-        "Implemented Spark/Sedona pipelines for longitudinal analysis across demographic, economic, and geographical dimensions"
-      ]
-    },
-    {
-      "title": "ANALYTICS SUPERVISOR",
-      "company": "GSD&M, Austin, TX",
-      "dates": "2018 – 2019",
-      "subtitle": "Big Data Infrastructure and Geospatial Analytics Platform",
-      "responsibilities": [
-        "Transformed small data team into big data engineering operation, migrating from desktop GIS to Hadoop/Spark clusters on AWS",
-        "Developed customer segmentation platform using Spark/PySpark with advanced spatial analysis and machine learning integration",
-        "Built real-time data visualization dashboards using React, d3.js, and OpenLayers for executive reporting and client presentations",
-        "Implemented version control workflows and Agile development practices improving team delivery timelines by 40%",
-        "Integrated ESRI ArcGIS Server with custom web applications for high-volume advertising and customer analytics workloads"
-      ]
-    },
-    {
-      "title": "SOFTWARE ENGINEER",
-      "company": "Mautinoa Technologies, Austin, TX",
-      "dates": "2016 – 2018",
-      "subtitle": "GeoDjango Platform Development and Multi-Agent Modeling",
-      "responsibilities": [
-        "Conceived and engineered SimCrisis: GeoDjango web application with NetLogo multi-agent modeling for econometric crisis simulations",
-        "Implemented modular architecture supporting extensible rule systems for crisis scenario modeling and humanitarian intervention analysis",
-        "Built geospatial analysis tools using PostGIS and GRASS for population impact assessment and resource optimization",
-        "Collaborated with UNICEF and International Federation of Red Cross technical teams for requirements validation and deployment",
-        "Created RESTful APIs and React interfaces for complex simulation parameter configuration and geospatial results visualization"
-      ]
-    },
-    {
-      "title": "SENIOR ANALYST & PLATFORM DEVELOPER",
-      "company": "Myers Research, Austin, TX",
-      "dates": "2012 – 2014",
-      "subtitle": "Survey Platform Development and Geospatial Market Analysis",
-      "responsibilities": [
-        "Co-developed RACSO: comprehensive GeoDjango web application for survey lifecycle management from instrument design to analysis",
-        "Implemented survey design tools, data collection interfaces, and automated reporting with integrated geospatial analysis capabilities",
-        "Built PostGIS-based market segmentation features enhancing demographic analysis with location-based consumer insights",
-        "Designed database schemas and PostGIS optimization strategies for large-scale survey data storage and spatial queries",
-        "Led RFP process analyzing 1,200+ vendor proposals for platform development, selecting optimal technology stack"
-      ]
-    },
-    {
-      "title": "RESEARCH DIRECTOR & PLATFORM ARCHITECT",
-      "company": "Progressive Change Campaign Committee, Austin, TX",
-      "dates": "2011 – 2012",
-      "subtitle": "Telephony Integration and Real-Time Survey Systems",
-      "responsibilities": [
-        "Engineered FLEEM: GeoDjango platform integrating Twilio API for thousands of simultaneous IVR phone surveys with real-time processing",
-        "Developed statistical boundary estimation methods using PostGIS and GRASS, enhancing geographic targeting for political research",
-        "Implemented real-time data collection and processing systems with live result visualization using d3.js and OpenLayers",
-        "Built foundational polling consortium database infrastructure later adopted by The Analyst Institute",
-        "Created comprehensive geospatial data visualization solutions improving stakeholder understanding of complex research findings"
-      ]
     }
   ],
   "achievements": {
     "Geospatial Platform Development": [
-      "Architected BALLISTA redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration",
-      "Built DAMON boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms",
-      "Developed SimCrisis econometric simulation platform with NetLogo multi-agent modeling and GeoDjango web interface",
-      "Created RACSO comprehensive survey platform managing complete research lifecycle with integrated geospatial market segmentation"
-    ],
-    "Big Data & Performance Engineering": [
-      "Implemented Spark/Sedona ETL optimizations achieving 57% performance improvement in geospatial data processing pipelines",
-      "Built systems processing billions of spatial records with sub-hour latency using distributed Spark clusters on AWS",
-      "Developed fraud detection algorithms processing multi-terabyte campaign finance datasets with real-time PostGIS spatial analysis",
-      "Created spatial clustering algorithms achieving 88% improvement in analytical targeting efficacy using custom PySpark implementations"
-    ],
-    "Technical Leadership & Integration": [
-      "Led engineering teams up to 11 developers specializing in scalable geospatial architecture and OSGeo/ESRI technology integration",
-      "Pioneered integration of ESRI, OSGeo (QGIS, GRASS), and SAFE FME technologies into production web applications",
-      "Established technical standards for GeoDjango, PostGIS, and Spark/Sedona development across distributed teams",
-      "Mentored developers in advanced geospatial software engineering, spatial algorithms, and big data processing principles"
+      "Architected redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration",
+      "Built boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms",
+      "Developed econometric simulation platform with NetLogo multi-agent modeling and web interface",
+      "Created comprehensive survey platform managing complete research lifecycle with integrated geospatial market segmentation"
     ]
   },
   "_metadata": {
     "version": "software_engineer",
-    "created": "2025-05-27T16:17:47.826048",
+    "user": "Dheeraj Chand",
+    "created": "2025-05-27T17:11:24.268009",
     "description": "Software engineer focused version emphasizing technical skills and platform development"
   }
 }

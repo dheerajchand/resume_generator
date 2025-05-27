@@ -329,18 +329,28 @@ class ColorSchemeGenerator:
         print(f"\n📄 Resume Preview:")
         print("   " + "─" * 50)
 
+        # Try to get user name from config, fallback to generic
+        try:
+            from user_config import UserConfig
+            user_config = UserConfig()
+            user_name = user_config.name
+            user_title = user_config.get_title('software')
+        except:
+            user_name = "YOUR NAME"
+            user_title = "Professional Title"
+
         # Name with actual color
         name_r, name_g, name_b = self.hex_to_rgb_tuple(name_color)
         name_fg = f"\033[38;2;{name_r};{name_g};{name_b}m"
         reset = "\033[0m"
-        print(f"   {name_fg}DHEERAJ CHAND{reset}")
+        print(f"   {name_fg}{user_name}{reset}")
 
         # Title with actual color
         title_r, title_g, title_b = self.hex_to_rgb_tuple(title_color)
         title_fg = f"\033[38;2;{title_r};{title_g};{title_b}m"
-        print(f"   {title_fg}Senior Software Engineer{reset}")
+        print(f"   {title_fg}{user_title}{reset}")
 
-        print("   (202) 550-7110 | Dheeraj.Chand@gmail.com")
+        print(f"   Phone | Email")
 
         # Section header example
         section_r, section_g, section_b = self.hex_to_rgb_tuple(section_color)
@@ -350,8 +360,8 @@ class ColorSchemeGenerator:
         # Job title example
         job_r, job_g, job_b = self.hex_to_rgb_tuple(job_color)
         job_fg = f"\033[38;2;{job_r};{job_g};{job_b}m"
-        print(f"   {job_fg}PARTNER & SENIOR SOFTWARE ENGINEER{reset}")
-        print("   Siege Analytics, Austin, TX | 2005 – Present")
+        print(f"   {job_fg}SENIOR SOFTWARE ENGINEER{reset}")
+        print("   Company Name, City, ST | 2020 – Present")
 
         print("   " + "─" * 50)
 
