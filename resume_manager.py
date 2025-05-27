@@ -164,7 +164,7 @@ class ResumeManager:
         output_base.mkdir(parents=True, exist_ok=True)
 
         # Generate with custom output path
-        output_file = output_base / f"{version_key}_{color_scheme}.{format_type}"
+        output_file = output_base / f"dheeraj_chand_{version_key}_{color_scheme}.{format_type}"
         cmd = f"python reportlab_resume.py --format {format_type} --basename {version_name} --output-dir outputs_temp"
 
         success, output = self.run_command(cmd)
@@ -231,7 +231,7 @@ class ResumeManager:
 
         print(f"\n🎉 Generated {version_key} resume with {len(successful_schemes)} color schemes:")
         for scheme in successful_schemes:
-            output_path = Path("outputs") / version_key / scheme / format_type / f"{version_key}_{scheme}.{format_type}"
+            output_path = Path("outputs") / version_key / scheme / format_type / f"dheeraj_chand_{version_key}_{scheme}.{format_type}"
             print(f"   📂 {output_path}")
 
         return len(successful_schemes) > 0
@@ -344,6 +344,7 @@ class ResumeManager:
         print()
         print(f"📁 Find your nuclear arsenal in the outputs/ directory!")
         print(f"   Organized by: outputs/[version]/[color_scheme]/[format]/")
+        print(f"   Files named: dheeraj_chand_[version]_[color_scheme].[extension]")
 
         return total_generated
 
