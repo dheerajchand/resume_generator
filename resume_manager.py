@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 from user_config import UserConfig
 
+
 class ResumeManager:
     """Manages resume generation for multiple versions with color scheme organization"""
 
@@ -21,7 +22,9 @@ class ResumeManager:
             self.user_config = UserConfig()
         except FileNotFoundError:
             print("❌ User configuration not found!")
-            print("🔧 Please run 'python setup_user.py' to create your configuration first.")
+            print(
+                "🔧 Please run 'python setup_user.py' to create your configuration first."
+            )
             sys.exit(1)
         except Exception as e:
             print(f"❌ Error loading user configuration: {e}")
@@ -35,27 +38,27 @@ class ResumeManager:
             sys.exit(1)
 
         self.versions = {
-            'research': self.user_config.get_version_directory_name('research'),
-            'technical': self.user_config.get_version_directory_name('technical'),
-            'comprehensive': self.user_config.get_version_directory_name('comprehensive'),
-            'consulting': self.user_config.get_version_directory_name('consulting'),
-            'software': self.user_config.get_version_directory_name('software'),
-            'marketing': self.user_config.get_version_directory_name('marketing')
+            "research": self.user_config.get_version_directory_name("research"),
+            "technical": self.user_config.get_version_directory_name("technical"),
+            "comprehensive": self.user_config.get_version_directory_name(
+                "comprehensive"
+            ),
+            "consulting": self.user_config.get_version_directory_name("consulting"),
+            "software": self.user_config.get_version_directory_name("software"),
+            "marketing": self.user_config.get_version_directory_name("marketing"),
         }
 
-        self.color_schemes = [
-            'default_professional',
-            'corporate_blue',
-            'modern_tech'
-        ]
+        self.color_schemes = ["default_professional", "corporate_blue", "modern_tech"]
 
-        self.formats = ['pdf', 'docx', 'rtf']
-        self.current_color_scheme = 'default_professional'  # Track current scheme
+        self.formats = ["pdf", "docx", "rtf"]
+        self.current_color_scheme = "default_professional"  # Track current scheme
 
     def run_command(self, cmd):
         """Run a command and return success status"""
         try:
-            result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+            result = subprocess.run(
+                cmd, shell=True, check=True, capture_output=True, text=True
+            )
             return True, result.stdout
         except subprocess.CalledProcessError as e:
             return False, e.stderr
@@ -63,19 +66,19 @@ class ResumeManager:
     def get_current_color_scheme(self):
         """Detect current color scheme from existing config files"""
         # Check a sample config file to see what color scheme is active
-        sample_version = 'dheeraj_chand_software_engineer'
+        sample_version = "dheeraj_chand_software_engineer"
         config_path = Path("inputs") / sample_version / "config.json"
 
         if config_path.exists():
             try:
-                with open(config_path, 'r') as f:
+                with open(config_path, "r") as f:
                     config = json.load(f)
-                    metadata = config.get('_metadata', {})
-                    return metadata.get('scheme_name', 'default_professional')
+                    metadata = config.get("_metadata", {})
+                    return metadata.get("scheme_name", "default_professional")
             except:
                 pass
 
-        return 'default_professional'
+        return "default_professional"
 
     def validate_color_scheme(self, color_scheme):
         """Validate that a color scheme exists (built-in or file)"""
@@ -83,7 +86,7 @@ class ResumeManager:
             return True
 
         # Check built-in schemes
-        built_ins = ['default_professional', 'corporate_blue', 'modern_tech']
+        built_ins = ["default_professional", "corporate_blue", "modern_tech"]
         if color_scheme in built_ins:
             return True
 
@@ -96,7 +99,7 @@ class ResumeManager:
 
     def get_all_available_schemes(self):
         """Get all available color schemes from all sources"""
-        schemes = ['default_professional', 'corporate_blue', 'modern_tech']
+        schemes = ["default_professional", "corporate_blue", "modern_tech"]
 
         # Add schemes from color_schemes directory
         schemes_dir = Path("color_schemes")
@@ -113,7 +116,7 @@ class ResumeManager:
         print("🔍 Checking system setup...")
 
         # Check required files
-        required_files = ['resume_data_generator.py', 'reportlab_resume.py']
+        required_files = ["resume_data_generator.py", "reportlab_resume.py"]
         missing_files = []
 
         for file_path in required_files:
@@ -127,6 +130,7 @@ class ResumeManager:
         # Check dependencies
         try:
             import reportlab
+
             print("✅ ReportLab found")
         except ImportError:
             print("❌ ReportLab not found. Install with: pip install reportlab")
@@ -134,6 +138,7 @@ class ResumeManager:
 
         try:
             import docx
+
             print("✅ python-docx found")
         except ImportError:
             print("⚠️  python-docx not found. DOCX generation will be skipped.")
@@ -142,11 +147,13 @@ class ResumeManager:
         print("✅ System setup OK")
         return True
 
-    def generate_data(self, color_scheme='default_professional'):
+    def generate_data(self, color_scheme="default_professional"):
         """Generate resume data using your existing generator"""
         print(f"📝 Generating resume data with {color_scheme} color scheme...")
 
-        success, output = self.run_command(f"python resume_data_generator.py --color-scheme {color_scheme}")
+        success, output = self.run_command(
+            f"python resume_data_generator.py --color-scheme {color_scheme}"
+        )
 
         if success:
             print("✅ Resume data generated")
@@ -157,7 +164,7 @@ class ResumeManager:
             print(f"Error: {output}")
             return False
 
-    def generate_single_resume(self, version_key, format_type='pdf', color_scheme=None):
+    def generate_single_resume(self, version_key, format_type="pdf", color_scheme=None):
         """Generate a single resume version with color scheme organization"""
         if version_key not in self.versions:
             print(f"❌ Unknown version: {version_key}")
@@ -177,23 +184,30 @@ class ResumeManager:
         if color_scheme is None:
             color_scheme = self.get_current_color_scheme()
 
-        print(f"📄 Generating {version_key} resume in {format_type.upper()} format with {color_scheme} colors...")
+        print(
+            f"📄 Generating {version_key} resume in {format_type.upper()} format with {color_scheme} colors..."
+        )
 
         # Create color-scheme-organized output directory
         output_base = Path("outputs") / version_key / color_scheme / format_type
         output_base.mkdir(parents=True, exist_ok=True)
 
         # Generate with custom output path
-        output_file = output_base / self.user_config.get_output_filename(version_key, color_scheme, format_type)
+        output_file = output_base / self.user_config.get_output_filename(
+            version_key, color_scheme, format_type
+        )
         cmd = f"python reportlab_resume.py --format {format_type} --basename {version_name} --output-dir outputs_temp"
 
         success, output = self.run_command(cmd)
 
         if success:
             # Move from temp location to organized location
-            temp_file = Path(f"outputs_temp/{version_name}/{format_type}/{version_name}.{format_type}")
+            temp_file = Path(
+                f"outputs_temp/{version_name}/{format_type}/{version_name}.{format_type}"
+            )
             if temp_file.exists():
                 import shutil
+
                 shutil.move(str(temp_file), str(output_file))
                 # Clean up temp directory
                 shutil.rmtree("outputs_temp", ignore_errors=True)
@@ -216,23 +230,29 @@ class ResumeManager:
         if color_scheme is None:
             color_scheme = self.get_current_color_scheme()
 
-        print(f"🚀 Generating all formats for {version_key} with {color_scheme} colors...")
+        print(
+            f"🚀 Generating all formats for {version_key} with {color_scheme} colors..."
+        )
 
         success_count = 0
         for fmt in self.formats:
             if self.generate_single_resume(version_key, fmt, color_scheme):
                 success_count += 1
 
-        print(f"✅ Generated {success_count}/{len(self.formats)} formats for {version_key}")
+        print(
+            f"✅ Generated {success_count}/{len(self.formats)} formats for {version_key}"
+        )
         return success_count == len(self.formats)
 
-    def generate_color_comparison(self, version_key, color_schemes, format_type='pdf'):
+    def generate_color_comparison(self, version_key, color_schemes, format_type="pdf"):
         """Generate the same resume version with multiple color schemes for comparison"""
         if version_key not in self.versions:
             print(f"❌ Unknown version: {version_key}")
             return False
 
-        print(f"🎨 Generating {version_key} resume with multiple color schemes for comparison...")
+        print(
+            f"🎨 Generating {version_key} resume with multiple color schemes for comparison..."
+        )
 
         successful_schemes = []
 
@@ -240,7 +260,9 @@ class ResumeManager:
             print(f"\n📄 Generating with {scheme} colors...")
 
             # Generate data with this color scheme
-            success, _ = self.run_command(f"python resume_data_generator.py --color-scheme {scheme}")
+            success, _ = self.run_command(
+                f"python resume_data_generator.py --color-scheme {scheme}"
+            )
             if not success:
                 print(f"⚠️  Could not generate data with {scheme} scheme")
                 continue
@@ -249,14 +271,22 @@ class ResumeManager:
             if self.generate_single_resume(version_key, format_type, scheme):
                 successful_schemes.append(scheme)
 
-        print(f"\n🎉 Generated {version_key} resume with {len(successful_schemes)} color schemes:")
+        print(
+            f"\n🎉 Generated {version_key} resume with {len(successful_schemes)} color schemes:"
+        )
         for scheme in successful_schemes:
-            output_path = Path("outputs") / version_key / scheme / format_type / self.user_config.get_output_filename(version_key, scheme, format_type)
+            output_path = (
+                Path("outputs")
+                / version_key
+                / scheme
+                / format_type
+                / self.user_config.get_output_filename(version_key, scheme, format_type)
+            )
             print(f"   📂 {output_path}")
 
         return len(successful_schemes) > 0
 
-    def generate_all_versions(self, format_type='pdf'):
+    def generate_all_versions(self, format_type="pdf"):
         """Generate all versions in specified format with current color scheme"""
         print(f"🚀 Generating all resume versions in {format_type.upper()} format...")
 
@@ -294,18 +324,24 @@ class ResumeManager:
                     total_generated += 1
 
         print()
-        print(f"🎉 Generation complete: {total_generated}/{total_possible} files generated")
+        print(
+            f"🎉 Generation complete: {total_generated}/{total_possible} files generated"
+        )
 
         return total_generated
 
     def generate_nuclear_option(self):
         """Generate EVERY version in EVERY format with EVERY color scheme - The Nuclear Option"""
         available_schemes = self.get_all_available_schemes()
-        total_combinations = len(self.versions) * len(self.formats) * len(available_schemes)
+        total_combinations = (
+            len(self.versions) * len(self.formats) * len(available_schemes)
+        )
 
         print("☢️  NUCLEAR OPTION: Generating EVERYTHING")
         print("=" * 60)
-        print(f"📊 Total combinations: {len(self.versions)} versions × {len(self.formats)} formats × {len(available_schemes)} color schemes")
+        print(
+            f"📊 Total combinations: {len(self.versions)} versions × {len(self.formats)} formats × {len(available_schemes)} color schemes"
+        )
         print(f"🎯 Total files to generate: {total_combinations}")
         print()
         print("⏰ This will take several minutes...")
@@ -313,8 +349,10 @@ class ResumeManager:
         print()
 
         # Confirm the nuclear option
-        response = input("🤔 Are you sure you want to generate ALL resumes with ALL color schemes? (y/N): ")
-        if response.lower() != 'y':
+        response = input(
+            "🤔 Are you sure you want to generate ALL resumes with ALL color schemes? (y/N): "
+        )
+        if response.lower() != "y":
             print("❌ Nuclear option cancelled - probably wise!")
             return 0
 
@@ -327,11 +365,15 @@ class ResumeManager:
 
         for scheme in available_schemes:
             scheme_progress += 1
-            print(f"\n🎨 Color Scheme {scheme_progress}/{len(available_schemes)}: {scheme}")
+            print(
+                f"\n🎨 Color Scheme {scheme_progress}/{len(available_schemes)}: {scheme}"
+            )
             print("─" * 40)
 
             # Generate data for this color scheme
-            success, _ = self.run_command(f"python resume_data_generator.py --color-scheme {scheme}")
+            success, _ = self.run_command(
+                f"python resume_data_generator.py --color-scheme {scheme}"
+            )
             if not success:
                 print(f"⚠️  Failed to generate data for {scheme} scheme - skipping")
                 total_failed += len(self.versions) * len(self.formats)
@@ -354,7 +396,9 @@ class ResumeManager:
 
                 print(f"({version_success}/{len(self.formats)})")
 
-            print(f"  🎯 Scheme total: {scheme_generated}/{len(self.versions) * len(self.formats)} files")
+            print(
+                f"  🎯 Scheme total: {scheme_generated}/{len(self.versions) * len(self.formats)} files"
+            )
 
         print(f"\n☢️  NUCLEAR GENERATION COMPLETE!")
         print("=" * 60)
@@ -364,7 +408,9 @@ class ResumeManager:
         print()
         print(f"📁 Find your nuclear arsenal in the outputs/ directory!")
         print(f"   Organized by: outputs/[version]/[color_scheme]/[format]/")
-        print(f"   Files named: {self.user_config.file_base_name}_[version]_[color_scheme].[extension]")
+        print(
+            f"   Files named: {self.user_config.file_base_name}_[version]_[color_scheme].[extension]"
+        )
 
         return total_generated
 
@@ -374,12 +420,12 @@ class ResumeManager:
         print()
 
         descriptions = {
-            'research': 'Research & Data Analytics Leader - For academic/research roles',
-            'technical': 'Senior Geospatial Data Engineer - Technical depth emphasis',
-            'comprehensive': 'Complete work history - All details included',
-            'consulting': 'Data Analytics & Technology Consultant - Strategic advisor',
-            'software': 'Senior Software Engineer - Platform development (DEFAULT)',
-            'marketing': 'Senior Product Marketing Manager - Go-to-market focus'
+            "research": "Research & Data Analytics Leader - For academic/research roles",
+            "technical": "Senior Geospatial Data Engineer - Technical depth emphasis",
+            "comprehensive": "Complete work history - All details included",
+            "consulting": "Data Analytics & Technology Consultant - Strategic advisor",
+            "software": "Senior Software Engineer - Platform development (DEFAULT)",
+            "marketing": "Senior Product Marketing Manager - Go-to-market focus",
         }
 
         current_scheme = self.get_current_color_scheme()
@@ -393,7 +439,9 @@ class ResumeManager:
 
             # Check for existing outputs with current color scheme
             output_dir = Path("outputs") / key / current_scheme
-            has_outputs = "📄" if output_dir.exists() and any(output_dir.rglob("*")) else "  "
+            has_outputs = (
+                "📄" if output_dir.exists() and any(output_dir.rglob("*")) else "  "
+            )
 
             print(f"  {status} {has_outputs} {key:12} - {description}")
 
@@ -417,8 +465,11 @@ class ResumeManager:
             target_dir = Path("outputs") / version_key / color_scheme
             if target_dir.exists():
                 import shutil
+
                 shutil.rmtree(target_dir)
-                print(f"✅ Cleaned {version_key} outputs for {color_scheme} color scheme")
+                print(
+                    f"✅ Cleaned {version_key} outputs for {color_scheme} color scheme"
+                )
             else:
                 print(f"ℹ️  No outputs found for {version_key} with {color_scheme}")
         elif version_key:
@@ -426,6 +477,7 @@ class ResumeManager:
             target_dir = Path("outputs") / version_key
             if target_dir.exists():
                 import shutil
+
                 shutil.rmtree(target_dir)
                 print(f"✅ Cleaned all outputs for {version_key}")
             else:
@@ -435,14 +487,16 @@ class ResumeManager:
             outputs_dir = Path("outputs")
             if outputs_dir.exists():
                 import shutil
+
                 shutil.rmtree(outputs_dir)
                 print("✅ Cleaned all output directories")
             else:
                 print("ℹ️  No output directories to clean")
 
+
 def get_available_color_schemes():
     """Get list of available color schemes from files and built-ins"""
-    schemes = ['default_professional', 'corporate_blue', 'modern_tech']  # Built-ins
+    schemes = ["default_professional", "corporate_blue", "modern_tech"]  # Built-ins
 
     # Add schemes from color_schemes directory
     schemes_dir = Path("color_schemes")
@@ -454,6 +508,7 @@ def get_available_color_schemes():
 
     return schemes
 
+
 def main():
     """Main function with argument parsing"""
 
@@ -461,7 +516,7 @@ def main():
     available_schemes = get_available_color_schemes()
 
     parser = argparse.ArgumentParser(
-        description='Professional Resume Manager - Generate individual or batch resumes with color scheme organization',
+        description="Professional Resume Manager - Generate individual or batch resumes with color scheme organization",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f"""
 Examples:
@@ -493,42 +548,83 @@ Examples:
   python resume_manager.py --list
 
 Available color schemes: {', '.join(available_schemes)}
-        """
+        """,
     )
 
     # Data generation
-    parser.add_argument('--generate-data', action='store_true',
-                       help='Generate resume data files using existing generator')
-    parser.add_argument('--color-scheme',
-                       help=f'Color scheme to use. Available: {", ".join(available_schemes)} (or any custom scheme in color_schemes/)')
+    parser.add_argument(
+        "--generate-data",
+        action="store_true",
+        help="Generate resume data files using existing generator",
+    )
+    parser.add_argument(
+        "--color-scheme",
+        help=f'Color scheme to use. Available: {", ".join(available_schemes)} (or any custom scheme in color_schemes/)',
+    )
 
     # Single resume generation
-    parser.add_argument('--version', choices=['research', 'technical', 'comprehensive', 'consulting', 'software', 'marketing'],
-                       help='Resume version to generate')
-    parser.add_argument('--format', choices=['pdf', 'docx', 'rtf'], default='pdf',
-                       help='Output format (default: pdf)')
+    parser.add_argument(
+        "--version",
+        choices=[
+            "research",
+            "technical",
+            "comprehensive",
+            "consulting",
+            "software",
+            "marketing",
+        ],
+        help="Resume version to generate",
+    )
+    parser.add_argument(
+        "--format",
+        choices=["pdf", "docx", "rtf"],
+        default="pdf",
+        help="Output format (default: pdf)",
+    )
 
     # Color comparison
-    parser.add_argument('--color-comparison', nargs='+', metavar='COLOR_SCHEME',
-                       help='Generate version with multiple color schemes for comparison')
+    parser.add_argument(
+        "--color-comparison",
+        nargs="+",
+        metavar="COLOR_SCHEME",
+        help="Generate version with multiple color schemes for comparison",
+    )
 
     # Batch operations
-    parser.add_argument('--all-formats', action='store_true',
-                       help='Generate all formats for specified version')
-    parser.add_argument('--all-versions', action='store_true',
-                       help='Generate all versions in specified format')
-    parser.add_argument('--everything', action='store_true',
-                       help='Generate all versions in all formats (current color scheme)')
-    parser.add_argument('--nuclear', action='store_true',
-                       help='☢️  NUCLEAR OPTION: Generate EVERY version in EVERY format with EVERY color scheme')
+    parser.add_argument(
+        "--all-formats",
+        action="store_true",
+        help="Generate all formats for specified version",
+    )
+    parser.add_argument(
+        "--all-versions",
+        action="store_true",
+        help="Generate all versions in specified format",
+    )
+    parser.add_argument(
+        "--everything",
+        action="store_true",
+        help="Generate all versions in all formats (current color scheme)",
+    )
+    parser.add_argument(
+        "--nuclear",
+        action="store_true",
+        help="☢️  NUCLEAR OPTION: Generate EVERY version in EVERY format with EVERY color scheme",
+    )
 
     # Utility
-    parser.add_argument('--list', action='store_true',
-                       help='List available resume versions and color schemes')
-    parser.add_argument('--clean', nargs='*', metavar='VERSION_OR_SCHEME',
-                       help='Clean output directories (optional: specify version and/or color scheme)')
-    parser.add_argument('--check', action='store_true',
-                       help='Check system setup')
+    parser.add_argument(
+        "--list",
+        action="store_true",
+        help="List available resume versions and color schemes",
+    )
+    parser.add_argument(
+        "--clean",
+        nargs="*",
+        metavar="VERSION_OR_SCHEME",
+        help="Clean output directories (optional: specify version and/or color scheme)",
+    )
+    parser.add_argument("--check", action="store_true", help="Check system setup")
 
     args = parser.parse_args()
 
@@ -572,7 +668,7 @@ Available color schemes: {', '.join(available_schemes)}
 
     # Generate data
     if args.generate_data:
-        color_scheme = args.color_scheme or 'default_professional'
+        color_scheme = args.color_scheme or "default_professional"
         success = manager.generate_data(color_scheme)
         return 0 if success else 1
 
@@ -581,7 +677,9 @@ Available color schemes: {', '.join(available_schemes)}
         if not args.version:
             print("❌ --version required for color comparison")
             return 1
-        success = manager.generate_color_comparison(args.version, args.color_comparison, args.format)
+        success = manager.generate_color_comparison(
+            args.version, args.color_comparison, args.format
+        )
         return 0 if success else 1
 
     # Generate everything
@@ -613,13 +711,16 @@ Available color schemes: {', '.join(available_schemes)}
         if args.all_formats:
             success = manager.generate_all_formats(args.version, args.color_scheme)
         else:
-            success = manager.generate_single_resume(args.version, args.format, args.color_scheme)
+            success = manager.generate_single_resume(
+                args.version, args.format, args.color_scheme
+            )
 
         return 0 if success else 1
 
     # If we reach here, no valid operation was specified
     print("❌ No operation specified. Use --help to see available options.")
     return 1
+
 
 if __name__ == "__main__":
     exit(main())
