@@ -1,0 +1,21 @@
+# Resume Generator Dependencies
+# Core PDF generation
+reportlab>=3.6.0
+
+# Word document generation
+python-docx>=0.8.11
+
+# Data handling and validation
+pydantic>=2.0.0
+
+# Type checking and development
+mypy>=1.0.0
+black>=23.0.0
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Optional: Enhanced color handling
+colorthief>=0.2.1
+
+# Optional: Image processing for advanced features
+Pillow>=9.0.0
