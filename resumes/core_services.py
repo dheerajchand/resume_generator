@@ -451,32 +451,37 @@ class ResumeGenerator:
             
             # Left cell: Site and LinkedIn with pipe separator
             if website_url or linkedin_url:
-                canvas.setFillColor(HexColor("#666666"))
-                
-                # Build combined text with pipe separator
-                left_parts = []
-                if website_url:
-                    left_parts.append(f"Site: {website_url}")
-                if linkedin_url:
-                    left_parts.append(f"LinkedIn: {linkedin_url}")
-                
-                combined_text = " | ".join(left_parts)
-                canvas.drawString(0.6*inch, footer_y, combined_text)
-                
-                # Add clickable links
                 current_x = 0.6*inch
+                
+                # Draw labels in accent color, links in regular color
                 if website_url:
-                    site_text = f"Site: {website_url}"
-                    site_width = canvas.stringWidth(site_text, "Helvetica", 8)
+                    # Label in accent color
+                    canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                    canvas.drawString(current_x, footer_y, "Site: ")
+                    current_x += canvas.stringWidth("Site: ", "Helvetica", 8)
+                    
+                    # Link in regular color
                     canvas.setFillColor(HexColor("#4682B4"))
-                    canvas.linkURL(website_url, (current_x + canvas.stringWidth("Site: ", "Helvetica", 8), footer_y - 0.05*inch, current_x + site_width, footer_y + 0.1*inch))
-                    current_x += site_width + canvas.stringWidth(" | ", "Helvetica", 8)
+                    canvas.linkURL(website_url, (current_x, footer_y - 0.05*inch, current_x + len(website_url)*0.05*inch, footer_y + 0.1*inch))
+                    canvas.drawString(current_x, footer_y, website_url)
+                    current_x += canvas.stringWidth(website_url, "Helvetica", 8)
                 
                 if linkedin_url:
-                    linkedin_text = f"LinkedIn: {linkedin_url}"
-                    linkedin_width = canvas.stringWidth(linkedin_text, "Helvetica", 8)
+                    # Pipe separator
+                    if website_url:
+                        canvas.setFillColor(HexColor("#666666"))
+                        canvas.drawString(current_x, footer_y, " | ")
+                        current_x += canvas.stringWidth(" | ", "Helvetica", 8)
+                    
+                    # Label in accent color
+                    canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                    canvas.drawString(current_x, footer_y, "LinkedIn: ")
+                    current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", 8)
+                    
+                    # Link in LinkedIn blue
                     canvas.setFillColor(HexColor("#0077B5"))
-                    canvas.linkURL(linkedin_url, (current_x + canvas.stringWidth("LinkedIn: ", "Helvetica", 8), footer_y - 0.05*inch, current_x + linkedin_width, footer_y + 0.1*inch))
+                    canvas.linkURL(linkedin_url, (current_x, footer_y - 0.05*inch, current_x + len(linkedin_url)*0.05*inch, footer_y + 0.1*inch))
+                    canvas.drawString(current_x, footer_y, linkedin_url)
             
             # Right cell: Page number
             canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
