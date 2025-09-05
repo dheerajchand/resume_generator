@@ -101,7 +101,7 @@ class ResumeGenerator:
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=3,
                 leftIndent=12,
@@ -110,7 +110,7 @@ class ResumeGenerator:
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
                 parent=styles["Normal"],
-                fontSize=8,
+                fontSize=9,
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
                 spaceAfter=1,
                 leftIndent=12,
@@ -281,7 +281,7 @@ class ResumeGenerator:
                     for bullet in job_unit[2:]:
                         story.append(bullet)
                 
-                story.append(Spacer(1, 2))  # Reduced for space efficiency
+                story.append(Spacer(1, 1))  # Minimal spacing between jobs
         
         # Projects
         projects = self.data.get("projects", [])
