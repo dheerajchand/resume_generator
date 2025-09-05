@@ -434,24 +434,25 @@ class ResumeGenerator:
             website_url = personal_info.get("website", "")
             linkedin_url = personal_info.get("linkedin", "")
             
-            # Left cell: Personal Site
+            # Left cell: Site (shortened to avoid overlap)
             if website_url:
                 canvas.setFillColor(HexColor("#666666"))
-                canvas.drawString(0.6*inch, footer_y, "Personal Site: ")
+                canvas.drawString(0.6*inch, footer_y, "Site: ")
                 canvas.setFillColor(HexColor("#4682B4"))
                 # Calculate proper spacing to avoid overlap
-                label_width = canvas.stringWidth("Personal Site: ", "Helvetica", 8)
+                label_width = canvas.stringWidth("Site: ", "Helvetica", 8)
                 link_x = 0.6*inch + label_width
                 canvas.linkURL(website_url, (link_x, footer_y - 0.05*inch, link_x + len(website_url)*0.05*inch, footer_y + 0.1*inch))
                 canvas.drawString(link_x, footer_y, website_url)
             
-            # Middle cell: LinkedIn
+            # Middle cell: LinkedIn (positioned to avoid overlap with left cell)
             if linkedin_url:
                 canvas.setFillColor(HexColor("#666666"))
-                # Center LinkedIn in middle third
+                # Position LinkedIn in the right half of middle area to avoid overlap
                 linkedin_text = f"LinkedIn: {linkedin_url}"
                 linkedin_width = canvas.stringWidth(linkedin_text, "Helvetica", 8)
-                linkedin_x = (0.6*inch + 7.5*inch) / 2 - linkedin_width / 2
+                # Start from 3.5 inches to give space for left cell
+                linkedin_x = 3.5*inch
                 canvas.drawString(linkedin_x, footer_y, "LinkedIn: ")
                 canvas.setFillColor(HexColor("#0077B5"))  # LinkedIn blue
                 label_width = canvas.stringWidth("LinkedIn: ", "Helvetica", 8)
