@@ -195,6 +195,9 @@ class ResumeGenerator:
         # Add space for header (will be drawn by canvas)
         story.append(Spacer(1, 1.2*inch))
         
+        # Add extra space for subsequent pages to separate from header bar
+        story.append(Spacer(1, 0.2*inch))
+        
         # Add space before first section (reduced for smaller header)
         story.append(Spacer(1, 0.05*inch))
         
