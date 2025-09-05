@@ -37,8 +37,8 @@
   "experience": [
     {
       "title": "PARTNER",
-      "company": "Your Company Name, Your City, ST",
-      "dates": "2005 – Present",
+      "company": "Siege Analytics, Washington, DC",
+      "dates": "January 2014 – Present",
       "subtitle": "Leading Applied Research Projects with Community Development Focus",
       "responsibilities": [
         "Direct comprehensive applied research projects from conception to completion for organizations focused on economic mobility and community development",
@@ -47,6 +47,102 @@
         "Collaborate with government agencies and research institutions to develop evidence-based solutions addressing systemic poverty",
         "Manage client relationships across public sector and nonprofit organizations, consistently delivering research that drives strategic decision-making",
         "Develop custom analytical tools processing billions of records to identify patterns in economic mobility and demographic trends"
+      ]
+    },
+    {
+      "title": "PRINCIPAL RESEARCH CONSULTANT",
+      "company": "Clarity and Rigour, Washington, DC",
+      "dates": "2012 – 2014",
+      "subtitle": "Geospatial Research and Policy Analysis",
+      "responsibilities": [
+        "Conducted geospatial research projects for electoral and demographic analysis",
+        "Developed research methodologies for policy impact assessment",
+        "Led data collection and analysis for community development initiatives",
+        "Provided expert testimony and consultation on research methodology"
+      ]
+    },
+    {
+      "title": "DIRECTOR OF RESEARCH",
+      "company": "Helm, Washington, DC",
+      "dates": "2010 – 2012",
+      "subtitle": "Research Leadership and Data Analysis",
+      "responsibilities": [
+        "Led research initiatives for political and advocacy organizations",
+        "Developed data analysis frameworks for campaign strategy and policy research",
+        "Managed research teams conducting voter behavior and demographic studies",
+        "Created research reports and presentations for diverse stakeholder audiences"
+      ]
+    },
+    {
+      "title": "SENIOR RESEARCH ANALYST",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2008 – 2010",
+      "subtitle": "Campaign Research and Data Analysis",
+      "responsibilities": [
+        "Conducted comprehensive polling and demographic analysis for political campaigns",
+        "Developed voter targeting models and segmentation strategies",
+        "Analyzed campaign data to inform strategic decision-making",
+        "Created research presentations and briefings for campaign leadership"
+      ]
+    },
+    {
+      "title": "RESEARCH DIRECTOR",
+      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "dates": "2006 – 2008",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Managed critical research operations for political campaigns",
+        "Conducted comprehensive polling and demographic analysis",
+        "Developed strategic recommendations based on data analysis",
+        "Led research team in support of progressive political initiatives"
+      ]
+    },
+    {
+      "title": "RESEARCH COORDINATOR",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "2004 – 2006",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Coordinated research projects for political campaigns and advocacy groups",
+        "Developed data collection and analysis protocols for campaign research",
+        "Conducted voter behavior analysis and demographic research",
+        "Supported campaign strategy development through data-driven insights"
+      ]
+    },
+    {
+      "title": "RESEARCH MANAGER",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "2002 – 2004",
+      "subtitle": "Community Research and Social Justice Analysis",
+      "responsibilities": [
+        "Led research initiatives focused on social justice and community development",
+        "Conducted community needs assessments and demographic analysis",
+        "Developed research frameworks for advocacy and policy development",
+        "Managed data collection and analysis for community organizing efforts"
+      ]
+    },
+    {
+      "title": "RESEARCH ANALYST",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "2001 – 2002",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Conducted political polling and survey research analysis",
+        "Developed statistical models for voter behavior and demographic analysis",
+        "Created research reports and data visualizations for client presentations",
+        "Supported senior researchers with data analysis and reporting"
+      ]
+    },
+    {
+      "title": "FIELD RESEARCH COORDINATOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "2000 – 2001",
+      "subtitle": "Field Research and Data Collection",
+      "responsibilities": [
+        "Coordinated field research operations for political campaigns and studies",
+        "Developed data collection protocols and quality control systems",
+        "Trained field staff on research methodology and data collection",
+        "Analyzed field research data to inform campaign strategy and findings"
       ]
     }
   ],
@@ -60,7 +156,7 @@
   "_metadata": {
     "version": "research_focused",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.266746",
+    "created": "2025-09-04T14:30:26.913576",
     "description": "Research-focused version emphasizing applied research leadership and community impact"
   }
 }

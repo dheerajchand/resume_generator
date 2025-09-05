@@ -68,6 +68,20 @@ This folder contains comprehensive, idiot-level documentation for the Resume Gen
 - **Length**: 20-30 minutes to browse
 - **Prerequisites**: None
 
+### 10. **[ReportLab Template Guide](reportlab-template-guide.md)** - Template Customization
+- **Purpose**: Understand and modify the PDF template system
+- **Audience**: Developers and advanced users
+- **Content**: Template architecture, style system, customization
+- **Length**: 30-45 minutes to read
+- **Prerequisites**: Basic programming knowledge
+
+### 11. **[Color Schemes Guide](color-schemes-guide.md)** - Color System Documentation
+- **Purpose**: Understand and create custom color schemes
+- **Audience**: Designers and developers
+- **Content**: Color theory, scheme creation, accessibility
+- **Length**: 25-35 minutes to read
+- **Prerequisites**: Basic design knowledge
+
 ## 🎯 How to Use This Documentation
 
 ### For Complete Beginners

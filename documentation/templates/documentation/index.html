@@ -1,0 +1,152 @@
+{% extends 'documentation/base.html' %}
+
+{% block content %}
+<div class="content-area">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Documentation</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">
+            <i class="fas fa-book me-3"></i>
+            Documentation
+        </h1>
+        <p class="lead text-muted">
+            Complete, idiot-level documentation for the Resume Generator system
+        </p>
+        <p class="text-muted">
+            Everything you need to know, from basic setup to advanced customization
+        </p>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="alert alert-info border-0 shadow-sm">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-rocket fa-2x me-3 text-info"></i>
+                    <div>
+                        <h5 class="alert-heading mb-1">Quick Start</h5>
+                        <p class="mb-0">New to the system? Start with our <a href="{% url 'documentation:page' 'getting-started' %}" class="alert-link">Getting Started Guide</a> to get up and running in minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Cards -->
+    <div class="row g-4">
+        {% for doc in docs %}
+        <div class="col-lg-6 col-xl-4">
+            <div class="card doc-card h-100">
+                <div class="card-body text-center p-4">
+                    <div class="doc-icon">{{ doc.icon }}</div>
+                    <h5 class="card-title">{{ doc.title }}</h5>
+                    <p class="card-text text-muted">{{ doc.description }}</p>
+                    <div class="mt-auto">
+                        <div class="row text-center mb-3">
+                            <div class="col-6">
+                                <small class="text-muted">
+                                    <i class="fas fa-users me-1"></i>
+                                    {{ doc.audience }}
+                                </small>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">
+                                    <i class="fas fa-clock me-1"></i>
+                                    {{ doc.length }}
+                                </small>
+                            </div>
+                        </div>
+                        <a href="{% url 'documentation:page' doc.url %}" class="btn btn-primary">
+                            <i class="fas fa-arrow-right me-2"></i>
+                            Read Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-star me-2"></i>
+                Why This Documentation?
+            </h2>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4">
+                <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                <h5>Idiot-Level Clarity</h5>
+                <p class="text-muted">Written for absolute beginners with no technical knowledge required.</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4">
+                <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                <h5>Complete Coverage</h5>
+                <p class="text-muted">Every feature, every error, every use case explained in detail.</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4">
+                <i class="fas fa-search fa-3x text-info mb-3"></i>
+                <h5>Easy to Find</h5>
+                <p class="text-muted">Search functionality and clear navigation make finding answers simple.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Getting Help Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 bg-light">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">
+                        <i class="fas fa-life-ring me-2"></i>
+                        Need Help?
+                    </h3>
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'documentation:page' 'troubleshooting' %}" class="text-decoration-none">
+                                <i class="fas fa-tools fa-2x text-warning mb-2"></i>
+                                <h6>Troubleshooting</h6>
+                                <small class="text-muted">Fix common problems</small>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'documentation:page' 'faq' %}" class="text-decoration-none">
+                                <i class="fas fa-question-circle fa-2x text-info mb-2"></i>
+                                <h6>FAQ</h6>
+                                <small class="text-muted">Common questions</small>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'documentation:search' %}" class="text-decoration-none">
+                                <i class="fas fa-search fa-2x text-primary mb-2"></i>
+                                <h6>Search</h6>
+                                <small class="text-muted">Find specific info</small>
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <a href="{% url 'documentation:page' 'examples' %}" class="text-decoration-none">
+                                <i class="fas fa-lightbulb fa-2x text-success mb-2"></i>
+                                <h6>Examples</h6>
+                                <small class="text-muted">Copy-paste templates</small>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

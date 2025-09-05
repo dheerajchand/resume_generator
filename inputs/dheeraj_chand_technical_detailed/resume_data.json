@@ -33,8 +33,8 @@
   "experience": [
     {
       "title": "PARTNER & SENIOR DATA ARCHITECT",
-      "company": "Your Company Name, Your City, ST",
-      "dates": "2005 – Present",
+      "company": "Siege Analytics, Washington, DC",
+      "dates": "January 2014 – Present",
       "subtitle": "Geospatial Data Platform Architecture and Big Data Engineering",
       "responsibilities": [
         "Architected and engineered production geospatial platforms serving thousands of analysts",
@@ -43,6 +43,102 @@
         "Implemented fraud detection systems processing multi-terabyte datasets with real-time spatial analysis capabilities",
         "Created parametric boundary estimation algorithms using PostGIS and GRASS without machine learning dependencies",
         "Led integration of ESRI ArcGIS Server, OSGeo tools (QGIS, GRASS), and SAFE FME for enterprise geospatial workflows"
+      ]
+    },
+    {
+      "title": "PRINCIPAL TECHNICAL ARCHITECT",
+      "company": "Clarity and Rigour, Washington, DC",
+      "dates": "2012 – 2014",
+      "subtitle": "Geospatial Systems Architecture and Development",
+      "responsibilities": [
+        "Architected geospatial analysis frameworks and mapping applications for electoral research",
+        "Developed custom visualization tools and interactive dashboards using JavaScript and OpenLayers",
+        "Designed data processing pipelines for large-scale demographic and geographic datasets",
+        "Implemented PostGIS spatial databases and optimized geospatial query performance"
+      ]
+    },
+    {
+      "title": "DIRECTOR OF TECHNOLOGY",
+      "company": "Helm, Washington, DC",
+      "dates": "2010 – 2012",
+      "subtitle": "Data Platform Architecture and Engineering Leadership",
+      "responsibilities": [
+        "Led technical architecture and development of data-driven political technology platforms",
+        "Designed and implemented scalable data platforms using Python, Django, and PostgreSQL",
+        "Built RESTful APIs and microservices architecture for campaign data integration",
+        "Managed engineering teams and established development best practices and CI/CD pipelines"
+      ]
+    },
+    {
+      "title": "SENIOR TECHNICAL ANALYST",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2008 – 2010",
+      "subtitle": "Campaign Technology and Data Engineering",
+      "responsibilities": [
+        "Developed voter targeting models and demographic analysis tools using Python and R",
+        "Built web applications and data visualization systems for campaign analytics",
+        "Created data integration systems connecting multiple campaign data sources",
+        "Implemented machine learning algorithms and statistical models for voter behavior prediction"
+      ]
+    },
+    {
+      "title": "TECHNICAL COORDINATOR",
+      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "dates": "2006 – 2008",
+      "subtitle": "Political Technology and Data Systems",
+      "responsibilities": [
+        "Coordinated technical operations and data systems for political campaigns",
+        "Developed data collection and analysis protocols for campaign research",
+        "Built custom applications and tools for voter engagement and campaign management",
+        "Supported technical infrastructure and data processing for progressive political initiatives"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "2004 – 2006",
+      "subtitle": "Political Technology Development",
+      "responsibilities": [
+        "Developed software solutions for political campaigns using PHP, JavaScript, and MySQL",
+        "Built web applications for voter engagement and campaign management",
+        "Integrated third-party APIs and data sources for campaign tools",
+        "Collaborated with political strategists to translate requirements into technical solutions"
+      ]
+    },
+    {
+      "title": "TECHNOLOGY MANAGER",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "2002 – 2004",
+      "subtitle": "Nonprofit Technology Integration and Development",
+      "responsibilities": [
+        "Developed data management systems and web applications for social justice organizations",
+        "Built custom applications for community engagement using PHP, MySQL, and web technologies",
+        "Provided technical training and support to nonprofit staff",
+        "Integrated technology solutions within organizational frameworks for advocacy work"
+      ]
+    },
+    {
+      "title": "PROGRAMMER",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "2001 – 2002",
+      "subtitle": "Political Research and Data Analysis Tools",
+      "responsibilities": [
+        "Developed data analysis tools for political polling and research using Python and R",
+        "Built statistical models and data visualization tools for research presentations",
+        "Created automated reporting systems and data processing pipelines for survey analysis",
+        "Supported senior researchers with technical analysis and data processing automation"
+      ]
+    },
+    {
+      "title": "TECHNICAL COORDINATOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "2000 – 2001",
+      "subtitle": "Field Operations Technology and Data Management",
+      "responsibilities": [
+        "Developed data collection and management systems for political field operations",
+        "Built databases and reporting tools for campaign field work and voter outreach",
+        "Trained field staff on data collection protocols and quality control systems",
+        "Analyzed field data using statistical methods to inform campaign strategy and research findings"
       ]
     }
   ],
@@ -56,7 +152,7 @@
   "_metadata": {
     "version": "technical_detailed",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.267210",
+    "created": "2025-09-04T14:30:26.914008",
     "description": "Technical version emphasizing engineering skills, data architecture, and platform development"
   }
 }

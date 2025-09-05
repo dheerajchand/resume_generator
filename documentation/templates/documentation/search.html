@@ -1,0 +1,178 @@
+{% extends 'documentation/base.html' %}
+
+{% block content %}
+<div class="content-area">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'documentation:index' %}">Documentation</a></li>
+            <li class="breadcrumb-item active">Search</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary">
+            <i class="fas fa-search me-3"></i>
+            Search Documentation
+        </h1>
+        <p class="lead text-muted">
+            Find exactly what you're looking for in our comprehensive documentation
+        </p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <form method="get" action="{% url 'documentation:search' %}">
+                <div class="input-group input-group-lg">
+                    <input class="form-control search-box" type="search" name="q" 
+                           placeholder="Search for topics, features, or problems..." 
+                           value="{{ query }}" autofocus>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search me-2"></i>
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    {% if query %}
+        {% if results %}
+            <div class="mb-4">
+                <h3>
+                    <i class="fas fa-list me-2"></i>
+                    Search Results for "{{ query }}"
+                </h3>
+                <p class="text-muted">{{ results|length }} result{{ results|length|pluralize }} found</p>
+            </div>
+
+            <div class="row">
+                {% for result in results %}
+                <div class="col-12 mb-3">
+                    <div class="search-result">
+                        <h5>
+                            <a href="{{ result.url }}" class="text-decoration-none">
+                                {{ result.title }}
+                            </a>
+                        </h5>
+                        <p class="preview">{{ result.preview }}</p>
+                        <small class="text-muted">
+                            <i class="fas fa-file-alt me-1"></i>
+                            {{ result.filename }}
+                        </small>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No Results Found</h4>
+                <p class="text-muted">
+                    We couldn't find any documentation matching "{{ query }}".
+                </p>
+                <div class="mt-4">
+                    <a href="{% url 'documentation:index' %}" class="btn btn-primary me-3">
+                        <i class="fas fa-home me-2"></i>
+                        Browse All Docs
+                    </a>
+                    <a href="{% url 'documentation:page' 'troubleshooting' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-tools me-2"></i>
+                        Troubleshooting
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <!-- Search Tips -->
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card border-0 bg-light">
+                    <div class="card-body p-4">
+                        <h4 class="text-center mb-4">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            Search Tips
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <h6><i class="fas fa-keyword me-2"></i>Use Keywords</h6>
+                                <p class="text-muted small">Try searching for specific terms like "installation", "API", "troubleshooting", or "color schemes".</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6><i class="fas fa-question me-2"></i>Ask Questions</h6>
+                                <p class="text-muted small">Search for questions like "How do I install?" or "Why won't it work?".</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6><i class="fas fa-code me-2"></i>Technical Terms</h6>
+                                <p class="text-muted small">Use technical terms like "ReportLab", "Django", "PDF generation", or "color schemes".</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h6><i class="fas fa-exclamation-triangle me-2"></i>Error Messages</h6>
+                                <p class="text-muted small">Copy and paste error messages to find specific solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Topics -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="text-center mb-4">
+                    <i class="fas fa-fire me-2"></i>
+                    Popular Topics
+                </h3>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'documentation:page' 'getting-started' %}" class="text-decoration-none">
+                    <div class="card doc-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-rocket fa-2x text-primary mb-2"></i>
+                            <h6>Getting Started</h6>
+                            <small class="text-muted">Installation and setup</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'documentation:page' 'troubleshooting' %}" class="text-decoration-none">
+                    <div class="card doc-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-tools fa-2x text-warning mb-2"></i>
+                            <h6>Troubleshooting</h6>
+                            <small class="text-muted">Fix common problems</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'documentation:page' 'api-documentation' %}" class="text-decoration-none">
+                    <div class="card doc-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-plug fa-2x text-info mb-2"></i>
+                            <h6>API Reference</h6>
+                            <small class="text-muted">Programmatic access</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 mb-3">
+                <a href="{% url 'documentation:page' 'color-schemes-guide' %}" class="text-decoration-none">
+                    <div class="card doc-card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-palette fa-2x text-success mb-2"></i>
+                            <h6>Color Schemes</h6>
+                            <small class="text-muted">Customize appearance</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -27,6 +27,11 @@ from .serializers import ResumeSerializer, PersonalInfoSerializer
 from .services import ResumeGenerationService, ContentManagementService
 
 
+def home(request):
+    """Home page view"""
+    return render(request, 'resumes/home.html')
+
+
 class ResumeListView(LoginRequiredMixin, ListView):
     """List all resumes for the current user"""
     model = Resume

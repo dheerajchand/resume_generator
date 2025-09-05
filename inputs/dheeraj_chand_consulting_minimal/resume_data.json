@@ -33,8 +33,8 @@
   "experience": [
     {
       "title": "PRINCIPAL CONSULTANT",
-      "company": "Your Company Name, Your City, ST",
-      "dates": "2005 – Present",
+      "company": "Siege Analytics, Washington, DC",
+      "dates": "January 2014 – Present",
       "subtitle": "Data, Technology and Strategy Consulting",
       "responsibilities": [
         "Provide comprehensive data analysis, engineering, and strategic planning for diverse client portfolio",
@@ -42,6 +42,102 @@
         "Lead digital transformation initiatives including cloud migrations and legacy system modernization",
         "Deliver management consulting including project planning, team building, and operational optimization",
         "Maintain long-term strategic partnerships with clients across political, nonprofit, and technology sectors"
+      ]
+    },
+    {
+      "title": "PRINCIPAL CONSULTANT",
+      "company": "Clarity and Rigour, Washington, DC",
+      "dates": "2012 – 2014",
+      "subtitle": "Geospatial Solutions and Policy Consulting",
+      "responsibilities": [
+        "Provided strategic consulting on geospatial data applications for policy and business",
+        "Developed custom analytical frameworks for electoral and demographic research",
+        "Delivered data-driven recommendations for political campaign strategy",
+        "Built client relationships across political and advocacy sectors"
+      ]
+    },
+    {
+      "title": "SENIOR CONSULTANT",
+      "company": "Helm, Washington, DC",
+      "dates": "2010 – 2012",
+      "subtitle": "Data Strategy and Product Consulting",
+      "responsibilities": [
+        "Led data strategy initiatives for political and advocacy organizations",
+        "Developed product roadmaps and technical architecture recommendations",
+        "Managed client relationships and project delivery across multiple sectors",
+        "Provided technical expertise on data platform development and integration"
+      ]
+    },
+    {
+      "title": "CONSULTANT",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2008 – 2010",
+      "subtitle": "Campaign Strategy and Data Consulting",
+      "responsibilities": [
+        "Provided data analysis and strategic consulting for political campaigns",
+        "Developed voter targeting and demographic analysis strategies",
+        "Delivered campaign optimization recommendations based on data insights",
+        "Supported client teams with technical expertise and strategic guidance"
+      ]
+    },
+    {
+      "title": "SENIOR CONSULTANT",
+      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "dates": "2006 – 2008",
+      "subtitle": "Political Strategy and Research Consulting",
+      "responsibilities": [
+        "Provided strategic consulting on research operations and campaign data analysis",
+        "Developed data collection and analysis strategies for political initiatives",
+        "Delivered research-based recommendations for campaign strategy",
+        "Supported progressive political organizations with data-driven insights"
+      ]
+    },
+    {
+      "title": "CONSULTANT",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "2004 – 2006",
+      "subtitle": "Technology and Data Consulting",
+      "responsibilities": [
+        "Provided technical consulting for political campaigns and advocacy groups",
+        "Developed data integration and analysis strategies for campaign tools",
+        "Delivered technology recommendations for voter engagement and campaign management",
+        "Supported client teams with technical expertise and implementation guidance"
+      ]
+    },
+    {
+      "title": "CONSULTANT",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "2002 – 2004",
+      "subtitle": "Nonprofit Technology and Data Consulting",
+      "responsibilities": [
+        "Provided technology consulting for social justice organizations",
+        "Developed data management and analysis strategies for community organizing",
+        "Delivered technical recommendations for advocacy and community engagement",
+        "Supported nonprofit staff with technology training and implementation"
+      ]
+    },
+    {
+      "title": "ANALYST",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "2001 – 2002",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Provided data analysis and research support for political polling projects",
+        "Developed statistical models and analytical frameworks for voter research",
+        "Delivered research insights and recommendations for campaign strategy",
+        "Supported senior consultants with data analysis and client presentations"
+      ]
+    },
+    {
+      "title": "FIELD COORDINATOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "2000 – 2001",
+      "subtitle": "Field Operations and Data Management",
+      "responsibilities": [
+        "Coordinated field operations and data collection for political campaigns",
+        "Developed data management systems and quality control protocols",
+        "Delivered field data analysis and strategic recommendations",
+        "Supported campaign teams with field operations and data insights"
       ]
     }
   ],
@@ -55,7 +151,7 @@
   "_metadata": {
     "version": "consulting_minimal",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.267765",
+    "created": "2025-09-04T14:30:26.914464",
     "description": "Minimal consulting-focused version emphasizing strategic advisory and technical expertise"
   }
 }

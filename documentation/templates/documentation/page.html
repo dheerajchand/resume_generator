@@ -1,0 +1,57 @@
+{% extends 'documentation/base.html' %}
+
+{% block content %}
+<div class="content-area">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'documentation:index' %}">Documentation</a></li>
+            <li class="breadcrumb-item active">{{ title }}</li>
+        </ol>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h1 class="display-5 fw-bold text-primary">
+            {{ icon }} {{ title }}
+        </h1>
+        <p class="lead text-muted">{{ description }}</p>
+    </div>
+
+    <!-- Content -->
+    <div class="markdown-content">
+        {{ content|safe }}
+    </div>
+
+    <!-- Navigation -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 bg-light">
+                <div class="card-body p-4">
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'documentation:index' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-home me-2"></i>
+                                All Documentation
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'documentation:search' %}" class="btn btn-outline-info">
+                                <i class="fas fa-search me-2"></i>
+                                Search Docs
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'documentation:page' 'troubleshooting' %}" class="btn btn-outline-warning">
+                                <i class="fas fa-tools me-2"></i>
+                                Troubleshooting
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
