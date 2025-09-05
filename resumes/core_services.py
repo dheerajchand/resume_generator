@@ -151,7 +151,7 @@ class ResumeGenerator:
                 "CustomContact",
                 parent=styles["Normal"],
                 fontSize=11,
-                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
+                textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),  # Use accent color for header contact
                 alignment=TA_RIGHT,
                 spaceAfter=12,
                 fontName="Helvetica",
@@ -345,24 +345,69 @@ class ResumeGenerator:
                 story.append(Spacer(1, 6))
         
         
-        # Build with custom footer
+        # Build with custom headers and footer
+        def add_first_page_header(canvas, doc):
+            """Add full header for first page"""
+            add_footer(canvas, doc)  # Also add footer
+        
+        def add_later_page_header(canvas, doc):
+            """Add compact header for subsequent pages"""
+            canvas.saveState()
+            
+            # Get contact info for compact header
+            contact_parts = []
+            if personal_info.get("phone"):
+                contact_parts.append(personal_info["phone"])
+            if personal_info.get("email"):
+                email = personal_info["email"]
+                contact_parts.append(f'<link href="mailto:{email}">{email}</link>')
+            if personal_info.get("linkedin"):
+                linkedin = personal_info["linkedin"]
+                contact_parts.append(f'<link href="{linkedin}">{linkedin}</link>')
+            if personal_info.get("location"):
+                contact_parts.append(personal_info["location"])
+            
+            # Add compact header: smaller name + contact info on same line
+            canvas.setFont("Helvetica-Bold", 14)  # Smaller name
+            canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
+            name = personal_info.get("name", "NAME")
+            canvas.drawRightString(7.5*inch, 10.5*inch, name)
+            
+            # Add contact info on same line
+            if contact_parts:
+                canvas.setFont("Helvetica", 9)  # Smaller contact info
+                canvas.setFillColor(HexColor("#4682B4"))  # Blue for header contact
+                contact_text = " | ".join(contact_parts)
+                canvas.drawRightString(7.5*inch, 10.2*inch, contact_text)
+            
+            # Add horizontal bar
+            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setLineWidth(1)
+            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)
+            
+            canvas.restoreState()
+            add_footer(canvas, doc)  # Also add footer
+        
         def add_footer(canvas, doc):
-            """Add footer with website and page number"""
+            """Add footer with website link and page number"""
             canvas.saveState()
             canvas.setFont("Helvetica", 8)
-            canvas.setFillColor(HexColor("#666666"))
+            canvas.setFillColor(HexColor("#4682B4"))  # Blue color for footer links
             
-            # Add website on left
+            # Add website as clickable link on left
             if website_url:
+                # Create a link annotation for the website
+                canvas.linkURL(website_url, (0.6*inch, 0.3*inch, 0.6*inch + len(website_url)*0.05*inch, 0.4*inch))
                 canvas.drawString(0.6*inch, 0.3*inch, website_url)
             
-            # Add page number on right
+            # Add page number on right in different color
+            canvas.setFillColor(HexColor("#666666"))
             page_num = canvas.getPageNumber()
             canvas.drawRightString(7.5*inch, 0.3*inch, f"Page {page_num}")
             
             canvas.restoreState()
         
-        doc.build(story, onFirstPage=add_footer, onLaterPages=add_footer)
+        doc.build(story, onFirstPage=add_first_page_header, onLaterPages=add_later_page_header)
         return filename
     
     def generate_docx(self, filename: str) -> str:
