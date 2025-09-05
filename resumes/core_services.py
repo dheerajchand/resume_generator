@@ -75,16 +75,16 @@ class ResumeGenerator:
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
-                fontSize=11,
+                fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=1,
+                spaceAfter=6,
                 spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#2C3E50")),
                 spaceAfter=4,
                 spaceBefore=4,
@@ -101,7 +101,7 @@ class ResumeGenerator:
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=11,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=3,
                 leftIndent=12,
@@ -110,7 +110,7 @@ class ResumeGenerator:
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
                 spaceAfter=1,
                 leftIndent=12,
@@ -119,7 +119,7 @@ class ResumeGenerator:
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=1,
                 spaceBefore=2,
@@ -128,7 +128,7 @@ class ResumeGenerator:
             "SubCompetency": ParagraphStyle(
                 "CustomSubCompetency",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 spaceAfter=1,
                 leftIndent=12,
@@ -137,7 +137,7 @@ class ResumeGenerator:
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
                 parent=styles["Normal"],
-                fontSize=8,
+                fontSize=9,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=1,
                 leftIndent=0,
@@ -146,7 +146,7 @@ class ResumeGenerator:
             "Contact": ParagraphStyle(
                 "CustomContact",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
                 alignment=TA_RIGHT,
                 spaceAfter=12,
