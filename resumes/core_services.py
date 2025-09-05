@@ -410,10 +410,10 @@ class ResumeGenerator:
                 canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone)
             
-            # Add horizontal bar (more space from text)
+            # Add horizontal bar (closer to header text)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.1*inch, 7.5*inch, 10.1*inch)  # More space below header
+            canvas.line(0.6*inch, 10.3*inch, 7.5*inch, 10.3*inch)  # Closer to header text
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
