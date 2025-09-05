@@ -41,8 +41,8 @@ class ResumeGenerator:
         """Create paragraph styles based on config"""
         styles = getSampleStyleSheet()
         
-        # Get colors from config
-        colors = self.config.get("colors", {})
+        # Get colors from config (color schemes have colors directly, not wrapped in "colors")
+        colors = self.config if self.config else {}
         
         custom_styles = {
             "Name": ParagraphStyle(
@@ -814,7 +814,12 @@ class ResumeManager:
             return False
         
         try:
-            generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None)
+            # Load color scheme
+            color_scheme_file = Path("color_schemes") / f"{color_scheme}.json"
+            if color_scheme_file.exists():
+                generator = ResumeGenerator(str(data_file), str(color_scheme_file))
+            else:
+                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None)
             
             # Create output directory
             output_path = Path(output_dir) / version / color_scheme / format_type
