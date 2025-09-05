@@ -196,7 +196,7 @@ class ResumeGenerator:
         story.append(Spacer(1, 1.2*inch))
         
         # Add extra space for subsequent pages to prevent bar interference
-        story.append(Spacer(1, 0.3*inch))
+        story.append(Spacer(1, 0.2*inch))
         
         # Add space before first section (reduced for smaller header)
         story.append(Spacer(1, 0.05*inch))
@@ -428,10 +428,10 @@ class ResumeGenerator:
                 canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
             
-            # Add horizontal bar (with proper margin to avoid body text interference)
+            # Add horizontal bar (closer to header text)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)  # Lower position with margin
+            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)  # Back to closer position
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
