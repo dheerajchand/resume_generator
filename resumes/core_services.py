@@ -83,20 +83,20 @@ class ResumeGenerator:
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
-                parent=styles["Heading3"],
-                fontSize=10,
+                parent=styles["Normal"],
+                fontSize=9,
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#2C3E50")),
                 spaceAfter=4,
-                spaceBefore=8,
-                fontName="Helvetica-Bold",
+                spaceBefore=4,
+                fontName="Helvetica",
             ),
             "Company": ParagraphStyle(
                 "CustomCompany",
-                parent=styles["Normal"],
-                fontSize=9,
-                textColor=HexColor(colors.get("COMPANY_COLOR", "#34495E")),
+                parent=styles["Heading3"],
+                fontSize=10,
+                textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),
                 spaceAfter=2,
-                fontName="Helvetica",
+                fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
@@ -172,13 +172,16 @@ class ResumeGenerator:
             story.append(Paragraph(summary, self.styles["Body"]))
             story.append(Spacer(1, 6))
         
-        # Key Achievements - NEW SECTION (moved before Professional Experience)
-        key_achievements = self.data.get("key_achievements", [])
-        if key_achievements:
-            story.append(Paragraph("KEY ACHIEVEMENTS", self.styles["SectionHeader"]))
-            for achievement in key_achievements:
-                story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
-            story.append(Spacer(1, 6))
+        # Key Achievements and Impact - moved up from bottom
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            story.append(Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"]))
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    story.append(Paragraph(category, self.styles["JobTitle"]))
+                    for achievement in achievement_list:
+                        story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
+                    story.append(Spacer(1, 6))
         
         # Competencies
         competencies = self.data.get("competencies", {})
@@ -281,16 +284,6 @@ class ResumeGenerator:
                 
                 story.append(Spacer(1, 6))
         
-        # Achievements
-        achievements = self.data.get("achievements", {})
-        if achievements:
-            story.append(Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"]))
-            for category, achievement_list in achievements.items():
-                if isinstance(achievement_list, list):
-                    story.append(Paragraph(category, self.styles["JobTitle"]))
-                    for achievement in achievement_list:
-                        story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
-                    story.append(Spacer(1, 6))
         
         doc.build(story)
         return filename
