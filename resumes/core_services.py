@@ -77,8 +77,8 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=11,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=6,
-                spaceBefore=12,
+                spaceAfter=4,
+                spaceBefore=8,
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
@@ -114,6 +114,33 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
                 spaceAfter=4,
                 leftIndent=12,
+                fontName="Helvetica",
+            ),
+            "MainCompetency": ParagraphStyle(
+                "CustomMainCompetency",
+                parent=styles["Normal"],
+                fontSize=10,
+                textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
+                spaceAfter=2,
+                spaceBefore=4,
+                fontName="Helvetica-Bold",
+            ),
+            "SubCompetency": ParagraphStyle(
+                "CustomSubCompetency",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
+                spaceAfter=1,
+                leftIndent=12,
+                fontName="Helvetica-Bold",
+            ),
+            "CompetencyDetail": ParagraphStyle(
+                "CustomCompetencyDetail",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
+                spaceAfter=2,
+                leftIndent=24,
                 fontName="Helvetica",
             ),
             "Contact": ParagraphStyle(
@@ -187,20 +214,32 @@ class ResumeGenerator:
             story.append(Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"]))
             for category, achievement_list in achievements.items():
                 if isinstance(achievement_list, list):
-                    story.append(Paragraph(category, self.styles["JobTitle"]))
+                    story.append(Paragraph(category, self.styles["MainCompetency"]))
                     for achievement in achievement_list:
                         story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
-                    story.append(Spacer(1, 6))
+                    story.append(Spacer(1, 4))  # Reduced spacing
         
-        # Competencies
+        # Competencies in compact inline format for maximum space efficiency
         competencies = self.data.get("competencies", {})
         if competencies:
             story.append(Paragraph("CORE COMPETENCIES", self.styles["SectionHeader"]))
-            for category, skills in competencies.items():
-                if isinstance(skills, list):
-                    skill_text = " • ".join(skills)
-                    story.append(Paragraph(f"<b>{category}:</b> {skill_text}", self.styles["Body"]))
-            story.append(Spacer(1, 6))
+            
+            for main_category, sub_skills in competencies.items():
+                if isinstance(sub_skills, list):
+                    # Build compact inline content
+                    sub_content = []
+                    for skill_line in sub_skills:
+                        if ": " in skill_line:
+                            sub_category, details = skill_line.split(": ", 1)
+                            sub_content.append(f"<i>{sub_category}</i> ({details})")
+                        else:
+                            sub_content.append(skill_line)
+                    
+                    # Create single paragraph with main category and all sub-skills
+                    full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
+                    story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
+            
+            story.append(Spacer(1, 4))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -226,7 +265,7 @@ class ResumeGenerator:
                 job_unit.append(Paragraph(company_line, self.styles["Company"]))
                 
                 if job.get("subtitle"):
-                    job_unit.append(Paragraph(job["subtitle"], self.styles["Body"]))
+                    job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
                 
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
@@ -251,18 +290,18 @@ class ResumeGenerator:
                 if dates:
                     title_line += f" ({dates})"
                 
-                story.append(Paragraph(title_line, self.styles["JobTitle"]))
+                story.append(Paragraph(title_line, self.styles["SubCompetency"]))
                 
                 if description:
-                    story.append(Paragraph(description, self.styles["Body"]))
+                    story.append(Paragraph(description, self.styles["CompetencyDetail"]))
                 
                 if technologies:
                     tech_text = "Technologies: " + ", ".join(technologies)
-                    story.append(Paragraph(tech_text, self.styles["Body"]))
+                    story.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
                 
                 if impact:
                     impact_text = f"Impact: {impact}"
-                    story.append(Paragraph(impact_text, self.styles["Body"]))
+                    story.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
                 
                 story.append(Spacer(1, 6))
         
