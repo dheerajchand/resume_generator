@@ -1,0 +1,750 @@
+#!/usr/bin/env python3
+"""
+Core Resume Generation Services
+Consolidated functionality for resume generation across all formats
+"""
+
+import json
+import os
+from pathlib import Path
+from typing import Dict, List, Optional, Any
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.lib.colors import HexColor, black, white
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
+from docx import Document
+from docx.shared import Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+import tempfile
+
+
+class ResumeGenerator:
+    """Core resume generator supporting all formats"""
+    
+    def __init__(self, data_file: str, config_file: Optional[str] = None):
+        self.data = self._load_json(data_file)
+        self.config = self._load_json(config_file) if config_file else {}
+        self.styles = self._create_styles()
+    
+    def _load_json(self, file_path: str) -> Dict[str, Any]:
+        """Load JSON data from file"""
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            raise Exception(f"Error loading {file_path}: {e}")
+    
+    def _create_styles(self) -> Dict[str, ParagraphStyle]:
+        """Create paragraph styles based on config"""
+        styles = getSampleStyleSheet()
+        
+        # Get colors from config
+        colors = self.config.get("colors", {})
+        
+        custom_styles = {
+            "Name": ParagraphStyle(
+                "CustomName",
+                parent=styles["Heading1"],
+                fontSize=24,
+                textColor=HexColor(colors.get("NAME_COLOR", "#228B22")),
+                alignment=TA_CENTER,
+                spaceAfter=6,
+            ),
+            "Title": ParagraphStyle(
+                "CustomTitle",
+                parent=styles["Heading2"],
+                fontSize=14,
+                textColor=HexColor(colors.get("TITLE_COLOR", "#B8860B")),
+                alignment=TA_CENTER,
+                spaceAfter=12,
+            ),
+            "SectionHeader": ParagraphStyle(
+                "CustomSectionHeader",
+                parent=styles["Heading2"],
+                fontSize=12,
+                textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#B8860B")),
+                spaceAfter=6,
+                spaceBefore=12,
+            ),
+            "JobTitle": ParagraphStyle(
+                "CustomJobTitle",
+                parent=styles["Heading3"],
+                fontSize=11,
+                textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#722F37")),
+                spaceAfter=3,
+            ),
+            "Body": ParagraphStyle(
+                "CustomBody",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#333333")),
+                spaceAfter=3,
+            ),
+            "Contact": ParagraphStyle(
+                "CustomContact",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#333333")),
+                alignment=TA_CENTER,
+                spaceAfter=6,
+            ),
+        }
+        
+        return custom_styles
+    
+    def generate_pdf(self, filename: str) -> str:
+        """Generate PDF resume"""
+        doc = SimpleDocTemplate(filename, pagesize=letter, 
+                              rightMargin=0.6*inch, leftMargin=0.6*inch,
+                              topMargin=0.6*inch, bottomMargin=0.6*inch)
+        story = []
+        
+        # Personal info
+        personal_info = self.data.get("personal_info", {})
+        story.append(Paragraph(personal_info.get("name", "NAME"), self.styles["Name"]))
+        
+        # Contact info
+        contact_parts = []
+        if personal_info.get("phone"):
+            contact_parts.append(personal_info["phone"])
+        if personal_info.get("email"):
+            contact_parts.append(personal_info["email"])
+        if personal_info.get("website"):
+            contact_parts.append(personal_info["website"])
+        if personal_info.get("linkedin"):
+            contact_parts.append(personal_info["linkedin"])
+        if personal_info.get("location"):
+            contact_parts.append(personal_info["location"])
+        
+        if contact_parts:
+            story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
+        
+        story.append(Spacer(1, 12))
+        
+        # Summary
+        summary = self.data.get("summary", "")
+        if summary:
+            story.append(Paragraph("PROFESSIONAL SUMMARY", self.styles["SectionHeader"]))
+            story.append(Paragraph(summary, self.styles["Body"]))
+            story.append(Spacer(1, 6))
+        
+        # Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            story.append(Paragraph("CORE COMPETENCIES", self.styles["SectionHeader"]))
+            for category, skills in competencies.items():
+                if isinstance(skills, list):
+                    skill_text = " • ".join(skills)
+                    story.append(Paragraph(f"<b>{category}:</b> {skill_text}", self.styles["Body"]))
+            story.append(Spacer(1, 6))
+        
+        # Experience
+        experience = self.data.get("experience", [])
+        if experience:
+            story.append(Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"]))
+            for job in experience:
+                job_title = job.get("title", "")
+                company = job.get("company", "")
+                location = job.get("location", "")
+                dates = job.get("dates", "")
+                
+                title_line = f"{job_title}"
+                if company:
+                    title_line += f" - {company}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                story.append(Paragraph(title_line, self.styles["JobTitle"]))
+                
+                if job.get("subtitle"):
+                    story.append(Paragraph(job["subtitle"], self.styles["Body"]))
+                
+                responsibilities = job.get("responsibilities", [])
+                for resp in responsibilities:
+                    story.append(Paragraph(f"• {resp}", self.styles["Body"]))
+                
+                story.append(Spacer(1, 6))
+        
+        # Projects
+        projects = self.data.get("projects", [])
+        if projects:
+            story.append(Paragraph("KEY PROJECTS", self.styles["SectionHeader"]))
+            for project in projects:
+                project_name = project.get("name", "")
+                dates = project.get("dates", "")
+                description = project.get("description", "")
+                technologies = project.get("technologies", [])
+                impact = project.get("impact", "")
+                
+                title_line = project_name
+                if dates:
+                    title_line += f" ({dates})"
+                
+                story.append(Paragraph(title_line, self.styles["JobTitle"]))
+                
+                if description:
+                    story.append(Paragraph(description, self.styles["Body"]))
+                
+                if technologies:
+                    tech_text = "Technologies: " + ", ".join(technologies)
+                    story.append(Paragraph(tech_text, self.styles["Body"]))
+                
+                if impact:
+                    impact_text = f"Impact: {impact}"
+                    story.append(Paragraph(impact_text, self.styles["Body"]))
+                
+                story.append(Spacer(1, 6))
+        
+        # Education
+        education = self.data.get("education", [])
+        if education:
+            story.append(Paragraph("EDUCATION", self.styles["SectionHeader"]))
+            for edu in education:
+                degree = edu.get("degree", "")
+                institution = edu.get("institution", "")
+                location = edu.get("location", "")
+                dates = edu.get("dates", "")
+                gpa = edu.get("gpa", "")
+                honors = edu.get("honors", "")
+                
+                title_line = degree
+                if institution:
+                    title_line += f" - {institution}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                story.append(Paragraph(title_line, self.styles["JobTitle"]))
+                
+                if gpa:
+                    story.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
+                
+                if honors:
+                    story.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
+                
+                story.append(Spacer(1, 6))
+        
+        # Achievements
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            story.append(Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"]))
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    story.append(Paragraph(category, self.styles["JobTitle"]))
+                    for achievement in achievement_list:
+                        story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
+                    story.append(Spacer(1, 6))
+        
+        doc.build(story)
+        return filename
+    
+    def generate_docx(self, filename: str) -> str:
+        """Generate DOCX resume"""
+        doc = Document()
+        
+        # Personal info
+        personal_info = self.data.get("personal_info", {})
+        
+        # Name
+        name_para = doc.add_paragraph()
+        name_run = name_para.add_run(personal_info.get("name", "NAME"))
+        name_run.font.size = Inches(0.2)
+        name_run.font.bold = True
+        name_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        
+        # Contact info
+        contact_parts = []
+        if personal_info.get("phone"):
+            contact_parts.append(personal_info["phone"])
+        if personal_info.get("email"):
+            contact_parts.append(personal_info["email"])
+        if personal_info.get("website"):
+            contact_parts.append(personal_info["website"])
+        if personal_info.get("linkedin"):
+            contact_parts.append(personal_info["linkedin"])
+        if personal_info.get("location"):
+            contact_parts.append(personal_info["location"])
+        
+        if contact_parts:
+            contact_para = doc.add_paragraph(" | ".join(contact_parts))
+            contact_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        
+        # Summary
+        summary = self.data.get("summary", "")
+        if summary:
+            doc.add_heading("PROFESSIONAL SUMMARY", level=2)
+            doc.add_paragraph(summary)
+        
+        # Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            doc.add_heading("CORE COMPETENCIES", level=2)
+            for category, skills in competencies.items():
+                if isinstance(skills, list):
+                    skill_text = " • ".join(skills)
+                    doc.add_paragraph(f"{category}: {skill_text}")
+        
+        # Experience
+        experience = self.data.get("experience", [])
+        if experience:
+            doc.add_heading("PROFESSIONAL EXPERIENCE", level=2)
+            for job in experience:
+                job_title = job.get("title", "")
+                company = job.get("company", "")
+                location = job.get("location", "")
+                dates = job.get("dates", "")
+                
+                title_line = f"{job_title}"
+                if company:
+                    title_line += f" - {company}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                doc.add_heading(title_line, level=3)
+                
+                if job.get("subtitle"):
+                    doc.add_paragraph(job["subtitle"])
+                
+                responsibilities = job.get("responsibilities", [])
+                for resp in responsibilities:
+                    doc.add_paragraph(f"• {resp}")
+        
+        # Projects
+        projects = self.data.get("projects", [])
+        if projects:
+            doc.add_heading("KEY PROJECTS", level=2)
+            for project in projects:
+                project_name = project.get("name", "")
+                dates = project.get("dates", "")
+                description = project.get("description", "")
+                technologies = project.get("technologies", [])
+                impact = project.get("impact", "")
+                
+                title_line = project_name
+                if dates:
+                    title_line += f" ({dates})"
+                
+                doc.add_heading(title_line, level=3)
+                
+                if description:
+                    doc.add_paragraph(description)
+                
+                if technologies:
+                    doc.add_paragraph(f"Technologies: {', '.join(technologies)}")
+                
+                if impact:
+                    doc.add_paragraph(f"Impact: {impact}")
+        
+        # Education
+        education = self.data.get("education", [])
+        if education:
+            doc.add_heading("EDUCATION", level=2)
+            for edu in education:
+                degree = edu.get("degree", "")
+                institution = edu.get("institution", "")
+                location = edu.get("location", "")
+                dates = edu.get("dates", "")
+                gpa = edu.get("gpa", "")
+                honors = edu.get("honors", "")
+                
+                title_line = degree
+                if institution:
+                    title_line += f" - {institution}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                doc.add_heading(title_line, level=3)
+                
+                if gpa:
+                    doc.add_paragraph(f"GPA: {gpa}")
+                
+                if honors:
+                    doc.add_paragraph(f"Honors: {honors}")
+        
+        # Achievements
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            doc.add_heading("KEY ACHIEVEMENTS AND IMPACT", level=2)
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    doc.add_heading(category, level=3)
+                    for achievement in achievement_list:
+                        doc.add_paragraph(f"• {achievement}")
+        
+        doc.save(filename)
+        return filename
+    
+    def generate_rtf(self, filename: str) -> str:
+        """Generate RTF resume"""
+        # RTF is a text format, so we'll create a simple text version
+        content = []
+        
+        # Personal info
+        personal_info = self.data.get("personal_info", {})
+        content.append(f"\\b {personal_info.get('name', 'NAME')}\\b0")
+        content.append("")
+        
+        # Contact info
+        contact_parts = []
+        if personal_info.get("phone"):
+            contact_parts.append(personal_info["phone"])
+        if personal_info.get("email"):
+            contact_parts.append(personal_info["email"])
+        if personal_info.get("website"):
+            contact_parts.append(personal_info["website"])
+        if personal_info.get("linkedin"):
+            contact_parts.append(personal_info["linkedin"])
+        if personal_info.get("location"):
+            contact_parts.append(personal_info["location"])
+        
+        if contact_parts:
+            content.append(" | ".join(contact_parts))
+        
+        content.append("")
+        
+        # Summary
+        summary = self.data.get("summary", "")
+        if summary:
+            content.append("\\b PROFESSIONAL SUMMARY\\b0")
+            content.append(summary)
+            content.append("")
+        
+        # Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            content.append("\\b CORE COMPETENCIES\\b0")
+            for category, skills in competencies.items():
+                if isinstance(skills, list):
+                    skill_text = " • ".join(skills)
+                    content.append(f"{category}: {skill_text}")
+            content.append("")
+        
+        # Experience
+        experience = self.data.get("experience", [])
+        if experience:
+            content.append("\\b PROFESSIONAL EXPERIENCE\\b0")
+            for job in experience:
+                job_title = job.get("title", "")
+                company = job.get("company", "")
+                location = job.get("location", "")
+                dates = job.get("dates", "")
+                
+                title_line = f"{job_title}"
+                if company:
+                    title_line += f" - {company}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                content.append(f"\\b {title_line}\\b0")
+                
+                if job.get("subtitle"):
+                    content.append(job["subtitle"])
+                
+                responsibilities = job.get("responsibilities", [])
+                for resp in responsibilities:
+                    content.append(f"• {resp}")
+                
+                content.append("")
+        
+        # Projects
+        projects = self.data.get("projects", [])
+        if projects:
+            content.append("\\b KEY PROJECTS\\b0")
+            for project in projects:
+                project_name = project.get("name", "")
+                dates = project.get("dates", "")
+                description = project.get("description", "")
+                technologies = project.get("technologies", [])
+                impact = project.get("impact", "")
+                
+                title_line = project_name
+                if dates:
+                    title_line += f" ({dates})"
+                
+                content.append(f"\\b {title_line}\\b0")
+                
+                if description:
+                    content.append(description)
+                
+                if technologies:
+                    content.append(f"Technologies: {', '.join(technologies)}")
+                
+                if impact:
+                    content.append(f"Impact: {impact}")
+                
+                content.append("")
+        
+        # Education
+        education = self.data.get("education", [])
+        if education:
+            content.append("\\b EDUCATION\\b0")
+            for edu in education:
+                degree = edu.get("degree", "")
+                institution = edu.get("institution", "")
+                location = edu.get("location", "")
+                dates = edu.get("dates", "")
+                gpa = edu.get("gpa", "")
+                honors = edu.get("honors", "")
+                
+                title_line = degree
+                if institution:
+                    title_line += f" - {institution}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                content.append(f"\\b {title_line}\\b0")
+                
+                if gpa:
+                    content.append(f"GPA: {gpa}")
+                
+                if honors:
+                    content.append(f"Honors: {honors}")
+                
+                content.append("")
+        
+        # Achievements
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            content.append("\\b KEY ACHIEVEMENTS AND IMPACT\\b0")
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    content.append(f"\\b {category}\\b0")
+                    for achievement in achievement_list:
+                        content.append(f"• {achievement}")
+                    content.append("")
+        
+        # Write RTF file
+        rtf_content = "{\\rtf1\\ansi\\deff0 " + "\\par ".join(content) + "}"
+        
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(rtf_content)
+        
+        return filename
+    
+    def generate_markdown(self, filename: str) -> str:
+        """Generate Markdown resume"""
+        content = []
+        
+        # Personal info
+        personal_info = self.data.get("personal_info", {})
+        content.append(f"# {personal_info.get('name', 'NAME')}")
+        content.append("")
+        
+        # Contact information
+        contact_parts = []
+        if personal_info.get('phone'):
+            contact_parts.append(f"**Phone:** {personal_info['phone']}")
+        if personal_info.get('email'):
+            contact_parts.append(f"**Email:** {personal_info['email']}")
+        if personal_info.get('website'):
+            contact_parts.append(f"**Website:** {personal_info['website']}")
+        if personal_info.get('linkedin'):
+            contact_parts.append(f"**LinkedIn:** {personal_info['linkedin']}")
+        if personal_info.get('location'):
+            contact_parts.append(f"**Location:** {personal_info['location']}")
+        
+        if contact_parts:
+            content.append(" | ".join(contact_parts))
+            content.append("")
+        
+        # Summary
+        summary = self.data.get("summary", "")
+        if summary:
+            content.append("## Professional Summary")
+            content.append("")
+            content.append(summary)
+            content.append("")
+        
+        # Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            content.append("## Core Competencies")
+            content.append("")
+            for category, skills in competencies.items():
+                content.append(f"### {category}")
+                if isinstance(skills, list):
+                    for skill in skills:
+                        content.append(f"- {skill}")
+                content.append("")
+        
+        # Experience
+        experience = self.data.get("experience", [])
+        if experience:
+            content.append("## Professional Experience")
+            content.append("")
+            for job in experience:
+                content.append(f"### {job.get('title', '')}")
+                company_info = job.get('company', '')
+                if job.get('location'):
+                    company_info += f" | {job['location']}"
+                if job.get('dates'):
+                    company_info += f" | {job['dates']}"
+                content.append(f"**{company_info}**")
+                content.append("")
+                
+                if job.get('subtitle'):
+                    content.append(f"*{job['subtitle']}*")
+                    content.append("")
+                
+                responsibilities = job.get('responsibilities', [])
+                if responsibilities:
+                    for resp in responsibilities:
+                        content.append(f"- {resp}")
+                content.append("")
+        
+        # Projects
+        projects = self.data.get("projects", [])
+        if projects:
+            content.append("## Key Projects")
+            content.append("")
+            for project in projects:
+                content.append(f"### {project.get('name', '')}")
+                if project.get('dates'):
+                    content.append(f"*{project['dates']}*")
+                    content.append("")
+                if project.get('description'):
+                    content.append(f"{project['description']}")
+                    content.append("")
+                if project.get('technologies'):
+                    content.append(f"**Technologies:** {', '.join(project['technologies'])}")
+                if project.get('impact'):
+                    content.append(f"**Impact:** {project['impact']}")
+                content.append("")
+        
+        # Education
+        education = self.data.get("education", [])
+        if education:
+            content.append("## Education")
+            content.append("")
+            for edu in education:
+                content.append(f"### {edu.get('degree', '')}")
+                institution_info = edu.get('institution', '')
+                if edu.get('location'):
+                    institution_info += f" | {edu['location']}"
+                if edu.get('dates'):
+                    institution_info += f" | {edu['dates']}"
+                content.append(f"**{institution_info}**")
+                if edu.get('gpa'):
+                    content.append(f"**GPA:** {edu['gpa']}")
+                if edu.get('honors'):
+                    content.append(f"**Honors:** {edu['honors']}")
+                content.append("")
+        
+        # Achievements
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            content.append("## Key Achievements and Impact")
+            content.append("")
+            for category, achievement_list in achievements.items():
+                content.append(f"### {category}")
+                if isinstance(achievement_list, list):
+                    for achievement in achievement_list:
+                        content.append(f"- {achievement}")
+                content.append("")
+        
+        # Footer
+        content.append("---")
+        content.append("")
+        content.append("*Generated using Resume Generator System*")
+        
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("\n".join(content))
+        
+        return filename
+
+
+class ResumeManager:
+    """Manages resume generation with color schemes and formats"""
+    
+    def __init__(self):
+        self.versions = {
+            "research": "dheeraj_chand_research_focused",
+            "technical": "dheeraj_chand_technical_detailed", 
+            "comprehensive": "dheeraj_chand_comprehensive_full",
+            "consulting": "dheeraj_chand_consulting_minimal",
+            "software": "dheeraj_chand_software_engineer",
+            "marketing": "dheeraj_chand_product_marketing"
+        }
+        
+        self.color_schemes = [
+            "default_professional",
+            "corporate_blue", 
+            "modern_tech",
+            "satellite_imagery",
+            "terrain_mapping",
+            "cartographic_professional",
+            "topographic_classic"
+        ]
+        
+        self.formats = ["pdf", "docx", "rtf", "md"]
+    
+    def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs") -> bool:
+        """Generate a single resume with specified parameters"""
+        if version not in self.versions:
+            return False
+        
+        input_basename = self.versions[version]
+        input_dir = Path("inputs") / input_basename
+        
+        if not input_dir.exists():
+            return False
+        
+        data_file = input_dir / "resume_data.json"
+        config_file = input_dir / "config.json"
+        
+        if not data_file.exists():
+            return False
+        
+        try:
+            generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None)
+            
+            # Create output directory
+            output_path = Path(output_dir) / version / color_scheme / format_type
+            output_path.mkdir(parents=True, exist_ok=True)
+            
+            # Generate file
+            filename = output_path / f"dheeraj_chand_{version}_{color_scheme}.{format_type}"
+            
+            if format_type == "pdf":
+                generator.generate_pdf(str(filename))
+            elif format_type == "docx":
+                generator.generate_docx(str(filename))
+            elif format_type == "rtf":
+                generator.generate_rtf(str(filename))
+            elif format_type == "md":
+                generator.generate_markdown(str(filename))
+            else:
+                return False
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error generating {version} {color_scheme} {format_type}: {e}")
+            return False
+    
+    def generate_all_combinations(self, output_dir: str = "outputs") -> Dict[str, int]:
+        """Generate all combinations of versions, color schemes, and formats"""
+        results = {"success": 0, "failed": 0}
+        
+        for version in self.versions:
+            for color_scheme in self.color_schemes:
+                for format_type in self.formats:
+                    if self.generate_single_resume(version, color_scheme, format_type, output_dir):
+                        results["success"] += 1
+                    else:
+                        results["failed"] += 1
+        
+        return results

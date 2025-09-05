@@ -39,8 +39,8 @@
   "experience": [
     {
       "title": "PARTNER & STRATEGIC CONSULTANT",
-      "company": "Your Company Name, Your City, ST",
-      "dates": "2005 – Present",
+      "company": "Siege Analytics, Washington, DC",
+      "dates": "January 2014 – Present",
       "subtitle": "Market Research, Product Strategy & Go-to-Market Leadership",
       "responsibilities": [
         "Led comprehensive market intelligence and competitive analysis projects for B2B technology platforms, delivering actionable insights that shaped product positioning and messaging strategies",
@@ -49,6 +49,102 @@
         "Conducted extensive customer research and segmentation analysis using survey methodology and behavioral data to develop targeted buyer personas and messaging frameworks",
         "Collaborated with cross-functional teams including engineering, sales, and customer success to align product strategy with market demands and customer feedback",
         "Built comprehensive competitive intelligence frameworks analyzing market trends, pricing strategies, and feature differentiation across political technology and data analytics sectors"
+      ]
+    },
+    {
+      "title": "PRINCIPAL MARKETING CONSULTANT",
+      "company": "Clarity and Rigour, Washington, DC",
+      "dates": "2012 – 2014",
+      "subtitle": "Data-Driven Marketing and Strategy",
+      "responsibilities": [
+        "Developed data-driven marketing strategies for political and advocacy campaigns",
+        "Created audience segmentation and targeting frameworks using demographic analysis",
+        "Led marketing analytics initiatives for electoral and policy campaigns",
+        "Built client relationships and delivered marketing strategy recommendations"
+      ]
+    },
+    {
+      "title": "DIRECTOR OF MARKETING",
+      "company": "Helm, Washington, DC",
+      "dates": "2010 – 2012",
+      "subtitle": "Product Marketing and Strategy",
+      "responsibilities": [
+        "Led product marketing initiatives for data-driven political technology solutions",
+        "Developed go-to-market strategies for campaign management and voter targeting platforms",
+        "Managed marketing teams and coordinated cross-functional product launches",
+        "Created marketing materials and presentations for diverse stakeholder audiences"
+      ]
+    },
+    {
+      "title": "SENIOR MARKETING ANALYST",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2008 – 2010",
+      "subtitle": "Campaign Marketing and Analytics",
+      "responsibilities": [
+        "Developed marketing strategies and voter targeting approaches for political campaigns",
+        "Created demographic analysis and audience segmentation for campaign messaging",
+        "Analyzed campaign performance data to optimize marketing effectiveness",
+        "Collaborated with creative teams to integrate data insights into campaign materials"
+      ]
+    },
+    {
+      "title": "MARKETING COORDINATOR",
+      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "dates": "2006 – 2008",
+      "subtitle": "Political Marketing and Communications",
+      "responsibilities": [
+        "Coordinated marketing and communications for progressive political initiatives",
+        "Developed messaging strategies based on research and demographic analysis",
+        "Created marketing materials and coordinated campaign communications",
+        "Supported marketing operations for political campaigns and advocacy efforts"
+      ]
+    },
+    {
+      "title": "MARKETING SPECIALIST",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "2004 – 2006",
+      "subtitle": "Technology Marketing and Product Promotion",
+      "responsibilities": [
+        "Developed marketing strategies for political technology products and services",
+        "Created marketing materials and product documentation for campaign tools",
+        "Coordinated product launches and marketing campaigns for advocacy organizations",
+        "Supported sales teams with marketing materials and client presentations"
+      ]
+    },
+    {
+      "title": "COMMUNICATIONS COORDINATOR",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "2002 – 2004",
+      "subtitle": "Nonprofit Marketing and Communications",
+      "responsibilities": [
+        "Developed marketing and communications strategies for social justice organizations",
+        "Created marketing materials and communications for community organizing efforts",
+        "Coordinated outreach and engagement initiatives for advocacy campaigns",
+        "Supported nonprofit organizations with marketing and communications guidance"
+      ]
+    },
+    {
+      "title": "RESEARCH COORDINATOR",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "2001 – 2002",
+      "subtitle": "Political Research and Marketing Support",
+      "responsibilities": [
+        "Coordinated research projects supporting political marketing and campaign strategy",
+        "Developed data analysis frameworks for voter research and targeting",
+        "Created research reports and presentations for marketing and campaign teams",
+        "Supported senior researchers with data analysis and client communications"
+      ]
+    },
+    {
+      "title": "FIELD COORDINATOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "2000 – 2001",
+      "subtitle": "Field Operations and Campaign Support",
+      "responsibilities": [
+        "Coordinated field operations supporting political campaigns and research projects",
+        "Developed data collection systems for campaign field work and voter outreach",
+        "Trained field staff on campaign messaging and data collection protocols",
+        "Analyzed field data to inform campaign strategy and marketing approaches"
       ]
     }
   ],
@@ -62,7 +158,7 @@
   "_metadata": {
     "version": "product_marketing",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.268233",
+    "created": "2025-09-04T14:30:26.914984",
     "description": "Product marketing focused version emphasizing market research, go-to-market strategy, and customer insights"
   }
 }

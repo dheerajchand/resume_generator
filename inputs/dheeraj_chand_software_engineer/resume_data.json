@@ -33,8 +33,8 @@
   "experience": [
     {
       "title": "PARTNER & SENIOR SOFTWARE ENGINEER",
-      "company": "Your Company Name, Your City, ST",
-      "dates": "2005 – Present",
+      "company": "Siege Analytics, Washington, DC",
+      "dates": "January 2014 – Present",
       "subtitle": "Geospatial Platform Architecture and Full-Stack Development",
       "responsibilities": [
         "Architected and engineered redistricting platform serving thousands of analysts with real-time collaborative editing, Census integration, and legal compliance analysis",
@@ -43,6 +43,90 @@
         "Implemented advanced spatial clustering algorithms achieving 88% improvement in analytical targeting efficacy for political applications",
         "Created fraud detection systems processing multi-terabyte campaign finance datasets with real-time alerting capabilities",
         "Led technical architecture decisions integrating ESRI, OSGeo, and SAFE FME technologies for Fortune 500 and political clients"
+      ]
+    },
+    {
+      "title": "PRINCIPAL SOFTWARE ENGINEER",
+      "company": "Clarity and Rigour, Washington, DC",
+      "dates": "2012 – 2014",
+      "subtitle": "Geospatial Solutions and Software Development",
+      "responsibilities": [
+        "Developed geospatial analysis frameworks and mapping applications for electoral research",
+        "Built custom visualization tools and interactive dashboards for client presentations",
+        "Architected data processing pipelines for large-scale demographic and geographic datasets",
+        "Created web-based mapping applications using JavaScript, OpenLayers, and PostGIS"
+      ]
+    },
+    {
+      "title": "DIRECTOR OF DATA PRODUCTS",
+      "company": "Helm, Washington, DC",
+      "dates": "2010 – 2012",
+      "subtitle": "Data Product Development and Engineering Leadership",
+      "responsibilities": [
+        "Led development of data-driven solutions and platform architecture for political organizations",
+        "Managed cross-functional engineering teams building campaign management and voter targeting systems",
+        "Designed and implemented scalable data platforms using Python, Django, and PostgreSQL",
+        "Built RESTful APIs and microservices for campaign data integration"
+      ]
+    },
+    {
+      "title": "SENIOR SOFTWARE ENGINEER",
+      "company": "GSD&M, Austin, TX",
+      "dates": "2008 – 2010",
+      "subtitle": "Campaign Technology and Analytics Development",
+      "responsibilities": [
+        "Developed voter targeting models and demographic analysis tools using Python and R",
+        "Built web applications for campaign data visualization and reporting",
+        "Created data integration systems connecting multiple campaign data sources",
+        "Implemented machine learning algorithms for voter behavior prediction"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "2004 – 2006",
+      "subtitle": "Political Technology Development",
+      "responsibilities": [
+        "Developed software solutions for political campaigns and advocacy groups using PHP and JavaScript",
+        "Built web applications for voter engagement and campaign management",
+        "Integrated third-party APIs and data sources for campaign tools",
+        "Collaborated with political strategists to translate requirements into technical solutions"
+      ]
+    },
+    {
+      "title": "TECHNOLOGY MANAGER",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "2002 – 2004",
+      "subtitle": "Nonprofit Technology Integration and Development",
+      "responsibilities": [
+        "Developed data management systems and web applications for social justice organizations",
+        "Built custom applications for community engagement and advocacy using PHP and MySQL",
+        "Provided technical training and support to nonprofit staff",
+        "Integrated technology solutions within organizational frameworks"
+      ]
+    },
+    {
+      "title": "PROGRAMMER",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "2001 – 2002",
+      "subtitle": "Political Research and Data Analysis Tools",
+      "responsibilities": [
+        "Developed data analysis tools for political polling and research using Python and R",
+        "Built statistical models and data visualization tools for research presentations",
+        "Created automated reporting systems for survey data analysis",
+        "Supported senior researchers with technical analysis and data processing"
+      ]
+    },
+    {
+      "title": "FIELD DIRECTOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "2000 – 2001",
+      "subtitle": "Political Field Operations and Data Management",
+      "responsibilities": [
+        "Developed data collection and management systems for field operations",
+        "Built databases and reporting tools for campaign field work",
+        "Trained field staff on data collection protocols and quality control",
+        "Analyzed field data to inform campaign strategy and research findings"
       ]
     }
   ],
@@ -57,7 +141,7 @@
   "_metadata": {
     "version": "software_engineer",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.268009",
+    "created": "2025-09-04T14:30:26.914687",
     "description": "Software engineer focused version emphasizing technical skills and platform development"
   }
 }

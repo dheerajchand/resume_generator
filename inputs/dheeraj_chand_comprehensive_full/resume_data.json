@@ -33,7 +33,7 @@
   "experience": [
     {
       "title": "PARTNER",
-      "company": "Your Company Name, Your City, ST",
+      "company": "Siege Analytics, Washington, DC",
       "dates": "2005 – Present",
       "subtitle": "Data, Technology and Strategy Consulting",
       "responsibilities": [
@@ -43,6 +43,103 @@
         "Develop custom analytical tools and algorithms for fraud detection and spatial clustering",
         "Manage complex client relationships across political, nonprofit, and technology sectors",
         "Lead technical architecture decisions for data-intensive applications and platforms"
+      ]
+    },
+    {
+      "title": "DATA PRODUCTS MANAGER",
+      "company": "Helm/Murmuration, Washington, DC",
+      "dates": "June 2021 – May 2023",
+      "subtitle": "Data Platform Development and Team Leadership",
+      "responsibilities": [
+        "Conceived and developed framework to clean, validate, and normalize government data from Census, BLS, and NCES",
+        "Built multi-tenant data warehouse and data lake for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions",
+        "Trained analytical and engineering staff on open source geospatial technology for analysis, segmentation, and visualization",
+        "Wrote five-year strategic plans for developing data warehouse that became basis of company's distinguishing products",
+        "Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Mautinoa Technologies, Washington, DC",
+      "dates": "August 2016 – February 2018",
+      "subtitle": "Financial Technology and Humanitarian Crisis Solutions",
+      "responsibilities": [
+        "Developed SimCrisis, a GeoDjango web application using multi-agent modeling for econometric simulations of crisis economies",
+        "Built modular application accepting rules extensions for ethnic strife, different crisis types, supply failures, and disaster scenarios",
+        "Liaised with officers from International Federation of Red Cross, UNICEF, and Chaos Communications Congress to improve platform",
+        "Conceived and built application to predict how crisis economies respond to different humanitarian interventions"
+      ]
+    },
+    {
+      "title": "SENIOR ANALYST",
+      "company": "Myers Research, Washington, DC",
+      "dates": "August 2012 – February 2014",
+      "subtitle": "Quantitative and Qualitative Research for Democratic Campaigns",
+      "responsibilities": [
+        "Developed RACSO, a web application for pollsters to fully administer research including questionnaire creation, versioning, and reporting",
+        "Wrote RFP and analyzed bids from 1,200 vendors before selecting implementation partner",
+        "Built prototype in R for comprehensive polling administration and sample file management",
+        "Provided strategic counsel to Democratic campaigns, political actors, and NGOs through quantitative and qualitative research"
+      ]
+    },
+    {
+      "title": "RESEARCH DIRECTOR",
+      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "dates": "August 2011 – August 2012",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Managed critical research operations for political campaigns",
+        "Conducted comprehensive polling and demographic analysis",
+        "Developed strategic recommendations based on data analysis",
+        "Led research team in support of progressive political initiatives"
+      ]
+    },
+    {
+      "title": "SOFTWARE ENGINEER",
+      "company": "Salsa Labs, Inc., Washington, DC",
+      "dates": "January 2011 – August 2011",
+      "subtitle": "Political Technology Development",
+      "responsibilities": [
+        "Developed software solutions for political campaigns and advocacy groups",
+        "Built web applications for voter engagement and campaign management",
+        "Integrated third-party APIs and data sources for campaign tools",
+        "Collaborated with political strategists to translate requirements into technical solutions"
+      ]
+    },
+    {
+      "title": "INTERIM TECHNOLOGY MANAGER",
+      "company": "The Praxis Project, Oakland, CA",
+      "dates": "April 2009 – October 2009",
+      "subtitle": "Nonprofit Technology Integration",
+      "responsibilities": [
+        "Integrated technology solutions within organizational frameworks for social justice organizations",
+        "Developed data management systems for community organizing efforts",
+        "Provided technical training and support to nonprofit staff",
+        "Built custom applications for community engagement and advocacy"
+      ]
+    },
+    {
+      "title": "PROGRAMMER",
+      "company": "Lake Research Partners, Washington, DC",
+      "dates": "April 2008 – December 2008",
+      "subtitle": "Political Research and Data Analysis",
+      "responsibilities": [
+        "Developed data analysis tools for political polling and research",
+        "Built statistical models for voter behavior analysis",
+        "Created data visualization tools for research presentations",
+        "Supported senior researchers with technical analysis and reporting"
+      ]
+    },
+    {
+      "title": "FIELD DIRECTOR",
+      "company": "The Feldman Group, Washington, DC",
+      "dates": "August 2007 – April 2008",
+      "subtitle": "Political Field Operations and Data Management",
+      "responsibilities": [
+        "Managed field operations for political campaigns and research projects",
+        "Developed data collection and management systems for field work",
+        "Trained field staff on data collection protocols and quality control",
+        "Analyzed field data to inform campaign strategy and research findings"
       ]
     }
   ],
@@ -57,7 +154,7 @@
   "_metadata": {
     "version": "comprehensive_full",
     "user": "Dheeraj Chand",
-    "created": "2025-05-27T17:11:24.267508",
+    "created": "2025-09-04T14:30:26.914241",
     "description": "Comprehensive version with complete work history and technical depth"
   }
 }
