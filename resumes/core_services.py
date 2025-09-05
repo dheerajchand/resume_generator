@@ -51,7 +51,7 @@ class ResumeGenerator:
                 fontSize=28,
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_CENTER,
-                spaceAfter=8,
+                spaceAfter=0,  # No space after name
                 fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
@@ -60,7 +60,7 @@ class ResumeGenerator:
                 fontSize=12,
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=6,
+                spaceAfter=0,  # No space after title
                 fontName="Helvetica-Bold",
             ),
             "Subtitle": ParagraphStyle(
@@ -69,7 +69,7 @@ class ResumeGenerator:
                 fontSize=10,
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
-                spaceAfter=20,
+                spaceAfter=0,  # No space after subtitle
                 fontName="Helvetica",
             ),
             "SectionHeader": ParagraphStyle(
@@ -113,7 +113,7 @@ class ResumeGenerator:
                 fontSize=9,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=20,
+                spaceAfter=0,  # No space after contact
                 fontName="Helvetica",
             ),
         }
@@ -122,12 +122,12 @@ class ResumeGenerator:
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
-        return Table([['']], colWidths=[6*inch], rowHeights=[height/72*inch]).setStyle(
-            TableStyle([
-                ('BACKGROUND', (0, 0), (-1, -1), HexColor(color)),
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-            ])
-        )
+        table = Table([['']], colWidths=[6*inch], rowHeights=[height/72*inch])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, -1), HexColor(color)),
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ]))
+        return table
     
     def generate_pdf(self, filename: str) -> str:
         """Generate PDF resume"""
@@ -160,10 +160,8 @@ class ResumeGenerator:
         if contact_parts:
             story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
         
-        # Add horizontal bar after header
-        story.append(Spacer(1, 8))
-        story.append(self._create_horizontal_bar())
-        story.append(Spacer(1, 16))
+        # Add large space before first section (like Deepak's 60325 = ~0.85 inches)
+        story.append(Spacer(1, 0.85*inch))
         
         # Summary
         summary = self.data.get("summary", "")
@@ -189,10 +187,6 @@ class ResumeGenerator:
                     skill_text = " • ".join(skills)
                     story.append(Paragraph(f"<b>{category}:</b> {skill_text}", self.styles["Body"]))
             story.append(Spacer(1, 6))
-        
-        # Add horizontal bar before Professional Experience
-        story.append(self._create_horizontal_bar(height=1))
-        story.append(Spacer(1, 8))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
