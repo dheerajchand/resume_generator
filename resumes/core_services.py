@@ -193,10 +193,10 @@ class ResumeGenerator:
             contact_parts.append(personal_info["phone"])
         if personal_info.get("email"):
             email = personal_info["email"]
-            contact_parts.append(f'<link href="mailto:{email}">{email}</link>')
+            contact_parts.append(f'<a href="mailto:{email}">{email}</a>')
         if personal_info.get("linkedin"):
             linkedin = personal_info["linkedin"]
-            contact_parts.append(f'<link href="{linkedin}">{linkedin}</link>')
+            contact_parts.append(f'<a href="{linkedin}">{linkedin}</a>')
         if personal_info.get("location"):
             contact_parts.append(personal_info["location"])
         
@@ -345,48 +345,14 @@ class ResumeGenerator:
                 story.append(Spacer(1, 6))
         
         
-        # Build with custom headers and footer
+        # Build with custom footer only (no header conflicts)
         def add_first_page_header(canvas, doc):
-            """Add full header for first page"""
-            add_footer(canvas, doc)  # Also add footer
+            """Add footer for first page"""
+            add_footer(canvas, doc)
         
         def add_later_page_header(canvas, doc):
-            """Add compact header for subsequent pages"""
-            canvas.saveState()
-            
-            # Get contact info for compact header
-            contact_parts = []
-            if personal_info.get("phone"):
-                contact_parts.append(personal_info["phone"])
-            if personal_info.get("email"):
-                email = personal_info["email"]
-                contact_parts.append(f'<link href="mailto:{email}">{email}</link>')
-            if personal_info.get("linkedin"):
-                linkedin = personal_info["linkedin"]
-                contact_parts.append(f'<link href="{linkedin}">{linkedin}</link>')
-            if personal_info.get("location"):
-                contact_parts.append(personal_info["location"])
-            
-            # Add compact header: smaller name + contact info on same line
-            canvas.setFont("Helvetica-Bold", 14)  # Smaller name
-            canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
-            name = personal_info.get("name", "NAME")
-            canvas.drawRightString(7.5*inch, 10.5*inch, name)
-            
-            # Add contact info on same line
-            if contact_parts:
-                canvas.setFont("Helvetica", 9)  # Smaller contact info
-                canvas.setFillColor(HexColor("#4682B4"))  # Blue for header contact
-                contact_text = " | ".join(contact_parts)
-                canvas.drawRightString(7.5*inch, 10.2*inch, contact_text)
-            
-            # Add horizontal bar
-            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
-            canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)
-            
-            canvas.restoreState()
-            add_footer(canvas, doc)  # Also add footer
+            """Add footer for subsequent pages"""
+            add_footer(canvas, doc)
         
         def add_footer(canvas, doc):
             """Add footer with website link and page number"""
