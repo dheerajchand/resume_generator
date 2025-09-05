@@ -47,48 +47,73 @@ class ResumeGenerator:
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=24,
-                textColor=HexColor(colors.get("NAME_COLOR", "#228B22")),
+                fontSize=28,
+                textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_CENTER,
-                spaceAfter=12,
+                spaceAfter=8,
+                fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
                 "CustomTitle",
                 parent=styles["Heading2"],
-                fontSize=14,
-                textColor=HexColor(colors.get("TITLE_COLOR", "#B8860B")),
+                fontSize=12,
+                textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=12,
+                spaceAfter=6,
+                fontName="Helvetica-Bold",
+            ),
+            "Subtitle": ParagraphStyle(
+                "CustomSubtitle",
+                parent=styles["Normal"],
+                fontSize=10,
+                textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
+                alignment=TA_CENTER,
+                spaceAfter=20,
+                fontName="Helvetica",
             ),
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
-                fontSize=12,
-                textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#B8860B")),
+                fontSize=11,
+                textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=8,
-                spaceBefore=16,
+                spaceBefore=20,
+                fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
                 parent=styles["Heading3"],
-                fontSize=11,
-                textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#722F37")),
-                spaceAfter=6,
+                fontSize=10,
+                textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#2C3E50")),
+                spaceAfter=4,
+                spaceBefore=8,
+                fontName="Helvetica-Bold",
+            ),
+            "Company": ParagraphStyle(
+                "CustomCompany",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("COMPANY_COLOR", "#34495E")),
+                spaceAfter=2,
+                fontName="Helvetica",
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
                 fontSize=9,
-                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#333333")),
-                spaceAfter=3,
+                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
+                spaceAfter=4,
+                leftIndent=12,
+                fontName="Helvetica",
             ),
             "Contact": ParagraphStyle(
                 "CustomContact",
                 parent=styles["Normal"],
                 fontSize=9,
-                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#333333")),
+                textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=18,
+                spaceAfter=20,
+                fontName="Helvetica",
             ),
         }
         
@@ -101,11 +126,15 @@ class ResumeGenerator:
                               topMargin=0.6*inch, bottomMargin=0.6*inch)
         story = []
         
-        # Personal info
+        # Personal info - Modern header style like Deepak's
         personal_info = self.data.get("personal_info", {})
         story.append(Paragraph(personal_info.get("name", "NAME"), self.styles["Name"]))
         
-        # Contact info
+        # Professional title/tagline
+        if personal_info.get("title"):
+            story.append(Paragraph(personal_info["title"], self.styles["Title"]))
+        
+        # Contact info - clean, centered
         contact_parts = []
         if personal_info.get("phone"):
             contact_parts.append(personal_info["phone"])
@@ -121,7 +150,7 @@ class ResumeGenerator:
         if contact_parts:
             story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
         
-        story.append(Spacer(1, 18))
+        story.append(Spacer(1, 20))
         
         # Summary
         summary = self.data.get("summary", "")
@@ -140,7 +169,7 @@ class ResumeGenerator:
                     story.append(Paragraph(f"<b>{category}:</b> {skill_text}", self.styles["Body"]))
             story.append(Spacer(1, 6))
         
-        # Experience
+        # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
         if experience:
             story.append(Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"]))
@@ -150,15 +179,17 @@ class ResumeGenerator:
                 location = job.get("location", "")
                 dates = job.get("dates", "")
                 
-                title_line = f"{job_title}"
-                if company:
-                    title_line += f" - {company}"
+                # Company and dates on one line (like Deepak's format)
+                company_line = company
                 if location:
-                    title_line += f" ({location})"
+                    company_line += f" - {location}"
                 if dates:
-                    title_line += f" | {dates}"
+                    company_line += f" {dates}"
                 
-                story.append(Paragraph(title_line, self.styles["JobTitle"]))
+                story.append(Paragraph(company_line, self.styles["Company"]))
+                
+                # Job title on separate line
+                story.append(Paragraph(job_title, self.styles["JobTitle"]))
                 
                 if job.get("subtitle"):
                     story.append(Paragraph(job["subtitle"], self.styles["Body"]))
