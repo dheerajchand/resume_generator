@@ -14,7 +14,7 @@ from reportlab.lib.colors import HexColor, black, white
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Table, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY, TA_RIGHT
 from docx import Document
 from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -48,10 +48,10 @@ class ResumeGenerator:
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=28,
+                fontSize=24,
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
-                alignment=TA_CENTER,
-                spaceAfter=0,  # No space after name
+                alignment=TA_RIGHT,
+                spaceAfter=6,
                 fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
@@ -60,7 +60,7 @@ class ResumeGenerator:
                 fontSize=12,
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=0,  # No space after title
+                spaceAfter=6,
                 fontName="Helvetica-Bold",
             ),
             "Subtitle": ParagraphStyle(
@@ -69,7 +69,7 @@ class ResumeGenerator:
                 fontSize=10,
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
-                spaceAfter=0,  # No space after subtitle
+                spaceAfter=6,
                 fontName="Helvetica",
             ),
             "SectionHeader": ParagraphStyle(
@@ -77,8 +77,8 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=11,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=8,
-                spaceBefore=20,
+                spaceAfter=6,
+                spaceBefore=12,
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
@@ -112,8 +112,8 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=9,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
-                alignment=TA_CENTER,
-                spaceAfter=0,  # No space after contact
+                alignment=TA_RIGHT,
+                spaceAfter=12,
                 fontName="Helvetica",
             ),
         }
@@ -136,32 +136,34 @@ class ResumeGenerator:
                               topMargin=0.6*inch, bottomMargin=0.6*inch)
         story = []
         
-        # Personal info - Modern header style like Deepak's
+        # Personal info - Right-aligned header
         personal_info = self.data.get("personal_info", {})
         story.append(Paragraph(personal_info.get("name", "NAME"), self.styles["Name"]))
         
-        # Professional title/tagline
-        if personal_info.get("title"):
-            story.append(Paragraph(personal_info["title"], self.styles["Title"]))
-        
-        # Contact info - clean, centered
+        # Contact info - right-aligned with clickable links
         contact_parts = []
         if personal_info.get("phone"):
             contact_parts.append(personal_info["phone"])
         if personal_info.get("email"):
-            contact_parts.append(personal_info["email"])
+            email = personal_info["email"]
+            contact_parts.append(f'<link href="mailto:{email}">{email}</link>')
         if personal_info.get("website"):
-            contact_parts.append(personal_info["website"])
+            website = personal_info["website"]
+            contact_parts.append(f'<link href="{website}">{website}</link>')
         if personal_info.get("linkedin"):
-            contact_parts.append(personal_info["linkedin"])
+            linkedin = personal_info["linkedin"]
+            contact_parts.append(f'<link href="{linkedin}">{linkedin}</link>')
         if personal_info.get("location"):
             contact_parts.append(personal_info["location"])
         
         if contact_parts:
             story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
         
-        # Add large space before first section (like Deepak's 60325 = ~0.85 inches)
-        story.append(Spacer(1, 0.85*inch))
+        # Add horizontal bar separator
+        story.append(self._create_horizontal_bar())
+        
+        # Add space before first section
+        story.append(Spacer(1, 0.15*inch))
         
         # Summary
         summary = self.data.get("summary", "")
