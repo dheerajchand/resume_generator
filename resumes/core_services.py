@@ -107,6 +107,15 @@ class ResumeGenerator:
                 leftIndent=12,
                 fontName="Helvetica",
             ),
+            "BulletPoint": ParagraphStyle(
+                "CustomBulletPoint",
+                parent=styles["Normal"],
+                fontSize=9,
+                textColor=HexColor(colors.get("ACCENT_COLOR", "#FF6B35")),
+                spaceAfter=4,
+                leftIndent=12,
+                fontName="Helvetica",
+            ),
             "Contact": ParagraphStyle(
                 "CustomContact",
                 parent=styles["Normal"],
@@ -180,7 +189,7 @@ class ResumeGenerator:
                 if isinstance(achievement_list, list):
                     story.append(Paragraph(category, self.styles["JobTitle"]))
                     for achievement in achievement_list:
-                        story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
+                        story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
                     story.append(Spacer(1, 6))
         
         # Competencies
@@ -203,26 +212,29 @@ class ResumeGenerator:
                 location = job.get("location", "")
                 dates = job.get("dates", "")
                 
-                # Company and dates on one line (like Deepak's format)
+                # Company, job title, and dates on one line
                 company_line = company
+                if job_title:
+                    company_line += f" | {job_title}"
                 if location:
                     company_line += f" - {location}"
                 if dates:
                     company_line += f" {dates}"
                 
-                story.append(Paragraph(company_line, self.styles["Company"]))
-                
-                # Job title on separate line
-                story.append(Paragraph(job_title, self.styles["JobTitle"]))
+                # Keep the entire job unit together
+                job_unit = []
+                job_unit.append(Paragraph(company_line, self.styles["Company"]))
                 
                 if job.get("subtitle"):
-                    story.append(Paragraph(job["subtitle"], self.styles["Body"]))
+                    job_unit.append(Paragraph(job["subtitle"], self.styles["Body"]))
                 
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
-                    story.append(Paragraph(f"• {resp}", self.styles["Body"]))
+                    job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 
-                story.append(Spacer(1, 12))
+                # Keep job unit together and add reduced spacing
+                story.append(KeepTogether(job_unit))
+                story.append(Spacer(1, 8))  # Reduced from 12 to 8
         
         # Projects
         projects = self.data.get("projects", [])
