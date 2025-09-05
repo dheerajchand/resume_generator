@@ -75,10 +75,10 @@ class ResumeGenerator:
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
-                fontSize=11,
+                fontSize=10,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=4,
-                spaceBefore=8,
+                spaceAfter=3,
+                spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
@@ -101,28 +101,28 @@ class ResumeGenerator:
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=8,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=4,
+                spaceAfter=3,
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=7,
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=4,
+                spaceAfter=1,
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=9,
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=2,
-                spaceBefore=4,
+                spaceAfter=1,
+                spaceBefore=2,
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
@@ -137,10 +137,10 @@ class ResumeGenerator:
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=8,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=2,
-                leftIndent=24,
+                spaceAfter=1,
+                leftIndent=0,
                 fontName="Helvetica",
             ),
             "Contact": ParagraphStyle(
@@ -217,7 +217,7 @@ class ResumeGenerator:
                     story.append(Paragraph(category, self.styles["MainCompetency"]))
                     for achievement in achievement_list:
                         story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
-                    story.append(Spacer(1, 4))  # Reduced spacing
+                    story.append(Spacer(1, 2))  # Minimal spacing
         
         # Competencies in compact inline format for maximum space efficiency
         competencies = self.data.get("competencies", {})
@@ -239,7 +239,7 @@ class ResumeGenerator:
                     full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
                     story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
-            story.append(Spacer(1, 4))
+            story.append(Spacer(1, 2))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -268,12 +268,16 @@ class ResumeGenerator:
                     job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
                 
                 responsibilities = job.get("responsibilities", [])
-                for resp in responsibilities:
+                # Limit to 3 most important bullet points for space efficiency
+                for resp in responsibilities[:3]:
+                    # Make bullet points more concise
+                    if len(resp) > 80:
+                        resp = resp[:77] + "..."
                     job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 
-                # Keep job unit together and add reduced spacing
+                # Keep job unit together and add minimal spacing
                 story.append(KeepTogether(job_unit))
-                story.append(Spacer(1, 8))  # Reduced from 12 to 8
+                story.append(Spacer(1, 2))  # Further reduced from 8 to 4
         
         # Projects
         projects = self.data.get("projects", [])
