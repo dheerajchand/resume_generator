@@ -50,7 +50,7 @@ class ResumeGenerator:
                 fontSize=24,
                 textColor=HexColor(colors.get("NAME_COLOR", "#228B22")),
                 alignment=TA_CENTER,
-                spaceAfter=6,
+                spaceAfter=12,
             ),
             "Title": ParagraphStyle(
                 "CustomTitle",
@@ -65,15 +65,15 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#B8860B")),
-                spaceAfter=6,
-                spaceBefore=12,
+                spaceAfter=8,
+                spaceBefore=16,
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
                 parent=styles["Heading3"],
                 fontSize=11,
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#722F37")),
-                spaceAfter=3,
+                spaceAfter=6,
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
@@ -88,7 +88,7 @@ class ResumeGenerator:
                 fontSize=9,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#333333")),
                 alignment=TA_CENTER,
-                spaceAfter=6,
+                spaceAfter=18,
             ),
         }
         
@@ -121,7 +121,7 @@ class ResumeGenerator:
         if contact_parts:
             story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
         
-        story.append(Spacer(1, 12))
+        story.append(Spacer(1, 18))
         
         # Summary
         summary = self.data.get("summary", "")
@@ -167,7 +167,7 @@ class ResumeGenerator:
                 for resp in responsibilities:
                     story.append(Paragraph(f"• {resp}", self.styles["Body"]))
                 
-                story.append(Spacer(1, 6))
+                story.append(Spacer(1, 12))
         
         # Projects
         projects = self.data.get("projects", [])
