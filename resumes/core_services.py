@@ -195,6 +195,9 @@ class ResumeGenerator:
         # Add space for header (will be drawn by canvas)
         story.append(Spacer(1, 1.2*inch))
         
+        # Add extra space for subsequent pages to prevent bar interference
+        story.append(Spacer(1, 0.3*inch))
+        
         # Add space before first section (reduced for smaller header)
         story.append(Spacer(1, 0.05*inch))
         
@@ -404,31 +407,31 @@ class ResumeGenerator:
             canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
             canvas.drawString(0.6*inch, 10.5*inch, name)
             
-            # Middle cell: Email with abbreviation (centered)
+            # Middle cell: Email (centered)
             if email:
                 canvas.setFont("Helvetica", 9)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
-                email_text = f"E: {email}"
+                email_text = f"Email: {email}"
                 # Center email in the middle third of the page
                 email_width = canvas.stringWidth(email_text, "Helvetica", 9)
                 email_x = (0.6*inch + 7.5*inch) / 2 - email_width / 2
                 canvas.drawString(email_x, 10.5*inch, email_text)
             
-            # Right cell: Phone with abbreviation (clickable link)
+            # Right cell: Phone (clickable link)
             if phone:
                 canvas.setFont("Helvetica", 9)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
-                phone_text = f"P: {phone}"
+                phone_text = f"Phone: {phone}"
                 # Create clickable link for phone
                 phone_width = canvas.stringWidth(phone_text, "Helvetica", 9)
                 phone_x = 7.5*inch - phone_width
                 canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
             
-            # Add horizontal bar (closer to bottom of text elements)
+            # Add horizontal bar (with proper margin to avoid body text interference)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)  # Closer to bottom of text
+            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)  # Lower position with margin
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
