@@ -52,10 +52,10 @@ class ResumeGenerator:
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=24,
+                fontSize=28,  # Bigger name
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_RIGHT,
-                spaceAfter=6,
+                spaceAfter=8,
                 fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
@@ -156,6 +156,15 @@ class ResumeGenerator:
                 spaceAfter=12,
                 fontName="Helvetica",
             ),
+            "ContactStacked": ParagraphStyle(
+                "CustomContactStacked",
+                parent=styles["Normal"],
+                fontSize=11,
+                textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
+                alignment=TA_RIGHT,
+                spaceAfter=2,
+                fontName="Helvetica",
+            ),
         }
         
         return custom_styles
@@ -187,21 +196,14 @@ class ResumeGenerator:
         # Add space between name and contact info to center it relative to bar
         story.append(Spacer(1, 0.1*inch))
         
-        # Contact info - right-aligned with clickable links (website moved to footer)
-        contact_parts = []
+        # Contact info - stacked vertically (phone and email only, LinkedIn moved to footer)
         if personal_info.get("phone"):
-            contact_parts.append(personal_info["phone"])
+            story.append(Paragraph(personal_info["phone"], self.styles["ContactStacked"]))
         if personal_info.get("email"):
             email = personal_info["email"]
-            contact_parts.append(f'<a href="mailto:{email}">{email}</a>')
-        if personal_info.get("linkedin"):
-            linkedin = personal_info["linkedin"]
-            contact_parts.append(f'<a href="{linkedin}">{linkedin}</a>')
+            story.append(Paragraph(f'<a href="mailto:{email}">{email}</a>', self.styles["ContactStacked"]))
         if personal_info.get("location"):
-            contact_parts.append(personal_info["location"])
-        
-        if contact_parts:
-            story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
+            story.append(Paragraph(personal_info["location"], self.styles["ContactStacked"]))
         
         # Add horizontal bar separator
         story.append(self._create_horizontal_bar())
@@ -351,20 +353,51 @@ class ResumeGenerator:
             add_footer(canvas, doc)
         
         def add_later_page_header(canvas, doc):
-            """Add footer for subsequent pages"""
-            add_footer(canvas, doc)
+            """Add header for subsequent pages with name + contact on one line"""
+            canvas.saveState()
+            
+            # Get contact info for compact header
+            contact_parts = []
+            if personal_info.get("phone"):
+                contact_parts.append(personal_info["phone"])
+            if personal_info.get("email"):
+                email = personal_info["email"]
+                contact_parts.append(email)  # No HTML tags for canvas drawing
+            
+            # Add compact header: name + contact info on same line
+            canvas.setFont("Helvetica-Bold", 14)  # Smaller name
+            canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
+            name = personal_info.get("name", "NAME")
+            
+            # Add contact info on same line
+            if contact_parts:
+                contact_text = " | ".join(contact_parts)
+                full_text = f"{name} | {contact_text}"
+            else:
+                full_text = name
+            
+            canvas.drawRightString(7.5*inch, 10.5*inch, full_text)
+            
+            # Add horizontal bar
+            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setLineWidth(1)
+            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)
+            
+            canvas.restoreState()
+            add_footer(canvas, doc)  # Also add footer
         
         def add_footer(canvas, doc):
-            """Add footer with website link and page number"""
+            """Add footer with LinkedIn link and page number"""
             canvas.saveState()
             canvas.setFont("Helvetica", 8)
             canvas.setFillColor(HexColor("#4682B4"))  # Blue color for footer links
             
-            # Add website as clickable link on left
-            if website_url:
-                # Create a link annotation for the website
-                canvas.linkURL(website_url, (0.6*inch, 0.3*inch, 0.6*inch + len(website_url)*0.05*inch, 0.4*inch))
-                canvas.drawString(0.6*inch, 0.3*inch, website_url)
+            # Add LinkedIn as clickable link on left
+            linkedin_url = personal_info.get("linkedin", "")
+            if linkedin_url:
+                # Create a link annotation for LinkedIn
+                canvas.linkURL(linkedin_url, (0.6*inch, 0.3*inch, 0.6*inch + len(linkedin_url)*0.05*inch, 0.4*inch))
+                canvas.drawString(0.6*inch, 0.3*inch, linkedin_url)
             
             # Add page number on right in different color
             canvas.setFillColor(HexColor("#666666"))
