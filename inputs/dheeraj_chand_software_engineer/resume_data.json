@@ -7,6 +7,14 @@
     "linkedin": "https://www.linkedin.com/in/dheerajchand/"
   },
   "summary": "Senior Software Engineer with 21 years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.",
+  "key_achievements": [
+    "Architected redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Built cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Led development of fraud detection systems processing multi-terabyte campaign finance datasets",
+    "Designed scalable ETL pipelines using PySpark and dbt for large-scale geospatial datasets",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through technical optimization"
+  ],
   "competencies": {
     "Programming & Development": [
       "Python: Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn",

@@ -7,6 +7,14 @@
     "linkedin": "https://www.linkedin.com/in/dheerajchand/"
   },
   "summary": "Research & Data Professional with 21 years of comprehensive experience spanning applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions. Proven track record leading cross-functional teams, architecting data platforms, and delivering insights that drive strategic decision-making across political, nonprofit, and technology sectors. Deep expertise in survey methodology, geospatial analysis, and building production systems for sensitive data applications.",
+  "key_achievements": [
+    "Led development of redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Architected cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Delivered $4.9M additional revenue through continuous testing and optimization of marketing campaigns",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through process optimization",
+    "Built multi-tenant data warehouse for longitudinal analysis across attitudinal, behavioral, demographic, and geographical dimensions",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives"
+  ],
   "competencies": {
     "Research and Analytics": [
       "Survey Methodology: Design, sampling, weighting, longitudinal analysis",

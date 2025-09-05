@@ -11,7 +11,8 @@ from typing import Dict, List, Optional, Any
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.colors import HexColor, black, white
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Table, TableStyle
+from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 from docx import Document
@@ -119,6 +120,15 @@ class ResumeGenerator:
         
         return custom_styles
     
+    def _create_horizontal_bar(self, color="#2C3E50", height=2):
+        """Create a horizontal bar for section separation"""
+        return Table([['']], colWidths=[6*inch], rowHeights=[height/72*inch]).setStyle(
+            TableStyle([
+                ('BACKGROUND', (0, 0), (-1, -1), HexColor(color)),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ])
+        )
+    
     def generate_pdf(self, filename: str) -> str:
         """Generate PDF resume"""
         doc = SimpleDocTemplate(filename, pagesize=letter, 
@@ -150,13 +160,24 @@ class ResumeGenerator:
         if contact_parts:
             story.append(Paragraph(" | ".join(contact_parts), self.styles["Contact"]))
         
-        story.append(Spacer(1, 20))
+        # Add horizontal bar after header
+        story.append(Spacer(1, 8))
+        story.append(self._create_horizontal_bar())
+        story.append(Spacer(1, 16))
         
         # Summary
         summary = self.data.get("summary", "")
         if summary:
             story.append(Paragraph("PROFESSIONAL SUMMARY", self.styles["SectionHeader"]))
             story.append(Paragraph(summary, self.styles["Body"]))
+            story.append(Spacer(1, 6))
+        
+        # Key Achievements - NEW SECTION (moved before Professional Experience)
+        key_achievements = self.data.get("key_achievements", [])
+        if key_achievements:
+            story.append(Paragraph("KEY ACHIEVEMENTS", self.styles["SectionHeader"]))
+            for achievement in key_achievements:
+                story.append(Paragraph(f"• {achievement}", self.styles["Body"]))
             story.append(Spacer(1, 6))
         
         # Competencies
@@ -168,6 +189,10 @@ class ResumeGenerator:
                     skill_text = " • ".join(skills)
                     story.append(Paragraph(f"<b>{category}:</b> {skill_text}", self.styles["Body"]))
             story.append(Spacer(1, 6))
+        
+        # Add horizontal bar before Professional Experience
+        story.append(self._create_horizontal_bar(height=1))
+        story.append(Spacer(1, 8))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])

@@ -38,7 +38,7 @@
     {
       "title": "PARTNER",
       "company": "Siege Analytics, Washington, DC",
-      "dates": "January 2014 – Present",
+      "dates": "January 2014 \u2013 Present",
       "subtitle": "Leading Applied Research Projects with Community Development Focus",
       "responsibilities": [
         "Direct comprehensive applied research projects from conception to completion for organizations focused on economic mobility and community development",
@@ -52,7 +52,7 @@
     {
       "title": "DATA PRODUCTS MANAGER",
       "company": "Helm/Murmuration, Washington, DC",
-      "dates": "2012 – 2014",
+      "dates": "2012 \u2013 2014",
       "subtitle": "Geospatial Research and Policy Analysis",
       "responsibilities": [
         "Conducted geospatial research projects for electoral and demographic analysis",
@@ -64,7 +64,7 @@
     {
       "title": "SOFTWARE ENGINEER",
       "company": "Mautinoa Technologies, Washington, DC",
-      "dates": "2010 – 2012",
+      "dates": "2010 \u2013 2012",
       "subtitle": "Research Leadership and Data Analysis",
       "responsibilities": [
         "Led research initiatives for political and advocacy organizations",
@@ -76,7 +76,7 @@
     {
       "title": "SENIOR ANALYST",
       "company": "Myers Research, Washington, DC",
-      "dates": "2008 – 2010",
+      "dates": "2008 \u2013 2010",
       "subtitle": "Campaign Research and Data Analysis",
       "responsibilities": [
         "Conducted comprehensive polling and demographic analysis for political campaigns",
@@ -88,7 +88,7 @@
     {
       "title": "RESEARCH DIRECTOR",
       "company": "Progressive Change Campaign Committee, Washington, DC",
-      "dates": "2006 – 2008",
+      "dates": "2006 \u2013 2008",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
         "Managed critical research operations for political campaigns",
@@ -100,7 +100,7 @@
     {
       "title": "SOFTWARE ENGINEER",
       "company": "Salsa Labs, Inc., Washington, DC",
-      "dates": "2004 – 2006",
+      "dates": "2004 \u2013 2006",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
         "Coordinated research projects for political campaigns and advocacy groups",
@@ -112,7 +112,7 @@
     {
       "title": "INTERIM TECHNOLOGY MANAGER",
       "company": "The Praxis Project, Oakland, CA",
-      "dates": "2002 – 2004",
+      "dates": "2002 \u2013 2004",
       "subtitle": "Community Research and Social Justice Analysis",
       "responsibilities": [
         "Led research initiatives focused on social justice and community development",
@@ -124,7 +124,7 @@
     {
       "title": "PROGRAMMER",
       "company": "Lake Research Partners, Washington, DC",
-      "dates": "2001 – 2002",
+      "dates": "2001 \u2013 2002",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
         "Conducted political polling and survey research analysis",
@@ -136,7 +136,7 @@
     {
       "title": "FIELD DIRECTOR",
       "company": "The Feldman Group, Washington, DC",
-      "dates": "2000 – 2001",
+      "dates": "2000 \u2013 2001",
       "subtitle": "Field Research and Data Collection",
       "responsibilities": [
         "Coordinated field research operations for political campaigns and studies",
@@ -158,5 +158,13 @@
     "user": "Dheeraj Chand",
     "created": "2025-09-04T14:30:26.913576",
     "description": "Research-focused version emphasizing applied research leadership and community impact"
-  }
+  },
+  "key_achievements": [
+    "Led development of redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Architected cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Delivered $4.9M additional revenue through continuous testing and optimization of marketing campaigns",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through process optimization",
+    "Built multi-tenant data warehouse for longitudinal analysis across attitudinal, behavioral, demographic, and geographical dimensions",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives"
+  ]
 }

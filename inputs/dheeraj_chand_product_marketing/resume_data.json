@@ -40,7 +40,7 @@
     {
       "title": "PARTNER",
       "company": "Siege Analytics, Washington, DC",
-      "dates": "January 2014 – Present",
+      "dates": "January 2014 \u2013 Present",
       "subtitle": "Market Research, Product Strategy & Go-to-Market Leadership",
       "responsibilities": [
         "Led comprehensive market intelligence and competitive analysis projects for B2B technology platforms, delivering actionable insights that shaped product positioning and messaging strategies",
@@ -54,7 +54,7 @@
     {
       "title": "DATA PRODUCTS MANAGER",
       "company": "Helm/Murmuration, Washington, DC",
-      "dates": "2012 – 2014",
+      "dates": "2012 \u2013 2014",
       "subtitle": "Data-Driven Marketing and Strategy",
       "responsibilities": [
         "Developed data-driven marketing strategies for political and advocacy campaigns",
@@ -66,7 +66,7 @@
     {
       "title": "SOFTWARE ENGINEER",
       "company": "Mautinoa Technologies, Washington, DC",
-      "dates": "2010 – 2012",
+      "dates": "2010 \u2013 2012",
       "subtitle": "Product Marketing and Strategy",
       "responsibilities": [
         "Led product marketing initiatives for data-driven political technology solutions",
@@ -78,7 +78,7 @@
     {
       "title": "SENIOR ANALYST",
       "company": "Myers Research, Washington, DC",
-      "dates": "2008 – 2010",
+      "dates": "2008 \u2013 2010",
       "subtitle": "Campaign Marketing and Analytics",
       "responsibilities": [
         "Developed marketing strategies and voter targeting approaches for political campaigns",
@@ -90,7 +90,7 @@
     {
       "title": "RESEARCH DIRECTOR",
       "company": "Progressive Change Campaign Committee, Washington, DC",
-      "dates": "2006 – 2008",
+      "dates": "2006 \u2013 2008",
       "subtitle": "Political Marketing and Communications",
       "responsibilities": [
         "Coordinated marketing and communications for progressive political initiatives",
@@ -102,7 +102,7 @@
     {
       "title": "SOFTWARE ENGINEER",
       "company": "Salsa Labs, Inc., Washington, DC",
-      "dates": "2004 – 2006",
+      "dates": "2004 \u2013 2006",
       "subtitle": "Technology Marketing and Product Promotion",
       "responsibilities": [
         "Developed marketing strategies for political technology products and services",
@@ -114,7 +114,7 @@
     {
       "title": "INTERIM TECHNOLOGY MANAGER",
       "company": "The Praxis Project, Oakland, CA",
-      "dates": "2002 – 2004",
+      "dates": "2002 \u2013 2004",
       "subtitle": "Nonprofit Marketing and Communications",
       "responsibilities": [
         "Developed marketing and communications strategies for social justice organizations",
@@ -126,7 +126,7 @@
     {
       "title": "PROGRAMMER",
       "company": "Lake Research Partners, Washington, DC",
-      "dates": "2001 – 2002",
+      "dates": "2001 \u2013 2002",
       "subtitle": "Political Research and Marketing Support",
       "responsibilities": [
         "Coordinated research projects supporting political marketing and campaign strategy",
@@ -138,7 +138,7 @@
     {
       "title": "FIELD DIRECTOR",
       "company": "The Feldman Group, Washington, DC",
-      "dates": "2000 – 2001",
+      "dates": "2000 \u2013 2001",
       "subtitle": "Field Operations and Campaign Support",
       "responsibilities": [
         "Coordinated field operations supporting political campaigns and research projects",
@@ -160,5 +160,13 @@
     "user": "Dheeraj Chand",
     "created": "2025-09-04T14:30:26.914984",
     "description": "Product marketing focused version emphasizing market research, go-to-market strategy, and customer insights"
-  }
+  },
+  "key_achievements": [
+    "Led development of redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Architected cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Delivered $4.9M additional revenue through continuous testing and optimization of marketing campaigns",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through process optimization",
+    "Built multi-tenant data warehouse for longitudinal analysis across attitudinal, behavioral, demographic, and geographical dimensions",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives"
+  ]
 }
