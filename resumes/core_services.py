@@ -189,23 +189,47 @@ class ResumeGenerator:
                               topMargin=0.6*inch, bottomMargin=0.8*inch)  # Increased bottom margin for footer
         story = []
         
-        # Personal info - Right-aligned header
+        # Personal info - Three-cell header layout
         personal_info = self.data.get("personal_info", {})
-        story.append(Paragraph(personal_info.get("name", "NAME"), self.styles["Name"]))
         
-        # Add space between name and contact info to center it relative to bar
-        story.append(Spacer(1, 0.1*inch))
+        # Create three-cell table for header
+        header_data = []
         
-        # Contact info - stacked vertically (phone and email only, LinkedIn moved to footer)
-        if personal_info.get("phone"):
-            story.append(Paragraph(personal_info["phone"], self.styles["ContactStacked"]))
+        # Left cell: Email and phone stacked vertically
+        left_content = []
         if personal_info.get("email"):
             email = personal_info["email"]
-            story.append(Paragraph(f'<a href="mailto:{email}">{email}</a>', self.styles["ContactStacked"]))
-        if personal_info.get("location"):
-            story.append(Paragraph(personal_info["location"], self.styles["ContactStacked"]))
+            left_content.append(f'<a href="mailto:{email}">{email}</a>')
+        if personal_info.get("phone"):
+            left_content.append(personal_info["phone"])
+        left_cell = "<br/>".join(left_content) if left_content else ""
         
-        # Add horizontal bar separator
+        # Middle cell: Empty/whitespace
+        middle_cell = ""
+        
+        # Right cell: Full name
+        right_cell = personal_info.get("name", "NAME")
+        
+        header_data.append([left_cell, middle_cell, right_cell])
+        
+        # Create header table
+        header_table = Table(header_data, colWidths=[2.5*inch, 1*inch, 2.5*inch])
+        header_table.setStyle(TableStyle([
+            ('ALIGN', (0, 0), (0, 0), 'LEFT'),   # Left cell: email/phone
+            ('ALIGN', (1, 0), (1, 0), 'CENTER'), # Middle cell: empty
+            ('ALIGN', (2, 0), (2, 0), 'RIGHT'),  # Right cell: name
+            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ('FONTSIZE', (0, 0), (0, 0), 11),    # Contact info size
+            ('FONTSIZE', (2, 0), (2, 0), 28),    # Name size
+            ('FONTNAME', (2, 0), (2, 0), 'Helvetica-Bold'),
+            ('TEXTCOLOR', (0, 0), (0, 0), HexColor(self.config.get("ACCENT_COLOR", "#4682B4"))),
+            ('TEXTCOLOR', (2, 0), (2, 0), HexColor(self.config.get("NAME_COLOR", "#2C3E50"))),
+        ]))
+        
+        story.append(header_table)
+        
+        # Add horizontal bar separator (closer to header)
+        story.append(Spacer(1, 0.05*inch))  # Small space before bar
         story.append(self._create_horizontal_bar())
         
         # Add space before first section (reduced for smaller header)
@@ -353,56 +377,73 @@ class ResumeGenerator:
             add_footer(canvas, doc)
         
         def add_later_page_header(canvas, doc):
-            """Add header for subsequent pages with name + contact on one line"""
+            """Add header for subsequent pages with three-cell layout"""
             canvas.saveState()
             
-            # Get contact info for compact header
-            contact_parts = []
-            if personal_info.get("phone"):
-                contact_parts.append(personal_info["phone"])
-            if personal_info.get("email"):
-                email = personal_info["email"]
-                contact_parts.append(email)  # No HTML tags for canvas drawing
+            # Three-cell layout: Name (left) | Email (middle) | Phone (right)
+            name = personal_info.get("name", "NAME").upper()  # Bold and all caps
+            email = personal_info.get("email", "").lower()    # Lowercase
+            phone = personal_info.get("phone", "").lower()    # Lowercase
             
-            # Add compact header: name + contact info on same line
-            canvas.setFont("Helvetica-Bold", 14)  # Smaller name
+            # Left cell: Name (bold, all caps)
+            canvas.setFont("Helvetica-Bold", 10)  # Smaller text
             canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
-            name = personal_info.get("name", "NAME")
+            canvas.drawString(0.6*inch, 10.5*inch, name)
             
-            # Add contact info on same line
-            if contact_parts:
-                contact_text = " | ".join(contact_parts)
-                full_text = f"{name} | {contact_text}"
-            else:
-                full_text = name
+            # Middle cell: Email (lowercase)
+            if email:
+                canvas.setFont("Helvetica", 9)
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                canvas.drawString(3.0*inch, 10.5*inch, email)
             
-            canvas.drawRightString(7.5*inch, 10.5*inch, full_text)
+            # Right cell: Phone (lowercase)
+            if phone:
+                canvas.setFont("Helvetica", 9)
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                canvas.drawRightString(7.5*inch, 10.5*inch, phone)
             
-            # Add horizontal bar
+            # Add horizontal bar (closer to header text)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)
+            canvas.line(0.6*inch, 10.3*inch, 7.5*inch, 10.3*inch)
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
         
         def add_footer(canvas, doc):
-            """Add footer with LinkedIn link and page number"""
+            """Add footer with descriptions, LinkedIn link, and page number"""
             canvas.saveState()
+            
+            # Add bar above footer to separate from page text
+            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setLineWidth(0.5)
+            canvas.line(0.6*inch, 0.6*inch, 7.5*inch, 0.6*inch)
+            
             canvas.setFont("Helvetica", 8)
-            canvas.setFillColor(HexColor("#4682B4"))  # Blue color for footer links
             
-            # Add LinkedIn as clickable link on left
+            # Left side: Personal Site and LinkedIn with descriptions
+            left_y = 0.4*inch
+            website_url = personal_info.get("website", "")
             linkedin_url = personal_info.get("linkedin", "")
-            if linkedin_url:
-                # Create a link annotation for LinkedIn
-                canvas.linkURL(linkedin_url, (0.6*inch, 0.3*inch, 0.6*inch + len(linkedin_url)*0.05*inch, 0.4*inch))
-                canvas.drawString(0.6*inch, 0.3*inch, linkedin_url)
             
-            # Add page number on right in different color
-            canvas.setFillColor(HexColor("#666666"))
+            if website_url:
+                canvas.setFillColor(HexColor("#666666"))
+                canvas.drawString(0.6*inch, left_y, "Personal Site: ")
+                canvas.setFillColor(HexColor("#4682B4"))
+                canvas.linkURL(website_url, (0.6*inch + 0.6*inch, left_y, 0.6*inch + 0.6*inch + len(website_url)*0.05*inch, left_y + 0.1*inch))
+                canvas.drawString(0.6*inch + 0.6*inch, left_y, website_url)
+            
+            if linkedin_url:
+                canvas.setFillColor(HexColor("#666666"))
+                canvas.drawString(0.6*inch, left_y - 0.12*inch, "LinkedIn: ")
+                canvas.setFillColor(HexColor("#0077B5"))  # LinkedIn blue
+                canvas.linkURL(linkedin_url, (0.6*inch + 0.5*inch, left_y - 0.12*inch, 0.6*inch + 0.5*inch + len(linkedin_url)*0.05*inch, left_y - 0.02*inch))
+                canvas.drawString(0.6*inch + 0.5*inch, left_y - 0.12*inch, linkedin_url)
+            
+            # Right side: Page number in accent color
+            canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
             page_num = canvas.getPageNumber()
-            canvas.drawRightString(7.5*inch, 0.3*inch, f"Page {page_num}")
+            canvas.drawRightString(7.5*inch, 0.4*inch, f"Page {page_num}")
             
             canvas.restoreState()
         
