@@ -112,7 +112,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=8,
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=2,
+                spaceAfter=1,
                 leftIndent=12,
                 fontName="Helvetica",
             ),
@@ -217,7 +217,7 @@ class ResumeGenerator:
                     story.append(Paragraph(category, self.styles["MainCompetency"]))
                     for achievement in achievement_list:
                         story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
-                    story.append(Spacer(1, 1))  # Minimal spacing
+                    story.append(Spacer(1, 0.5))  # Minimal spacing
         
         # Competencies in compact inline format for maximum space efficiency
         competencies = self.data.get("competencies", {})
@@ -239,7 +239,7 @@ class ResumeGenerator:
                     full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
                     story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
-            story.append(Spacer(1, 1))
+            story.append(Spacer(1, 0.5))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -271,9 +271,17 @@ class ResumeGenerator:
                 for resp in responsibilities:
                     job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 
-                # Keep job unit together and add minimal spacing
-                story.append(KeepTogether(job_unit))
-                story.append(Spacer(1, 3))  # Slightly increased for readability
+                # Allow job units to split across pages for space efficiency
+                # Add each component separately to allow natural page breaks
+                story.append(job_unit[0])  # Company line
+                if len(job_unit) > 1:
+                    story.append(job_unit[1])  # Subtitle
+                if len(job_unit) > 2:
+                    # Add bullet points individually to allow splitting
+                    for bullet in job_unit[2:]:
+                        story.append(bullet)
+                
+                story.append(Spacer(1, 2))  # Reduced for space efficiency
         
         # Projects
         projects = self.data.get("projects", [])
