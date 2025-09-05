@@ -77,7 +77,7 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=11,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=2,
+                spaceAfter=1,
                 spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
