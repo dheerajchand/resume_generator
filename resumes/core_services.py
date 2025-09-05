@@ -11,14 +11,18 @@ from typing import Dict, List, Optional, Any
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.colors import HexColor, black, white
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Table, TableStyle, PageTemplate, BaseDocTemplate
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY, TA_RIGHT
+from reportlab.platypus.frames import Frame
+from reportlab.platypus.doctemplate import PageTemplate
 from docx import Document
 from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 import tempfile
+
+
 
 
 class ResumeGenerator:
@@ -77,7 +81,7 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=6,
+                spaceAfter=2,
                 spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
@@ -119,7 +123,7 @@ class ResumeGenerator:
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=11,
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=1,
                 spaceBefore=2,
@@ -128,7 +132,7 @@ class ResumeGenerator:
             "SubCompetency": ParagraphStyle(
                 "CustomSubCompetency",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=11,
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 spaceAfter=1,
                 leftIndent=12,
@@ -137,7 +141,7 @@ class ResumeGenerator:
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
                 parent=styles["Normal"],
-                fontSize=9,
+                fontSize=10,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=1,
                 leftIndent=0,
@@ -146,7 +150,7 @@ class ResumeGenerator:
             "Contact": ParagraphStyle(
                 "CustomContact",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=11,
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#34495E")),
                 alignment=TA_RIGHT,
                 spaceAfter=12,
@@ -167,25 +171,29 @@ class ResumeGenerator:
     
     def generate_pdf(self, filename: str) -> str:
         """Generate PDF resume"""
+        # Get website URL for footer
+        personal_info = self.data.get("personal_info", {})
+        website_url = personal_info.get("website", "")
+        
         doc = SimpleDocTemplate(filename, pagesize=letter, 
                               rightMargin=0.6*inch, leftMargin=0.6*inch,
-                              topMargin=0.6*inch, bottomMargin=0.6*inch)
+                              topMargin=0.6*inch, bottomMargin=0.8*inch)  # Increased bottom margin for footer
         story = []
         
         # Personal info - Right-aligned header
         personal_info = self.data.get("personal_info", {})
         story.append(Paragraph(personal_info.get("name", "NAME"), self.styles["Name"]))
         
-        # Contact info - right-aligned with clickable links
+        # Add space between name and contact info to center it relative to bar
+        story.append(Spacer(1, 0.1*inch))
+        
+        # Contact info - right-aligned with clickable links (website moved to footer)
         contact_parts = []
         if personal_info.get("phone"):
             contact_parts.append(personal_info["phone"])
         if personal_info.get("email"):
             email = personal_info["email"]
             contact_parts.append(f'<link href="mailto:{email}">{email}</link>')
-        if personal_info.get("website"):
-            website = personal_info["website"]
-            contact_parts.append(f'<link href="{website}">{website}</link>')
         if personal_info.get("linkedin"):
             linkedin = personal_info["linkedin"]
             contact_parts.append(f'<link href="{linkedin}">{linkedin}</link>')
@@ -198,8 +206,8 @@ class ResumeGenerator:
         # Add horizontal bar separator
         story.append(self._create_horizontal_bar())
         
-        # Add space before first section
-        story.append(Spacer(1, 0.15*inch))
+        # Add space before first section (reduced for smaller header)
+        story.append(Spacer(1, 0.05*inch))
         
         # Summary
         summary = self.data.get("summary", "")
@@ -271,15 +279,8 @@ class ResumeGenerator:
                 for resp in responsibilities:
                     job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 
-                # Allow job units to split across pages for space efficiency
-                # Add each component separately to allow natural page breaks
-                story.append(job_unit[0])  # Company line
-                if len(job_unit) > 1:
-                    story.append(job_unit[1])  # Subtitle
-                if len(job_unit) > 2:
-                    # Add bullet points individually to allow splitting
-                    for bullet in job_unit[2:]:
-                        story.append(bullet)
+                # Keep the entire job unit together to prevent splitting
+                story.append(KeepTogether(job_unit))
                 
                 story.append(Spacer(1, 1))  # Minimal spacing between jobs
         
@@ -344,7 +345,24 @@ class ResumeGenerator:
                 story.append(Spacer(1, 6))
         
         
-        doc.build(story)
+        # Build with custom footer
+        def add_footer(canvas, doc):
+            """Add footer with website and page number"""
+            canvas.saveState()
+            canvas.setFont("Helvetica", 8)
+            canvas.setFillColor(HexColor("#666666"))
+            
+            # Add website on left
+            if website_url:
+                canvas.drawString(0.6*inch, 0.3*inch, website_url)
+            
+            # Add page number on right
+            page_num = canvas.getPageNumber()
+            canvas.drawRightString(7.5*inch, 0.3*inch, f"Page {page_num}")
+            
+            canvas.restoreState()
+        
+        doc.build(story, onFirstPage=add_footer, onLaterPages=add_footer)
         return filename
     
     def generate_docx(self, filename: str) -> str:
