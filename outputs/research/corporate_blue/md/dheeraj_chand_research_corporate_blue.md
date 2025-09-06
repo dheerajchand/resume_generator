@@ -16,7 +16,7 @@ Research and Data Analytics Leader with 21 years of experience directing applied
 ## Core Competencies
 
 **Applied Research Leadership**: **Applied Research Project Management (Conception to Completion)** • **Research Methodology Design and Implementation** • **Cross-functional Team Leadership and Mentoring** • **Stakeholder Communication and Translation of Complex Findings** • **Evidence-Based Framework Development** • **Survey Methodology and Consumer Insights** • **Statistical Analysis and Data Validation**
-**Technical Proficiency**: **Programming**: *Python (Pandas, SciKit, TensorFlow, Django), R, SQL, Scala* • **Data Platforms**: *PostgreSQL, MySQL, Snowflake, Spark, MongoDB, Oracle* • **Analysis Tools**: *Excel (Advanced), Tableau, PowerBI, SPSS, SAS* • **Research Tools**: *Survey Design, Sampling Methodology, Statistical Modeling* • **Geospatial Analysis**: *ESRI ArcGIS, Quantum GIS, PostGIS, OSGeo*
+**Technical Proficiency**: **Programming**: *`Python (Pandas`, `SciKit`, `TensorFlow`, `Django)`, `R`, `SQL`, `Scala`* • **Data Platforms**: *`PostgreSQL`, `MySQL`, Snowflake, `Spark`, `MongoDB`, `Oracle`* • **Analysis Tools**: *Excel (Advanced), `Tableau`, `PowerBI`, `SPSS`, `SAS`* • **Research Tools**: *`Survey Design`, Sampling Methodology, Statistical Modeling* • **Geospatial Analysis**: *`ESRI ArcGIS`, Quantum GIS, PostGIS, `OSGeo`*
 **Strategic Operations**: **Community Partnership Development** • **Government Relations and Policy Analysis** • **Multi-million Dollar Project Management** • **Performance Measurement and Evaluation** • **Data-Driven Decision Making for Social Impact** • **Public Systems Integration** • **Stakeholder Briefing and Expert Testimony**
 
 ## Professional Experience

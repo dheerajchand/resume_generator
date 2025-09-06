@@ -16,7 +16,7 @@ Strategic data and technology consultant with 21 years solving complex problems 
 ## Core Competencies
 
 **Consulting Expertise**: **Strategic Data Analysis (Exploratory, Predictive, Explanatory)** • **Data Engineering and Infrastructure Development** • **Systems Integration and Architecture Consulting** • **Project Management and Product Management** • **Team Leadership and Technical Mentoring** • **Stakeholder Communication and Requirements Gathering**
-**Technical Solutions**: **Programming**: *Python (Django, Pandas, PySpark), Scala (Spark), JavaScript* • **Data Platforms**: *PostgreSQL/PostGIS, Snowflake, MongoDB, AWS, GCP* • **Analytics**: *Tableau, PowerBI, Statistical Modeling, Machine Learning* • **Integration**: *APIs, ETL/ELT pipelines, Cloud migrations, Legacy modernization*
+**Technical Solutions**: **Programming**: *`Python (Django`, `Pandas`, `PySpark)`, `Scala (Spark)`, `JavaScript`* • **Data Platforms**: *`PostgreSQL/PostGIS`, Snowflake, `MongoDB`, `AWS`, GCP* • **Analytics**: *`Tableau`, `PowerBI`, Statistical Modeling, `Machine Learning`* • **Integration**: *APIs, ETL/ELT pipelines, `Cloud migrations`, `Legacy modernization`*
 **Industry Focus**: **Political and Electoral Data Analytics** • **Nonprofit and Community Organization Solutions** • **Technology Startup and Scale-up Consulting** • **Geospatial Analysis and Demographic Intelligence** • **Survey Research and Consumer Behavior Analysis**
 
 ## Professional Experience

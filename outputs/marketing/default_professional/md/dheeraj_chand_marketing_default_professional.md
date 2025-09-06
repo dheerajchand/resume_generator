@@ -17,7 +17,7 @@ Results-driven Product Marketing professional with 21 years of experience transl
 
 **Product Marketing Core**: **Market Intelligence & Competitive Analysis** • **Product Positioning & Messaging Development** • **Go-to-Market Strategy & Product Launch Management** • **Customer Segmentation & Buyer Persona Development** • **Cross-functional Team Leadership & Collaboration** • **Sales Enablement & Training Material Development** • **Data-Driven Decision Making & Analytics Interpretation**
 **Research & Analytics**: **Survey Methodology & Customer Insights** • **Market Research Design & Implementation** • **Competitive Intelligence & SWOT Analysis** • **Customer Journey Mapping & Behavioral Analysis** • **Statistical Modeling & Trend Analysis** • **Performance Metrics & Dashboard Development** • **A/B Testing & Conversion Optimization**
-**Communication & Technology**: **Strategic Messaging & Narrative Development** • **Stakeholder Communication & Executive Briefings** • **Content Creation**: *Case Studies, Battle Cards, Playbooks* • **B2B SaaS Platform Experience & Technical Acumen** • **CRM/Marketing Automation (Salesforce, HubSpot)** • **Data Visualization (Tableau, PowerBI, D3.js)** • **AI/ML Tools Integration & Marketing Technology Stack**
+**Communication & Technology**: **Strategic Messaging & Narrative Development** • **Stakeholder Communication & Executive Briefings** • **Content Creation**: *Case Studies, `Battle Cards`, Playbooks* • **B2B SaaS Platform Experience & Technical Acumen** • **CRM/Marketing Automation (Salesforce, HubSpot)** • **Data Visualization (Tableau, PowerBI, D3.js)** • **AI/ML Tools Integration & Marketing Technology Stack**
 
 ## Professional Experience
 

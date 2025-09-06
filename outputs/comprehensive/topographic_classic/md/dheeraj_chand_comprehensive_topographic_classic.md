@@ -16,9 +16,9 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 ## Core Competencies
 
-**Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, longitudinal analysis* • **Statistical Analysis**: *Regression modeling, clustering, segmentation, machine learning* • **Geospatial Analysis**: *Spatial clustering, boundary estimation, demographic mapping* • **Data Visualization**: *Tableau, PowerBI, d3.js, Matplotlib, Seaborn, choropleth mapping* • **Research Management**: *Team leadership, methodology design, stakeholder communication*
-**Programming and Development**: **Python**: *Django/GeoDjango, Flask, Pandas, PySpark, SciKit-Learn, TensorFlow* • **JVM Languages**: *Scala (Spark), Java, Groovy* • **Web Technologies**: *JavaScript, React, d3.js, PHP, HTML/CSS* • **Database Languages**: *SQL, T-SQL, PostgreSQL/PostGIS* • **Statistical Computing**: *R, SPSS, SAS, Stata*
-**Data Infrastructure**: **Cloud Platforms**: *AWS (EC2, RDS, S3), Google Cloud Platform, Microsoft Azure* • **Big Data**: *Apache Spark, PySpark, Hadoop, Snowflake, dbt* • **Databases**: *PostgreSQL/PostGIS, MySQL, Oracle, MongoDB, Neo4j* • **Geospatial**: *ESRI ArcGIS, Quantum GIS, GeoServer, OSGeo, GRASS* • **DevOps**: *Docker, Git, CI/CD pipelines, automated testing, version control*
+**Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, `longitudinal analysis`* • **Statistical Analysis**: *`Regression modeling`, `clustering`, segmentation, `machine learning`* • **Geospatial Analysis**: *`Spatial clustering`, `boundary estimation`, `demographic mapping`* • **Data Visualization**: *`Tableau`, `PowerBI`, `d3.js`, `Matplotlib`, `Seaborn`, `choropleth mapping`* • **Research Management**: *`Team leadership`, methodology design, `stakeholder communication`*
+**Programming and Development**: **Python**: *`Django/GeoDjango`, `Flask`, `Pandas`, `PySpark`, `SciKit-Learn`, `TensorFlow`* • **JVM Languages**: *`Scala (Spark)`, `Java`, `Groovy`* • **Web Technologies**: *`JavaScript`, `React`, `d3.js`, `PHP`, `HTML/CSS`* • **Database Languages**: *`SQL`, `T-SQL`, `PostgreSQL/PostGIS`* • **Statistical Computing**: *`R`, `SPSS`, `SAS`, `Stata`*
+**Data Infrastructure**: **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Big Data**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Databases**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`, `Neo4j`* • **Geospatial**: *`ESRI ArcGIS`, Quantum GIS, `GeoServer`, `OSGeo`, `GRASS`* • **DevOps**: *`Docker`, `Git`, CI/CD pipelines, automated testing, `version control`*
 
 ## Professional Experience
 
@@ -27,22 +27,22 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 *Data, Technology and Strategy Consulting*
 
-- Conduct comprehensive quantitative and qualitative research studies using Python, R, SPSS, and Stata for political candidates and organizations
-- Architect cloud-based data warehouse solutions on AWS (EC2, RDS, S3) processing billions of records for electoral analytics
-- Design scalable ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial and demographic datasets
-- Develop custom analytical tools and algorithms using Python, Pandas, NumPy, and Scikit-learn for fraud detection and spatial clustering
-- Manage complex client relationships across political, nonprofit, and technology sectors using Django/GeoDjango web applications
-- Lead technical architecture decisions for data-intensive applications using Docker, Git, and modern DevOps practices
+- Conduct comprehensive quantitative and qualitative research studies using `Python`, `R`, `SPSS`, and `Stata` for political candidates and organizations
+- Architect cloud-based data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics
+- Design scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
+- Develop custom analytical tools and algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering
+- Manage complex client relationships across political, nonprofit, and technology sectors using `Django`/Geo`Django` web applications
+- Lead technical architecture decisions for data-intensive applications using `Docker`, `Git`, and modern DevOps practices
 
 ### DATA PRODUCTS MANAGER
 **Helm/Murmuration, Washington, DC | June 2021 – May 2023**
 
 *Data Platform Development and Team Leadership*
 
-- Conceived and developed framework using Python, Pandas, and PostgreSQL to clean, validate, and normalize government data from Census, BLS, and NCES
-- Built multi-tenant data warehouse and data lake using Snowflake, dbt, and AWS for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions
-- Trained analytical and engineering staff on open source geospatial technology (QGIS, GRASS, OSGeo) for analysis, segmentation, and visualization using Tableau and PowerBI
-- Wrote five-year strategic plans for developing data warehouse using Scala, PySpark, and Apache Spark that became basis of company's distinguishing products
+- Conceived and developed framework using `Python`, `Pandas`, and Postgre`SQL` to clean, validate, and normalize government data from Census, BLS, and NCES
+- Built multi-tenant data warehouse and data lake using Snowflake, dbt, and `AWS` for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions
+- Trained analytical and engineering staff on open source geospatial technology (`QGIS`, `G`R`ASS`, `OSGeo`) for analysis, segmentation, and visualization using `Tableau` and `PowerBI`
+- Wrote five-year strategic plans for developing data warehouse using `Scala`, Py`Spark`, and Apache `Spark` that became basis of company's distinguishing products
 - Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders using Agile methodologies and modern DevOps practices
 
 ### SOFTWARE ENGINEER
@@ -50,19 +50,19 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 *Financial Technology and Humanitarian Crisis Solutions*
 
-- Developed SimCrisis, a GeoDjango web application using Python, PostgreSQL/PostGIS, and NetLogo for multi-agent modeling and econometric simulations of crisis economies
-- Built modular application using Python, Django, and GRASS accepting rules extensions for ethnic strife, different crisis types, supply failures, and disaster scenarios
-- Liaised with officers from International Federation of Red Cross, UNICEF, and Chaos Communications Congress to improve platform using Docker and Ubuntu
-- Conceived and built application using Python, Pandas, and Jupyter to predict how crisis economies respond to different humanitarian interventions
+- Developed SimCrisis, a Geo`Django` web application using `Python`, Postgre`SQL`/PostGIS, and `NetLogo` for multi-agent modeling and econometric simulations of crisis economies
+- Built modular application using `Python`, `Django`, and `G`R`ASS` accepting rules extensions for ethnic strife, different crisis types, supply failures, and disaster scenarios
+- Liaised with officers from International Federation of `R`ed Cross, UNICEF, and Chaos Communications Congress to improve platform using `Docker` and Ubuntu
+- Conceived and built application using `Python`, `Pandas`, and `Jupyter` to predict how crisis economies respond to different humanitarian interventions
 
 ### SENIOR ANALYST
 **Myers Research, Washington, DC | August 2012 – February 2014**
 
 *Quantitative and Qualitative Research for Democratic Campaigns*
 
-- Developed RACSO, a web application for pollsters to fully administer research including questionnaire creation, versioning, and reporting
-- Wrote RFP and analyzed bids from 1,200 vendors before selecting implementation partner
-- Built prototype in R for comprehensive polling administration and sample file management
+- Developed `R`ACSO, a web application for pollsters to fully administer research including questionnaire creation, versioning, and reporting
+- Wrote `R`FP and analyzed bids from 1,200 vendors before selecting implementation partner
+- Built prototype in `R` for comprehensive polling administration and sample file management
 - Provided strategic counsel to Democratic campaigns, political actors, and NGOs through quantitative and qualitative research
 
 ### RESEARCH DIRECTOR

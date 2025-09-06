@@ -1068,36 +1068,50 @@ class ResumeGenerator:
                         content.append(f"- {achievement}")
                 content.append("")
         
-        # Competencies (paragraph format like PDF)
+        # Competencies (enhanced paragraph format with visual hierarchy)
         competencies = self.data.get("competencies", {})
         if competencies:
             content.append("## Core Competencies")
             content.append("")
             for category, skills in competencies.items():
                 if isinstance(skills, list):
-                    # Build paragraph format with Markdown formatting for hierarchy
+                    # Build paragraph format with enhanced Markdown formatting for visual hierarchy
                     skill_parts = []
                     for skill_line in skills:
                         if ": " in skill_line:
                             sub_category, details = skill_line.split(": ", 1)
-                            # Use **bold** for sub-categories and *italics* for details
-                            skill_parts.append(f"**{sub_category}**: *{details}*")
+                            # Enhanced formatting to represent color hierarchy
+                            # Main sub-categories: **bold** (like accent color)
+                            # Details: *italics* with `code` for technical terms (like muted color)
+                            # Extract technical terms and format them as code
+                            tech_terms = []
+                            for term in details.split(", "):
+                                if any(tech in term.lower() for tech in ['python', 'sql', 'aws', 'docker', 'git', 'tableau', 'powerbi', 'spark', 'hadoop', 'mongodb', 'postgresql', 'mysql', 'oracle', 'neo4j', 'arcgis', 'qgis', 'osgeo', 'grass', 'django', 'flask', 'pandas', 'numpy', 'scikit', 'tensorflow', 'r', 'spss', 'sas', 'stata', 'javascript', 'react', 'php', 'html', 'css', 'scala', 'java', 'groovy', 'jupyter', 'netlogo', 'd3.js', 'matplotlib', 'seaborn']):
+                                    tech_terms.append(f"`{term.strip()}`")
+                                else:
+                                    tech_terms.append(term.strip())
+                            formatted_details = ", ".join(tech_terms)
+                            skill_parts.append(f"**{sub_category}**: *{formatted_details}*")
                         else:
-                            # Use **bold** for main skills
+                            # Use **bold** for main skills (like accent color)
                             skill_parts.append(f"**{skill_line}**")
                     
                     # Create single paragraph with main category and all sub-skills
+                    # Main category: **bold** (like primary color)
                     full_text = f"**{category}**: " + " • ".join(skill_parts)
                     content.append(full_text)
             content.append("")
         
-        # Experience
+        # Experience (enhanced formatting with visual hierarchy)
         experience = self.data.get("experience", [])
         if experience:
             content.append("## Professional Experience")
             content.append("")
             for job in experience:
+                # Job title: ### header (like primary color)
                 content.append(f"### {job.get('title', '')}")
+                
+                # Company info: **bold** (like accent color)
                 company_info = job.get('company', '')
                 if job.get('location'):
                     company_info += f" | {job['location']}"
@@ -1106,14 +1120,24 @@ class ResumeGenerator:
                 content.append(f"**{company_info}**")
                 content.append("")
                 
+                # Subtitle: *italics* (like muted color)
                 if job.get('subtitle'):
                     content.append(f"*{job['subtitle']}*")
                     content.append("")
                 
+                # Responsibilities with enhanced formatting
                 responsibilities = job.get('responsibilities', [])
                 if responsibilities:
                     for resp in responsibilities:
-                        content.append(f"- {resp}")
+                        # Extract and format technical terms in responsibilities
+                        enhanced_resp = resp
+                        tech_terms = ['Python', 'SQL', 'AWS', 'Docker', 'Git', 'Tableau', 'PowerBI', 'Spark', 'Hadoop', 'MongoDB', 'PostgreSQL', 'MySQL', 'Oracle', 'Neo4j', 'ArcGIS', 'QGIS', 'OSGeo', 'GRASS', 'Django', 'Flask', 'Pandas', 'NumPy', 'SciKit', 'TensorFlow', 'R', 'SPSS', 'SAS', 'Stata', 'JavaScript', 'React', 'PHP', 'HTML', 'CSS', 'Scala', 'Java', 'Groovy', 'Jupyter', 'NetLogo', 'd3.js', 'Matplotlib', 'Seaborn']
+                        
+                        for term in tech_terms:
+                            if term in enhanced_resp:
+                                enhanced_resp = enhanced_resp.replace(term, f"`{term}`")
+                        
+                        content.append(f"- {enhanced_resp}")
                 content.append("")
         
         # Projects

@@ -15,9 +15,9 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 
 ## Core Competencies
 
-**Big Data & Geospatial Processing**: **Apache Spark**: *PySpark, Spark SQL, Scala Spark, Sedona (geospatial), distributed processing* • **Geospatial Databases**: *PostGIS (advanced), Oracle Spatial, spatial indexing, query optimization* • **ETL/ELT**: *dbt, Informatica, CDAP, custom PySpark pipelines, data governance frameworks* • **Cloud Platforms**: *AWS (EC2, RDS, S3), Snowflake, Hadoop clusters, distributed computing* • **Streaming**: *Real-time data processing, Kafka integration, event-driven architectures*
-**GIS Technology Stack**: **ESRI**: *ArcGIS Server, ArcGIS Pro, enterprise geodatabases, ModelBuilder, ArcPy scripting* • **OSGeo**: *QGIS, GRASS GIS, GDAL/OGR, GeoServer, spatial analysis workflows* • **SAFE FME**: *Data transformation, format conversion, spatial ETL, enterprise integration* • **Web Mapping**: *OpenLayers, Leaflet, MapBox, tile servers, WMS/WFS services* • **Spatial Analysis**: *Clustering algorithms, boundary estimation, network analysis, geostatistics*
-**Software Development & Architecture**: **Python**: *Django/GeoDjango, Flask, Pandas, NumPy, SciKit-Learn, spatial libraries* • **JVM**: *Scala (Spark), Java (GeoTools, enterprise), Groovy scripting* • **Web Technologies**: *React, JavaScript, d3.js, RESTful APIs, microservices* • **Databases**: *PostgreSQL/PostGIS, Oracle, MySQL, MongoDB, spatial optimization* • **DevOps**: *Docker, Kubernetes, CI/CD (GitLab, GitHub), Airflow, Celery, nginx*
+**Big Data & Geospatial Processing**: **Apache Spark**: *`PySpark`, `Spark SQL`, `Scala Spark`, Sedona (geospatial), `distributed processing`* • **Geospatial Databases**: *PostGIS (advanced), `Oracle Spatial`, spatial indexing, `query optimization`* • **ETL/ELT**: *dbt, `Informatica`, CDAP, `custom PySpark pipelines`, `data governance frameworks`* • **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), Snowflake, `Hadoop clusters`, `distributed computing`* • **Streaming**: *`Real-time data processing`, `Kafka integration`, `event-driven architectures`*
+**GIS Technology Stack**: **ESRI**: *`ArcGIS Server`, `ArcGIS Pro`, `enterprise geodatabases`, `ModelBuilder`, `ArcPy scripting`* • **OSGeo**: *`QGIS`, `GRASS GIS`, `GDAL/OGR`, `GeoServer`, `spatial analysis workflows`* • **SAFE FME**: *`Data transformation`, `format conversion`, spatial ETL, `enterprise integration`* • **Web Mapping**: *`OpenLayers`, Leaflet, MapBox, `tile servers`, `WMS/WFS services`* • **Spatial Analysis**: *`Clustering algorithms`, `boundary estimation`, `network analysis`, geostatistics*
+**Software Development & Architecture**: **Python**: *`Django/GeoDjango`, `Flask`, `Pandas`, `NumPy`, `SciKit-Learn`, `spatial libraries`* • **JVM**: *`Scala (Spark)`, `Java (GeoTools`, `enterprise)`, `Groovy scripting`* • **Web Technologies**: *`React`, `JavaScript`, `d3.js`, `RESTful APIs`, `microservices`* • **Databases**: *`PostgreSQL/PostGIS`, `Oracle`, `MySQL`, `MongoDB`, spatial optimization* • **DevOps**: *`Docker`, `Kubernetes`, `CI/CD (GitLab`, `GitHub)`, `Airflow`, `Celery`, nginx*
 
 ## Professional Experience
 
@@ -27,11 +27,11 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 *Geospatial Data Platform Architecture and Big Data Engineering*
 
 - Architected and engineered production geospatial platforms serving thousands of analysts
-- Built enterprise-scale ETL pipelines using PySpark and Sedona processing billions of geospatial records with advanced spatial clustering algorithms
-- Developed multi-tenant data warehouse integrating Census, electoral, and demographic data using PostGIS and Spark SQL optimization
+- Built enterprise-scale ETL pipelines using Py`Spark` and Sedona processing billions of geospatial records with advanced spatial clustering algorithms
+- Developed multi-tenant data warehouse integrating Census, electoral, and demographic data using PostGIS and `Spark` `SQL` optimization
 - Implemented fraud detection systems processing multi-terabyte datasets with real-time spatial analysis capabilities
-- Created parametric boundary estimation algorithms using PostGIS and GRASS without machine learning dependencies
-- Led integration of ESRI ArcGIS Server, OSGeo tools (QGIS, GRASS), and SAFE FME for enterprise geospatial workflows
+- Created parametric boundary estimation algorithms using PostGIS and `G`R`ASS` without machine learning dependencies
+- Led integration of ES`R`I `ArcGIS` Server, `OSGeo` tools (`QGIS`, `G`R`ASS`), and SAFE FME for enterprise geospatial workflows
 
 ### DATA PRODUCTS MANAGER
 **Helm/Murmuration, Washington, DC | 2012 – 2014**
@@ -39,7 +39,7 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 *Geospatial Systems Architecture and Development*
 
 - Architected geospatial analysis frameworks and mapping applications for electoral research
-- Developed custom visualization tools and interactive dashboards using JavaScript and OpenLayers
+- Developed custom visualization tools and interactive dashboards using ``Java`Script` and OpenLayers
 - Designed data processing pipelines for large-scale demographic and geographic datasets
 - Implemented PostGIS spatial databases and optimized geospatial query performance
 
@@ -49,8 +49,8 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 *Data Platform Architecture and Engineering Leadership*
 
 - Led technical architecture and development of data-driven political technology platforms
-- Designed and implemented scalable data platforms using Python, Django, and PostgreSQL
-- Built RESTful APIs and microservices architecture for campaign data integration
+- Designed and implemented scalable data platforms using `Python`, `Django`, and Postgre`SQL`
+- Built `R`ESTful APIs and microservices architecture for campaign data integration
 - Managed engineering teams and established development best practices and CI/CD pipelines
 
 ### SENIOR ANALYST
@@ -58,7 +58,7 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 
 *Campaign Technology and Data Engineering*
 
-- Developed voter targeting models and demographic analysis tools using Python and R
+- Developed voter targeting models and demographic analysis tools using `Python` and `R`
 - Built web applications and data visualization systems for campaign analytics
 - Created data integration systems connecting multiple campaign data sources
 - Implemented machine learning algorithms and statistical models for voter behavior prediction
@@ -78,7 +78,7 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 
 *Political Technology Development*
 
-- Developed software solutions for political campaigns using PHP, JavaScript, and MySQL
+- Developed software solutions for political campaigns using `PHP`, ``Java`Script`, and My`SQL`
 - Built web applications for voter engagement and campaign management
 - Integrated third-party APIs and data sources for campaign tools
 - Collaborated with political strategists to translate requirements into technical solutions
@@ -89,7 +89,7 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 *Nonprofit Technology Integration and Development*
 
 - Developed data management systems and web applications for social justice organizations
-- Built custom applications for community engagement using PHP, MySQL, and web technologies
+- Built custom applications for community engagement using `PHP`, My`SQL`, and web technologies
 - Provided technical training and support to nonprofit staff
 - Integrated technology solutions within organizational frameworks for advocacy work
 
@@ -98,7 +98,7 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 
 *Political Research and Data Analysis Tools*
 
-- Developed data analysis tools for political polling and research using Python and R
+- Developed data analysis tools for political polling and research using `Python` and `R`
 - Built statistical models and data visualization tools for research presentations
 - Created automated reporting systems and data processing pipelines for survey analysis
 - Supported senior researchers with technical analysis and data processing automation
