@@ -40,8 +40,8 @@ from resume_generator_django.resume_generator.constants import (
     PAGE_RIGHT_MARGIN, HEADER_FIRST_PHONE_Y, HEADER_FIRST_GITHUB_Y, 
     HEADER_FIRST_NAME_Y, HEADER_FIRST_LOCATION_Y, HEADER_RECURRING_NAME_Y,
     HEADER_RECURRING_EMAIL_Y, HEADER_RECURRING_PHONE_Y, HEADER_RECURRING_GITHUB_Y,
-    FOOTER_Y,
-    get_spacing_constant, get_font_size, get_color_role
+    FOOTER_Y, FONT_THEMES, FONT_ROLES, FONT_SIZE_THEMES,
+    get_spacing_constant, get_font_size, get_color_role, get_theme_font, get_theme_font_size
 )
 
 
@@ -50,9 +50,10 @@ from resume_generator_django.resume_generator.constants import (
 class ResumeGenerator:
     """Core resume generator supporting all formats"""
     
-    def __init__(self, data_file: str, config_file: Optional[str] = None):
+    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional'):
         self.data = self._load_json(data_file)
         self.config = self._load_json(config_file) if config_file else {}
+        self.color_scheme = color_scheme
         self.styles = self._create_styles()
         
         # Spacing system constants (imported from settings)
@@ -72,21 +73,42 @@ class ResumeGenerator:
             raise Exception(f"Error loading {file_path}: {e}")
     
     def _create_styles(self) -> Dict[str, ParagraphStyle]:
-        """Create paragraph styles based on config"""
+        """Create paragraph styles based on config with theme-specific fonts"""
         styles = getSampleStyleSheet()
         
         # Get colors from config (color schemes have colors directly, not wrapped in "colors")
         colors = self.config if self.config else {}
         
+        # Get color scheme name for font theme selection
+        color_scheme = getattr(self, 'color_scheme', 'default_professional')
+        
+        # Helper function to get theme-specific font with proper bold/italic handling
+        def get_font(role, bold=False, italic=False):
+            base_font = get_theme_font(color_scheme, role)
+            
+            # If the theme already specifies bold/italic, use it directly
+            if '-Bold' in base_font or '-Oblique' in base_font:
+                return base_font
+            
+            # Handle font variations for ReportLab
+            if bold and italic:
+                return f"{base_font}-BoldOblique"
+            elif bold:
+                return f"{base_font}-Bold"
+            elif italic:
+                return f"{base_font}-Oblique"
+            else:
+                return base_font
+        
         custom_styles = {
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=28,  # Bigger name - keep as special case
+                fontSize=28,  # Bigger name - keep as special case, consistent across all themes
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_RIGHT,
                 spaceAfter=get_spacing_constant('base') * 1,
-                fontName="Helvetica-Bold",
+                fontName=get_font('name', bold=True),
             ),
             "Title": ParagraphStyle(
                 "CustomTitle",
@@ -95,7 +117,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_LARGE,
-                fontName="Helvetica-Bold",
+                fontName=get_font('primary', bold=True),
             ),
             "Subtitle": ParagraphStyle(
                 "CustomSubtitle",
@@ -104,7 +126,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_LARGE,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
             ),
             # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
             # Typography hierarchy: 8, 9, 10, 11, 12, 14pt
@@ -117,7 +139,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('header_to_content'),  # Minimal gap to content
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,     # Medium units spacing - reduced whitespace between main sections
-                fontName="Helvetica-Bold",
+                fontName=get_font('primary', bold=True),
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
@@ -126,7 +148,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal spacing - identical to company-to-tagline distance
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,  # Small spacing
-                fontName="Helvetica",
+                fontName=get_font('accent'),
             ),
             "Company": ParagraphStyle(
                 "CustomCompany",
@@ -135,7 +157,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),  # Primary color
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,    # Minimal spacing after company
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal spacing before company
-                fontName="Helvetica-Bold",
+                fontName=get_font('primary', bold=True),
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
@@ -144,7 +166,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,      # Medium unit spacing
                 leftIndent=12,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
             ),
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
@@ -153,7 +175,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,    # Small unit spacing - tighter bullet spacing
                 leftIndent=12,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
             ),
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
@@ -162,7 +184,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,    # Minimal unit spacing - minimal gap to bullets
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal unit spacing - minimal gap from previous
-                fontName="Helvetica-Bold",
+                fontName=get_font('primary', bold=True),
             ),
             "SubCompetency": ParagraphStyle(
                 "CustomSubCompetency",
@@ -171,7 +193,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
                 leftIndent=12,
-                fontName="Helvetica-Bold",
+                fontName=get_font('accent', bold=True),
             ),
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
@@ -180,7 +202,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
                 leftIndent=0,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
                 allowWidows=1,
                 allowOrphans=1,
             ),
@@ -191,7 +213,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),  # Use accent color for header contact
                 alignment=TA_RIGHT,
                 spaceAfter=get_spacing_constant('base') * 1,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
             ),
             "ContactStacked": ParagraphStyle(
                 "CustomContactStacked",
@@ -200,7 +222,7 @@ class ResumeGenerator:
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 alignment=TA_RIGHT,
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,
-                fontName="Helvetica",
+                fontName=get_font('secondary'),
             ),
         }
         
@@ -462,7 +484,15 @@ class ResumeGenerator:
         doc = SimpleDocTemplate(filename, pagesize=letter, 
                               rightMargin=MARGIN_RIGHT, leftMargin=MARGIN_LEFT,
                               topMargin=dimensions['top_margin'], 
-                              bottomMargin=dimensions['bottom_margin'])
+                              bottomMargin=dimensions['bottom_margin'],
+                              # Optimized quality settings for maximum quality within size limits
+                              compress=1,  # Light compression for reasonable file size
+                              creator="Resume Generator Pro",
+                              title=f"Resume - {self.data.get('personal_info', {}).get('name', 'Professional')}",
+                              author=self.data.get('personal_info', {}).get('name', 'Professional'),
+                              # Additional quality settings
+                              subject="Professional Resume",
+                              keywords="resume, professional, career")
         story = []
         
         # Define sections in order
@@ -480,6 +510,11 @@ class ResumeGenerator:
         def add_first_page_header(canvas, doc):
             """Add three-cell header for first page using calculated dimensions"""
             canvas.saveState()
+            
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            canvas.setLineWidth(1.0)  # Ensure consistent line width
             
             # Use calculated dimensions
             header_bar_y = dimensions['header_bar_y']
@@ -551,6 +586,11 @@ class ResumeGenerator:
             """Add header for subsequent pages using systematic approach"""
             canvas.saveState()
             
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            canvas.setLineWidth(1.0)  # Ensure consistent line width
+            
             # Use calculated dimensions (same as first page)
             header_bar_y = dimensions['header_bar_y']
             personal_info = self.data.get("personal_info", {})
@@ -616,6 +656,11 @@ class ResumeGenerator:
             """Add footer with two-cell structure using calculated dimensions"""
             canvas.saveState()
             
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            canvas.setLineWidth(1.0)  # Ensure consistent line width
+            
             # Use calculated footer bar position
             footer_bar_y = dimensions['footer_bar_y']
             personal_info = self.data.get("personal_info", {})
@@ -636,15 +681,15 @@ class ResumeGenerator:
             if website_url or linkedin_url:
                 current_x = PAGE_LEFT_MARGIN
                 
-                # Draw labels in accent color, links in regular color
+                # Draw labels in accent color, links in different color
                 if website_url:
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "Site: ")
                     current_x += canvas.stringWidth("Site: ", "Helvetica", FONT_SIZE_8)
                     
-                    # Link in regular color
-                    canvas.setFillColor(HexColor("#4682B4"))
+                    # Link in different color (use medium text color for contrast)
+                    canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(website_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(website_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, website_url)
                     current_x += canvas.stringWidth(website_url, "Helvetica", FONT_SIZE_8)
@@ -661,8 +706,8 @@ class ResumeGenerator:
                     canvas.drawString(current_x, footer_y, "LinkedIn: ")
                     current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", FONT_SIZE_8)
                     
-                    # Link in LinkedIn blue
-                    canvas.setFillColor(HexColor("#0077B5"))
+                    # Link in different color (use medium text color for contrast)
+                    canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(linkedin_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(linkedin_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, linkedin_url)
             
@@ -677,8 +722,16 @@ class ResumeGenerator:
         return filename
     
     def generate_docx(self, filename: str) -> str:
-        """Generate DOCX resume"""
+        """Generate DOCX resume with high quality settings"""
         doc = Document()
+        
+        # High quality DOCX settings
+        doc.core_properties.title = f"Resume - {self.data.get('personal_info', {}).get('name', 'Professional')}"
+        doc.core_properties.author = self.data.get('personal_info', {}).get('name', 'Professional')
+        doc.core_properties.creator = "Resume Generator Pro"
+        doc.core_properties.subject = "Professional Resume"
+        doc.core_properties.keywords = "resume, professional, career"
+        doc.core_properties.comments = "Generated by Resume Generator Pro"
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
@@ -1146,9 +1199,9 @@ class ResumeManager:
             # Load color scheme
             color_scheme_file = Path("color_schemes") / f"{color_scheme}.json"
             if color_scheme_file.exists():
-                generator = ResumeGenerator(str(data_file), str(color_scheme_file))
+                generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme)
             else:
-                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None)
+                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme)
             
             # Create output directory
             output_path = Path(output_dir) / version / color_scheme / format_type

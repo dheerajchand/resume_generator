@@ -555,6 +555,33 @@ SPACE_MULTIPLIER_MEDIUM = 0.5     # Medium spacing
 SPACE_MULTIPLIER_LARGE = 0.75     # Large spacing
 ```
 
+### Font Theme System
+
+```python
+# Font themes for each color scheme - ATS-friendly typography
+FONT_THEMES = {
+    'modern_tech': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Courier',          # Monospace for body text - tech feel
+        'accent': 'Helvetica-Bold',      # Bold for job titles
+        'technical': 'Courier',          # Monospace for code/data
+        'fallback': 'Helvetica'
+    },
+    # ... other themes
+}
+
+# Font size variations by theme for distinctive typography
+FONT_SIZE_THEMES = {
+    'modern_tech': {
+        'section_header': 16,    # Much larger for tech emphasis
+        'company': 14,           # Much larger for tech companies
+        'job_title': 13,         # Much larger for tech roles
+        'body': 8,               # Much smaller for more content
+        # ... other sizes
+    }
+}
+```
+
 ### Typography System
 
 ```python

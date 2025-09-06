@@ -14,7 +14,7 @@ def docs_index(request):
     """Main documentation index page"""
     context = {
         'title': 'Documentation',
-        'description': 'Complete documentation for the Resume Generator system with systematic design system',
+        'description': 'Complete documentation for the Resume Generator system with systematic design system, font themes, and high-quality output',
         'docs': [
             {
                 'title': 'Getting Started',
@@ -65,6 +65,14 @@ def docs_index(request):
                 'icon': '🎨'
             },
             {
+                'title': 'Color Scheme Themes',
+                'description': 'Industry-specific themes and design philosophy',
+                'url': 'color-scheme-themes',
+                'audience': 'Designers, Users',
+                'length': '15-20 minutes',
+                'icon': '🎯'
+            },
+            {
                 'title': 'Troubleshooting',
                 'description': 'Fix common problems and issues',
                 'url': 'troubleshooting',
@@ -104,6 +112,7 @@ def docs_page(request, page_name):
         'api-documentation': 'api-documentation.md',
         'reportlab-template-guide': 'reportlab-template-guide.md',
         'color-schemes-guide': 'color-schemes-guide.md',
+        'color-scheme-themes': 'color-scheme-themes.md',
         'troubleshooting': 'troubleshooting.md',
         'faq': 'faq.md',
         'examples': 'examples.md',
@@ -158,6 +167,11 @@ def docs_page(request, page_name):
             'title': 'Color Schemes Guide',
             'description': 'Create and customize professional color schemes',
             'icon': '🎨'
+        },
+        'color-scheme-themes': {
+            'title': 'Color Scheme Themes',
+            'description': 'Industry-specific themes and design philosophy',
+            'icon': '🎯'
         },
         'troubleshooting': {
             'title': 'Troubleshooting Guide',

@@ -142,6 +142,201 @@ HEADER_RECURRING_GITHUB_Y = 10.35 * inch
 FOOTER_Y = 0.4 * inch
 
 # =============================================================================
+# FONT THEME SYSTEM
+# =============================================================================
+
+# Font themes for each color scheme - ATS-friendly typography with distinctive variations
+# Using ReportLab's built-in fonts with strategic weight/style variations
+FONT_THEMES = {
+    'cartographic_professional': {
+        'primary': 'Helvetica-Bold',     # Bold for headers - mapping authority
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica-Bold',      # Bold for job titles - mapping emphasis
+        'technical': 'Courier',          # Monospace for coordinates/data
+        'fallback': 'Helvetica'
+    },
+    'corporate_blue': {
+        'primary': 'Helvetica-Bold',     # Bold for corporate authority
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica-Bold',      # Bold for job titles - corporate emphasis
+        'technical': 'Helvetica',        # Regular for technical content
+        'fallback': 'Helvetica'
+    },
+    'default_professional': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica-Bold',      # Bold for job titles - professional emphasis
+        'technical': 'Helvetica',        # Regular for technical content
+        'fallback': 'Helvetica'
+    },
+    'modern_clean': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica-Bold',      # Bold for job titles - modern emphasis
+        'technical': 'Helvetica',        # Regular for technical content
+        'fallback': 'Helvetica'
+    },
+    'modern_tech': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Courier',          # Monospace for body text - tech feel
+        'accent': 'Helvetica-Bold',      # Bold for job titles
+        'technical': 'Courier',          # Monospace for code/data
+        'fallback': 'Helvetica'
+    },
+    'satellite_imagery': {
+        'primary': 'Helvetica-Bold',     # Bold for headers - scientific authority
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Courier',             # Monospace for job titles - technical
+        'technical': 'Courier',          # Monospace for coordinates/data
+        'fallback': 'Helvetica'
+    },
+    'terrain_mapping': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica-Bold',      # Bold for job titles - mapping emphasis
+        'technical': 'Courier',          # Monospace for technical content
+        'fallback': 'Helvetica'
+    },
+    'topographic_classic': {
+        'primary': 'Helvetica-Bold',     # Bold for headers
+        'secondary': 'Helvetica',        # Regular for body text
+        'accent': 'Helvetica',           # Regular for job titles - classic look
+        'technical': 'Helvetica',        # Regular for technical content
+        'fallback': 'Helvetica'
+    }
+}
+
+# Font role mappings for systematic application
+FONT_ROLES = {
+    'name': 'primary',           # Name on first page
+    'section_header': 'primary',
+    'company': 'primary', 
+    'job_title': 'accent',
+    'body': 'secondary',
+    'bullet_point': 'secondary',
+    'main_competency': 'primary',
+    'sub_competency': 'accent',
+    'competency_detail': 'secondary',
+    'footer': 'secondary',
+    'technical': 'technical'  # For coordinates, code, data
+}
+
+# Font size variations by theme for more distinctive typography
+FONT_SIZE_THEMES = {
+    'cartographic_professional': {
+        'name': 28,              # Large name - consistent across all themes
+        'section_header': 14,    # Standard size
+        'company': 12,           # Standard size
+        'job_title': 11,         # Standard size
+        'body': 10,              # Standard size
+        'bullet_point': 10,      # Standard size
+        'main_competency': 12,   # Slightly larger for emphasis
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 9,  # Slightly smaller for details
+        'footer': 8,             # Small footer
+        'technical': 9           # Smaller for technical content
+    },
+    'corporate_blue': {
+        'name': 28,              # Large name - consistent across all themes
+        'section_header': 14,    # Standard size
+        'company': 12,           # Standard size
+        'job_title': 11,         # Standard size
+        'body': 10,              # Standard size
+        'bullet_point': 10,      # Standard size
+        'main_competency': 12,   # Standard size
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 9,  # Standard size
+        'footer': 8,             # Small footer
+        'technical': 10          # Standard size
+    },
+    'modern_tech': {
+        'section_header': 16,    # Much larger for tech emphasis
+        'company': 14,           # Much larger for tech companies
+        'job_title': 13,         # Much larger for tech roles
+        'body': 8,               # Much smaller for more content
+        'bullet_point': 8,       # Much smaller for more content
+        'main_competency': 14,   # Much larger for tech skills
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 7,  # Much smaller for technical details
+        'footer': 8,             # Small footer
+        'technical': 7           # Much smaller for code/data
+    },
+    'satellite_imagery': {
+        'section_header': 15,    # Larger for scientific authority
+        'company': 13,           # Larger for scientific companies
+        'job_title': 9,          # Much smaller for technical focus
+        'body': 8,               # Much smaller for scientific content
+        'bullet_point': 8,       # Much smaller for scientific content
+        'main_competency': 13,   # Larger for scientific skills
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 7,  # Much smaller for technical details
+        'footer': 8,             # Small footer
+        'technical': 7           # Much smaller for coordinates/data
+    },
+    'terrain_mapping': {
+        'section_header': 14,    # Standard size
+        'company': 12,           # Standard size
+        'job_title': 11,         # Standard size
+        'body': 10,              # Standard size
+        'bullet_point': 10,      # Standard size
+        'main_competency': 12,   # Standard size
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 9,  # Standard size
+        'footer': 8,             # Small footer
+        'technical': 9           # Standard size
+    },
+    'topographic_classic': {
+        'section_header': 13,    # Slightly smaller for classic look
+        'company': 11,           # Slightly smaller for classic look
+        'job_title': 10,         # Slightly smaller for classic look
+        'body': 10,              # Standard size
+        'bullet_point': 10,      # Standard size
+        'main_competency': 11,   # Slightly smaller for classic look
+        'sub_competency': 10,    # Standard size
+        'competency_detail': 9,  # Standard size
+        'footer': 8,             # Small footer
+        'technical': 9           # Standard size
+    }
+}
+
+def get_theme_font(color_scheme, role):
+    """
+    Get the appropriate font for a given color scheme and role.
+    
+    Args:
+        color_scheme (str): The color scheme name
+        role (str): The font role (e.g., 'primary', 'secondary', 'accent')
+    
+    Returns:
+        str: The font name to use
+    """
+    # Get the font theme for this color scheme
+    theme_fonts = FONT_THEMES.get(color_scheme, FONT_THEMES['default_professional'])
+    
+    # Get the font role (primary, secondary, accent, technical)
+    font_role = FONT_ROLES.get(role, 'secondary')
+    
+    # Return the appropriate font with fallback
+    return theme_fonts.get(font_role, theme_fonts.get('fallback', 'Helvetica'))
+
+def get_theme_font_size(color_scheme, role):
+    """
+    Get the appropriate font size for a given color scheme and role.
+    
+    Args:
+        color_scheme (str): The color scheme name
+        role (str): The font role (e.g., 'section_header', 'body', 'bullet_point')
+    
+    Returns:
+        int: The font size to use
+    """
+    # Get the font size theme for this color scheme
+    theme_sizes = FONT_SIZE_THEMES.get(color_scheme, FONT_SIZE_THEMES['default_professional'])
+    
+    # Return the appropriate font size with fallback
+    return theme_sizes.get(role, theme_sizes.get('body', 10))
+
+# =============================================================================
 # JOB SPLITTING RULES
 # =============================================================================
 

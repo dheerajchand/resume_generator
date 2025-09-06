@@ -8,6 +8,8 @@ A comprehensive Django-based resume generation system that creates professional 
 - **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Modern Clean, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
 - **6 Resume Versions**: Research, Technical, Comprehensive, Consulting, Software, and Marketing
 - **Systematic Design System**: Consistent spacing, typography, and color hierarchy
+- **Font Theme System**: ATS-friendly typography with distinctive variations per theme
+- **High Quality Output**: Optimized for maximum quality within service size limits
 - **Django Web Interface**: Full web application with REST API
 - **Heroku Ready**: Configured for easy deployment to Heroku
 - **Functional Architecture**: Clean, maintainable code with functional programming principles
@@ -218,8 +220,8 @@ python manage.py test resumes.tests.test_core_services
 - **Memory Usage**: ~50MB for full generation
 - **Total Generated Files**: 192 files (6 versions × 4 formats × 8 color schemes)
 - **File Sizes**: 
-  - PDF: 50-100KB
-  - DOCX: 30-80KB
+  - PDF: ~12KB (optimized for all services)
+  - DOCX: ~39KB (excellent compatibility)
   - RTF: 20-60KB
   - Markdown: 5-15KB
 
@@ -233,6 +235,13 @@ python manage.py test resumes.tests.test_core_services
 - **Header Bar Positioning**: Dynamic positioning based on content (GitHub presence)
 - **Margin System**: Calculated margins ensure consistent content positioning across all pages
 - **No Double Spacing**: Eliminated extra spacers that caused inconsistent spacing
+
+### Font Theme System
+- **ATS-Friendly Typography**: Uses only ReportLab built-in fonts for maximum compatibility
+- **Theme-Specific Variations**: Each color scheme has distinctive font combinations
+- **Strategic Font Usage**: Bold for headers, regular for body, monospace for technical content
+- **Font Size Variations**: Dramatic size differences for visual distinction
+- **Professional Appearance**: Maintains readability while adding personality
 
 ### Typography Hierarchy
 - **Section Headers**: 12pt bold for major sections
