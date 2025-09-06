@@ -6,34 +6,18 @@
 
 Results-driven Product Marketing professional with 21 years of experience translating complex data insights into compelling market strategies and customer narratives. Expert in market intelligence, competitive analysis, and data-driven positioning with proven success leading cross-functional teams and launching B2B SaaS platforms used by thousands of users. Deep expertise in survey methodology, customer segmentation, and go-to-market strategy development. Skilled at turning complex technical concepts into clear, actionable messaging that drives customer adoption and business growth across political, technology, and consulting sectors.
 
+## Key Achievements and Impact
+
+### Product Marketing & Launch Success
+- Successfully launched multiple B2B SaaS platforms used by thousands of active users with proven market adoption and customer retention
+- Developed comprehensive go-to-market strategies resulting in measurable increases in customer acquisition, engagement, and platform utilization across diverse market segments
+- Created compelling product narratives and messaging frameworks that effectively translated complex technical capabilities into clear customer value propositions
+
 ## Core Competencies
 
-### Product Marketing Core
-- Market Intelligence & Competitive Analysis
-- Product Positioning & Messaging Development
-- Go-to-Market Strategy & Product Launch Management
-- Customer Segmentation & Buyer Persona Development
-- Cross-functional Team Leadership & Collaboration
-- Sales Enablement & Training Material Development
-- Data-Driven Decision Making & Analytics Interpretation
-
-### Research & Analytics
-- Survey Methodology & Customer Insights
-- Market Research Design & Implementation
-- Competitive Intelligence & SWOT Analysis
-- Customer Journey Mapping & Behavioral Analysis
-- Statistical Modeling & Trend Analysis
-- Performance Metrics & Dashboard Development
-- A/B Testing & Conversion Optimization
-
-### Communication & Technology
-- Strategic Messaging & Narrative Development
-- Stakeholder Communication & Executive Briefings
-- Content Creation: Case Studies, Battle Cards, Playbooks
-- B2B SaaS Platform Experience & Technical Acumen
-- CRM/Marketing Automation (Salesforce, HubSpot)
-- Data Visualization (Tableau, PowerBI, D3.js)
-- AI/ML Tools Integration & Marketing Technology Stack
+**Product Marketing Core**: **Market Intelligence & Competitive Analysis** • **Product Positioning & Messaging Development** • **Go-to-Market Strategy & Product Launch Management** • **Customer Segmentation & Buyer Persona Development** • **Cross-functional Team Leadership & Collaboration** • **Sales Enablement & Training Material Development** • **Data-Driven Decision Making & Analytics Interpretation**
+**Research & Analytics**: **Survey Methodology & Customer Insights** • **Market Research Design & Implementation** • **Competitive Intelligence & SWOT Analysis** • **Customer Journey Mapping & Behavioral Analysis** • **Statistical Modeling & Trend Analysis** • **Performance Metrics & Dashboard Development** • **A/B Testing & Conversion Optimization**
+**Communication & Technology**: **Strategic Messaging & Narrative Development** • **Stakeholder Communication & Executive Briefings** • **Content Creation**: *Case Studies, Battle Cards, Playbooks* • **B2B SaaS Platform Experience & Technical Acumen** • **CRM/Marketing Automation (Salesforce, HubSpot)** • **Data Visualization (Tableau, PowerBI, D3.js)** • **AI/ML Tools Integration & Marketing Technology Stack**
 
 ## Professional Experience
 
@@ -128,13 +112,6 @@ Results-driven Product Marketing professional with 21 years of experience transl
 - Developed data collection systems for campaign field work and voter outreach
 - Trained field staff on campaign messaging and data collection protocols
 - Analyzed field data to inform campaign strategy and marketing approaches
-
-## Key Achievements and Impact
-
-### Product Marketing & Launch Success
-- Successfully launched multiple B2B SaaS platforms used by thousands of active users with proven market adoption and customer retention
-- Developed comprehensive go-to-market strategies resulting in measurable increases in customer acquisition, engagement, and platform utilization across diverse market segments
-- Created compelling product narratives and messaging frameworks that effectively translated complex technical capabilities into clear customer value propositions
 
 ---
 

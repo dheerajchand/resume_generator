@@ -6,32 +6,18 @@
 
 Research and Data Analytics Leader with 21 years of experience directing applied research projects from conception to completion focused on economic mobility, community development, and social impact. Proven track record of leading cross-functional teams, translating complex research insights for diverse stakeholders including elected officials and community organizations, and implementing evidence-based solutions that drive meaningful outcomes. Expert in research methodology design, statistical analysis, and community partnership development with extensive experience serving vulnerable populations and addressing systemic poverty challenges.
 
+## Key Achievements and Impact
+
+### Research Leadership and Community Impact
+- Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders
+- Research analysis used in court cases addressing housing, redistricting, and community development with rigorous methodology
+- Conceived and deployed cloud-based analytical software used by thousands of researchers nationwide for community-focused research
+
 ## Core Competencies
 
-### Applied Research Leadership
-- Applied Research Project Management (Conception to Completion)
-- Research Methodology Design and Implementation
-- Cross-functional Team Leadership and Mentoring
-- Stakeholder Communication and Translation of Complex Findings
-- Evidence-Based Framework Development
-- Survey Methodology and Consumer Insights
-- Statistical Analysis and Data Validation
-
-### Technical Proficiency
-- Programming: Python (Pandas, SciKit, TensorFlow, Django), R, SQL, Scala
-- Data Platforms: PostgreSQL, MySQL, Snowflake, Spark, MongoDB, Oracle
-- Analysis Tools: Excel (Advanced), Tableau, PowerBI, SPSS, SAS
-- Research Tools: Survey Design, Sampling Methodology, Statistical Modeling
-- Geospatial Analysis: ESRI ArcGIS, Quantum GIS, PostGIS, OSGeo
-
-### Strategic Operations
-- Community Partnership Development
-- Government Relations and Policy Analysis
-- Multi-million Dollar Project Management
-- Performance Measurement and Evaluation
-- Data-Driven Decision Making for Social Impact
-- Public Systems Integration
-- Stakeholder Briefing and Expert Testimony
+**Applied Research Leadership**: **Applied Research Project Management (Conception to Completion)** • **Research Methodology Design and Implementation** • **Cross-functional Team Leadership and Mentoring** • **Stakeholder Communication and Translation of Complex Findings** • **Evidence-Based Framework Development** • **Survey Methodology and Consumer Insights** • **Statistical Analysis and Data Validation**
+**Technical Proficiency**: **Programming**: *Python (Pandas, SciKit, TensorFlow, Django), R, SQL, Scala* • **Data Platforms**: *PostgreSQL, MySQL, Snowflake, Spark, MongoDB, Oracle* • **Analysis Tools**: *Excel (Advanced), Tableau, PowerBI, SPSS, SAS* • **Research Tools**: *Survey Design, Sampling Methodology, Statistical Modeling* • **Geospatial Analysis**: *ESRI ArcGIS, Quantum GIS, PostGIS, OSGeo*
+**Strategic Operations**: **Community Partnership Development** • **Government Relations and Policy Analysis** • **Multi-million Dollar Project Management** • **Performance Measurement and Evaluation** • **Data-Driven Decision Making for Social Impact** • **Public Systems Integration** • **Stakeholder Briefing and Expert Testimony**
 
 ## Professional Experience
 
@@ -126,13 +112,6 @@ Research and Data Analytics Leader with 21 years of experience directing applied
 - Developed data collection protocols and quality control systems
 - Trained field staff on research methodology and data collection
 - Analyzed field research data to inform campaign strategy and findings
-
-## Key Achievements and Impact
-
-### Research Leadership and Community Impact
-- Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders
-- Research analysis used in court cases addressing housing, redistricting, and community development with rigorous methodology
-- Conceived and deployed cloud-based analytical software used by thousands of researchers nationwide for community-focused research
 
 ---
 

@@ -6,28 +6,18 @@
 
 Senior Data Engineer with 21 years of expertise in geospatial data platforms, big data processing, and distributed systems architecture. Deep specialist in Apache Spark/Sedona for large-scale geospatial analytics, with fluency across ESRI, OSGeo, and SAFE FME technology stacks. Proven track record architecting production systems serving thousands of users, implementing PySpark pipelines processing billions of spatial records, and leading engineering teams. Expert in full-stack geospatial development from PostGIS database optimization to React-based mapping interfaces.
 
+## Key Achievements and Impact
+
+### Geospatial Platform Engineering
+- Architected redistricting platform processing Census data for thousands of analysts with real-time PostGIS collaborative editing
+- Built boundary estimation system using advanced PostGIS algorithms and incomplete data without machine learning requirements
+- Developed geospatial simulation platform integrating multi-agent modeling with web interface
+
 ## Core Competencies
 
-### Big Data & Geospatial Processing
-- Apache Spark: PySpark, Spark SQL, Scala Spark, Sedona (geospatial), distributed processing
-- Geospatial Databases: PostGIS (advanced), Oracle Spatial, spatial indexing, query optimization
-- ETL/ELT: dbt, Informatica, CDAP, custom PySpark pipelines, data governance frameworks
-- Cloud Platforms: AWS (EC2, RDS, S3), Snowflake, Hadoop clusters, distributed computing
-- Streaming: Real-time data processing, Kafka integration, event-driven architectures
-
-### GIS Technology Stack
-- ESRI: ArcGIS Server, ArcGIS Pro, enterprise geodatabases, ModelBuilder, ArcPy scripting
-- OSGeo: QGIS, GRASS GIS, GDAL/OGR, GeoServer, spatial analysis workflows
-- SAFE FME: Data transformation, format conversion, spatial ETL, enterprise integration
-- Web Mapping: OpenLayers, Leaflet, MapBox, tile servers, WMS/WFS services
-- Spatial Analysis: Clustering algorithms, boundary estimation, network analysis, geostatistics
-
-### Software Development & Architecture
-- Python: Django/GeoDjango, Flask, Pandas, NumPy, SciKit-Learn, spatial libraries
-- JVM: Scala (Spark), Java (GeoTools, enterprise), Groovy scripting
-- Web Technologies: React, JavaScript, d3.js, RESTful APIs, microservices
-- Databases: PostgreSQL/PostGIS, Oracle, MySQL, MongoDB, spatial optimization
-- DevOps: Docker, Kubernetes, CI/CD (GitLab, GitHub), Airflow, Celery, nginx
+**Big Data & Geospatial Processing**: **Apache Spark**: *PySpark, Spark SQL, Scala Spark, Sedona (geospatial), distributed processing* • **Geospatial Databases**: *PostGIS (advanced), Oracle Spatial, spatial indexing, query optimization* • **ETL/ELT**: *dbt, Informatica, CDAP, custom PySpark pipelines, data governance frameworks* • **Cloud Platforms**: *AWS (EC2, RDS, S3), Snowflake, Hadoop clusters, distributed computing* • **Streaming**: *Real-time data processing, Kafka integration, event-driven architectures*
+**GIS Technology Stack**: **ESRI**: *ArcGIS Server, ArcGIS Pro, enterprise geodatabases, ModelBuilder, ArcPy scripting* • **OSGeo**: *QGIS, GRASS GIS, GDAL/OGR, GeoServer, spatial analysis workflows* • **SAFE FME**: *Data transformation, format conversion, spatial ETL, enterprise integration* • **Web Mapping**: *OpenLayers, Leaflet, MapBox, tile servers, WMS/WFS services* • **Spatial Analysis**: *Clustering algorithms, boundary estimation, network analysis, geostatistics*
+**Software Development & Architecture**: **Python**: *Django/GeoDjango, Flask, Pandas, NumPy, SciKit-Learn, spatial libraries* • **JVM**: *Scala (Spark), Java (GeoTools, enterprise), Groovy scripting* • **Web Technologies**: *React, JavaScript, d3.js, RESTful APIs, microservices* • **Databases**: *PostgreSQL/PostGIS, Oracle, MySQL, MongoDB, spatial optimization* • **DevOps**: *Docker, Kubernetes, CI/CD (GitLab, GitHub), Airflow, Celery, nginx*
 
 ## Professional Experience
 
@@ -122,13 +112,6 @@ Senior Data Engineer with 21 years of expertise in geospatial data platforms, bi
 - Built databases and reporting tools for campaign field work and voter outreach
 - Trained field staff on data collection protocols and quality control systems
 - Analyzed field data using statistical methods to inform campaign strategy and research findings
-
-## Key Achievements and Impact
-
-### Geospatial Platform Engineering
-- Architected redistricting platform processing Census data for thousands of analysts with real-time PostGIS collaborative editing
-- Built boundary estimation system using advanced PostGIS algorithms and incomplete data without machine learning requirements
-- Developed geospatial simulation platform integrating multi-agent modeling with web interface
 
 ---
 

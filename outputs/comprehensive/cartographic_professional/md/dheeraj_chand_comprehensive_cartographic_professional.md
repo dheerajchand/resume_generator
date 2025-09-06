@@ -6,28 +6,19 @@
 
 Research & Data Professional with 21 years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.
 
+## Key Achievements and Impact
+
+### Software Development and Innovation
+- Conceived and deployed redistricting software used by thousands of analysts nationwide
+- Developed boundary estimation system using incomplete data without ML requirements
+- Created econometric simulation platform for humanitarian intervention modeling
+- Built comprehensive survey operations platform from RFP through deployment
+
 ## Core Competencies
 
-### Research and Analytics
-- Survey Methodology: Design, sampling, weighting, longitudinal analysis
-- Statistical Analysis: Regression modeling, clustering, segmentation, machine learning
-- Geospatial Analysis: Spatial clustering, boundary estimation, demographic mapping
-- Data Visualization: Tableau, PowerBI, d3.js, Matplotlib, Seaborn, choropleth mapping
-- Research Management: Team leadership, methodology design, stakeholder communication
-
-### Programming and Development
-- Python: Django/GeoDjango, Flask, Pandas, PySpark, SciKit-Learn, TensorFlow
-- JVM Languages: Scala (Spark), Java, Groovy
-- Web Technologies: JavaScript, React, d3.js, PHP, HTML/CSS
-- Database Languages: SQL, T-SQL, PostgreSQL/PostGIS
-- Statistical Computing: R, SPSS, SAS, Stata
-
-### Data Infrastructure
-- Cloud Platforms: AWS (EC2, RDS, S3), Google Cloud Platform, Microsoft Azure
-- Big Data: Apache Spark, PySpark, Hadoop, Snowflake, dbt
-- Databases: PostgreSQL/PostGIS, MySQL, Oracle, MongoDB, Neo4j
-- Geospatial: ESRI ArcGIS, Quantum GIS, GeoServer, OSGeo, GRASS
-- DevOps: Docker, Git, CI/CD pipelines, automated testing, version control
+**Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, longitudinal analysis* • **Statistical Analysis**: *Regression modeling, clustering, segmentation, machine learning* • **Geospatial Analysis**: *Spatial clustering, boundary estimation, demographic mapping* • **Data Visualization**: *Tableau, PowerBI, d3.js, Matplotlib, Seaborn, choropleth mapping* • **Research Management**: *Team leadership, methodology design, stakeholder communication*
+**Programming and Development**: **Python**: *Django/GeoDjango, Flask, Pandas, PySpark, SciKit-Learn, TensorFlow* • **JVM Languages**: *Scala (Spark), Java, Groovy* • **Web Technologies**: *JavaScript, React, d3.js, PHP, HTML/CSS* • **Database Languages**: *SQL, T-SQL, PostgreSQL/PostGIS* • **Statistical Computing**: *R, SPSS, SAS, Stata*
+**Data Infrastructure**: **Cloud Platforms**: *AWS (EC2, RDS, S3), Google Cloud Platform, Microsoft Azure* • **Big Data**: *Apache Spark, PySpark, Hadoop, Snowflake, dbt* • **Databases**: *PostgreSQL/PostGIS, MySQL, Oracle, MongoDB, Neo4j* • **Geospatial**: *ESRI ArcGIS, Quantum GIS, GeoServer, OSGeo, GRASS* • **DevOps**: *Docker, Git, CI/CD pipelines, automated testing, version control*
 
 ## Professional Experience
 
@@ -123,14 +114,6 @@ Research & Data Professional with 21 years of experience in applied research, da
 - Developed data collection and management systems for field work
 - Trained field staff on data collection protocols and quality control
 - Analyzed field data to inform campaign strategy and research findings
-
-## Key Achievements and Impact
-
-### Software Development and Innovation
-- Conceived and deployed redistricting software used by thousands of analysts nationwide
-- Developed boundary estimation system using incomplete data without ML requirements
-- Created econometric simulation platform for humanitarian intervention modeling
-- Built comprehensive survey operations platform from RFP through deployment
 
 ---
 

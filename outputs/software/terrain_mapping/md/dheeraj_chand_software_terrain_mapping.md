@@ -6,28 +6,19 @@
 
 Senior Software Engineer with 21 years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.
 
+## Key Achievements and Impact
+
+### Geospatial Platform Development
+- Architected redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
+- Built boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms
+- Developed econometric simulation platform with NetLogo multi-agent modeling and web interface
+- Created comprehensive survey platform managing complete research lifecycle with integrated geospatial market segmentation
+
 ## Core Competencies
 
-### Programming & Development
-- Python: Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn
-- JVM: Scala (Spark/Sedona), Java (GeoTools, enterprise applications), Groovy
-- Web Technologies: JavaScript, React, d3.js, OpenLayers, jQuery, HTML/CSS
-- Database Languages: SQL, T-SQL, PostgreSQL/PostGIS, Oracle, MySQL
-- Statistical/Analysis: R, SPSS, NetLogo (agent-based modeling)
-
-### Big Data & Geospatial Platforms
-- Apache Spark: PySpark, Spark SQL, Sedona (geospatial), distributed processing
-- Geospatial Stack: PostGIS, ESRI ArcGIS, Quantum GIS, GRASS, OSGeo, SAFE FME
-- Cloud Platforms: AWS (EC2, RDS, S3), Snowflake, Google Cloud, Microsoft Azure
-- Data Engineering: ETL/ELT pipelines, dbt, Hadoop, Informatica, CDAP
-- Databases: PostgreSQL/PostGIS, Oracle, MongoDB, Neo4j, MySQL
-
-### Software Architecture & DevOps
-- Distributed Systems: Multi-tenant SaaS, microservices, API design, scalability
-- Geospatial Applications: Spatial algorithms, boundary estimation, clustering analysis
-- Web Applications: Full-stack development, RESTful APIs, real-time collaboration
-- DevOps: Docker, Vagrant, CI/CD (GitLab, GitHub), Celery, Airflow, nginx
-- Integration: Twilio API, WMS tile servers, CRM/DMP integration, OAuth
+**Programming & Development**: **Python**: *Django/GeoDjango, Flask, Pandas, PySpark, NumPy, SciKit-Learn* • **JVM**: *Scala (Spark/Sedona), Java (GeoTools, enterprise applications), Groovy* • **Web Technologies**: *JavaScript, React, d3.js, OpenLayers, jQuery, HTML/CSS* • **Database Languages**: *SQL, T-SQL, PostgreSQL/PostGIS, Oracle, MySQL* • **Statistical/Analysis**: *R, SPSS, NetLogo (agent-based modeling)*
+**Big Data & Geospatial Platforms**: **Apache Spark**: *PySpark, Spark SQL, Sedona (geospatial), distributed processing* • **Geospatial Stack**: *PostGIS, ESRI ArcGIS, Quantum GIS, GRASS, OSGeo, SAFE FME* • **Cloud Platforms**: *AWS (EC2, RDS, S3), Snowflake, Google Cloud, Microsoft Azure* • **Data Engineering**: *ETL/ELT pipelines, dbt, Hadoop, Informatica, CDAP* • **Databases**: *PostgreSQL/PostGIS, Oracle, MongoDB, Neo4j, MySQL*
+**Software Architecture & DevOps**: **Distributed Systems**: *Multi-tenant SaaS, microservices, API design, scalability* • **Geospatial Applications**: *Spatial algorithms, boundary estimation, clustering analysis* • **Web Applications**: *Full-stack development, RESTful APIs, real-time collaboration* • **DevOps**: *Docker, Vagrant, CI/CD (GitLab, GitHub), Celery, Airflow, nginx* • **Integration**: *Twilio API, WMS tile servers, CRM/DMP integration, OAuth*
 
 ## Professional Experience
 
@@ -112,14 +103,6 @@ Senior Software Engineer with 21 years building scalable geospatial data platfor
 - Built databases and reporting tools for campaign field work
 - Trained field staff on data collection protocols and quality control
 - Analyzed field data to inform campaign strategy and research findings
-
-## Key Achievements and Impact
-
-### Geospatial Platform Development
-- Architected redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
-- Built boundary estimation system achieving accurate geospatial results without machine learning using advanced PostGIS algorithms
-- Developed econometric simulation platform with NetLogo multi-agent modeling and web interface
-- Created comprehensive survey platform managing complete research lifecycle with integrated geospatial market segmentation
 
 ---
 

@@ -6,28 +6,18 @@
 
 Strategic data and technology consultant with 21 years solving complex problems through analytics and software development. Specializes in transforming organizational data capabilities from concept to production. Expert in translating business requirements into technical solutions, with proven success across political, nonprofit, and technology sectors. Currently building scalable data platforms while modernizing legacy systems for improved performance and maintainability.
 
+## Key Achievements and Impact
+
+### Technology Innovation
+- Developed proprietary B2B SaaS solutions for data analytics and geospatial applications
+- Created open source frameworks for political and social behavior prediction
+- Pioneered integration of advanced mapping techniques into standard consulting deliverables
+
 ## Core Competencies
 
-### Consulting Expertise
-- Strategic Data Analysis (Exploratory, Predictive, Explanatory)
-- Data Engineering and Infrastructure Development
-- Systems Integration and Architecture Consulting
-- Project Management and Product Management
-- Team Leadership and Technical Mentoring
-- Stakeholder Communication and Requirements Gathering
-
-### Technical Solutions
-- Programming: Python (Django, Pandas, PySpark), Scala (Spark), JavaScript
-- Data Platforms: PostgreSQL/PostGIS, Snowflake, MongoDB, AWS, GCP
-- Analytics: Tableau, PowerBI, Statistical Modeling, Machine Learning
-- Integration: APIs, ETL/ELT pipelines, Cloud migrations, Legacy modernization
-
-### Industry Focus
-- Political and Electoral Data Analytics
-- Nonprofit and Community Organization Solutions
-- Technology Startup and Scale-up Consulting
-- Geospatial Analysis and Demographic Intelligence
-- Survey Research and Consumer Behavior Analysis
+**Consulting Expertise**: **Strategic Data Analysis (Exploratory, Predictive, Explanatory)** • **Data Engineering and Infrastructure Development** • **Systems Integration and Architecture Consulting** • **Project Management and Product Management** • **Team Leadership and Technical Mentoring** • **Stakeholder Communication and Requirements Gathering**
+**Technical Solutions**: **Programming**: *Python (Django, Pandas, PySpark), Scala (Spark), JavaScript* • **Data Platforms**: *PostgreSQL/PostGIS, Snowflake, MongoDB, AWS, GCP* • **Analytics**: *Tableau, PowerBI, Statistical Modeling, Machine Learning* • **Integration**: *APIs, ETL/ELT pipelines, Cloud migrations, Legacy modernization*
+**Industry Focus**: **Political and Electoral Data Analytics** • **Nonprofit and Community Organization Solutions** • **Technology Startup and Scale-up Consulting** • **Geospatial Analysis and Demographic Intelligence** • **Survey Research and Consumer Behavior Analysis**
 
 ## Professional Experience
 
@@ -121,13 +111,6 @@ Strategic data and technology consultant with 21 years solving complex problems 
 - Developed data management systems and quality control protocols
 - Delivered field data analysis and strategic recommendations
 - Supported campaign teams with field operations and data insights
-
-## Key Achievements and Impact
-
-### Technology Innovation
-- Developed proprietary B2B SaaS solutions for data analytics and geospatial applications
-- Created open source frameworks for political and social behavior prediction
-- Pioneered integration of advanced mapping techniques into standard consulting deliverables
 
 ---
 
