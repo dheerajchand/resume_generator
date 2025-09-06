@@ -16,10 +16,10 @@ SPACE_BASE = 0.2 * inch
 
 # Spacing hierarchy
 SPACE_BETWEEN_SECTIONS = SPACE_BASE * 0.5             # Between major sections (reduced)
-SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.15           # Between different jobs (further reduced)
+SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.1            # Between different jobs (very minimal)
 SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BASE / 32        # Within job units (extremely minimal)
 SPACE_HEADER_TO_CONTENT = SPACE_BASE * 0.05           # Between headers and their content (very minimal)
-SPACE_SUBHEADER_TO_BULLETS = SPACE_BASE * 0.1         # Between subheaders and their bullet lists
+SPACE_SUBHEADER_TO_BULLETS = SPACE_BASE * 0.2         # Between subheaders and their bullet lists (more visible)
 SPACE_HEADER_TOP = 0.4 * inch                         # Space for header on first page
 
 # =============================================================================
