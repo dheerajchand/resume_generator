@@ -168,6 +168,8 @@ class ResumeGenerator:
                 spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
                 leftIndent=0,
                 fontName="Helvetica",
+                allowWidows=1,
+                allowOrphans=1,
             ),
             "Contact": ParagraphStyle(
                 "CustomContact",
@@ -226,17 +228,24 @@ class ResumeGenerator:
             competency_content = []
             for main_category, sub_skills in competencies.items():
                 if isinstance(sub_skills, list):
-                    # Build compact inline content
+                    # Build compact inline content with color hierarchy
+                    colors = self.config if self.config else {}
+                    accent_color = colors.get("ACCENT_COLOR", "#4682B4") 
+                    muted_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
+                    
                     sub_content = []
                     for skill_line in sub_skills:
                         if ": " in skill_line:
                             sub_category, details = skill_line.split(": ", 1)
-                            sub_content.append(f"<i>{sub_category}</i> ({details})")
+                            sub_content.append(f'<font color="{accent_color}"><i>{sub_category}</i></font> <font color="{muted_color}">({details})</font>')
                         else:
-                            sub_content.append(skill_line)
+                            sub_content.append(f'<font color="{accent_color}">{skill_line}</font>')
                     
-                    # Create single paragraph with main category and all sub-skills
-                    full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
+                    # Create single paragraph with main category and all sub-skills using color hierarchy
+                    # Main category in primary color, sub-categories in accent color, details in muted color
+                    main_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
+                    
+                    full_text = f'<font color="{main_color}"><b>{main_category}:</b></font> {"; ".join(sub_content)}'
                     competency_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
             sections.append({
