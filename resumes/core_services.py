@@ -76,74 +76,79 @@ class ResumeGenerator:
                 spaceAfter=6,
                 fontName="Helvetica",
             ),
+            # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
+            # Typography hierarchy: 8, 9, 10, 11, 12, 14pt
+            # Color hierarchy: primary, secondary, accent, muted
+            
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
                 fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=2,
-                spaceBefore=6,
+                spaceAfter=1,      # 1 unit spacing
+                spaceBefore=3,     # 3 units spacing - more whitespace between main sections
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
                 parent=styles["Normal"],
-                fontSize=10,
-                textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#2C3E50")),
-                spaceAfter=2,
-                spaceBefore=2,
+                fontSize=11,       # Increased for legibility
+                textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
+                spaceAfter=0.25,   # Minimal spacing
+                spaceBefore=0.25,  # Minimal spacing
                 fontName="Helvetica",
             ),
             "Company": ParagraphStyle(
                 "CustomCompany",
                 parent=styles["Heading3"],
-                fontSize=10,
-                textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),
-                spaceAfter=1,
+                fontSize=12,       # Increased for legibility
+                textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),  # Primary color
+                spaceAfter=0.5,    # 0.5 unit spacing
+                spaceBefore=0.5,   # 0.5 unit spacing
                 fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
-                fontSize=11,
+                fontSize=11,       # Increased for legibility
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=3,
+                spaceAfter=1,      # 1 unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=10,       # Increased for legibility
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=1,
+                spaceAfter=0.5,    # 0.5 unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
                 parent=styles["Normal"],
-                fontSize=11,
+                fontSize=12,       # Increased for legibility
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=1,
-                spaceBefore=1,
+                spaceAfter=0.5,    # 0.5 unit spacing
+                spaceBefore=0.5,   # 0.5 unit spacing
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
                 "CustomSubCompetency",
                 parent=styles["Normal"],
-                fontSize=11,
+                fontSize=11,       # Increased for legibility
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
-                spaceAfter=1,
+                spaceAfter=0.5,    # 0.5 unit spacing
                 leftIndent=12,
                 fontName="Helvetica-Bold",
             ),
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=10,       # Increased for legibility
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=1,
+                spaceAfter=0.5,    # 0.5 unit spacing
                 leftIndent=0,
                 fontName="Helvetica",
             ),
@@ -193,20 +198,13 @@ class ResumeGenerator:
         personal_info = self.data.get("personal_info", {})
         
         # Add space for header (will be drawn by canvas)
-        story.append(Spacer(1, 1.2*inch))
-        
-        # Add small spacer for first page bar-to-content spacing
-        story.append(Spacer(1, 0.05*inch))
-        
-        # Add space before first section (reduced for smaller header)
-        story.append(Spacer(1, 0.05*inch))
+        story.append(Spacer(1, 0.4*inch))
         
         # Summary
         summary = self.data.get("summary", "")
         if summary:
             story.append(Paragraph("PROFESSIONAL SUMMARY", self.styles["SectionHeader"]))
             story.append(Paragraph(summary, self.styles["Body"]))
-            story.append(Spacer(1, 6))
         
         # Key Achievements and Impact - moved up from bottom
         achievements = self.data.get("achievements", {})
@@ -217,7 +215,6 @@ class ResumeGenerator:
                     story.append(Paragraph(category, self.styles["MainCompetency"]))
                     for achievement in achievement_list:
                         story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
-                    story.append(Spacer(1, 0.5))  # Minimal spacing
         
         # Competencies in compact inline format for maximum space efficiency
         competencies = self.data.get("competencies", {})
@@ -238,13 +235,8 @@ class ResumeGenerator:
                     # Create single paragraph with main category and all sub-skills
                     full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
                     story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
-            
-            story.append(Spacer(1, 0.2))
         
         # No universal spacer - spacing handled per page type
-        
-        # Add small spacer before Professional Experience for recurring pages
-        story.append(Spacer(1, 0.05*inch))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -265,7 +257,7 @@ class ResumeGenerator:
                 if dates:
                     company_line += f" {dates}"
                 
-                # Keep the entire job unit together
+                # Intelligent job unit splitting logic
                 job_unit = []
                 job_unit.append(Paragraph(company_line, self.styles["Company"]))
                 
@@ -273,13 +265,25 @@ class ResumeGenerator:
                     job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
                 
                 responsibilities = job.get("responsibilities", [])
-                for resp in responsibilities:
-                    job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 
-                # Keep the entire job unit together to prevent splitting
-                story.append(KeepTogether(job_unit))
-                
-                story.append(Spacer(1, 1))  # Minimal spacing between jobs
+                # If job has many responsibilities, allow splitting but keep header together
+                if len(responsibilities) > 3:
+                    # Keep company + title + subtitle together
+                    header_unit = job_unit.copy()
+                    story.append(KeepTogether(header_unit))
+                    
+                    # Add first few bullets to header if space allows
+                    for i, resp in enumerate(responsibilities[:2]):
+                        story.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                    
+                    # Add remaining bullets (can split across pages)
+                    for resp in responsibilities[2:]:
+                        story.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                else:
+                    # For shorter jobs, keep everything together
+                    for resp in responsibilities:
+                        job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                    story.append(KeepTogether(job_unit))
         
         # Projects
         projects = self.data.get("projects", [])
@@ -390,10 +394,10 @@ class ResumeGenerator:
                          (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
             canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
             
-            # Add horizontal bar separator (below header content)
+            # Add horizontal bar separator (just underneath header text)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)  # Below header content
+            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)  # Just underneath header text
             
             canvas.restoreState()
             add_footer(canvas, doc)
@@ -439,10 +443,10 @@ class ResumeGenerator:
                 canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
             
-            # Add horizontal bar (higher to avoid text interference)
+            # Add horizontal bar (close to header text, not body text)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Higher position to avoid text
+            canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Close to header text at 10.5*inch
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
