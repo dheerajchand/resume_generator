@@ -4,21 +4,33 @@
 
 ## Professional Summary
 
-Distinguished Research and Data Analytics Leader with 21 years of experience directing groundbreaking applied research projects that have shaped policy, influenced elections, and transformed community development outcomes. Led multi-million dollar research initiatives serving thousands of analysts nationwide, with proven expertise in translating complex research insights for diverse stakeholders including elected officials, government agencies, and community organizations. Expert in research methodology design, statistical analysis, and community partnership development with extensive experience addressing systemic poverty challenges and delivering evidence-based solutions that drive meaningful social impact.
+Distinguished Research & Data Analytics Professional with 21 years of expertise in survey methodology, consumer insights, voting behavior, and advanced data analysis. Proven track record in designing and implementing comprehensive research studies, managing cross-functional teams, and translating complex data into actionable intelligence. Expert in geospatial analysis, demographic segmentation, and consumer behavior modeling with experience serving major brands, organizations, and political candidates. Regular expert testimony and source on public opinion for journalists, with redistricting analysis used in court cases.
 
 ## Key Achievements and Impact
 
-### Research Leadership and Policy Impact
-- Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders
-- Research analysis used in court cases addressing housing, redistricting, and community development with rigorous methodology
-- Conceived and deployed cloud-based analytical software used by thousands of researchers nationwide for community-focused research
-- Developed research frameworks and methodologies that became industry standards for community development and policy analysis
+### Survey Methodology & Research Innovation
+- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party, later becoming the Polling Consortium Database at The Analyst Institute
+- Developed RACSO platform for pollsters to fully administer research, analyzing bids from 1,200 vendors before selecting implementation partner
+- Engineered FLEEM system using Twilio API for thousands of simultaneous phone calls for IVR polls supporting Senators Martin Heinrich and Elizabeth Warren
+- Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
+
+### Expert Testimony & Court Cases
+- Regular expert testimony and source on public opinion for journalists, elected officials, and NGO leadership
+- Redistricting analysis used in court cases with rigorous methodology and expert testimony
+- Research analysis used in court cases addressing housing, redistricting, and community development
+- Provided expert consultation on research methodology for diverse stakeholder groups
+
+### Data Infrastructure & Analytics
+- Conceived, architected, engineered and deployed cloud-based redistricting software used by thousands of analysts nationwide
+- Designed, architected and created multi-tenant data warehouse tracking decades of political, geographical, econometric change
+- Led multi-million dollar market research projects involving sensitive consumer data with privacy compliance
+- Developed advanced data pipelines for machine learning applications enhancing consumer segmentation and predictive modeling
 
 ## Core Competencies
 
-**Applied Research Leadership**: **Applied Research Project Management (Conception to Completion)** • **Research Methodology Design and Implementation** • **Cross-functional Team Leadership and Mentoring** • **Stakeholder Communication and Translation of Complex Findings** • **Evidence-Based Framework Development** • **Survey Methodology and Consumer Insights** • **Statistical Analysis and Data Validation**
-**Technical Proficiency**: **Programming**: *`Python (Pandas`, `SciKit`, `TensorFlow`, `Django)`, `R`, `SQL`, `Scala`* • **Data Platforms**: *`PostgreSQL`, `MySQL`, Snowflake, `Spark`, `MongoDB`, `Oracle`* • **Analysis Tools**: *Excel (Advanced), `Tableau`, `PowerBI`, `SPSS`, `SAS`* • **Research Tools**: *`Survey Design`, Sampling Methodology, Statistical Modeling* • **Geospatial Analysis**: *`ESRI ArcGIS`, Quantum GIS, PostGIS, `OSGeo`*
-**Strategic Operations**: **Community Partnership Development** • **Government Relations and Policy Analysis** • **Multi-million Dollar Project Management** • **Performance Measurement and Evaluation** • **Data-Driven Decision Making for Social Impact** • **Public Systems Integration** • **Stakeholder Briefing and Expert Testimony**
+**Survey Methodology & Research Design**: **Survey Design and Questionnaire Development for Political and Market Research** • **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)** • **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling** • **Focus Groups and Qualitative Research Methodologies** • **Meta-analytical Dataset Development for Longitudinal Analysis** • **Survey Instrument Standardization and Call Methods Optimization** • **Expert Testimony and Consultation on Research Methodology**
+**Data Analysis & Visualization**: **Advanced Statistical Modeling and Analysis (Regression, Clustering, Segmentation)** • **Data Visualization**: *`Tableau`, `PowerBI`, `Seaborn`, `Matplotlib`, `d3.js`* • **Geospatial Analysis**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleths and Hexagonal Grid Maps for Demographic Visualization** • **Consumer Behavior Analysis and Market Segmentation** • **Machine Learning and Predictive Modeling for Targeting** • **Big Data Analytics**: *`Spark/PySpark`, `Hadoop`, Snowflake, dbt*
+**Research Leadership & Client Management**: **Multi-million Dollar Research Project Management** • **Cross-functional Team Leadership (Teams of 7-11 professionals)** • **Client Relationship Management across Political, NGO, and Corporate Sectors** • **Stakeholder Briefing for Elected Officials and Senior Leadership** • **Court Case Analysis and Expert Testimony** • **Research Framework Development and Quality Control** • **Business Intelligence and Market Intelligence Delivery**
 
 ## Professional Experience
 
@@ -27,23 +39,24 @@ Distinguished Research and Data Analytics Leader with 21 years of experience dir
 
 *Leading Applied Research Projects with Community Development Focus*
 
-- Conduct comprehensive quantitative and qualitative research studies using `Python`, `R`, `SPSS`, and `Stata` for political candidates and organizations
-- Architect cloud-based data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics
-- Design scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
-- Develop custom analytical tools and algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering
-- Manage complex client relationships across political, nonprofit, and technology sectors using `Django`/Geo`Django` web applications
-- Lead technical architecture decisions for data-intensive applications using `Docker`, `Git`, and modern DevOps practices
+- Conducted comprehensive quantitative and qualitative research studies for political candidates and major organizations, providing actionable consumer insights and market intelligence
+- Designed and implemented advanced segmentation models using demographic, psychographic, and behavioral data to identify high-value targets
+- Led multi-million dollar market research projects involving sensitive consumer data, ensuring compliance with privacy regulations while delivering actionable insights
+- Developed and deployed custom research software that processed billions of consumer records for pattern analysis, fraud detection and entity resolution
+- Built and maintained client relationships across diverse industries, consistently delivering insights that drove strategic decision-making
+- Architected and engineered cloud-based data warehouse solutions processing billions of records for electoral analytics and geospatial analysis
 
 ### DATA PRODUCTS MANAGER
 **Helm/Murmuration, Washington, DC | June 2021 – May 2023**
 
 *Data Platform Development and Team Leadership*
 
-- Conceived and developed framework using `Python`, `Pandas`, and Postgre`SQL` to clean, validate, and normalize government data from Census, BLS, and NCES
-- Built multi-tenant data warehouse and data lake using Snowflake, dbt, and `AWS` for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions
-- Trained analytical and engineering staff on open source geospatial technology (`QGIS`, `G`R`ASS`, `OSGeo`) for analysis, segmentation, and visualization using `Tableau` and `PowerBI`
-- Wrote five-year strategic plans for developing data warehouse using `Scala`, Py`Spark`, and Apache `Spark` that became basis of company's distinguishing products
-- Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders using Agile methodologies and modern DevOps practices
+- Conceived and led implementation of comprehensive multi-tenant data warehouse integrating consumer demographic, economic, and behavioral data
+- Overhauled the organization's survey methodology and polling operations, significantly improving data accuracy and response rates
+- Managed and developed one of the in-house polling teams, focusing on `R`andom Device Engagement (`R`DE), text message and web panel collected surveys, with live telephone calling and focus groups
+- Worked on standardizing questions, survey instruments and call methods, along with building a meta-analytical dataset for longitudinal analysis
+- Managed a cross-functional team of eleven data engineers and analysts, establishing best practices for research methodology and data analysis
+- Developed advanced data pipelines for machine learning applications that enhanced consumer segmentation and predictive modeling capabilities
 
 ### SOFTWARE ENGINEER
 **Mautinoa Technologies, Washington, DC | August 2016 – February 2018**
@@ -60,60 +73,68 @@ Distinguished Research and Data Analytics Leader with 21 years of experience dir
 
 *Quantitative and Qualitative Research for Democratic Campaigns*
 
-- Developed `R`ACSO, a web application for pollsters to fully administer research including questionnaire creation, versioning, and reporting
-- Wrote `R`FP and analyzed bids from 1,200 vendors before selecting implementation partner
-- Built prototype in `R` for comprehensive polling administration and sample file management
-- Provided strategic counsel to Democratic campaigns, political actors, and NGOs through quantitative and qualitative research
+- Designed comprehensive survey instruments for specialized voting segments and niche markets
+- Developed sophisticated analytical products and reports that delivered actionable insights to clients
+- Co-developed `R`ACSO web application to manage all aspects of survey operations, from instrument design to data collection and analysis
+- Wrote `R`FP and analyzed bids from 1,200 vendors before selecting implementation partner for `R`ACSO platform
+- Introduced geospatial techniques to enhance market segmentation capabilities, providing clients with location-based consumer insights
+- Standardized reporting methodologies to improve clarity and impact of research findings
 
 ### RESEARCH DIRECTOR
 **Progressive Change Campaign Committee, Washington, DC | August 2011 – August 2012**
 
 *Political Research and Data Analysis*
 
-- Managed critical research operations for political campaigns
-- Conducted comprehensive polling and demographic analysis
-- Developed strategic recommendations based on data analysis
-- Led research team in support of progressive political initiatives
+- Engineered FLEEM web application using Twilio's API to make thousands of simultaneous phone calls for IV`R` polls
+- Used FLEEM for early quantitative research in support of Senators Martin Heinrich and Elizabeth Warren
+- Led all aspects of survey design, implementation, data analysis, and reporting for major national studies
+- Developed new statistical methods for boundary estimation techniques, enhancing geographic market segmentation capabilities
+- Created comprehensive data visualization solutions that improved clients' understanding of complex research findings
+- Provided tabular and graphical reporting with plans for interactive data exploration capabilities
 
 ### SOFTWARE ENGINEER
 **Salsa Labs, Inc., Washington, DC | January 2011 – August 2011**
 
 *Political Technology Development*
 
-- Developed software solutions for political campaigns and advocacy groups
-- Built web applications for voter engagement and campaign management
-- Integrated third-party APIs and data sources for campaign tools
-- Collaborated with political strategists to translate requirements into technical solutions
+- Developed software solutions for political campaigns and advocacy groups using modern web technologies
+- Built web applications for voter engagement and campaign management with real-time data integration
+- Integrated third-party APIs and data sources for campaign tools and voter database management
+- Collaborated with political strategists to translate requirements into technical solutions using agile methodologies
 
 ### INTERIM TECHNOLOGY MANAGER
 **The Praxis Project, Oakland, CA | April 2009 – October 2009**
 
 *Nonprofit Technology Integration*
 
-- Integrated technology solutions within organizational frameworks for social justice organizations
-- Developed data management systems for community organizing efforts
-- Provided technical training and support to nonprofit staff
-- Built custom applications for community engagement and advocacy
+- Integrated technology solutions within organizational frameworks for social justice organizations using open source technologies
+- Developed data management systems for community organizing efforts with focus on accessibility and usability
+- Provided technical training and support to nonprofit staff on database management and data analysis tools
+- Built custom applications for community engagement and advocacy using web technologies and mobile platforms
 
 ### PROGRAMMER
 **Lake Research Partners, Washington, DC | April 2008 – December 2008**
 
 *Political Research and Data Analysis*
 
-- Developed data analysis tools for political polling and research
-- Built statistical models for voter behavior analysis
-- Created data visualization tools for research presentations
-- Supported senior researchers with technical analysis and reporting
+- Worked on all aspects of questionnaire design, sampling, reporting and analysis for political actors in Congressional, Senate and Presidential elections
+- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party and affiliated actors
+- Developed polling consortium database that later became the Polling Consortium Database at The Analyst Institute
+- Designed questionnaires and analyzed data for complex market research studies across diverse industries
+- Conducted statistical modeling and analysis to address multifaceted consumer behavior questions
+- Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
 
 ### FIELD DIRECTOR
 **The Feldman Group, Washington, DC | August 2007 – April 2008**
 
 *Field Research and Data Collection*
 
-- Managed field operations for political campaigns and research projects
-- Developed data collection and management systems for field work
-- Trained field staff on data collection protocols and quality control
-- Analyzed field data to inform campaign strategy and research findings
+- Administered all quantitative and qualitative research, ensuring that reporting was accurate and comprehensive
+- Managed all aspects of survey fielding for a multi-million dollar research firm, including scheduling, oversight, sampling, and quality control
+- Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
+- Created custom reports and data visualizations based on specific client requirements
+- Introduced mapping and geospatial analysis into standard reporting procedures, enhancing the value of research deliverables
+- Trained field staff on data collection protocols and quality control using standardized methodologies and best practices
 
 ---
 
