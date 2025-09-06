@@ -124,7 +124,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('job_title'),
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
-                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_TINY,   # Tiny spacing - minimal gap to bullets
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal spacing - identical to company-to-tagline distance
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,  # Small spacing
                 fontName="Helvetica",
             ),
