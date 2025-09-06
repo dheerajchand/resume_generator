@@ -904,6 +904,18 @@ class ResumeGenerator:
             content.append(summary)
             content.append("")
         
+        # Achievements (moved to top)
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            content.append("\\b KEY ACHIEVEMENTS AND IMPACT\\b0")
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    content.append(f"\\b {category}\\b0")
+                    for achievement in achievement_list:
+                        content.append(f"• {achievement}")
+                    content.append("")
+            content.append("")
+        
         # Competencies
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -1001,16 +1013,6 @@ class ResumeGenerator:
                 
                 content.append("")
         
-        # Achievements
-        achievements = self.data.get("achievements", {})
-        if achievements:
-            content.append("\\b KEY ACHIEVEMENTS AND IMPACT\\b0")
-            for category, achievement_list in achievements.items():
-                if isinstance(achievement_list, list):
-                    content.append(f"\\b {category}\\b0")
-                    for achievement in achievement_list:
-                        content.append(f"• {achievement}")
-                    content.append("")
         
         # Write RTF file
         rtf_content = "{\\rtf1\\ansi\\deff0\\par " + "\\par ".join(content) + "\\par }"
@@ -1053,6 +1055,18 @@ class ResumeGenerator:
             content.append("")
             content.append(summary)
             content.append("")
+        
+        # Achievements (moved to top)
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            content.append("## Key Achievements and Impact")
+            content.append("")
+            for category, achievement_list in achievements.items():
+                content.append(f"### {category}")
+                if isinstance(achievement_list, list):
+                    for achievement in achievement_list:
+                        content.append(f"- {achievement}")
+                content.append("")
         
         # Competencies
         competencies = self.data.get("competencies", {})
@@ -1129,17 +1143,6 @@ class ResumeGenerator:
                     content.append(f"**Honors:** {edu['honors']}")
                 content.append("")
         
-        # Achievements
-        achievements = self.data.get("achievements", {})
-        if achievements:
-            content.append("## Key Achievements and Impact")
-            content.append("")
-            for category, achievement_list in achievements.items():
-                content.append(f"### {category}")
-                if isinstance(achievement_list, list):
-                    for achievement in achievement_list:
-                        content.append(f"- {achievement}")
-                content.append("")
         
         # Footer
         content.append("---")
