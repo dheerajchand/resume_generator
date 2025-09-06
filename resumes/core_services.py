@@ -658,15 +658,15 @@ class ResumeGenerator:
             if website_url or linkedin_url:
                 current_x = PAGE_LEFT_MARGIN
                 
-                # Draw labels in accent color, links in regular color
+                # Draw labels in accent color, links in different color
                 if website_url:
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "Site: ")
                     current_x += canvas.stringWidth("Site: ", "Helvetica", FONT_SIZE_8)
                     
-                    # Link in theme color
-                    canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
+                    # Link in different color (use medium text color for contrast)
+                    canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(website_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(website_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, website_url)
                     current_x += canvas.stringWidth(website_url, "Helvetica", FONT_SIZE_8)
@@ -683,8 +683,8 @@ class ResumeGenerator:
                     canvas.drawString(current_x, footer_y, "LinkedIn: ")
                     current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", FONT_SIZE_8)
                     
-                    # Link in theme color
-                    canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#0077B5")))
+                    # Link in different color (use medium text color for contrast)
+                    canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(linkedin_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(linkedin_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, linkedin_url)
             
