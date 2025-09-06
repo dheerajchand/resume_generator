@@ -24,6 +24,7 @@ import tempfile
 from resume_generator_django.resume_generator.constants import (
     SPACE_BASE, SPACE_BETWEEN_SECTIONS, SPACE_BETWEEN_JOB_UNITS, 
     SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TO_CONTENT, SPACE_SUBHEADER_TO_BULLETS, SPACE_HEADER_TOP,
+    SPACE_HEADER_BAR_TO_CONTENT, SPACE_HEADER_HEIGHT, SPACE_FOOTER_HEIGHT, SPACE_HEADER_TO_MAIN_BODY,
     FONT_SIZE_SECTION_HEADER, FONT_SIZE_COMPANY, FONT_SIZE_MAIN_COMPETENCY,
     FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
     FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
@@ -212,8 +213,8 @@ class ResumeGenerator:
             for category, achievement_list in achievements.items():
                 if isinstance(achievement_list, list):
                     achievement_content.append(Paragraph(category, self.styles["MainCompetency"]))
-                    # Add small spacing between subheader and bullets
-                    achievement_content.append(Spacer(1, self.SPACE_SUBHEADER_TO_BULLETS))
+                    # Add small spacing between subheader and bullets (consistent with section headers)
+                    achievement_content.append(Spacer(1, self.SPACE_HEADER_TO_CONTENT))
                     for achievement in achievement_list:
                         achievement_content.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
             
@@ -305,8 +306,9 @@ class ResumeGenerator:
                         job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                     experience_content.append(KeepTogether(job_unit))
                 
-                # Add spacer between job units
-                experience_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_UNITS))
+                # Add spacer between job units (but not after the last job)
+                if job != experience[-1]:  # Only add spacer if not the last job
+                    experience_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_UNITS))
             
             sections.append({
                 "name": "PROFESSIONAL EXPERIENCE",
@@ -395,16 +397,31 @@ class ResumeGenerator:
         personal_info = self.data.get("personal_info", {})
         website_url = personal_info.get("website", "")
         
+        # SYSTEMATIC HEADER/FOOTER SPACING CALCULATION
+        # This calculation is used for ALL pages (first page and recurring pages)
+        personal_info = self.data.get("personal_info", {})
+        github_url = personal_info.get("github", "")
+        
+        # Standard header bar position calculation (same for all pages)
+        if github_url:
+            header_bar_y = 10.35*inch - 0.1*inch  # Just under GitHub link
+        else:
+            header_bar_y = 10.5*inch - 0.1*inch   # Just under phone number
+        
+        # Standard spacing calculation (same as "Key Achievements" to "Software Development")
+        section_to_subheader_spacing = SPACE_HEADER_TO_CONTENT + (SPACE_BASE * 0.1)
+        
+        # Content start position with Header-Subheader distance BELOW the bar
+        content_start_y = header_bar_y - section_to_subheader_spacing
+        
+        # Standard margins for ALL pages  
+        top_margin = 11*inch - content_start_y
+        bottom_margin = 0.8*inch + SPACE_FOOTER_HEIGHT
+        
         doc = SimpleDocTemplate(filename, pagesize=letter, 
                               rightMargin=0.6*inch, leftMargin=0.6*inch,
-                              topMargin=0.6*inch, bottomMargin=0.8*inch)  # Increased bottom margin for footer
+                              topMargin=top_margin, bottomMargin=bottom_margin)
         story = []
-        
-        # Personal info - Three-cell header layout using canvas
-        personal_info = self.data.get("personal_info", {})
-        
-        # Add space for header (will be drawn by canvas)
-        story.append(Spacer(1, 0.4*inch))
         
         # Define sections in order
         sections = self._get_sections()
@@ -445,7 +462,18 @@ class ResumeGenerator:
             if phone:
                 canvas.setFont("Helvetica", 11)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
-                canvas.drawString(left_x, top_y - 0.15*inch, phone)
+                canvas.drawString(left_x, top_y - 0.2*inch, phone)
+            
+            # GitHub link under phone on left side with equal spacing
+            github_url = personal_info.get("github", "")
+            if github_url:
+                canvas.setFont("Helvetica", 9)
+                canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
+                github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
+                # Create clickable link to GitHub with equal spacing
+                canvas.linkURL(github_url, 
+                             (left_x, top_y - 0.4*inch, left_x + canvas.stringWidth(github_text, "Helvetica", 9), top_y - 0.3*inch))
+                canvas.drawString(left_x, top_y - 0.35*inch, github_text)
             
             # Right cell: Full name with Austin, TX underneath
             canvas.setFont("Helvetica-Bold", 28)
@@ -465,10 +493,12 @@ class ResumeGenerator:
                          (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
             canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
             
-            # Add horizontal bar separator (just underneath header text)
+            # Add horizontal bar separator (under the left side content to avoid color conflicts)
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)  # Just underneath header text
+            # Position bar under the left side content (GitHub if present, otherwise phone)
+            bar_y = top_y - 0.45*inch if github_url else top_y - 0.25*inch
+            canvas.line(0.6*inch, bar_y, 7.5*inch, bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)
@@ -476,6 +506,15 @@ class ResumeGenerator:
         def add_later_page_header(canvas, doc):
             """Add header for subsequent pages with three-cell layout"""
             canvas.saveState()
+            
+            # STANDARDIZED HEADER CALCULATION (same as first page)
+            github_url = personal_info.get("github", "")
+            
+            # Use same header bar position calculation as first page
+            if github_url:
+                header_bar_y = 10.35*inch - 0.1*inch  # Just under GitHub link
+            else:
+                header_bar_y = 10.5*inch - 0.1*inch   # Just under phone number
             
             # Three-cell layout: Name (left) | Email (middle) | Phone (right)
             name = personal_info.get("name", "NAME").upper()  # Bold and all caps
@@ -503,7 +542,7 @@ class ResumeGenerator:
                 email_x = (0.6*inch + 7.5*inch) / 2 - email_width / 2
                 canvas.drawString(email_x, 10.5*inch, email_text)
             
-            # Right cell: Phone (clickable link)
+            # Right cell: Phone and GitHub stacked
             if phone:
                 canvas.setFont("Helvetica", 9)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
@@ -514,10 +553,23 @@ class ResumeGenerator:
                 canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
             
-            # Add horizontal bar (close to header text, not body text)
+            # GitHub link under phone on right side
+            github_url = personal_info.get("github", "")
+            if github_url:
+                canvas.setFont("Helvetica", 8)
+                canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
+                github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
+                # Create clickable link to GitHub
+                canvas.linkURL(github_url, 
+                             (7.5*inch - canvas.stringWidth(github_text, "Helvetica", 8), 
+                              10.3*inch, 7.5*inch, 10.4*inch))
+                canvas.drawRightString(7.5*inch, 10.35*inch, github_text)
+            
+            # Add horizontal bar using STANDARDIZED positioning
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Close to header text at 10.5*inch
+            # Use same header bar position as first page
+            canvas.line(0.6*inch, header_bar_y, 7.5*inch, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer

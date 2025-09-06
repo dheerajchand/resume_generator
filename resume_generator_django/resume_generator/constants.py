@@ -18,9 +18,13 @@ SPACE_BASE = 0.2 * inch
 SPACE_BETWEEN_SECTIONS = SPACE_BASE * 0.5             # Between major sections (reduced)
 SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.1            # Between different jobs (very minimal)
 SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BASE / 32        # Within job units (extremely minimal)
-SPACE_HEADER_TO_CONTENT = SPACE_BASE * 0.05           # Between headers and their content (very minimal)
-SPACE_SUBHEADER_TO_BULLETS = SPACE_BASE * 0.2         # Between subheaders and their bullet lists (more visible)
+SPACE_HEADER_TO_CONTENT = SPACE_BASE * 0.4            # Between headers and their content (balanced)
+SPACE_SUBHEADER_TO_BULLETS = SPACE_BASE * 0.1         # Between subheaders and their bullet lists (consistent)
 SPACE_HEADER_TOP = 0.4 * inch                         # Space for header on first page
+SPACE_HEADER_BAR_TO_CONTENT = SPACE_BASE * 0.3        # Between header bar and main content
+SPACE_HEADER_HEIGHT = 0.6 * inch                      # Total height needed for header section
+SPACE_FOOTER_HEIGHT = 0.4 * inch                      # Total height needed for footer section
+SPACE_HEADER_TO_MAIN_BODY = SPACE_BASE * 0.2          # Space between header bar and main body content
 
 # =============================================================================
 # TYPOGRAPHY SYSTEM
