@@ -5,8 +5,9 @@ A comprehensive Django-based resume generation system that creates professional 
 ## 🚀 Features
 
 - **Multiple Output Formats**: PDF, DOCX, RTF, and Markdown
-- **7 Professional Color Schemes**: Default, Corporate Blue, Modern Tech, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
+- **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
 - **6 Resume Versions**: Research, Technical, Comprehensive, Consulting, Software, and Marketing
+- **Systematic Design System**: Consistent spacing, typography, and color hierarchy
 - **Django Web Interface**: Full web application with REST API
 - **Heroku Ready**: Configured for easy deployment to Heroku
 - **Functional Architecture**: Clean, maintainable code with functional programming principles
@@ -105,7 +106,7 @@ python manage.py generate_all_resumes --confirm
 ```
 
 This generates all combinations:
-- 6 resume versions × 7 color schemes × 4 formats = 168 files
+- 6 resume versions × 8 color schemes × 4 formats = 192 files
 
 #### Generate Specific Resume
 ```bash
@@ -141,15 +142,22 @@ curl -X POST http://localhost:8000/api/resumes/generate/ \
 
 ## 🎨 Color Schemes
 
-The system includes 7 professional color schemes:
+The system includes 8 professional color schemes with systematic color hierarchy:
 
 1. **Default Professional** - Classic green and gold
 2. **Corporate Blue** - Professional blue tones
 3. **Modern Tech** - Contemporary tech colors
-4. **Satellite Imagery** - Earth observation inspired
-5. **Terrain Mapping** - Topographic map colors
-6. **Cartographic Professional** - GIS professional theme
-7. **Topographic Classic** - Traditional mapping colors
+4. **Modern Clean** - Minimalist modern design
+5. **Satellite Imagery** - Earth observation inspired
+6. **Terrain Mapping** - Topographic map colors
+7. **Cartographic Professional** - GIS professional theme
+8. **Topographic Classic** - Traditional mapping colors
+
+Each color scheme uses a systematic 4-color hierarchy:
+- **Primary**: Section headers, company names, main competency categories
+- **Secondary**: Body text, person's name
+- **Accent**: Sub-competencies, contact information
+- **Muted**: Bullet points, job titles, subtitles
 
 ## 📝 Resume Versions
 
@@ -171,6 +179,15 @@ Six different resume versions are available:
 - `ALLOWED_HOSTS`: Comma-separated list of allowed hosts
 - `DATABASE_URL`: Database connection string (for Heroku)
 
+### Design System
+
+The system uses a systematic design approach with centralized constants:
+
+- **Spacing System**: Consistent spacing hierarchy using `SPACE_BASE` unit
+- **Typography System**: Font size hierarchy (8-14pt range)
+- **Color System**: 4-color hierarchy (Primary, Secondary, Accent, Muted)
+- **Layout System**: Consistent margins and positioning across all pages
+
 ### Customizing Content
 
 Resume content is stored in JSON files in the `inputs/` directory. Each resume version has:
@@ -180,7 +197,7 @@ Resume content is stored in JSON files in the `inputs/` directory. Each resume v
 ### Adding New Color Schemes
 
 1. Create a new JSON file in `color_schemes/`
-2. Define color values for all required keys
+2. Define color values for all required keys following the 4-color hierarchy
 3. The system will automatically detect and use the new scheme
 
 ## 🧪 Testing
@@ -204,6 +221,26 @@ python manage.py test resumes.tests.test_core_services
   - DOCX: 30-80KB
   - RTF: 20-60KB
   - Markdown: 5-15KB
+
+## 🎨 Design System Features
+
+### Systematic Spacing
+- **Header-Subheader Distance**: Consistent spacing between section headers and content
+- **Job Unit Spacing**: Optimized spacing between different job entries
+- **Component Spacing**: Minimal spacing within job units for clean appearance
+
+### Typography Hierarchy
+- **Section Headers**: 12pt bold for major sections
+- **Company Names**: 12pt bold for company names
+- **Job Titles**: 11pt for job titles
+- **Body Text**: 11pt for main content
+- **Bullet Points**: 10pt for bulleted lists
+- **Footer Text**: 9pt for page numbers and links
+
+### Color System
+- **4-Color Hierarchy**: Primary, Secondary, Accent, Muted
+- **Consistent Application**: Same color roles across all color schemes
+- **Accessibility**: High contrast ratios for readability
 
 ## 🚀 Deployment
 
