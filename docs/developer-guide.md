@@ -2,7 +2,7 @@
 
 ## 🎯 What This Guide Covers
 
-This guide is for developers who want to understand, modify, or extend the Resume Generator system. It covers the technical architecture, code structure, and how to make changes.
+This guide is for developers who want to understand, modify, or extend the Resume Generator system. It covers the technical architecture, code structure, systematic design system, and how to make changes.
 
 ## 🏗️ System Architecture
 
@@ -536,6 +536,85 @@ def some_function():
 headers = {
     'Authorization': 'Token your-token-here'
 }
+```
+
+## 🎨 Systematic Design System
+
+### Overview
+
+The Resume Generator uses a completely systematic design system with no hardcoded values. All spacing, typography, colors, and positioning are defined in `resume_generator_django/resume_generator/constants.py`.
+
+### Spacing System
+
+```python
+# Systematic spacing scale (0.05, 0.1, 0.25, 0.5, 0.75, 1, 2, 4 units)
+SPACE_MULTIPLIER_TINY = 0.05      # For very tight layouts (tagline-to-bullets)
+SPACE_MULTIPLIER_MINIMAL = 0.1    # Minimal spacing (company-to-tagline, tagline-to-responsibilities)
+SPACE_MULTIPLIER_SMALL = 0.25     # Small spacing (between bullets)
+SPACE_MULTIPLIER_MEDIUM = 0.5     # Medium spacing
+SPACE_MULTIPLIER_LARGE = 0.75     # Large spacing
+```
+
+### Typography System
+
+```python
+# Systematic font hierarchy (8, 9, 10, 11, 12, 14pt)
+FONT_SIZE_8 = 8    # Footer text
+FONT_SIZE_9 = 9    # Small text
+FONT_SIZE_10 = 10  # Bullet points
+FONT_SIZE_11 = 11  # Body text, job titles
+FONT_SIZE_12 = 12  # Company names, section headers
+FONT_SIZE_14 = 14  # Large headers
+```
+
+### Color System
+
+```python
+# 4-color hierarchy used consistently across all color schemes
+COLOR_MAPPINGS = {
+    'primary': 'COMPANY_COLOR',      # Company names, section headers
+    'secondary': 'DARK_TEXT_COLOR',  # Body text
+    'accent': 'ACCENT_COLOR',        # Links, highlights
+    'muted': 'MEDIUM_TEXT_COLOR'     # Job titles, bullet points
+}
+```
+
+### Positioning System
+
+```python
+# All positioning values centralized
+PAGE_LEFT_MARGIN = 0.6 * inch
+PAGE_RIGHT_MARGIN = 7.5 * inch
+HEADER_LEFT_X = 0.6 * inch
+HEADER_TOP_Y = 10.5 * inch
+# ... and many more
+```
+
+### Perfect Spacing Consistency
+
+- **Company → JobTitle**: `SPACE_MULTIPLIER_MINIMAL` (0.1)
+- **JobTitle → Responsibilities**: `SPACE_MULTIPLIER_MINIMAL` (0.1) [IDENTICAL]
+- **Responsibilities → Responsibilities**: `SPACE_MULTIPLIER_SMALL` (0.25)
+
+### Adding New Constants
+
+1. **Add to constants.py**:
+```python
+NEW_CONSTANT = value
+```
+
+2. **Import in core_services.py**:
+```python
+from resume_generator_django.resume_generator.constants import (
+    # ... existing imports
+    NEW_CONSTANT,
+)
+```
+
+3. **Use systematically**:
+```python
+# Replace hardcoded values with constants
+spaceAfter=get_spacing_constant('base') * NEW_CONSTANT
 ```
 
 ## 🎯 Best Practices
