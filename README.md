@@ -45,53 +45,53 @@ resume_generator/
 ### Local Development
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone <repository-url>
    cd resume_generator
-   ```
+```
 
 2. **Create virtual environment**
-   ```bash
+```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies**
-   ```bash
+```bash
    pip install -r requirements.txt
    ```
 
 4. **Run migrations**
-   ```bash
+```bash
    python manage.py migrate
    ```
 
 5. **Start development server**
-   ```bash
+```bash
    python manage.py runserver
    ```
 
 ### Heroku Deployment
 
 1. **Install Heroku CLI**
-   ```bash
+```bash
    # Follow instructions at https://devcenter.heroku.com/articles/heroku-cli
    ```
 
 2. **Create Heroku app**
-   ```bash
+```bash
    heroku create your-resume-generator
    ```
 
 3. **Set environment variables**
-   ```bash
+```bash
    heroku config:set SECRET_KEY=your-secret-key-here
    heroku config:set DEBUG=False
    heroku config:set ALLOWED_HOSTS=your-app-name.herokuapp.com
    ```
 
 4. **Deploy**
-   ```bash
+```bash
    git push heroku main
    heroku run python manage.py migrate
    ```
@@ -225,9 +225,11 @@ python manage.py test resumes.tests.test_core_services
 ## 🎨 Design System Features
 
 ### Systematic Spacing
-- **Header-Subheader Distance**: Consistent spacing between section headers and content
-- **Job Unit Spacing**: Optimized spacing between different job entries
+- **Header-Subheader Distance**: Consistent spacing between section headers and content (matches "Key Achievements" to "Software Development" spacing)
+- **Job Unit Spacing**: Optimized spacing between different job entries (reduced for better page utilization)
 - **Component Spacing**: Minimal spacing within job units for clean appearance
+- **Header Bar Positioning**: Dynamic positioning based on content (GitHub presence)
+- **Margin System**: Calculated margins ensure consistent content positioning across all pages
 
 ### Typography Hierarchy
 - **Section Headers**: 12pt bold for major sections
@@ -241,6 +243,51 @@ python manage.py test resumes.tests.test_core_services
 - **4-Color Hierarchy**: Primary, Secondary, Accent, Muted
 - **Consistent Application**: Same color roles across all color schemes
 - **Accessibility**: High contrast ratios for readability
+
+### Document Structure & Links
+
+#### First Page Header
+- **Left Side**: Email, Phone, GitHub (stacked vertically)
+  - Email: Accent color, clickable mailto link
+  - Phone: Accent color, clickable tel link with +1 country code
+  - GitHub: Link color, clickable to GitHub profile
+- **Right Side**: Full name (large, bold) + Austin, TX location
+  - Name: Primary color, 28pt bold
+  - Location: Muted color, clickable OpenStreetMap link with coordinates
+- **Header Bar**: Muted color, positioned under left content
+
+#### Recurring Page Headers
+- **Left**: Name (all caps, bold, primary color)
+- **Center**: Email (accent color, clickable)
+- **Right**: Phone + GitHub (stacked, both clickable)
+  - Phone: Accent color, tel link
+  - GitHub: Link color, smaller font
+
+#### Footer
+- **Left**: Website + LinkedIn (pipe separated)
+  - Labels in accent color, links in respective brand colors
+  - Website: Clickable to personal site
+  - LinkedIn: Clickable to LinkedIn profile (LinkedIn blue)
+- **Right**: Page number (accent color)
+- **Footer Bar**: Muted color, separates from content
+
+#### Content Colors
+- **Section Headers**: Primary color, bold, 12pt
+- **Company Names**: Primary color, bold, 12pt
+- **Job Titles**: Muted color, 11pt
+- **Body Text**: Secondary color, 11pt
+- **Bullet Points**: Muted color, 10pt
+
+#### Core Competencies (Special 3-Color Hierarchy)
+- **Main Categories**: Primary color, bold (e.g., "Research and Analytics:")
+- **Sub-categories**: Accent color, italic (e.g., "Statistical Analysis")
+- **Details**: Muted color, parentheses (e.g., "(R, Python, SQL)")
+- **Format**: Inline paragraph with semicolon separators for compact presentation
+
+#### Key Achievements (Structured Format)
+- **Category Headers**: Primary color, bold (e.g., "Software Development")
+- **Achievement Bullets**: Muted color, bullet points
+- **Spacing**: Consistent subheader-to-bullets spacing
 
 ## 🚀 Deployment
 
