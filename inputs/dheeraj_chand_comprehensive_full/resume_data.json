@@ -4,9 +4,18 @@
     "phone": "202.550.7110",
     "email": "dheeraj.chand@gmail.com",
     "website": "https://www.dheerajchand.com",
-    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/",
+    "github": "https://github.com/dheerajchand"
   },
-  "summary": "Research & Data Professional with 21 years of comprehensive experience spanning applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions. Proven track record leading cross-functional teams, architecting data platforms, and delivering insights that drive strategic decision-making across political, nonprofit, and technology sectors. Deep expertise in survey methodology, geospatial analysis, and building production systems for sensitive data applications.",
+  "summary": "Research & Data Professional with 21 years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.",
+  "key_achievements": [
+    "Led development of redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Architected cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Delivered $4.9M additional revenue through continuous testing and optimization of marketing campaigns",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through process optimization",
+    "Built multi-tenant data warehouse for longitudinal analysis across attitudinal, behavioral, demographic, and geographical dimensions",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives"
+  ],
   "competencies": {
     "Research and Analytics": [
       "Survey Methodology: Design, sampling, weighting, longitudinal analysis",
@@ -37,12 +46,12 @@
       "dates": "2005 – Present",
       "subtitle": "Data, Technology and Strategy Consulting",
       "responsibilities": [
-        "Conduct comprehensive quantitative and qualitative research studies for political candidates and organizations",
-        "Architect cloud-based data warehouse solutions processing billions of records for electoral analytics",
-        "Design scalable ETL pipelines using PySpark and dbt for large-scale geospatial and demographic datasets",
-        "Develop custom analytical tools and algorithms for fraud detection and spatial clustering",
-        "Manage complex client relationships across political, nonprofit, and technology sectors",
-        "Lead technical architecture decisions for data-intensive applications and platforms"
+        "Conduct comprehensive quantitative and qualitative research studies using Python, R, SPSS, and Stata for political candidates and organizations",
+        "Architect cloud-based data warehouse solutions on AWS (EC2, RDS, S3) processing billions of records for electoral analytics",
+        "Design scalable ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial and demographic datasets",
+        "Develop custom analytical tools and algorithms using Python, Pandas, NumPy, and Scikit-learn for fraud detection and spatial clustering",
+        "Manage complex client relationships across political, nonprofit, and technology sectors using Django/GeoDjango web applications",
+        "Lead technical architecture decisions for data-intensive applications using Docker, Git, and modern DevOps practices"
       ]
     },
     {
@@ -51,11 +60,11 @@
       "dates": "June 2021 – May 2023",
       "subtitle": "Data Platform Development and Team Leadership",
       "responsibilities": [
-        "Conceived and developed framework to clean, validate, and normalize government data from Census, BLS, and NCES",
-        "Built multi-tenant data warehouse and data lake for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions",
-        "Trained analytical and engineering staff on open source geospatial technology for analysis, segmentation, and visualization",
-        "Wrote five-year strategic plans for developing data warehouse that became basis of company's distinguishing products",
-        "Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders"
+        "Conceived and developed framework using Python, Pandas, and PostgreSQL to clean, validate, and normalize government data from Census, BLS, and NCES",
+        "Built multi-tenant data warehouse and data lake using Snowflake, dbt, and AWS for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions",
+        "Trained analytical and engineering staff on open source geospatial technology (QGIS, GRASS, OSGeo) for analysis, segmentation, and visualization using Tableau and PowerBI",
+        "Wrote five-year strategic plans for developing data warehouse using Scala, PySpark, and Apache Spark that became basis of company's distinguishing products",
+        "Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders using Agile methodologies and modern DevOps practices"
       ]
     },
     {
@@ -64,10 +73,10 @@
       "dates": "August 2016 – February 2018",
       "subtitle": "Financial Technology and Humanitarian Crisis Solutions",
       "responsibilities": [
-        "Developed SimCrisis, a GeoDjango web application using multi-agent modeling for econometric simulations of crisis economies",
-        "Built modular application accepting rules extensions for ethnic strife, different crisis types, supply failures, and disaster scenarios",
-        "Liaised with officers from International Federation of Red Cross, UNICEF, and Chaos Communications Congress to improve platform",
-        "Conceived and built application to predict how crisis economies respond to different humanitarian interventions"
+        "Developed SimCrisis, a GeoDjango web application using Python, PostgreSQL/PostGIS, and NetLogo for multi-agent modeling and econometric simulations of crisis economies",
+        "Built modular application using Python, Django, and GRASS accepting rules extensions for ethnic strife, different crisis types, supply failures, and disaster scenarios",
+        "Liaised with officers from International Federation of Red Cross, UNICEF, and Chaos Communications Congress to improve platform using Docker and Ubuntu",
+        "Conceived and built application using Python, Pandas, and Jupyter to predict how crisis economies respond to different humanitarian interventions"
       ]
     },
     {

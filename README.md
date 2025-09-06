@@ -5,8 +5,9 @@ A comprehensive Django-based resume generation system that creates professional 
 ## 🚀 Features
 
 - **Multiple Output Formats**: PDF, DOCX, RTF, and Markdown
-- **7 Professional Color Schemes**: Default, Corporate Blue, Modern Tech, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
+- **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Modern Clean, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
 - **6 Resume Versions**: Research, Technical, Comprehensive, Consulting, Software, and Marketing
+- **Systematic Design System**: Consistent spacing, typography, and color hierarchy
 - **Django Web Interface**: Full web application with REST API
 - **Heroku Ready**: Configured for easy deployment to Heroku
 - **Functional Architecture**: Clean, maintainable code with functional programming principles
@@ -44,53 +45,53 @@ resume_generator/
 ### Local Development
 
 1. **Clone the repository**
-   ```bash
+```bash
    git clone <repository-url>
    cd resume_generator
-   ```
+```
 
 2. **Create virtual environment**
-   ```bash
+```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies**
-   ```bash
+```bash
    pip install -r requirements.txt
    ```
 
 4. **Run migrations**
-   ```bash
+```bash
    python manage.py migrate
    ```
 
 5. **Start development server**
-   ```bash
+```bash
    python manage.py runserver
    ```
 
 ### Heroku Deployment
 
 1. **Install Heroku CLI**
-   ```bash
+```bash
    # Follow instructions at https://devcenter.heroku.com/articles/heroku-cli
    ```
 
 2. **Create Heroku app**
-   ```bash
+```bash
    heroku create your-resume-generator
    ```
 
 3. **Set environment variables**
-   ```bash
+```bash
    heroku config:set SECRET_KEY=your-secret-key-here
    heroku config:set DEBUG=False
    heroku config:set ALLOWED_HOSTS=your-app-name.herokuapp.com
    ```
 
 4. **Deploy**
-   ```bash
+```bash
    git push heroku main
    heroku run python manage.py migrate
    ```
@@ -105,7 +106,7 @@ python manage.py generate_all_resumes --confirm
 ```
 
 This generates all combinations:
-- 6 resume versions × 7 color schemes × 4 formats = 168 files
+- 6 resume versions × 8 color schemes × 4 formats = 192 files
 
 #### Generate Specific Resume
 ```bash
@@ -141,15 +142,22 @@ curl -X POST http://localhost:8000/api/resumes/generate/ \
 
 ## 🎨 Color Schemes
 
-The system includes 7 professional color schemes:
+The system includes 8 professional color schemes with systematic color hierarchy:
 
 1. **Default Professional** - Classic green and gold
 2. **Corporate Blue** - Professional blue tones
 3. **Modern Tech** - Contemporary tech colors
-4. **Satellite Imagery** - Earth observation inspired
-5. **Terrain Mapping** - Topographic map colors
-6. **Cartographic Professional** - GIS professional theme
-7. **Topographic Classic** - Traditional mapping colors
+4. **Modern Clean** - Minimalist modern design
+5. **Satellite Imagery** - Earth observation inspired
+6. **Terrain Mapping** - Topographic map colors
+7. **Cartographic Professional** - GIS professional theme
+8. **Topographic Classic** - Traditional mapping colors
+
+Each color scheme uses a systematic 4-color hierarchy:
+- **Primary**: Section headers, company names, main competency categories
+- **Secondary**: Body text, person's name
+- **Accent**: Sub-competencies, contact information
+- **Muted**: Bullet points, job titles, subtitles
 
 ## 📝 Resume Versions
 
@@ -171,6 +179,15 @@ Six different resume versions are available:
 - `ALLOWED_HOSTS`: Comma-separated list of allowed hosts
 - `DATABASE_URL`: Database connection string (for Heroku)
 
+### Design System
+
+The system uses a systematic design approach with centralized constants:
+
+- **Spacing System**: Consistent spacing hierarchy using `SPACE_BASE` unit
+- **Typography System**: Font size hierarchy (8-14pt range)
+- **Color System**: 4-color hierarchy (Primary, Secondary, Accent, Muted)
+- **Layout System**: Consistent margins and positioning across all pages
+
 ### Customizing Content
 
 Resume content is stored in JSON files in the `inputs/` directory. Each resume version has:
@@ -180,7 +197,7 @@ Resume content is stored in JSON files in the `inputs/` directory. Each resume v
 ### Adding New Color Schemes
 
 1. Create a new JSON file in `color_schemes/`
-2. Define color values for all required keys
+2. Define color values for all required keys following the 4-color hierarchy
 3. The system will automatically detect and use the new scheme
 
 ## 🧪 Testing
@@ -199,11 +216,81 @@ python manage.py test resumes.tests.test_core_services
 
 - **Generation Speed**: ~2-3 seconds per resume
 - **Memory Usage**: ~50MB for full generation
+- **Total Generated Files**: 192 files (6 versions × 4 formats × 8 color schemes)
 - **File Sizes**: 
   - PDF: 50-100KB
   - DOCX: 30-80KB
   - RTF: 20-60KB
   - Markdown: 5-15KB
+
+## 🎨 Design System Features
+
+### Systematic Spacing
+- **Perfect Spacing Consistency**: Company-to-tagline distance = Tagline-to-responsibilities distance
+- **Systematic Spacing Scale**: TINY (0.05) → MINIMAL (0.1) → SMALL (0.25) → MEDIUM (0.5) → LARGE (0.75)
+- **Job Unit Spacing**: Optimized spacing between different job entries (reduced for better page utilization)
+- **Component Spacing**: Minimal spacing within job units for clean appearance
+- **Header Bar Positioning**: Dynamic positioning based on content (GitHub presence)
+- **Margin System**: Calculated margins ensure consistent content positioning across all pages
+- **No Double Spacing**: Eliminated extra spacers that caused inconsistent spacing
+
+### Typography Hierarchy
+- **Section Headers**: 12pt bold for major sections
+- **Company Names**: 12pt bold for company names
+- **Job Titles**: 11pt for job titles
+- **Body Text**: 11pt for main content
+- **Bullet Points**: 10pt for bulleted lists
+- **Footer Text**: 9pt for page numbers and links
+
+### Color System
+- **4-Color Hierarchy**: Primary, Secondary, Accent, Muted
+- **Consistent Application**: Same color roles across all color schemes
+- **Accessibility**: High contrast ratios for readability
+
+### Document Structure & Links
+
+#### First Page Header
+- **Left Side**: Email, Phone, GitHub (stacked vertically)
+  - Email: Accent color, clickable mailto link
+  - Phone: Accent color, clickable tel link with +1 country code
+  - GitHub: Link color, clickable to GitHub profile
+- **Right Side**: Full name (large, bold) + Austin, TX location
+  - Name: Primary color, 28pt bold
+  - Location: Muted color, clickable OpenStreetMap link with coordinates
+- **Header Bar**: Muted color, positioned under left content
+
+#### Recurring Page Headers
+- **Left**: Name (all caps, bold, primary color)
+- **Center**: Email (accent color, clickable)
+- **Right**: Phone + GitHub (stacked, both clickable)
+  - Phone: Accent color, tel link
+  - GitHub: Link color, smaller font
+
+#### Footer
+- **Left**: Website + LinkedIn (pipe separated)
+  - Labels in accent color, links in respective brand colors
+  - Website: Clickable to personal site
+  - LinkedIn: Clickable to LinkedIn profile (LinkedIn blue)
+- **Right**: Page number (accent color)
+- **Footer Bar**: Muted color, separates from content
+
+#### Content Colors
+- **Section Headers**: Primary color, bold, 12pt
+- **Company Names**: Primary color, bold, 12pt
+- **Job Titles**: Muted color, 11pt
+- **Body Text**: Secondary color, 11pt
+- **Bullet Points**: Muted color, 10pt
+
+#### Core Competencies (Special 3-Color Hierarchy)
+- **Main Categories**: Primary color, bold (e.g., "Research and Analytics:")
+- **Sub-categories**: Accent color, italic (e.g., "Statistical Analysis")
+- **Details**: Muted color, parentheses (e.g., "(R, Python, SQL)")
+- **Format**: Inline paragraph with semicolon separators for compact presentation
+
+#### Key Achievements (Structured Format)
+- **Category Headers**: Primary color, bold (e.g., "Software Development")
+- **Achievement Bullets**: Muted color, bullet points
+- **Spacing**: Consistent subheader-to-bullets spacing
 
 ## 🚀 Deployment
 

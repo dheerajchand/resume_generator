@@ -14,7 +14,7 @@ def docs_index(request):
     """Main documentation index page"""
     context = {
         'title': 'Documentation',
-        'description': 'Complete documentation for the Resume Generator system',
+        'description': 'Complete documentation for the Resume Generator system with systematic design system',
         'docs': [
             {
                 'title': 'Getting Started',
@@ -34,7 +34,7 @@ def docs_index(request):
             },
             {
                 'title': 'Developer Guide',
-                'description': 'Technical details for developers and advanced users',
+                'description': 'Technical details, systematic design system, and spacing consistency',
                 'url': 'developer-guide',
                 'audience': 'Developers',
                 'length': '45-60 minutes',
@@ -141,7 +141,7 @@ def docs_page(request, page_name):
         },
         'developer-guide': {
             'title': 'Developer Guide',
-            'description': 'Technical details for developers and advanced users',
+            'description': 'Technical details, systematic design system, and spacing consistency',
             'icon': '⚙️'
         },
         'api-documentation': {

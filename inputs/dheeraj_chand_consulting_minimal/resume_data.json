@@ -32,9 +32,9 @@
   },
   "experience": [
     {
-      "title": "PRINCIPAL CONSULTANT",
+      "title": "PARTNER",
       "company": "Siege Analytics, Washington, DC",
-      "dates": "January 2014 – Present",
+      "dates": "January 2014 \u2013 Present",
       "subtitle": "Data, Technology and Strategy Consulting",
       "responsibilities": [
         "Provide comprehensive data analysis, engineering, and strategic planning for diverse client portfolio",
@@ -45,9 +45,9 @@
       ]
     },
     {
-      "title": "PRINCIPAL CONSULTANT",
-      "company": "Clarity and Rigour, Washington, DC",
-      "dates": "2012 – 2014",
+      "title": "DATA PRODUCTS MANAGER",
+      "company": "Helm/Murmuration, Washington, DC",
+      "dates": "2012 \u2013 2014",
       "subtitle": "Geospatial Solutions and Policy Consulting",
       "responsibilities": [
         "Provided strategic consulting on geospatial data applications for policy and business",
@@ -57,9 +57,9 @@
       ]
     },
     {
-      "title": "SENIOR CONSULTANT",
-      "company": "Helm, Washington, DC",
-      "dates": "2010 – 2012",
+      "title": "SOFTWARE ENGINEER",
+      "company": "Mautinoa Technologies, Washington, DC",
+      "dates": "2010 \u2013 2012",
       "subtitle": "Data Strategy and Product Consulting",
       "responsibilities": [
         "Led data strategy initiatives for political and advocacy organizations",
@@ -69,9 +69,9 @@
       ]
     },
     {
-      "title": "CONSULTANT",
-      "company": "GSD&M, Austin, TX",
-      "dates": "2008 – 2010",
+      "title": "SENIOR ANALYST",
+      "company": "Myers Research, Washington, DC",
+      "dates": "2008 \u2013 2010",
       "subtitle": "Campaign Strategy and Data Consulting",
       "responsibilities": [
         "Provided data analysis and strategic consulting for political campaigns",
@@ -81,9 +81,9 @@
       ]
     },
     {
-      "title": "SENIOR CONSULTANT",
+      "title": "RESEARCH DIRECTOR",
       "company": "Progressive Change Campaign Committee, Washington, DC",
-      "dates": "2006 – 2008",
+      "dates": "2006 \u2013 2008",
       "subtitle": "Political Strategy and Research Consulting",
       "responsibilities": [
         "Provided strategic consulting on research operations and campaign data analysis",
@@ -93,9 +93,9 @@
       ]
     },
     {
-      "title": "CONSULTANT",
+      "title": "SOFTWARE ENGINEER",
       "company": "Salsa Labs, Inc., Washington, DC",
-      "dates": "2004 – 2006",
+      "dates": "2004 \u2013 2006",
       "subtitle": "Technology and Data Consulting",
       "responsibilities": [
         "Provided technical consulting for political campaigns and advocacy groups",
@@ -105,9 +105,9 @@
       ]
     },
     {
-      "title": "CONSULTANT",
+      "title": "INTERIM TECHNOLOGY MANAGER",
       "company": "The Praxis Project, Oakland, CA",
-      "dates": "2002 – 2004",
+      "dates": "2002 \u2013 2004",
       "subtitle": "Nonprofit Technology and Data Consulting",
       "responsibilities": [
         "Provided technology consulting for social justice organizations",
@@ -117,9 +117,9 @@
       ]
     },
     {
-      "title": "ANALYST",
+      "title": "PROGRAMMER",
       "company": "Lake Research Partners, Washington, DC",
-      "dates": "2001 – 2002",
+      "dates": "2001 \u2013 2002",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
         "Provided data analysis and research support for political polling projects",
@@ -129,9 +129,9 @@
       ]
     },
     {
-      "title": "FIELD COORDINATOR",
+      "title": "FIELD DIRECTOR",
       "company": "The Feldman Group, Washington, DC",
-      "dates": "2000 – 2001",
+      "dates": "2000 \u2013 2001",
       "subtitle": "Field Operations and Data Management",
       "responsibilities": [
         "Coordinated field operations and data collection for political campaigns",
@@ -153,5 +153,13 @@
     "user": "Dheeraj Chand",
     "created": "2025-09-04T14:30:26.914464",
     "description": "Minimal consulting-focused version emphasizing strategic advisory and technical expertise"
-  }
+  },
+  "key_achievements": [
+    "Led development of redistricting platform serving thousands of analysts with real-time collaborative editing and Census integration",
+    "Architected cloud-based data warehouse solutions processing billions of records for electoral analytics",
+    "Delivered $4.9M additional revenue through continuous testing and optimization of marketing campaigns",
+    "Increased lead conversion rates by 23% and operational efficiency by 19% through process optimization",
+    "Built multi-tenant data warehouse for longitudinal analysis across attitudinal, behavioral, demographic, and geographical dimensions",
+    "Managed teams of 7-11 engineers, designers, and analysts across multiple technology initiatives"
+  ]
 }
