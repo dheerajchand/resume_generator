@@ -40,8 +40,8 @@ from resume_generator_django.resume_generator.constants import (
     PAGE_RIGHT_MARGIN, HEADER_FIRST_PHONE_Y, HEADER_FIRST_GITHUB_Y, 
     HEADER_FIRST_NAME_Y, HEADER_FIRST_LOCATION_Y, HEADER_RECURRING_NAME_Y,
     HEADER_RECURRING_EMAIL_Y, HEADER_RECURRING_PHONE_Y, HEADER_RECURRING_GITHUB_Y,
-    FOOTER_Y, FONT_THEMES, FONT_ROLES,
-    get_spacing_constant, get_font_size, get_color_role, get_theme_font
+    FOOTER_Y, FONT_THEMES, FONT_ROLES, FONT_SIZE_THEMES,
+    get_spacing_constant, get_font_size, get_color_role, get_theme_font, get_theme_font_size
 )
 
 
@@ -86,6 +86,10 @@ class ResumeGenerator:
         def get_font(role, bold=False, italic=False):
             base_font = get_theme_font(color_scheme, role)
             
+            # If the theme already specifies bold/italic, use it directly
+            if '-Bold' in base_font or '-Oblique' in base_font:
+                return base_font
+            
             # Handle font variations for ReportLab
             if bold and italic:
                 return f"{base_font}-BoldOblique"
@@ -100,11 +104,11 @@ class ResumeGenerator:
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=28,  # Bigger name - keep as special case
+                fontSize=28,  # Bigger name - keep as special case, consistent across all themes
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_RIGHT,
                 spaceAfter=get_spacing_constant('base') * 1,
-                fontName=get_font('primary', bold=True),
+                fontName=get_font('name', bold=True),
             ),
             "Title": ParagraphStyle(
                 "CustomTitle",
