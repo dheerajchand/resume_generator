@@ -121,8 +121,8 @@ class ResumeGenerator:
                 parent=styles["Heading3"],
                 fontSize=get_font_size('company'),
                 textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),  # Primary color
-                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
-                spaceBefore=get_spacing_constant('base') * 0.5,   # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.1,    # Minimal spacing after company
+                spaceBefore=get_spacing_constant('base') * 0.1,   # Minimal spacing before company
                 fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
@@ -288,17 +288,25 @@ class ResumeGenerator:
                     job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))  # Spacing before responsibilities
                 
                 # If job has many responsibilities, allow splitting but keep header together
-                if len(responsibilities) > 3:
-                    # Keep company + title + subtitle together
+                if len(responsibilities) > 4:  # Increased threshold to 4
+                    # Keep company + title + subtitle + first bullet together
                     header_unit = job_unit.copy()
+                    # Add first bullet to header to ensure at least one stays with header
+                    header_unit.append(Paragraph(f"• {responsibilities[0]}", self.styles["BulletPoint"]))
                     experience_content.append(KeepTogether(header_unit))
                     
-                    # Add first few bullets to header if space allows
-                    for i, resp in enumerate(responsibilities[:2]):
+                    # Add remaining bullets (can split across pages)
+                    for resp in responsibilities[1:]:
                         experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                elif len(responsibilities) > 1:  # For jobs with 2-4 responsibilities
+                    # Keep header + at least one bullet together
+                    header_unit = job_unit.copy()
+                    # Add first bullet to header to ensure at least one stays with header
+                    header_unit.append(Paragraph(f"• {responsibilities[0]}", self.styles["BulletPoint"]))
+                    experience_content.append(KeepTogether(header_unit))
                     
                     # Add remaining bullets (can split across pages)
-                    for resp in responsibilities[2:]:
+                    for resp in responsibilities[1:]:
                         experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
                 else:
                     # For shorter jobs, keep everything together
@@ -391,36 +399,60 @@ class ResumeGenerator:
         ]))
         return table
     
-    def generate_pdf(self, filename: str) -> str:
-        """Generate PDF resume"""
-        # Get website URL for footer
-        personal_info = self.data.get("personal_info", {})
-        website_url = personal_info.get("website", "")
-        
-        # SYSTEMATIC HEADER/FOOTER SPACING CALCULATION
-        # This calculation is used for ALL pages (first page and recurring pages)
+    def _calculate_header_footer_dimensions(self):
+        """SYSTEMATIC APPROACH: Calculate header and footer dimensions first"""
         personal_info = self.data.get("personal_info", {})
         github_url = personal_info.get("github", "")
         
-        # Standard header bar position calculation (same for all pages)
+        # Calculate header bar position based on actual content
+        # First page has larger header with name + location, so bar goes under the lowest content
         if github_url:
+            # Header bar goes under GitHub link (lowest left content)
             header_bar_y = 10.35*inch - 0.1*inch  # Just under GitHub link
         else:
+            # Header bar goes under phone number (lowest left content)
             header_bar_y = 10.5*inch - 0.1*inch   # Just under phone number
         
-        # Standard spacing calculation (same as "Key Achievements" to "Software Development")
-        section_to_subheader_spacing = SPACE_HEADER_TO_CONTENT + (SPACE_BASE * 0.1)
+        # But first page also has name + location on right side that goes lower
+        # The bar should go under the lowest of either side
+        # Right side: name at 10.425*inch, location at 10.225*inch
+        right_side_bottom = 10.225*inch - 0.1*inch  # Just under location
         
-        # Content start position with Header-Subheader distance BELOW the bar
-        content_start_y = header_bar_y - section_to_subheader_spacing
+        # Use the lower of the two sides
+        header_bar_y = min(header_bar_y, right_side_bottom)
         
-        # Standard margins for ALL pages  
-        top_margin = 11*inch - content_start_y
-        bottom_margin = 0.8*inch + SPACE_FOOTER_HEIGHT
+        # Calculate footer bar position (fixed at bottom)
+        footer_bar_y = 0.6*inch
+        
+        # Calculate available space for body content
+        # Use same spacing as section headers to their content for consistency
+        section_to_subheader_spacing = SPACE_HEADER_TO_CONTENT
+        body_start_y = header_bar_y - section_to_subheader_spacing
+        body_end_y = footer_bar_y + section_to_subheader_spacing
+        
+        # Calculate margins based on actual header/footer positions
+        top_margin = 11*inch - body_start_y
+        bottom_margin = body_end_y
+        
+        return {
+            'header_bar_y': header_bar_y,
+            'footer_bar_y': footer_bar_y,
+            'body_start_y': body_start_y,
+            'body_end_y': body_end_y,
+            'top_margin': top_margin,
+            'bottom_margin': bottom_margin,
+            'section_to_subheader_spacing': section_to_subheader_spacing
+        }
+
+    def generate_pdf(self, filename: str) -> str:
+        """Generate PDF resume using systematic header/footer approach"""
+        # SYSTEMATIC APPROACH: Calculate dimensions first
+        dimensions = self._calculate_header_footer_dimensions()
         
         doc = SimpleDocTemplate(filename, pagesize=letter, 
                               rightMargin=0.6*inch, leftMargin=0.6*inch,
-                              topMargin=top_margin, bottomMargin=bottom_margin)
+                              topMargin=dimensions['top_margin'], 
+                              bottomMargin=dimensions['bottom_margin'])
         story = []
         
         # Define sections in order
@@ -434,10 +466,14 @@ class ResumeGenerator:
         
         
         
-        # Build with custom header and footer
+        # Build with custom header and footer using systematic approach
         def add_first_page_header(canvas, doc):
-            """Add three-cell header for first page"""
+            """Add three-cell header for first page using calculated dimensions"""
             canvas.saveState()
+            
+            # Use calculated dimensions
+            header_bar_y = dimensions['header_bar_y']
+            personal_info = self.data.get("personal_info", {})
             
             # Three-cell layout: Email/Phone (left) | Empty (middle) | Name (right)
             name = personal_info.get("name", "NAME")
@@ -493,28 +529,21 @@ class ResumeGenerator:
                          (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
             canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
             
-            # Add horizontal bar separator (under the left side content to avoid color conflicts)
+            # Add horizontal bar separator using calculated position
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
-            # Position bar under the left side content (GitHub if present, otherwise phone)
-            bar_y = top_y - 0.45*inch if github_url else top_y - 0.25*inch
-            canvas.line(0.6*inch, bar_y, 7.5*inch, bar_y)
+            canvas.line(0.6*inch, header_bar_y, 7.5*inch, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)
         
         def add_later_page_header(canvas, doc):
-            """Add header for subsequent pages with three-cell layout"""
+            """Add header for subsequent pages using systematic approach"""
             canvas.saveState()
             
-            # STANDARDIZED HEADER CALCULATION (same as first page)
-            github_url = personal_info.get("github", "")
-            
-            # Use same header bar position calculation as first page
-            if github_url:
-                header_bar_y = 10.35*inch - 0.1*inch  # Just under GitHub link
-            else:
-                header_bar_y = 10.5*inch - 0.1*inch   # Just under phone number
+            # Use calculated dimensions (same as first page)
+            header_bar_y = dimensions['header_bar_y']
+            personal_info = self.data.get("personal_info", {})
             
             # Three-cell layout: Name (left) | Email (middle) | Phone (right)
             name = personal_info.get("name", "NAME").upper()  # Bold and all caps
@@ -565,23 +594,26 @@ class ResumeGenerator:
                               10.3*inch, 7.5*inch, 10.4*inch))
                 canvas.drawRightString(7.5*inch, 10.35*inch, github_text)
             
-            # Add horizontal bar using STANDARDIZED positioning
+            # Add horizontal bar using calculated position
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
-            # Use same header bar position as first page
             canvas.line(0.6*inch, header_bar_y, 7.5*inch, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
         
         def add_footer(canvas, doc):
-            """Add footer with two-cell structure and pipe separator"""
+            """Add footer with two-cell structure using calculated dimensions"""
             canvas.saveState()
+            
+            # Use calculated footer bar position
+            footer_bar_y = dimensions['footer_bar_y']
+            personal_info = self.data.get("personal_info", {})
             
             # Add bar above footer to separate from page text
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(0.5)
-            canvas.line(0.6*inch, 0.6*inch, 7.5*inch, 0.6*inch)
+            canvas.line(0.6*inch, footer_bar_y, 7.5*inch, footer_bar_y)
             
             canvas.setFont("Helvetica", 8)
             footer_y = 0.4*inch
