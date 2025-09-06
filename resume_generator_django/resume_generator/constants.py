@@ -151,7 +151,7 @@ FONT_THEMES = {
     'cartographic_professional': {
         'primary': 'Helvetica-Bold',     # Bold for headers - mapping authority
         'secondary': 'Helvetica',        # Regular for body text
-        'accent': 'Helvetica',           # Regular for job titles
+        'accent': 'Helvetica-Bold',      # Bold for job titles - mapping emphasis
         'technical': 'Courier',          # Monospace for coordinates/data
         'fallback': 'Helvetica'
     },
@@ -165,14 +165,14 @@ FONT_THEMES = {
     'default_professional': {
         'primary': 'Helvetica-Bold',     # Bold for headers
         'secondary': 'Helvetica',        # Regular for body text
-        'accent': 'Helvetica',           # Regular for job titles
+        'accent': 'Helvetica-Bold',      # Bold for job titles - professional emphasis
         'technical': 'Helvetica',        # Regular for technical content
         'fallback': 'Helvetica'
     },
     'modern_clean': {
         'primary': 'Helvetica-Bold',     # Bold for headers
         'secondary': 'Helvetica',        # Regular for body text
-        'accent': 'Helvetica',           # Regular for job titles - clean look
+        'accent': 'Helvetica-Bold',      # Bold for job titles - modern emphasis
         'technical': 'Helvetica',        # Regular for technical content
         'fallback': 'Helvetica'
     },
@@ -250,28 +250,28 @@ FONT_SIZE_THEMES = {
         'technical': 10          # Standard size
     },
     'modern_tech': {
-        'section_header': 15,    # Larger for tech emphasis
-        'company': 13,           # Larger for tech companies
-        'job_title': 12,         # Larger for tech roles
-        'body': 9,               # Smaller for more content
-        'bullet_point': 9,       # Smaller for more content
-        'main_competency': 13,   # Larger for tech skills
+        'section_header': 16,    # Much larger for tech emphasis
+        'company': 14,           # Much larger for tech companies
+        'job_title': 13,         # Much larger for tech roles
+        'body': 8,               # Much smaller for more content
+        'bullet_point': 8,       # Much smaller for more content
+        'main_competency': 14,   # Much larger for tech skills
         'sub_competency': 10,    # Standard size
-        'competency_detail': 8,  # Smaller for technical details
+        'competency_detail': 7,  # Much smaller for technical details
         'footer': 8,             # Small footer
-        'technical': 8           # Smaller for code/data
+        'technical': 7           # Much smaller for code/data
     },
     'satellite_imagery': {
-        'section_header': 14,    # Standard size
-        'company': 12,           # Standard size
-        'job_title': 10,         # Smaller for technical focus
-        'body': 9,               # Smaller for scientific content
-        'bullet_point': 9,       # Smaller for scientific content
-        'main_competency': 12,   # Standard size
+        'section_header': 15,    # Larger for scientific authority
+        'company': 13,           # Larger for scientific companies
+        'job_title': 9,          # Much smaller for technical focus
+        'body': 8,               # Much smaller for scientific content
+        'bullet_point': 8,       # Much smaller for scientific content
+        'main_competency': 13,   # Larger for scientific skills
         'sub_competency': 10,    # Standard size
-        'competency_detail': 8,  # Smaller for technical details
+        'competency_detail': 7,  # Much smaller for technical details
         'footer': 8,             # Small footer
-        'technical': 8           # Smaller for coordinates/data
+        'technical': 7           # Much smaller for coordinates/data
     },
     'terrain_mapping': {
         'section_header': 14,    # Standard size

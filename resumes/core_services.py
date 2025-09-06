@@ -484,7 +484,12 @@ class ResumeGenerator:
         doc = SimpleDocTemplate(filename, pagesize=letter, 
                               rightMargin=MARGIN_RIGHT, leftMargin=MARGIN_LEFT,
                               topMargin=dimensions['top_margin'], 
-                              bottomMargin=dimensions['bottom_margin'])
+                              bottomMargin=dimensions['bottom_margin'],
+                              # High quality PDF settings
+                              compress=0,  # Disable compression for better quality
+                              creator="Resume Generator Pro",
+                              title=f"Resume - {self.data.get('personal_info', {}).get('name', 'Professional')}",
+                              author=self.data.get('personal_info', {}).get('name', 'Professional'))
         story = []
         
         # Define sections in order
@@ -502,6 +507,10 @@ class ResumeGenerator:
         def add_first_page_header(canvas, doc):
             """Add three-cell header for first page using calculated dimensions"""
             canvas.saveState()
+            
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
             
             # Use calculated dimensions
             header_bar_y = dimensions['header_bar_y']
@@ -573,6 +582,10 @@ class ResumeGenerator:
             """Add header for subsequent pages using systematic approach"""
             canvas.saveState()
             
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            
             # Use calculated dimensions (same as first page)
             header_bar_y = dimensions['header_bar_y']
             personal_info = self.data.get("personal_info", {})
@@ -638,6 +651,10 @@ class ResumeGenerator:
             """Add footer with two-cell structure using calculated dimensions"""
             canvas.saveState()
             
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            
             # Use calculated footer bar position
             footer_bar_y = dimensions['footer_bar_y']
             personal_info = self.data.get("personal_info", {})
@@ -699,8 +716,13 @@ class ResumeGenerator:
         return filename
     
     def generate_docx(self, filename: str) -> str:
-        """Generate DOCX resume"""
+        """Generate DOCX resume with high quality settings"""
         doc = Document()
+        
+        # High quality DOCX settings
+        doc.core_properties.title = f"Resume - {self.data.get('personal_info', {}).get('name', 'Professional')}"
+        doc.core_properties.author = self.data.get('personal_info', {}).get('name', 'Professional')
+        doc.core_properties.creator = "Resume Generator Pro"
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
