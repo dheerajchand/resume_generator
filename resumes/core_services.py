@@ -81,7 +81,7 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=1,
+                spaceAfter=2,
                 spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
@@ -90,8 +90,8 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=10,
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#2C3E50")),
-                spaceAfter=4,
-                spaceBefore=4,
+                spaceAfter=2,
+                spaceBefore=2,
                 fontName="Helvetica",
             ),
             "Company": ParagraphStyle(
@@ -99,7 +99,7 @@ class ResumeGenerator:
                 parent=styles["Heading3"],
                 fontSize=10,
                 textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),
-                spaceAfter=2,
+                spaceAfter=1,
                 fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
@@ -126,7 +126,7 @@ class ResumeGenerator:
                 fontSize=11,
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=1,
-                spaceBefore=2,
+                spaceBefore=1,
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
@@ -238,8 +238,8 @@ class ResumeGenerator:
             
             story.append(Spacer(1, 0.2))
         
-        # Add minimal space for consistent bar-to-content spacing
-        story.append(Spacer(1, 0.1*inch))
+        # Add minimal space for bar-to-content spacing
+        story.append(Spacer(1, 0.05*inch))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -385,10 +385,10 @@ class ResumeGenerator:
                          (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
             canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
             
-            # Add horizontal bar separator (unified with recurring pages)
+            # Add horizontal bar separator (below header content)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Same as recurring pages
+            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)  # Below header content
             
             canvas.restoreState()
             add_footer(canvas, doc)
