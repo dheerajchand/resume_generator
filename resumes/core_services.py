@@ -1068,17 +1068,28 @@ class ResumeGenerator:
                         content.append(f"- {achievement}")
                 content.append("")
         
-        # Competencies
+        # Competencies (paragraph format like PDF)
         competencies = self.data.get("competencies", {})
         if competencies:
             content.append("## Core Competencies")
             content.append("")
             for category, skills in competencies.items():
-                content.append(f"### {category}")
                 if isinstance(skills, list):
-                    for skill in skills:
-                        content.append(f"- {skill}")
-                content.append("")
+                    # Build paragraph format with Markdown formatting for hierarchy
+                    skill_parts = []
+                    for skill_line in skills:
+                        if ": " in skill_line:
+                            sub_category, details = skill_line.split(": ", 1)
+                            # Use **bold** for sub-categories and *italics* for details
+                            skill_parts.append(f"**{sub_category}**: *{details}*")
+                        else:
+                            # Use **bold** for main skills
+                            skill_parts.append(f"**{skill_line}**")
+                    
+                    # Create single paragraph with main category and all sub-skills
+                    full_text = f"**{category}**: " + " • ".join(skill_parts)
+                    content.append(full_text)
+            content.append("")
         
         # Experience
         experience = self.data.get("experience", [])
