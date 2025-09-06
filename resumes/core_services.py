@@ -23,7 +23,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 import tempfile
 from resume_generator_django.resume_generator.constants import (
     SPACE_BASE, SPACE_BETWEEN_SECTIONS, SPACE_BETWEEN_JOB_UNITS, 
-    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TOP,
+    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TO_CONTENT, SPACE_HEADER_TOP,
     FONT_SIZE_SECTION_HEADER, FONT_SIZE_COMPANY, FONT_SIZE_MAIN_COMPETENCY,
     FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
     FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
@@ -47,6 +47,7 @@ class ResumeGenerator:
         self.SPACE_BETWEEN_SECTIONS = SPACE_BETWEEN_SECTIONS
         self.SPACE_BETWEEN_JOB_UNITS = SPACE_BETWEEN_JOB_UNITS
         self.SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BETWEEN_JOB_COMPONENTS
+        self.SPACE_HEADER_TO_CONTENT = SPACE_HEADER_TO_CONTENT
     
     def _load_json(self, file_path: str) -> Dict[str, Any]:
         """Load JSON data from file"""
@@ -100,7 +101,7 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.25,     # 0.25 unit spacing
+                spaceAfter=get_spacing_constant('header_to_content'),  # Minimal gap to content
                 spaceBefore=get_spacing_constant('base') * 0.5,     # 0.5 units spacing - reduced whitespace between main sections
                 fontName="Helvetica-Bold",
             ),
@@ -399,9 +400,6 @@ class ResumeGenerator:
         # Render each section
         for i, section in enumerate(sections):
             if section["content"]:
-                # Add small spacer between sections (except before first section)
-                if i > 0:
-                    story.append(Spacer(1, self.SPACE_BETWEEN_SECTIONS))  # Whitespace between sections
                 story.append(Paragraph(section["name"], self.styles["SectionHeader"]))
                 story.extend(section["content"])
         
@@ -456,7 +454,7 @@ class ResumeGenerator:
             canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
             
             # Add horizontal bar separator (just underneath header text)
-            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
             canvas.line(0.6*inch, 10.2*inch, 7.5*inch, 10.2*inch)  # Just underneath header text
             
@@ -505,7 +503,7 @@ class ResumeGenerator:
                 canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
             
             # Add horizontal bar (close to header text, not body text)
-            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(1)
             canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Close to header text at 10.5*inch
             
@@ -517,7 +515,7 @@ class ResumeGenerator:
             canvas.saveState()
             
             # Add bar above footer to separate from page text
-            canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
+            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(0.5)
             canvas.line(0.6*inch, 0.6*inch, 7.5*inch, 0.6*inch)
             
