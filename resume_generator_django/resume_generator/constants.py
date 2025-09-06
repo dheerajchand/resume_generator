@@ -100,6 +100,46 @@ HEADER_LOCATION_LINK_OFFSET = 0.25 * inch
 # Footer content spacing
 FOOTER_LINK_OFFSET = 0.05 * inch
 
+# Spacing multipliers (systematic scale: 0.1, 0.25, 0.5, 0.75, 1, 2, 4)
+SPACE_MULTIPLIER_MINIMAL = 0.1    # Minimal spacing
+SPACE_MULTIPLIER_SMALL = 0.25     # Small spacing
+SPACE_MULTIPLIER_MEDIUM = 0.5     # Medium spacing
+SPACE_MULTIPLIER_LARGE = 0.75     # Large spacing
+
+# Font sizes (systematic hierarchy: 8, 9, 10, 11, 12, 14pt)
+FONT_SIZE_8 = 8
+FONT_SIZE_9 = 9
+FONT_SIZE_10 = 10
+FONT_SIZE_11 = 11
+FONT_SIZE_12 = 12
+FONT_SIZE_14 = 14
+
+# Bar dimensions
+BAR_WIDTH = 6 * inch
+BAR_HEIGHT = 2
+BAR_LINE_WIDTH = 1
+BAR_LINE_WIDTH_FOOTER = 0.5
+
+# Page content positioning
+PAGE_CONTENT_WIDTH = 6 * inch
+PAGE_LEFT_MARGIN = 0.6 * inch
+PAGE_RIGHT_MARGIN = 7.5 * inch
+
+# Header content positioning (first page)
+HEADER_FIRST_PHONE_Y = 10.5 * inch
+HEADER_FIRST_GITHUB_Y = 10.35 * inch
+HEADER_FIRST_NAME_Y = 10.425 * inch
+HEADER_FIRST_LOCATION_Y = 10.225 * inch
+
+# Header content positioning (recurring pages)
+HEADER_RECURRING_NAME_Y = 10.5 * inch
+HEADER_RECURRING_EMAIL_Y = 10.5 * inch
+HEADER_RECURRING_PHONE_Y = 10.5 * inch
+HEADER_RECURRING_GITHUB_Y = 10.35 * inch
+
+# Footer positioning
+FOOTER_Y = 0.4 * inch
+
 # =============================================================================
 # JOB SPLITTING RULES
 # =============================================================================

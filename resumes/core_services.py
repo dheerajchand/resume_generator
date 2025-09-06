@@ -29,11 +29,18 @@ from resume_generator_django.resume_generator.constants import (
     FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
     FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
     COLOR_MAPPINGS, PARAGRAPH_SPACING, SECTION_ORDER,
-    MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM,
+    MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, PAGE_HEIGHT,
     HEADER_LEFT_X, HEADER_TOP_Y, HEADER_RIGHT_X, HEADER_FOOTER_Y,
     HEADER_PHONE_OFFSET, HEADER_GITHUB_OFFSET, HEADER_GITHUB_LINK_OFFSET,
     HEADER_NAME_OFFSET, HEADER_LOCATION_OFFSET, HEADER_LOCATION_LINK_OFFSET,
-    FOOTER_LINK_OFFSET,
+    FOOTER_LINK_OFFSET, FOOTER_BAR_POSITION, SPACE_MULTIPLIER_MINIMAL, SPACE_MULTIPLIER_SMALL, 
+    SPACE_MULTIPLIER_MEDIUM, SPACE_MULTIPLIER_LARGE, FONT_SIZE_8, FONT_SIZE_9, 
+    FONT_SIZE_10, FONT_SIZE_11, FONT_SIZE_12, FONT_SIZE_14, BAR_WIDTH, BAR_HEIGHT,
+    BAR_LINE_WIDTH, BAR_LINE_WIDTH_FOOTER, PAGE_CONTENT_WIDTH, PAGE_LEFT_MARGIN,
+    PAGE_RIGHT_MARGIN, HEADER_FIRST_PHONE_Y, HEADER_FIRST_GITHUB_Y, 
+    HEADER_FIRST_NAME_Y, HEADER_FIRST_LOCATION_Y, HEADER_RECURRING_NAME_Y,
+    HEADER_RECURRING_EMAIL_Y, HEADER_RECURRING_PHONE_Y, HEADER_RECURRING_GITHUB_Y,
+    FOOTER_Y,
     get_spacing_constant, get_font_size, get_color_role
 )
 
@@ -87,7 +94,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=get_spacing_constant('base') * 0.75,
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_LARGE,
                 fontName="Helvetica-Bold",
             ),
             "Subtitle": ParagraphStyle(
@@ -96,7 +103,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
-                spaceAfter=get_spacing_constant('base') * 0.75,
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_LARGE,
                 fontName="Helvetica",
             ),
             # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
@@ -109,7 +116,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('header_to_content'),  # Minimal gap to content
-                spaceBefore=get_spacing_constant('base') * 0.5,     # 0.5 units spacing - reduced whitespace between main sections
+                spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,     # Medium units spacing - reduced whitespace between main sections
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
@@ -117,8 +124,8 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('job_title'),
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
-                spaceAfter=get_spacing_constant('base') * 0.25,   # Minimal spacing
-                spaceBefore=get_spacing_constant('base') * 0.25,  # Minimal spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,   # Small spacing
+                spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,  # Small spacing
                 fontName="Helvetica",
             ),
             "Company": ParagraphStyle(
@@ -126,8 +133,8 @@ class ResumeGenerator:
                 parent=styles["Heading3"],
                 fontSize=get_font_size('company'),
                 textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),  # Primary color
-                spaceAfter=get_spacing_constant('base') * 0.1,    # Minimal spacing after company
-                spaceBefore=get_spacing_constant('base') * 0.1,   # Minimal spacing before company
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,    # Minimal spacing after company
+                spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal spacing before company
                 fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
@@ -135,7 +142,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.5,      # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,      # Medium unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
@@ -144,7 +151,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
@@ -153,8 +160,8 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('main_competency'),
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.1,    # 0.1 unit spacing - minimal gap to bullets
-                spaceBefore=get_spacing_constant('base') * 0.1,   # 0.1 unit spacing - minimal gap from previous
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,    # Minimal unit spacing - minimal gap to bullets
+                spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal unit spacing - minimal gap from previous
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
@@ -162,7 +169,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('sub_competency'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
-                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
                 leftIndent=12,
                 fontName="Helvetica-Bold",
             ),
@@ -171,7 +178,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('competency_detail'),
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
                 leftIndent=0,
                 fontName="Helvetica",
                 allowWidows=1,
@@ -192,7 +199,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 alignment=TA_RIGHT,
-                spaceAfter=get_spacing_constant('base') * 0.5,
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,
                 fontName="Helvetica",
             ),
         }
@@ -397,7 +404,7 @@ class ResumeGenerator:
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
-        table = Table([['']], colWidths=[6*inch], rowHeights=[height/72*inch])
+        table = Table([['']], colWidths=[BAR_WIDTH], rowHeights=[height/72*inch])
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), HexColor(color)),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
@@ -413,21 +420,21 @@ class ResumeGenerator:
         # First page has larger header with name + location, so bar goes under the lowest content
         if github_url:
             # Header bar goes under GitHub link (lowest left content)
-            header_bar_y = 10.35*inch - 0.1*inch  # Just under GitHub link
+            header_bar_y = HEADER_FIRST_GITHUB_Y - SPACE_MULTIPLIER_MINIMAL * inch  # Just under GitHub link
         else:
             # Header bar goes under phone number (lowest left content)
-            header_bar_y = 10.5*inch - 0.1*inch   # Just under phone number
+            header_bar_y = HEADER_FIRST_PHONE_Y - SPACE_MULTIPLIER_MINIMAL * inch   # Just under phone number
         
         # But first page also has name + location on right side that goes lower
         # The bar should go under the lowest of either side
-        # Right side: name at 10.425*inch, location at 10.225*inch
-        right_side_bottom = 10.225*inch - 0.1*inch  # Just under location
+        # Right side: name at HEADER_FIRST_NAME_Y, location at HEADER_FIRST_LOCATION_Y
+        right_side_bottom = HEADER_FIRST_LOCATION_Y - SPACE_MULTIPLIER_MINIMAL * inch  # Just under location
         
         # Use the lower of the two sides
         header_bar_y = min(header_bar_y, right_side_bottom)
         
         # Calculate footer bar position (fixed at bottom)
-        footer_bar_y = 0.6*inch
+        footer_bar_y = FOOTER_BAR_POSITION
         
         # Calculate available space for body content
         # Use same spacing as section headers to their content for consistency
@@ -436,7 +443,7 @@ class ResumeGenerator:
         body_end_y = footer_bar_y + section_to_subheader_spacing
         
         # Calculate margins based on actual header/footer positions
-        top_margin = 11*inch - body_start_y
+        top_margin = PAGE_HEIGHT - body_start_y
         bottom_margin = body_end_y
         
         return {
@@ -496,48 +503,48 @@ class ResumeGenerator:
             top_y = HEADER_TOP_Y  # Lowered to prevent bleeding off page
             
             if email:
-                canvas.setFont("Helvetica", 11)
+                canvas.setFont("Helvetica", FONT_SIZE_11)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 canvas.drawString(left_x, top_y, email)
             
             if phone:
-                canvas.setFont("Helvetica", 11)
+                canvas.setFont("Helvetica", FONT_SIZE_11)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 canvas.drawString(left_x, top_y - HEADER_PHONE_OFFSET, phone)
             
             # GitHub link under phone on left side with equal spacing
             github_url = personal_info.get("github", "")
             if github_url:
-                canvas.setFont("Helvetica", 9)
+                canvas.setFont("Helvetica", FONT_SIZE_9)
                 canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
                 github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
                 # Create clickable link to GitHub with equal spacing
                 canvas.linkURL(github_url, 
-                             (left_x, top_y - 0.4*inch, left_x + canvas.stringWidth(github_text, "Helvetica", 9), top_y - 0.3*inch))
-                canvas.drawString(left_x, top_y - 0.35*inch, github_text)
+                             (left_x, top_y - HEADER_GITHUB_LINK_OFFSET, left_x + canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_9), top_y - HEADER_GITHUB_OFFSET))
+                canvas.drawString(left_x, top_y - HEADER_GITHUB_OFFSET, github_text)
             
             # Right cell: Full name with Austin, TX underneath
-            canvas.setFont("Helvetica-Bold", 28)
+            canvas.setFont("Helvetica-Bold", FONT_SIZE_14)
             canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
             # Center name vertically with the middle of the left content
-            name_y = top_y - 0.075*inch  # Center between email and phone
-            canvas.drawRightString(7.5*inch, name_y, name)
+            name_y = top_y - HEADER_NAME_OFFSET  # Center between email and phone
+            canvas.drawRightString(PAGE_RIGHT_MARGIN, name_y, name)
             
             # Austin, TX with coordinates as clickable link under name
-            canvas.setFont("Helvetica", 9)
+            canvas.setFont("Helvetica", FONT_SIZE_9)
             canvas.setFillColor(HexColor(self.config.get("SUBTITLE_COLOR", "#666666")))
             austin_text = "Austin, TX (30.2672°N, 97.7431°W)"
-            austin_width = canvas.stringWidth(austin_text, "Helvetica", 9)
-            austin_x = 7.5*inch - austin_width
+            austin_width = canvas.stringWidth(austin_text, "Helvetica", FONT_SIZE_9)
+            austin_x = PAGE_RIGHT_MARGIN - austin_width
             # Create clickable link to OpenStreetMap
             canvas.linkURL("https://www.openstreetmap.org/?mlat=30.2672&mlon=-97.7431&zoom=12", 
-                         (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
-            canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
+                         (austin_x, name_y - HEADER_LOCATION_LINK_OFFSET, PAGE_RIGHT_MARGIN, name_y - HEADER_LOCATION_OFFSET))
+            canvas.drawRightString(PAGE_RIGHT_MARGIN, name_y - HEADER_LOCATION_OFFSET, austin_text)
             
             # Add horizontal bar separator using calculated position
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
-            canvas.setLineWidth(1)
-            canvas.line(0.6*inch, header_bar_y, 7.5*inch, header_bar_y)
+            canvas.setLineWidth(BAR_LINE_WIDTH)
+            canvas.line(PAGE_LEFT_MARGIN, header_bar_y, PAGE_RIGHT_MARGIN, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)
@@ -562,47 +569,47 @@ class ResumeGenerator:
                 phone = f"+{phone}"
             
             # Left cell: Name (bold, all caps)
-            canvas.setFont("Helvetica-Bold", 10)  # Smaller text
+            canvas.setFont("Helvetica-Bold", FONT_SIZE_10)  # Smaller text
             canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
-            canvas.drawString(0.6*inch, 10.5*inch, name)
+            canvas.drawString(PAGE_LEFT_MARGIN, HEADER_RECURRING_NAME_Y, name)
             
             # Middle cell: Email (centered)
             if email:
-                canvas.setFont("Helvetica", 9)
+                canvas.setFont("Helvetica", FONT_SIZE_9)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 email_text = f"Email: {email}"
                 # Center email in the middle third of the page
-                email_width = canvas.stringWidth(email_text, "Helvetica", 9)
-                email_x = (0.6*inch + 7.5*inch) / 2 - email_width / 2
-                canvas.drawString(email_x, 10.5*inch, email_text)
+                email_width = canvas.stringWidth(email_text, "Helvetica", FONT_SIZE_9)
+                email_x = (PAGE_LEFT_MARGIN + PAGE_RIGHT_MARGIN) / 2 - email_width / 2
+                canvas.drawString(email_x, HEADER_RECURRING_EMAIL_Y, email_text)
             
             # Right cell: Phone and GitHub stacked
             if phone:
-                canvas.setFont("Helvetica", 9)
+                canvas.setFont("Helvetica", FONT_SIZE_9)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 phone_text = f"Phone: {phone}"
                 # Create clickable link for phone
-                phone_width = canvas.stringWidth(phone_text, "Helvetica", 9)
-                phone_x = 7.5*inch - phone_width
-                canvas.linkURL(f"tel:{phone}", (phone_x, 10.4*inch, 7.5*inch, 10.6*inch))
-                canvas.drawRightString(7.5*inch, 10.5*inch, phone_text)
+                phone_width = canvas.stringWidth(phone_text, "Helvetica", FONT_SIZE_9)
+                phone_x = PAGE_RIGHT_MARGIN - phone_width
+                canvas.linkURL(f"tel:{phone}", (phone_x, HEADER_RECURRING_PHONE_Y - 0.1*inch, PAGE_RIGHT_MARGIN, HEADER_RECURRING_PHONE_Y + 0.1*inch))
+                canvas.drawRightString(PAGE_RIGHT_MARGIN, HEADER_RECURRING_PHONE_Y, phone_text)
             
             # GitHub link under phone on right side
             github_url = personal_info.get("github", "")
             if github_url:
-                canvas.setFont("Helvetica", 8)
+                canvas.setFont("Helvetica", FONT_SIZE_8)
                 canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
                 github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
                 # Create clickable link to GitHub
                 canvas.linkURL(github_url, 
-                             (7.5*inch - canvas.stringWidth(github_text, "Helvetica", 8), 
-                              10.3*inch, 7.5*inch, 10.4*inch))
-                canvas.drawRightString(7.5*inch, 10.35*inch, github_text)
+                             (PAGE_RIGHT_MARGIN - canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_8), 
+                              HEADER_RECURRING_GITHUB_Y - 0.05*inch, PAGE_RIGHT_MARGIN, HEADER_RECURRING_GITHUB_Y + 0.05*inch))
+                canvas.drawRightString(PAGE_RIGHT_MARGIN, HEADER_RECURRING_GITHUB_Y, github_text)
             
             # Add horizontal bar using calculated position
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
-            canvas.setLineWidth(1)
-            canvas.line(0.6*inch, header_bar_y, 7.5*inch, header_bar_y)
+            canvas.setLineWidth(BAR_LINE_WIDTH)
+            canvas.line(PAGE_LEFT_MARGIN, header_bar_y, PAGE_RIGHT_MARGIN, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)  # Also add footer
@@ -617,11 +624,11 @@ class ResumeGenerator:
             
             # Add bar above footer to separate from page text
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
-            canvas.setLineWidth(0.5)
-            canvas.line(0.6*inch, footer_bar_y, 7.5*inch, footer_bar_y)
+            canvas.setLineWidth(BAR_LINE_WIDTH_FOOTER)
+            canvas.line(PAGE_LEFT_MARGIN, footer_bar_y, PAGE_RIGHT_MARGIN, footer_bar_y)
             
-            canvas.setFont("Helvetica", 8)
-            footer_y = 0.4*inch
+            canvas.setFont("Helvetica", FONT_SIZE_8)
+            footer_y = FOOTER_Y
             
             # Two-cell footer structure
             website_url = personal_info.get("website", "")
@@ -629,42 +636,42 @@ class ResumeGenerator:
             
             # Left cell: Site and LinkedIn with pipe separator
             if website_url or linkedin_url:
-                current_x = 0.6*inch
+                current_x = PAGE_LEFT_MARGIN
                 
                 # Draw labels in accent color, links in regular color
                 if website_url:
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "Site: ")
-                    current_x += canvas.stringWidth("Site: ", "Helvetica", 8)
+                    current_x += canvas.stringWidth("Site: ", "Helvetica", FONT_SIZE_8)
                     
                     # Link in regular color
                     canvas.setFillColor(HexColor("#4682B4"))
-                    canvas.linkURL(website_url, (current_x, footer_y - 0.05*inch, current_x + len(website_url)*0.05*inch, footer_y + 0.1*inch))
+                    canvas.linkURL(website_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(website_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, website_url)
-                    current_x += canvas.stringWidth(website_url, "Helvetica", 8)
+                    current_x += canvas.stringWidth(website_url, "Helvetica", FONT_SIZE_8)
                 
                 if linkedin_url:
                     # Pipe separator
                     if website_url:
                         canvas.setFillColor(HexColor("#666666"))
                         canvas.drawString(current_x, footer_y, " | ")
-                        current_x += canvas.stringWidth(" | ", "Helvetica", 8)
+                        current_x += canvas.stringWidth(" | ", "Helvetica", FONT_SIZE_8)
                     
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "LinkedIn: ")
-                    current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", 8)
+                    current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", FONT_SIZE_8)
                     
                     # Link in LinkedIn blue
                     canvas.setFillColor(HexColor("#0077B5"))
-                    canvas.linkURL(linkedin_url, (current_x, footer_y - 0.05*inch, current_x + len(linkedin_url)*0.05*inch, footer_y + 0.1*inch))
+                    canvas.linkURL(linkedin_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(linkedin_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, linkedin_url)
             
             # Right cell: Page number
             canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
             page_num = canvas.getPageNumber()
-            canvas.drawRightString(7.5*inch, footer_y, f"Page {page_num}")
+            canvas.drawRightString(PAGE_RIGHT_MARGIN, footer_y, f"Page {page_num}")
             
             canvas.restoreState()
         
@@ -681,7 +688,7 @@ class ResumeGenerator:
         # Name
         name_para = doc.add_paragraph()
         name_run = name_para.add_run(personal_info.get("name", "NAME"))
-        name_run.font.size = Inches(0.2)
+        name_run.font.size = Inches(0.2)  # Keep this as it's a reasonable size for DOCX
         name_run.font.bold = True
         name_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
         
