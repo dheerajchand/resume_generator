@@ -295,9 +295,7 @@ class ResumeGenerator:
                 
                 responsibilities = job.get("responsibilities", [])
                 
-                # Add small spacing before responsibilities
-                if responsibilities:
-                    job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))  # Spacing before responsibilities
+                # No additional spacing - JobTitle.spaceAfter already provides the correct spacing
                 
                 # If job has many responsibilities, allow splitting but keep header together
                 if len(responsibilities) > 4:  # Increased threshold to 4
