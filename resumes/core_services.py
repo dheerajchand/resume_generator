@@ -1013,7 +1013,7 @@ class ResumeGenerator:
                     content.append("")
         
         # Write RTF file
-        rtf_content = "{\\rtf1\\ansi\\deff0 " + "\\par ".join(content) + "}"
+        rtf_content = "{\\rtf1\\ansi\\deff0\\par " + "\\par ".join(content) + "\\par }"
         
         with open(filename, "w", encoding="utf-8") as f:
             f.write(rtf_content)

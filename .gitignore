@@ -6,7 +6,7 @@ user_config.json
 
 # Generated Resume Data (Personal Content)
 inputs/
-outputs/
+# outputs/ - Commented out to allow generated resumes to be tracked
 
 # Python
 __pycache__/
