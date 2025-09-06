@@ -14,7 +14,7 @@ def docs_index(request):
     """Main documentation index page"""
     context = {
         'title': 'Documentation',
-        'description': 'Complete documentation for the Resume Generator system with systematic design system',
+        'description': 'Complete documentation for the Resume Generator system with systematic design system, font themes, and high-quality output',
         'docs': [
             {
                 'title': 'Getting Started',
