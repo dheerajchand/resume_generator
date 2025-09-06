@@ -4,7 +4,8 @@
     "phone": "202.550.7110",
     "email": "dheeraj.chand@gmail.com",
     "website": "https://www.dheerajchand.com",
-    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/",
+    "github": "https://github.com/dheerajchand"
   },
   "summary": "Senior Software Engineer with 21 years building scalable geospatial data platforms, web applications, and distributed analytical systems. Expert in full-stack development with deep specialization in Apache Spark/Sedona for big data geospatial processing. Proven track record architecting multi-tenant SaaS platforms used by thousands of analysts, implementing ETL pipelines processing billions of geospatial records, and building production systems integrating ESRI, OSGeo, and SAFE FME technologies. Strong background in both enterprise consulting and startup environments, with experience leading engineering teams and delivering mission-critical geospatial applications.",
   "key_achievements": [

@@ -4,7 +4,8 @@
     "phone": "202.550.7110",
     "email": "dheeraj.chand@gmail.com",
     "website": "https://www.dheerajchand.com",
-    "linkedin": "https://www.linkedin.com/in/dheerajchand/"
+    "linkedin": "https://www.linkedin.com/in/dheerajchand/",
+    "github": "https://github.com/dheerajchand"
   },
   "summary": "Senior Data Engineer with 21 years of expertise in geospatial data platforms, big data processing, and distributed systems architecture. Deep specialist in Apache Spark/Sedona for large-scale geospatial analytics, with fluency across ESRI, OSGeo, and SAFE FME technology stacks. Proven track record architecting production systems serving thousands of users, implementing PySpark pipelines processing billions of spatial records, and leading engineering teams. Expert in full-stack geospatial development from PostGIS database optimization to React-based mapping interfaces.",
   "competencies": {
