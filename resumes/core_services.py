@@ -21,6 +21,15 @@ from docx import Document
 from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 import tempfile
+from resume_generator_django.resume_generator.constants import (
+    SPACE_BASE, SPACE_BETWEEN_SECTIONS, SPACE_BETWEEN_JOB_UNITS, 
+    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TOP,
+    FONT_SIZE_SECTION_HEADER, FONT_SIZE_COMPANY, FONT_SIZE_MAIN_COMPETENCY,
+    FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
+    FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
+    COLOR_MAPPINGS, PARAGRAPH_SPACING, SECTION_ORDER,
+    get_spacing_constant, get_font_size, get_color_role
+)
 
 
 
@@ -32,6 +41,12 @@ class ResumeGenerator:
         self.data = self._load_json(data_file)
         self.config = self._load_json(config_file) if config_file else {}
         self.styles = self._create_styles()
+        
+        # Spacing system constants (imported from settings)
+        self.SPACE_BASE = SPACE_BASE
+        self.SPACE_BETWEEN_SECTIONS = SPACE_BETWEEN_SECTIONS
+        self.SPACE_BETWEEN_JOB_UNITS = SPACE_BETWEEN_JOB_UNITS
+        self.SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BETWEEN_JOB_COMPONENTS
     
     def _load_json(self, file_path: str) -> Dict[str, Any]:
         """Load JSON data from file"""
@@ -52,28 +67,28 @@ class ResumeGenerator:
             "Name": ParagraphStyle(
                 "CustomName",
                 parent=styles["Heading1"],
-                fontSize=28,  # Bigger name
+                fontSize=28,  # Bigger name - keep as special case
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_RIGHT,
-                spaceAfter=8,
+                spaceAfter=get_spacing_constant('base') * 2,
                 fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
                 "CustomTitle",
                 parent=styles["Heading2"],
-                fontSize=12,
+                fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=6,
+                spaceAfter=get_spacing_constant('base') * 1.5,
                 fontName="Helvetica-Bold",
             ),
             "Subtitle": ParagraphStyle(
                 "CustomSubtitle",
                 parent=styles["Normal"],
-                fontSize=10,
+                fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
-                spaceAfter=6,
+                spaceAfter=get_spacing_constant('base') * 1.5,
                 fontName="Helvetica",
             ),
             # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
@@ -83,96 +98,274 @@ class ResumeGenerator:
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
-                fontSize=12,
+                fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=1,      # 1 unit spacing
-                spaceBefore=3,     # 3 units spacing - more whitespace between main sections
+                spaceAfter=get_spacing_constant('base') * 0.5,      # 0.5 unit spacing
+                spaceBefore=get_spacing_constant('base') * 1.5,     # 1.5 units spacing - more whitespace between main sections
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
                 "CustomJobTitle",
                 parent=styles["Normal"],
-                fontSize=11,       # Increased for legibility
+                fontSize=get_font_size('job_title'),
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
-                spaceAfter=0.25,   # Minimal spacing
-                spaceBefore=0.25,  # Minimal spacing
+                spaceAfter=get_spacing_constant('base') * 0.25,   # Minimal spacing
+                spaceBefore=get_spacing_constant('base') * 0.25,  # Minimal spacing
                 fontName="Helvetica",
             ),
             "Company": ParagraphStyle(
                 "CustomCompany",
                 parent=styles["Heading3"],
-                fontSize=12,       # Increased for legibility
+                fontSize=get_font_size('company'),
                 textColor=HexColor(colors.get("COMPANY_COLOR", "#2C3E50")),  # Primary color
-                spaceAfter=0.5,    # 0.5 unit spacing
-                spaceBefore=0.5,   # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
+                spaceBefore=get_spacing_constant('base') * 0.5,   # 0.5 unit spacing
                 fontName="Helvetica-Bold",
             ),
             "Body": ParagraphStyle(
                 "CustomBody",
                 parent=styles["Normal"],
-                fontSize=11,       # Increased for legibility
+                fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=1,      # 1 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,      # 0.5 unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "BulletPoint": ParagraphStyle(
                 "CustomBulletPoint",
                 parent=styles["Normal"],
-                fontSize=10,       # Increased for legibility
+                fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
             "MainCompetency": ParagraphStyle(
                 "CustomMainCompetency",
                 parent=styles["Normal"],
-                fontSize=12,       # Increased for legibility
+                fontSize=get_font_size('main_competency'),
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=0.5,    # 0.5 unit spacing
-                spaceBefore=0.5,   # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
+                spaceBefore=get_spacing_constant('base') * 0.5,   # 0.5 unit spacing
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
                 "CustomSubCompetency",
                 parent=styles["Normal"],
-                fontSize=11,       # Increased for legibility
+                fontSize=get_font_size('sub_competency'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
-                spaceAfter=0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
                 leftIndent=12,
                 fontName="Helvetica-Bold",
             ),
             "CompetencyDetail": ParagraphStyle(
                 "CustomCompetencyDetail",
                 parent=styles["Normal"],
-                fontSize=10,       # Increased for legibility
+                fontSize=get_font_size('competency_detail'),
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
-                spaceAfter=0.5,    # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
                 leftIndent=0,
                 fontName="Helvetica",
             ),
             "Contact": ParagraphStyle(
                 "CustomContact",
                 parent=styles["Normal"],
-                fontSize=11,
+                fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),  # Use accent color for header contact
                 alignment=TA_RIGHT,
-                spaceAfter=12,
+                spaceAfter=get_spacing_constant('base') * 2,
                 fontName="Helvetica",
             ),
             "ContactStacked": ParagraphStyle(
                 "CustomContactStacked",
                 parent=styles["Normal"],
-                fontSize=11,
+                fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),
                 alignment=TA_RIGHT,
-                spaceAfter=2,
+                spaceAfter=get_spacing_constant('base') * 0.5,
                 fontName="Helvetica",
             ),
         }
         
         return custom_styles
+    
+    def _get_sections(self):
+        """Define and render all resume sections in order"""
+        sections = []
+        
+        # Professional Summary
+        summary = self.data.get("summary", "")
+        if summary:
+            sections.append({
+                "name": "PROFESSIONAL SUMMARY",
+                "content": [Paragraph(summary, self.styles["Body"])]
+            })
+        
+        # Key Achievements and Impact
+        achievements = self.data.get("achievements", {})
+        if achievements:
+            achievement_content = []
+            for category, achievement_list in achievements.items():
+                if isinstance(achievement_list, list):
+                    achievement_content.append(Paragraph(category, self.styles["MainCompetency"]))
+                    for achievement in achievement_list:
+                        achievement_content.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
+            
+            sections.append({
+                "name": "KEY ACHIEVEMENTS AND IMPACT",
+                "content": achievement_content
+            })
+        
+        # Core Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            competency_content = []
+            for main_category, sub_skills in competencies.items():
+                if isinstance(sub_skills, list):
+                    # Build compact inline content
+                    sub_content = []
+                    for skill_line in sub_skills:
+                        if ": " in skill_line:
+                            sub_category, details = skill_line.split(": ", 1)
+                            sub_content.append(f"<i>{sub_category}</i> ({details})")
+                        else:
+                            sub_content.append(skill_line)
+                    
+                    # Create single paragraph with main category and all sub-skills
+                    full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
+                    competency_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
+            
+            sections.append({
+                "name": "CORE COMPETENCIES",
+                "content": competency_content
+            })
+        
+        # Professional Experience
+        experience = self.data.get("experience", [])
+        if experience:
+            experience_content = []
+            for job in experience:
+                job_title = job.get("title", "")
+                company = job.get("company", "")
+                location = job.get("location", "")
+                dates = job.get("dates", "")
+                
+                # Company, job title, and dates on one line
+                company_line = company
+                if job_title:
+                    company_line += f" | {job_title}"
+                if location:
+                    company_line += f" - {location}"
+                if dates:
+                    company_line += f" {dates}"
+                
+                # Intelligent job unit splitting logic
+                job_unit = []
+                job_unit.append(Paragraph(company_line, self.styles["Company"]))
+                
+                if job.get("subtitle"):
+                    job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))  # Spacing between company and subtitle
+                    job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
+                
+                responsibilities = job.get("responsibilities", [])
+                
+                # Add small spacing before responsibilities
+                if responsibilities:
+                    job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))  # Spacing before responsibilities
+                
+                # If job has many responsibilities, allow splitting but keep header together
+                if len(responsibilities) > 3:
+                    # Keep company + title + subtitle together
+                    header_unit = job_unit.copy()
+                    experience_content.append(KeepTogether(header_unit))
+                    
+                    # Add first few bullets to header if space allows
+                    for i, resp in enumerate(responsibilities[:2]):
+                        experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                    
+                    # Add remaining bullets (can split across pages)
+                    for resp in responsibilities[2:]:
+                        experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                else:
+                    # For shorter jobs, keep everything together
+                    for resp in responsibilities:
+                        job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                    experience_content.append(KeepTogether(job_unit))
+                
+                # Add spacer between job units
+                experience_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_UNITS))
+            
+            sections.append({
+                "name": "PROFESSIONAL EXPERIENCE",
+                "content": experience_content
+            })
+        
+        # Key Projects
+        projects = self.data.get("projects", [])
+        if projects:
+            project_content = []
+            for project in projects:
+                project_name = project.get("name", "")
+                dates = project.get("dates", "")
+                description = project.get("description", "")
+                technologies = project.get("technologies", [])
+                impact = project.get("impact", "")
+                
+                title_line = project_name
+                if dates:
+                    title_line += f" ({dates})"
+                
+                project_content.append(Paragraph(title_line, self.styles["SubCompetency"]))
+                
+                if description:
+                    project_content.append(Paragraph(description, self.styles["CompetencyDetail"]))
+                
+                if technologies:
+                    tech_text = "Technologies: " + ", ".join(technologies)
+                    project_content.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
+                
+                if impact:
+                    project_content.append(Paragraph(f"Impact: {impact}", self.styles["CompetencyDetail"]))
+            
+            sections.append({
+                "name": "KEY PROJECTS",
+                "content": project_content
+            })
+        
+        # Education
+        education = self.data.get("education", [])
+        if education:
+            education_content = []
+            for edu in education:
+                degree = edu.get("degree", "")
+                institution = edu.get("institution", "")
+                location = edu.get("location", "")
+                dates = edu.get("dates", "")
+                gpa = edu.get("gpa", "")
+                honors = edu.get("honors", "")
+                
+                title_line = degree
+                if institution:
+                    title_line += f" - {institution}"
+                if location:
+                    title_line += f" ({location})"
+                if dates:
+                    title_line += f" | {dates}"
+                
+                education_content.append(Paragraph(title_line, self.styles["JobTitle"]))
+                
+                if gpa:
+                    education_content.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
+                
+                if honors:
+                    education_content.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
+            
+            sections.append({
+                "name": "EDUCATION",
+                "content": education_content
+            })
+        
+        return sections
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
@@ -200,150 +393,18 @@ class ResumeGenerator:
         # Add space for header (will be drawn by canvas)
         story.append(Spacer(1, 0.4*inch))
         
-        # Summary
-        summary = self.data.get("summary", "")
-        if summary:
-            story.append(Paragraph("PROFESSIONAL SUMMARY", self.styles["SectionHeader"]))
-            story.append(Paragraph(summary, self.styles["Body"]))
+        # Define sections in order
+        sections = self._get_sections()
         
-        # Key Achievements and Impact - moved up from bottom
-        achievements = self.data.get("achievements", {})
-        if achievements:
-            story.append(Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"]))
-            for category, achievement_list in achievements.items():
-                if isinstance(achievement_list, list):
-                    story.append(Paragraph(category, self.styles["MainCompetency"]))
-                    for achievement in achievement_list:
-                        story.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
+        # Render each section
+        for i, section in enumerate(sections):
+            if section["content"]:
+                # Add small spacer between sections (except before first section)
+                if i > 0:
+                    story.append(Spacer(1, self.SPACE_BETWEEN_SECTIONS))  # Whitespace between sections
+                story.append(Paragraph(section["name"], self.styles["SectionHeader"]))
+                story.extend(section["content"])
         
-        # Competencies in compact inline format for maximum space efficiency
-        competencies = self.data.get("competencies", {})
-        if competencies:
-            story.append(Paragraph("CORE COMPETENCIES", self.styles["SectionHeader"]))
-            
-            for main_category, sub_skills in competencies.items():
-                if isinstance(sub_skills, list):
-                    # Build compact inline content
-                    sub_content = []
-                    for skill_line in sub_skills:
-                        if ": " in skill_line:
-                            sub_category, details = skill_line.split(": ", 1)
-                            sub_content.append(f"<i>{sub_category}</i> ({details})")
-                        else:
-                            sub_content.append(skill_line)
-                    
-                    # Create single paragraph with main category and all sub-skills
-                    full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
-                    story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
-        
-        # No universal spacer - spacing handled per page type
-        
-        # Experience - Modern format like Deepak's
-        experience = self.data.get("experience", [])
-        if experience:
-            story.append(Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"]))
-            for job in experience:
-                job_title = job.get("title", "")
-                company = job.get("company", "")
-                location = job.get("location", "")
-                dates = job.get("dates", "")
-                
-                # Company, job title, and dates on one line
-                company_line = company
-                if job_title:
-                    company_line += f" | {job_title}"
-                if location:
-                    company_line += f" - {location}"
-                if dates:
-                    company_line += f" {dates}"
-                
-                # Intelligent job unit splitting logic
-                job_unit = []
-                job_unit.append(Paragraph(company_line, self.styles["Company"]))
-                
-                if job.get("subtitle"):
-                    job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
-                
-                responsibilities = job.get("responsibilities", [])
-                
-                # If job has many responsibilities, allow splitting but keep header together
-                if len(responsibilities) > 3:
-                    # Keep company + title + subtitle together
-                    header_unit = job_unit.copy()
-                    story.append(KeepTogether(header_unit))
-                    
-                    # Add first few bullets to header if space allows
-                    for i, resp in enumerate(responsibilities[:2]):
-                        story.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
-                    
-                    # Add remaining bullets (can split across pages)
-                    for resp in responsibilities[2:]:
-                        story.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
-                else:
-                    # For shorter jobs, keep everything together
-                    for resp in responsibilities:
-                        job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
-                    story.append(KeepTogether(job_unit))
-        
-        # Projects
-        projects = self.data.get("projects", [])
-        if projects:
-            story.append(Paragraph("KEY PROJECTS", self.styles["SectionHeader"]))
-            for project in projects:
-                project_name = project.get("name", "")
-                dates = project.get("dates", "")
-                description = project.get("description", "")
-                technologies = project.get("technologies", [])
-                impact = project.get("impact", "")
-                
-                title_line = project_name
-                if dates:
-                    title_line += f" ({dates})"
-                
-                story.append(Paragraph(title_line, self.styles["SubCompetency"]))
-                
-                if description:
-                    story.append(Paragraph(description, self.styles["CompetencyDetail"]))
-                
-                if technologies:
-                    tech_text = "Technologies: " + ", ".join(technologies)
-                    story.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
-                
-                if impact:
-                    impact_text = f"Impact: {impact}"
-                    story.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
-                
-                story.append(Spacer(1, 6))
-        
-        # Education
-        education = self.data.get("education", [])
-        if education:
-            story.append(Paragraph("EDUCATION", self.styles["SectionHeader"]))
-            for edu in education:
-                degree = edu.get("degree", "")
-                institution = edu.get("institution", "")
-                location = edu.get("location", "")
-                dates = edu.get("dates", "")
-                gpa = edu.get("gpa", "")
-                honors = edu.get("honors", "")
-                
-                title_line = degree
-                if institution:
-                    title_line += f" - {institution}"
-                if location:
-                    title_line += f" ({location})"
-                if dates:
-                    title_line += f" | {dates}"
-                
-                story.append(Paragraph(title_line, self.styles["JobTitle"]))
-                
-                if gpa:
-                    story.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
-                
-                if honors:
-                    story.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
-                
-                story.append(Spacer(1, 6))
         
         
         # Build with custom header and footer
