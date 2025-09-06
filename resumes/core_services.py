@@ -29,6 +29,11 @@ from resume_generator_django.resume_generator.constants import (
     FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
     FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
     COLOR_MAPPINGS, PARAGRAPH_SPACING, SECTION_ORDER,
+    MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM,
+    HEADER_LEFT_X, HEADER_TOP_Y, HEADER_RIGHT_X, HEADER_FOOTER_Y,
+    HEADER_PHONE_OFFSET, HEADER_GITHUB_OFFSET, HEADER_GITHUB_LINK_OFFSET,
+    HEADER_NAME_OFFSET, HEADER_LOCATION_OFFSET, HEADER_LOCATION_LINK_OFFSET,
+    FOOTER_LINK_OFFSET,
     get_spacing_constant, get_font_size, get_color_role
 )
 
@@ -450,7 +455,7 @@ class ResumeGenerator:
         dimensions = self._calculate_header_footer_dimensions()
         
         doc = SimpleDocTemplate(filename, pagesize=letter, 
-                              rightMargin=0.6*inch, leftMargin=0.6*inch,
+                              rightMargin=MARGIN_RIGHT, leftMargin=MARGIN_LEFT,
                               topMargin=dimensions['top_margin'], 
                               bottomMargin=dimensions['bottom_margin'])
         story = []
@@ -487,8 +492,8 @@ class ResumeGenerator:
                 phone = f"+{phone}"
             
             # Left cell: Email and phone stacked vertically
-            left_x = 0.6*inch
-            top_y = 10.5*inch  # Lowered to prevent bleeding off page
+            left_x = HEADER_LEFT_X
+            top_y = HEADER_TOP_Y  # Lowered to prevent bleeding off page
             
             if email:
                 canvas.setFont("Helvetica", 11)
@@ -498,7 +503,7 @@ class ResumeGenerator:
             if phone:
                 canvas.setFont("Helvetica", 11)
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
-                canvas.drawString(left_x, top_y - 0.2*inch, phone)
+                canvas.drawString(left_x, top_y - HEADER_PHONE_OFFSET, phone)
             
             # GitHub link under phone on left side with equal spacing
             github_url = personal_info.get("github", "")

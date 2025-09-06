@@ -83,6 +83,23 @@ HEADER_BAR_POSITION_RECURRING_PAGES = 10.4 * inch
 # Footer positioning
 FOOTER_BAR_POSITION = 0.6 * inch
 
+# Header content positioning
+HEADER_LEFT_X = 0.6 * inch
+HEADER_TOP_Y = 10.5 * inch
+HEADER_RIGHT_X = 7.5 * inch
+HEADER_FOOTER_Y = 0.4 * inch
+
+# Header content spacing
+HEADER_PHONE_OFFSET = 0.2 * inch
+HEADER_GITHUB_OFFSET = 0.35 * inch
+HEADER_GITHUB_LINK_OFFSET = 0.4 * inch
+HEADER_NAME_OFFSET = 0.075 * inch
+HEADER_LOCATION_OFFSET = 0.2 * inch
+HEADER_LOCATION_LINK_OFFSET = 0.25 * inch
+
+# Footer content spacing
+FOOTER_LINK_OFFSET = 0.05 * inch
+
 # =============================================================================
 # JOB SPLITTING RULES
 # =============================================================================
