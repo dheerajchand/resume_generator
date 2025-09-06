@@ -15,8 +15,8 @@ from reportlab.lib.units import inch
 SPACE_BASE = 0.2 * inch
 
 # Spacing hierarchy
-SPACE_BETWEEN_SECTIONS = SPACE_BASE                    # Between major sections
-SPACE_BETWEEN_JOB_UNITS = SPACE_BASE / 2              # Between different jobs
+SPACE_BETWEEN_SECTIONS = SPACE_BASE * 0.5             # Between major sections (reduced)
+SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.25           # Between different jobs (reduced)
 SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BASE / 4         # Within job units
 SPACE_HEADER_TOP = 0.4 * inch                         # Space for header on first page
 
@@ -92,32 +92,32 @@ BULLETS_WITH_HEADER = 2
 # Paragraph style spacing (in points)
 PARAGRAPH_SPACING = {
     'section_header': {
-        'spaceAfter': 1,
-        'spaceBefore': 3,
-    },
-    'company': {
         'spaceAfter': 0.5,
         'spaceBefore': 0.5,
+    },
+    'company': {
+        'spaceAfter': 0.25,
+        'spaceBefore': 0.25,
     },
     'job_title': {
         'spaceAfter': 0.25,
         'spaceBefore': 0.25,
     },
     'body': {
-        'spaceAfter': 1,
+        'spaceAfter': 0.5,
     },
     'bullet_point': {
-        'spaceAfter': 0.5,
+        'spaceAfter': 0.25,
     },
     'main_competency': {
-        'spaceAfter': 0.5,
-        'spaceBefore': 0.5,
+        'spaceAfter': 0.25,
+        'spaceBefore': 0.25,
     },
     'sub_competency': {
-        'spaceAfter': 0.5,
+        'spaceAfter': 0.25,
     },
     'competency_detail': {
-        'spaceAfter': 0.5,
+        'spaceAfter': 0.25,
     },
 }
 

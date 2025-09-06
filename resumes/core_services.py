@@ -70,7 +70,7 @@ class ResumeGenerator:
                 fontSize=28,  # Bigger name - keep as special case
                 textColor=HexColor(colors.get("NAME_COLOR", "#2C3E50")),
                 alignment=TA_RIGHT,
-                spaceAfter=get_spacing_constant('base') * 2,
+                spaceAfter=get_spacing_constant('base') * 1,
                 fontName="Helvetica-Bold",
             ),
             "Title": ParagraphStyle(
@@ -79,7 +79,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#34495E")),
                 alignment=TA_CENTER,
-                spaceAfter=get_spacing_constant('base') * 1.5,
+                spaceAfter=get_spacing_constant('base') * 0.75,
                 fontName="Helvetica-Bold",
             ),
             "Subtitle": ParagraphStyle(
@@ -88,7 +88,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("TITLE_COLOR", "#7F8C8D")),
                 alignment=TA_CENTER,
-                spaceAfter=get_spacing_constant('base') * 1.5,
+                spaceAfter=get_spacing_constant('base') * 0.75,
                 fontName="Helvetica",
             ),
             # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
@@ -100,8 +100,8 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=get_font_size('section_header'),
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.5,      # 0.5 unit spacing
-                spaceBefore=get_spacing_constant('base') * 1.5,     # 1.5 units spacing - more whitespace between main sections
+                spaceAfter=get_spacing_constant('base') * 0.25,     # 0.25 unit spacing
+                spaceBefore=get_spacing_constant('base') * 0.5,     # 0.5 units spacing - reduced whitespace between main sections
                 fontName="Helvetica-Bold",
             ),
             "JobTitle": ParagraphStyle(
@@ -173,7 +173,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("ACCENT_COLOR", "#4682B4")),  # Use accent color for header contact
                 alignment=TA_RIGHT,
-                spaceAfter=get_spacing_constant('base') * 2,
+                spaceAfter=get_spacing_constant('base') * 1,
                 fontName="Helvetica",
             ),
             "ContactStacked": ParagraphStyle(
