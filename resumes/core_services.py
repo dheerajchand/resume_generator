@@ -195,6 +195,9 @@ class ResumeGenerator:
         # Add space for header (will be drawn by canvas)
         story.append(Spacer(1, 1.2*inch))
         
+        # Add small spacer for first page bar-to-content spacing
+        story.append(Spacer(1, 0.05*inch))
+        
         # Add space before first section (reduced for smaller header)
         story.append(Spacer(1, 0.05*inch))
         
@@ -238,13 +241,15 @@ class ResumeGenerator:
             
             story.append(Spacer(1, 0.2))
         
-        # Add minimal space for bar-to-content spacing
-        story.append(Spacer(1, 0.05*inch))
+        # No universal spacer - spacing handled per page type
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
         if experience:
             story.append(Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"]))
+            
+            # Add spacer for recurring pages bar-to-content spacing
+            story.append(Spacer(1, 0.05*inch))
             for job in experience:
                 job_title = job.get("title", "")
                 company = job.get("company", "")
