@@ -8,11 +8,11 @@ Distinguished Research and Data Analytics Leader with 21 years of experience dir
 
 ## Key Achievements and Impact
 
-### Software Development and Innovation
-- Conceived and deployed redistricting software used by thousands of analysts nationwide
-- Developed boundary estimation system using incomplete data without ML requirements
-- Created econometric simulation platform for humanitarian intervention modeling
-- Built comprehensive survey operations platform from RFP through deployment
+### Research Leadership and Policy Impact
+- Regular expert testimony and consultation on research methodology for journalists, elected officials, and community leaders
+- Research analysis used in court cases addressing housing, redistricting, and community development with rigorous methodology
+- Conceived and deployed cloud-based analytical software used by thousands of researchers nationwide for community-focused research
+- Developed research frameworks and methodologies that became industry standards for community development and policy analysis
 
 ## Core Competencies
 
