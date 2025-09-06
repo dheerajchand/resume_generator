@@ -81,7 +81,7 @@ class ResumeGenerator:
                 parent=styles["Heading2"],
                 fontSize=12,
                 textColor=HexColor(colors.get("SECTION_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=2,
+                spaceAfter=1,
                 spaceBefore=6,
                 fontName="Helvetica-Bold",
             ),
@@ -236,10 +236,10 @@ class ResumeGenerator:
                     full_text = f"<b>{main_category}:</b> {'; '.join(sub_content)}"
                     story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
-            story.append(Spacer(1, 0.5))
+            story.append(Spacer(1, 0.2))
         
-        # Add extra space for subsequent pages to prevent bar interference
-        story.append(Spacer(1, 0.2*inch))
+        # Add minimal space for consistent bar-to-content spacing
+        story.append(Spacer(1, 0.1*inch))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
@@ -367,22 +367,28 @@ class ResumeGenerator:
                 canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 canvas.drawString(left_x, top_y - 0.15*inch, phone)
             
-            # Add Austin coordinates for geospatial flair
-            canvas.setFont("Helvetica", 9)
-            canvas.setFillColor(HexColor(self.config.get("SUBTITLE_COLOR", "#666666")))
-            canvas.drawString(left_x, top_y - 0.35*inch, "Austin, TX (30.2672°N, 97.7431°W)")
-            
-            # Right cell: Full name (vertically centered with left content)
+            # Right cell: Full name with Austin, TX underneath
             canvas.setFont("Helvetica-Bold", 28)
             canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
             # Center name vertically with the middle of the left content
             name_y = top_y - 0.075*inch  # Center between email and phone
             canvas.drawRightString(7.5*inch, name_y, name)
             
-            # Add horizontal bar separator (closer to content)
+            # Austin, TX with coordinates as clickable link under name
+            canvas.setFont("Helvetica", 9)
+            canvas.setFillColor(HexColor(self.config.get("SUBTITLE_COLOR", "#666666")))
+            austin_text = "Austin, TX (30.2672°N, 97.7431°W)"
+            austin_width = canvas.stringWidth(austin_text, "Helvetica", 9)
+            austin_x = 7.5*inch - austin_width
+            # Create clickable link to OpenStreetMap
+            canvas.linkURL("https://www.openstreetmap.org/?mlat=30.2672&mlon=-97.7431&zoom=12", 
+                         (austin_x, name_y - 0.25*inch, 7.5*inch, name_y - 0.15*inch))
+            canvas.drawRightString(7.5*inch, name_y - 0.2*inch, austin_text)
+            
+            # Add horizontal bar separator (unified with recurring pages)
             canvas.setStrokeColor(HexColor(self.config.get("SECTION_HEADER_COLOR", "#2C3E50")))
             canvas.setLineWidth(1)
-            canvas.line(0.6*inch, 10.0*inch, 7.5*inch, 10.0*inch)
+            canvas.line(0.6*inch, 10.4*inch, 7.5*inch, 10.4*inch)  # Same as recurring pages
             
             canvas.restoreState()
             add_footer(canvas, doc)
