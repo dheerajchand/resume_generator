@@ -100,7 +100,8 @@ HEADER_LOCATION_LINK_OFFSET = 0.25 * inch
 # Footer content spacing
 FOOTER_LINK_OFFSET = 0.05 * inch
 
-# Spacing multipliers (systematic scale: 0.1, 0.25, 0.5, 0.75, 1, 2, 4)
+# Spacing multipliers (systematic scale: 0.05, 0.1, 0.25, 0.5, 0.75, 1, 2, 4)
+SPACE_MULTIPLIER_TINY = 0.05      # Tiny spacing (for tight layouts)
 SPACE_MULTIPLIER_MINIMAL = 0.1    # Minimal spacing
 SPACE_MULTIPLIER_SMALL = 0.25     # Small spacing
 SPACE_MULTIPLIER_MEDIUM = 0.5     # Medium spacing

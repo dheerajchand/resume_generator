@@ -33,7 +33,7 @@ from resume_generator_django.resume_generator.constants import (
     HEADER_LEFT_X, HEADER_TOP_Y, HEADER_RIGHT_X, HEADER_FOOTER_Y,
     HEADER_PHONE_OFFSET, HEADER_GITHUB_OFFSET, HEADER_GITHUB_LINK_OFFSET,
     HEADER_NAME_OFFSET, HEADER_LOCATION_OFFSET, HEADER_LOCATION_LINK_OFFSET,
-    FOOTER_LINK_OFFSET, FOOTER_BAR_POSITION, SPACE_MULTIPLIER_MINIMAL, SPACE_MULTIPLIER_SMALL, 
+    FOOTER_LINK_OFFSET, FOOTER_BAR_POSITION, SPACE_MULTIPLIER_TINY, SPACE_MULTIPLIER_MINIMAL, SPACE_MULTIPLIER_SMALL, 
     SPACE_MULTIPLIER_MEDIUM, SPACE_MULTIPLIER_LARGE, FONT_SIZE_8, FONT_SIZE_9, 
     FONT_SIZE_10, FONT_SIZE_11, FONT_SIZE_12, FONT_SIZE_14, BAR_WIDTH, BAR_HEIGHT,
     BAR_LINE_WIDTH, BAR_LINE_WIDTH_FOOTER, PAGE_CONTENT_WIDTH, PAGE_LEFT_MARGIN,
@@ -124,7 +124,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('job_title'),
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
-                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,   # Small spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_TINY,   # Tiny spacing - minimal gap to bullets
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,  # Small spacing
                 fontName="Helvetica",
             ),
@@ -151,7 +151,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('bullet_point'),
                 textColor=HexColor(colors.get("MEDIUM_TEXT_COLOR", "#666666")),
-                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,    # Medium unit spacing
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,    # Small unit spacing - tighter bullet spacing
                 leftIndent=12,
                 fontName="Helvetica",
             ),
