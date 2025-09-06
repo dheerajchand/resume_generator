@@ -24,10 +24,15 @@ class Command(BaseCommand):
             action='store_true',
             help='Skip confirmation prompt'
         )
+        parser.add_argument(
+            '--force',
+            action='store_true',
+            help='Force generation without confirmation (same as --confirm)'
+        )
 
     def handle(self, *args, **options):
         output_dir = options['output_dir']
-        confirm = options['confirm']
+        confirm = options['confirm'] or options['force']
         
         # Calculate total combinations
         manager = ResumeManager()
