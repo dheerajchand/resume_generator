@@ -243,13 +243,13 @@ class ResumeGenerator:
         
         # No universal spacer - spacing handled per page type
         
+        # Add small spacer before Professional Experience for recurring pages
+        story.append(Spacer(1, 0.05*inch))
+        
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
         if experience:
             story.append(Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"]))
-            
-            # Add spacer for recurring pages bar-to-content spacing
-            story.append(Spacer(1, 0.05*inch))
             for job in experience:
                 job_title = job.get("title", "")
                 company = job.get("company", "")
