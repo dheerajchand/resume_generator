@@ -16,9 +16,10 @@ SPACE_BASE = 0.2 * inch
 
 # Spacing hierarchy
 SPACE_BETWEEN_SECTIONS = SPACE_BASE * 0.5             # Between major sections (reduced)
-SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.25           # Between different jobs (reduced)
-SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BASE / 4         # Within job units
-SPACE_HEADER_TO_CONTENT = SPACE_BASE * 0.1            # Between headers and their content (minimal)
+SPACE_BETWEEN_JOB_UNITS = SPACE_BASE * 0.15           # Between different jobs (further reduced)
+SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BASE / 32        # Within job units (extremely minimal)
+SPACE_HEADER_TO_CONTENT = SPACE_BASE * 0.05           # Between headers and their content (very minimal)
+SPACE_SUBHEADER_TO_BULLETS = SPACE_BASE * 0.1         # Between subheaders and their bullet lists
 SPACE_HEADER_TOP = 0.4 * inch                         # Space for header on first page
 
 # =============================================================================
@@ -148,6 +149,7 @@ def get_spacing_constant(name: str) -> float:
         'job_units': SPACE_BETWEEN_JOB_UNITS,
         'job_components': SPACE_BETWEEN_JOB_COMPONENTS,
         'header_to_content': SPACE_HEADER_TO_CONTENT,
+        'subheader_to_bullets': SPACE_SUBHEADER_TO_BULLETS,
         'header_top': SPACE_HEADER_TOP,
     }
     return spacing_map.get(name, SPACE_BASE)

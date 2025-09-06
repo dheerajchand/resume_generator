@@ -23,7 +23,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 import tempfile
 from resume_generator_django.resume_generator.constants import (
     SPACE_BASE, SPACE_BETWEEN_SECTIONS, SPACE_BETWEEN_JOB_UNITS, 
-    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TO_CONTENT, SPACE_HEADER_TOP,
+    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TO_CONTENT, SPACE_SUBHEADER_TO_BULLETS, SPACE_HEADER_TOP,
     FONT_SIZE_SECTION_HEADER, FONT_SIZE_COMPANY, FONT_SIZE_MAIN_COMPETENCY,
     FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
     FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
@@ -48,6 +48,7 @@ class ResumeGenerator:
         self.SPACE_BETWEEN_JOB_UNITS = SPACE_BETWEEN_JOB_UNITS
         self.SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BETWEEN_JOB_COMPONENTS
         self.SPACE_HEADER_TO_CONTENT = SPACE_HEADER_TO_CONTENT
+        self.SPACE_SUBHEADER_TO_BULLETS = SPACE_SUBHEADER_TO_BULLETS
     
     def _load_json(self, file_path: str) -> Dict[str, Any]:
         """Load JSON data from file"""
@@ -146,8 +147,8 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('main_competency'),
                 textColor=HexColor(colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")),
-                spaceAfter=get_spacing_constant('base') * 0.5,    # 0.5 unit spacing
-                spaceBefore=get_spacing_constant('base') * 0.5,   # 0.5 unit spacing
+                spaceAfter=get_spacing_constant('base') * 0.1,    # 0.1 unit spacing - minimal gap to bullets
+                spaceBefore=get_spacing_constant('base') * 0.1,   # 0.1 unit spacing - minimal gap from previous
                 fontName="Helvetica-Bold",
             ),
             "SubCompetency": ParagraphStyle(
@@ -209,6 +210,8 @@ class ResumeGenerator:
             for category, achievement_list in achievements.items():
                 if isinstance(achievement_list, list):
                     achievement_content.append(Paragraph(category, self.styles["MainCompetency"]))
+                    # Add small spacing between subheader and bullets
+                    achievement_content.append(Spacer(1, self.SPACE_SUBHEADER_TO_BULLETS))
                     for achievement in achievement_list:
                         achievement_content.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
             
