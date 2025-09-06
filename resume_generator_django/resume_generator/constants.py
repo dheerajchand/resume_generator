@@ -142,6 +142,97 @@ HEADER_RECURRING_GITHUB_Y = 10.35 * inch
 FOOTER_Y = 0.4 * inch
 
 # =============================================================================
+# FONT THEME SYSTEM
+# =============================================================================
+
+# Font themes for each color scheme - ATS-friendly typography
+# Using only ReportLab's built-in fonts for maximum compatibility
+FONT_THEMES = {
+    'cartographic_professional': {
+        'primary': 'Helvetica',      # Clean, professional
+        'secondary': 'Helvetica',    # Consistent with primary
+        'technical': 'Courier',      # Monospace for technical content
+        'fallback': 'Helvetica'      # Safe fallback
+    },
+    'corporate_blue': {
+        'primary': 'Helvetica',      # Corporate standard
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Helvetica',       # Consistent with primary
+        'fallback': 'Helvetica'
+    },
+    'default_professional': {
+        'primary': 'Helvetica',      # Universal compatibility
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Helvetica',       # Consistent with primary
+        'fallback': 'Helvetica'
+    },
+    'modern_clean': {
+        'primary': 'Helvetica',      # Clean, modern
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Helvetica',       # Consistent with primary
+        'fallback': 'Helvetica'
+    },
+    'modern_tech': {
+        'primary': 'Helvetica',      # Clean, readable
+        'secondary': 'Courier',      # Monospace for code/data
+        'accent': 'Helvetica',       # Clean, readable
+        'fallback': 'Helvetica'
+    },
+    'satellite_imagery': {
+        'primary': 'Helvetica',      # Scientific precision
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Courier',         # For coordinates, data
+        'fallback': 'Helvetica'
+    },
+    'terrain_mapping': {
+        'primary': 'Helvetica',      # Mapping standard
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Helvetica',       # Consistent with primary
+        'fallback': 'Helvetica'
+    },
+    'topographic_classic': {
+        'primary': 'Helvetica',      # Classic, clean
+        'secondary': 'Helvetica',    # Consistent with primary
+        'accent': 'Helvetica',       # Consistent with primary
+        'fallback': 'Helvetica'
+    }
+}
+
+# Font role mappings for systematic application
+FONT_ROLES = {
+    'section_header': 'primary',
+    'company': 'primary', 
+    'job_title': 'accent',
+    'body': 'secondary',
+    'bullet_point': 'secondary',
+    'main_competency': 'primary',
+    'sub_competency': 'accent',
+    'competency_detail': 'secondary',
+    'footer': 'secondary',
+    'technical': 'technical'  # For coordinates, code, data
+}
+
+def get_theme_font(color_scheme, role):
+    """
+    Get the appropriate font for a given color scheme and role.
+    
+    Args:
+        color_scheme (str): The color scheme name
+        role (str): The font role (e.g., 'primary', 'secondary', 'accent')
+    
+    Returns:
+        str: The font name to use
+    """
+    # Get the font theme for this color scheme
+    theme_fonts = FONT_THEMES.get(color_scheme, FONT_THEMES['default_professional'])
+    
+    # Get the font role (primary, secondary, accent, technical)
+    font_role = FONT_ROLES.get(role, 'secondary')
+    
+    # Return the appropriate font with fallback
+    return theme_fonts.get(font_role, theme_fonts.get('fallback', 'Helvetica'))
+
+# =============================================================================
 # JOB SPLITTING RULES
 # =============================================================================
 
