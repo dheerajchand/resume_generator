@@ -195,9 +195,6 @@ class ResumeGenerator:
         # Add space for header (will be drawn by canvas)
         story.append(Spacer(1, 1.2*inch))
         
-        # Add extra space for subsequent pages to prevent bar interference
-        story.append(Spacer(1, 0.1*inch))
-        
         # Add space before first section (reduced for smaller header)
         story.append(Spacer(1, 0.05*inch))
         
@@ -240,6 +237,9 @@ class ResumeGenerator:
                     story.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
             story.append(Spacer(1, 0.5))
+        
+        # Add extra space for subsequent pages to prevent bar interference
+        story.append(Spacer(1, 0.2*inch))
         
         # Experience - Modern format like Deepak's
         experience = self.data.get("experience", [])
