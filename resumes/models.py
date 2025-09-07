@@ -3,9 +3,244 @@ Django models for Resume Generator
 """
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 import json
+import uuid
+
+
+class CustomUser(AbstractUser):
+    """Extended user model with additional fields for resume generation"""
+    
+    # Additional user fields
+    phone = models.CharField(
+        max_length=20,
+        blank=True,
+        validators=[RegexValidator(
+            regex=r'^\+?1?\d{9,15}$',
+            message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+        )]
+    )
+    website = models.URLField(blank=True)
+    linkedin = models.URLField(blank=True)
+    github = models.URLField(blank=True)
+    location = models.CharField(max_length=100, blank=True)
+    
+    # Professional information
+    professional_title = models.CharField(max_length=200, blank=True)
+    bio = models.TextField(blank=True, help_text="Professional bio or summary")
+    
+    # User preferences
+    preferred_color_scheme = models.CharField(max_length=100, default='default_professional')
+    preferred_resume_length = models.CharField(
+        max_length=10,
+        choices=[
+            ('long', 'Long (3+ pages)'),
+            ('short', 'Short (1-2 pages)'),
+        ],
+        default='long'
+    )
+    
+    # Account settings
+    is_verified = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
+    subscription_tier = models.CharField(
+        max_length=20,
+        choices=[
+            ('free', 'Free'),
+            ('premium', 'Premium'),
+            ('enterprise', 'Enterprise'),
+        ],
+        default='free'
+    )
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    last_login_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        db_table = 'auth_user'
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+    
+    def __str__(self):
+        return f"{self.username} ({self.email})"
+    
+    @property
+    def full_name(self):
+        """Get user's full name"""
+        return f"{self.first_name} {self.last_name}".strip() or self.username
+    
+    @property
+    def resume_count(self):
+        """Get number of resumes created by this user"""
+        return self.resumes.count()
+    
+    @property
+    def is_premium_user(self):
+        """Check if user has premium or enterprise subscription"""
+        return self.subscription_tier in ['premium', 'enterprise']
+
+
+# Use CustomUser as the User model
+User = CustomUser
+
+
+class UserProfile(models.Model):
+    """Extended user profile with additional professional information"""
+    
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='profile')
+    
+    # Professional summary
+    professional_summary = models.TextField(blank=True, help_text="Professional summary for resumes")
+    
+    # Contact preferences
+    show_phone = models.BooleanField(default=True)
+    show_email = models.BooleanField(default=True)
+    show_website = models.BooleanField(default=True)
+    show_linkedin = models.BooleanField(default=True)
+    show_github = models.BooleanField(default=True)
+    
+    # Resume preferences
+    default_resume_template = models.CharField(max_length=100, default='comprehensive')
+    auto_generate_on_update = models.BooleanField(default=False)
+    
+    # Privacy settings
+    profile_public = models.BooleanField(default=False)
+    allow_public_resumes = models.BooleanField(default=False)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.user.username} - Profile"
+
+
+class UserResumeData(models.Model):
+    """User-specific resume data storage"""
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='resume_data')
+    
+    # Resume metadata
+    resume_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('comprehensive', 'Comprehensive'),
+            ('polling_research_redistricting', 'Polling/Research/Redistricting'),
+            ('marketing', 'Marketing'),
+            ('data_analysis', 'Data Analysis'),
+            ('visualisation', 'Visualization'),
+            ('product', 'Product'),
+        ]
+    )
+    length_variant = models.CharField(
+        max_length=20,
+        choices=[
+            ('long', 'Long'),
+            ('short', 'Short'),
+        ]
+    )
+    
+    # Resume content (JSON storage)
+    personal_info = models.JSONField(default=dict)
+    summary = models.TextField(blank=True)
+    competencies = models.JSONField(default=dict)
+    experience = models.JSONField(default=list)
+    achievements = models.JSONField(default=dict)
+    education = models.JSONField(default=list)
+    projects = models.JSONField(default=list)
+    certifications = models.JSONField(default=list)
+    additional_info = models.TextField(blank=True)
+    
+    # File management
+    input_file_path = models.CharField(max_length=500, blank=True)
+    output_directory = models.CharField(max_length=500, blank=True)
+    
+    # Status
+    is_active = models.BooleanField(default=True)
+    last_generated = models.DateTimeField(null=True, blank=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ['user', 'resume_type', 'length_variant']
+        ordering = ['-updated_at']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.resume_type} ({self.length_variant})"
+    
+    def get_file_paths(self):
+        """Get all generated file paths for this resume"""
+        import os
+        if not self.output_directory:
+            return []
+        
+        file_paths = []
+        for format_type in ['pdf', 'docx', 'rtf', 'md']:
+            filename = f"dheeraj_chand_{self.resume_type}_{self.length_variant}_{self.user.username}.{format_type}"
+            file_path = os.path.join(self.output_directory, format_type, filename)
+            if os.path.exists(file_path):
+                file_paths.append({
+                    'format': format_type,
+                    'path': file_path,
+                    'size': os.path.getsize(file_path)
+                })
+        return file_paths
+
+
+class UserDirectory(models.Model):
+    """User-specific directory structure management"""
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='directories')
+    
+    # Directory paths
+    input_directory = models.CharField(max_length=500)
+    output_directory = models.CharField(max_length=500)
+    
+    # Directory status
+    is_initialized = models.BooleanField(default=False)
+    last_synced = models.DateTimeField(null=True, blank=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ['user']
+    
+    def __str__(self):
+        return f"{self.user.username} - Directories"
+    
+    def initialize_directories(self):
+        """Create user-specific input and output directories"""
+        import os
+        
+        # Create input directory structure
+        os.makedirs(self.input_directory, exist_ok=True)
+        
+        # Create output directory structure
+        for resume_type in ['comprehensive', 'polling_research_redistricting', 'marketing', 
+                           'data_analysis', 'visualisation', 'product']:
+            for length_variant in ['long', 'short']:
+                for color_scheme in ['default_professional', 'cartographic_professional', 
+                                   'corporate_blue', 'modern_clean', 'modern_tech', 
+                                   'satellite_imagery', 'terrain_mapping', 'topographic_classic']:
+                    for format_type in ['pdf', 'docx', 'rtf', 'md']:
+                        dir_path = os.path.join(
+                            self.output_directory, 
+                            resume_type, 
+                            length_variant, 
+                            color_scheme, 
+                            format_type
+                        )
+                        os.makedirs(dir_path, exist_ok=True)
+        
+        self.is_initialized = True
+        self.save()
 
 
 class ResumeTemplate(models.Model):

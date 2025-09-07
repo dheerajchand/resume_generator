@@ -1,162 +1,135 @@
 """
-Django views for Resume Generator
+Views for Resume Generator
 """
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.db import transaction
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
+from django.core.paginator import Paginator
+from django.db.models import Q
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 import json
-import uuid
 import os
-from datetime import datetime
+from pathlib import Path
 
 from .models import (
-    Resume, ResumeTemplate, PersonalInfo, Experience, Project, 
-    Education, Certification, Achievement, Competency, CompetencyCategory,
-    ColorScheme, ResumeGenerationJob
+    CustomUser, UserProfile, UserResumeData, UserDirectory,
+    Resume, ResumeTemplate, ColorScheme, ResumeGenerationJob
 )
-from .serializers import ResumeSerializer, PersonalInfoSerializer
-from .services import ResumeGenerationService, ContentManagementService
+from .serializers import (
+    UserResumeDataSerializer, ResumeSerializer, ColorSchemeSerializer,
+    ResumeGenerationJobSerializer
+)
 
-
-def home(request):
-    """Home page view"""
-    return render(request, 'resumes/home.html')
-
-
-class ResumeListView(LoginRequiredMixin, ListView):
-    """List all resumes for the current user"""
-    model = Resume
-    template_name = 'resumes/resume_list.html'
-    context_object_name = 'resumes'
-    
-    def get_queryset(self):
-        return Resume.objects.filter(user=self.request.user)
-
-
-class ResumeDetailView(LoginRequiredMixin, DetailView):
-    """Detail view for a specific resume"""
-    model = Resume
-    template_name = 'resumes/resume_detail.html'
-    context_object_name = 'resume'
-    
-    def get_queryset(self):
-        return Resume.objects.filter(user=self.request.user)
-
-
-class ResumeCreateView(LoginRequiredMixin, CreateView):
-    """Create a new resume"""
-    model = Resume
-    template_name = 'resumes/resume_form.html'
-    fields = ['title', 'description', 'template']
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-    
-    def get_success_url(self):
-        return reverse_lazy('resume_detail', kwargs={'pk': self.object.pk})
-
-
-class ResumeUpdateView(LoginRequiredMixin, UpdateView):
-    """Update an existing resume"""
-    model = Resume
-    template_name = 'resumes/resume_form.html'
-    fields = ['title', 'description', 'template']
-    
-    def get_queryset(self):
-        return Resume.objects.filter(user=self.request.user)
-
-
-class ResumeDeleteView(LoginRequiredMixin, DeleteView):
-    """Delete a resume"""
-    model = Resume
-    template_name = 'resumes/resume_confirm_delete.html'
-    success_url = reverse_lazy('resume_list')
-    
-    def get_queryset(self):
-        return Resume.objects.filter(user=self.request.user)
+User = get_user_model()
 
 
 @login_required
 def dashboard(request):
-    """Main dashboard view"""
+    """User dashboard view"""
     user = request.user
     
-    # Get user's data counts
+    # Get user's resume data
+    resume_data = UserResumeData.objects.filter(user=user, is_active=True)
+    
+    # Get user's generated resumes
+    resumes = Resume.objects.filter(user=user)
+    
+    # Get recent generation jobs
+    recent_jobs = ResumeGenerationJob.objects.filter(user=user).order_by('-created_at')[:5]
+    
+    # Get available color schemes
+    color_schemes = ColorScheme.objects.filter(is_active=True)
+    
+    # Get available templates
+    templates = ResumeTemplate.objects.filter(is_active=True)
+    
     context = {
-        'resume_count': Resume.objects.filter(user=user).count(),
-        'experience_count': Experience.objects.filter(user=user).count(),
-        'project_count': Project.objects.filter(user=user).count(),
-        'recent_resumes': Resume.objects.filter(user=user).order_by('-created_at')[:5],
-        'templates': ResumeTemplate.objects.filter(is_active=True),
-        'color_schemes': ColorScheme.objects.filter(is_active=True),
+        'user': user,
+        'resume_data': resume_data,
+        'resumes': resumes,
+        'recent_jobs': recent_jobs,
+        'color_schemes': color_schemes,
+        'templates': templates,
+        'resume_types': [
+            ('comprehensive', 'Comprehensive'),
+            ('polling_research_redistricting', 'Polling/Research/Redistricting'),
+            ('marketing', 'Marketing'),
+            ('data_analysis', 'Data Analysis'),
+            ('visualisation', 'Visualization'),
+            ('product', 'Product'),
+        ],
+        'length_variants': [
+            ('long', 'Long (3+ pages)'),
+            ('short', 'Short (1-2 pages)'),
+        ]
     }
     
     return render(request, 'resumes/dashboard.html', context)
 
 
 @login_required
-def generate_resume(request, resume_id):
-    """Generate resume files"""
+def resume_detail(request, resume_id):
+    """Resume detail view"""
     resume = get_object_or_404(Resume, id=resume_id, user=request.user)
     
-    if request.method == 'POST':
-        try:
-            # Get generation parameters
-            formats = request.POST.getlist('formats', ['pdf'])
-            color_scheme_id = request.POST.get('color_scheme')
-            
-            # Create generation job
-            job = ResumeGenerationJob.objects.create(
-                user=request.user,
-                resume=resume,
-                job_id=str(uuid.uuid4()),
-                formats=formats,
-                color_scheme_id=color_scheme_id if color_scheme_id else None,
-                status='queued'
-            )
-            
-            # Start generation (async in production)
-            generation_service = ResumeGenerationService()
-            result = generation_service.generate_resume(resume, formats, color_scheme_id)
-            
-            if result['success']:
-                job.status = 'completed'
-                job.result_files = result['files']
-                job.completed_at = datetime.now()
-                job.save()
-                
-                return JsonResponse({
-                    'success': True,
-                    'message': 'Resume generated successfully',
-                    'files': result['files']
-                })
-            else:
-                job.status = 'failed'
-                job.error_message = result['error']
-                job.save()
-                
-                return JsonResponse({
-                    'success': False,
-                    'message': result['error']
-                })
-                
-        except Exception as e:
-            return JsonResponse({
-                'success': False,
-                'message': f'Error generating resume: {str(e)}'
-            })
+    context = {
+        'resume': resume,
+        'file_paths': resume.get_file_paths() if hasattr(resume, 'get_file_paths') else [],
+    }
     
-    return render(request, 'resumes/generate_resume.html', {'resume': resume})
+    return render(request, 'resumes/resume_detail.html', context)
+
+
+@login_required
+@require_http_methods(["POST"])
+def generate_resume(request):
+    """Generate resume for user"""
+    try:
+        data = json.loads(request.body)
+        resume_type = data.get('resume_type')
+        length_variant = data.get('length_variant')
+        color_scheme = data.get('color_scheme', 'default_professional')
+        formats = data.get('formats', ['pdf', 'docx'])
+        
+        # Get or create user resume data
+        resume_data, created = UserResumeData.objects.get_or_create(
+            user=request.user,
+            resume_type=resume_type,
+            length_variant=length_variant,
+            defaults={'is_active': True}
+        )
+        
+        # Create generation job
+        job = ResumeGenerationJob.objects.create(
+            user=request.user,
+            resume=resume_data,
+            job_id=f"job_{request.user.id}_{resume_type}_{length_variant}",
+            formats=formats,
+            color_scheme=ColorScheme.objects.get(name=color_scheme) if color_scheme else None,
+            status='queued'
+        )
+        
+        # TODO: Start background task for resume generation
+        # For now, just return success
+        
+        return JsonResponse({
+            'success': True,
+            'job_id': job.job_id,
+            'message': 'Resume generation started'
+        })
+        
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=400)
 
 
 @login_required
@@ -164,182 +137,81 @@ def download_resume(request, resume_id, format_type):
     """Download generated resume file"""
     resume = get_object_or_404(Resume, id=resume_id, user=request.user)
     
+    # Get file path based on format
     file_path = None
-    if format_type == 'pdf' and resume.pdf_path:
+    if format_type == 'pdf':
         file_path = resume.pdf_path
-    elif format_type == 'docx' and resume.docx_path:
+    elif format_type == 'docx':
         file_path = resume.docx_path
-    elif format_type == 'rtf' and resume.rtf_path:
+    elif format_type == 'rtf':
         file_path = resume.rtf_path
     
     if not file_path or not os.path.exists(file_path):
-        return JsonResponse({'error': 'File not found'}, status=404)
+        return HttpResponse('File not found', status=404)
     
+    # Return file for download
     with open(file_path, 'rb') as f:
         response = HttpResponse(f.read(), content_type='application/octet-stream')
         response['Content-Disposition'] = f'attachment; filename="{resume.title}.{format_type}"'
         return response
 
 
-# API Views
-class ResumeAPIView:
-    """API view for resume operations"""
+class UserResumeDataViewSet(viewsets.ModelViewSet):
+    """API viewset for user resume data"""
+    serializer_class = UserResumeDataSerializer
+    permission_classes = [IsAuthenticated]
     
-    @staticmethod
-    def get_resume_data(request, resume_id):
-        """Get resume data as JSON"""
-        resume = get_object_or_404(Resume, id=resume_id, user=request.user)
-        serializer = ResumeSerializer(resume)
-        return JsonResponse(serializer.data)
+    def get_queryset(self):
+        return UserResumeData.objects.filter(user=self.request.user)
     
-    @staticmethod
-    def update_resume_data(request, resume_id):
-        """Update resume data from JSON"""
-        resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+    @action(detail=True, methods=['post'])
+    def generate(self, request, pk=None):
+        """Generate resume from user data"""
+        resume_data = self.get_object()
         
-        try:
-            data = json.loads(request.body)
-            resume.content = data
-            resume.save()
-            
-            return JsonResponse({'success': True, 'message': 'Resume updated successfully'})
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+        # Create generation job
+        job = ResumeGenerationJob.objects.create(
+            user=request.user,
+            resume=resume_data,
+            job_id=f"api_job_{request.user.id}_{resume_data.resume_type}_{resume_data.length_variant}",
+            formats=request.data.get('formats', ['pdf']),
+            status='queued'
+        )
+        
+        # TODO: Start background task
+        
+        return Response({
+            'job_id': job.job_id,
+            'status': 'queued'
+        })
+
+
+class ResumeViewSet(viewsets.ModelViewSet):
+    """API viewset for resumes"""
+    serializer_class = ResumeSerializer
+    permission_classes = [IsAuthenticated]
     
-    @staticmethod
-    def get_personal_info(request):
-        """Get user's personal information"""
-        try:
-            personal_info = PersonalInfo.objects.get(user=request.user)
-            serializer = PersonalInfoSerializer(personal_info)
-            return JsonResponse(serializer.data)
-        except PersonalInfo.DoesNotExist:
-            return JsonResponse({'error': 'Personal information not found'}, status=404)
+    def get_queryset(self):
+        return Resume.objects.filter(user=self.request.user)
     
-    @staticmethod
-    def update_personal_info(request):
-        """Update user's personal information"""
-        try:
-            personal_info, created = PersonalInfo.objects.get_or_create(user=request.user)
-            data = json.loads(request.body)
-            
-            for field, value in data.items():
-                if hasattr(personal_info, field):
-                    setattr(personal_info, field, value)
-            
-            personal_info.save()
-            return JsonResponse({'success': True, 'message': 'Personal information updated'})
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+    @action(detail=True, methods=['get'])
+    def files(self, request, pk=None):
+        """Get generated files for resume"""
+        resume = self.get_object()
+        file_paths = resume.get_file_paths() if hasattr(resume, 'get_file_paths') else []
+        return Response({'files': file_paths})
 
 
-@login_required
-def preview_resume(request, resume_id):
-    """Preview resume in browser"""
-    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+class ColorSchemeViewSet(viewsets.ReadOnlyModelViewSet):
+    """API viewset for color schemes"""
+    serializer_class = ColorSchemeSerializer
+    queryset = ColorScheme.objects.filter(is_active=True)
+
+
+class ResumeGenerationJobViewSet(viewsets.ReadOnlyModelViewSet):
+    """API viewset for generation jobs"""
+    serializer_class = ResumeGenerationJobSerializer
+    permission_classes = [IsAuthenticated]
     
-    # Generate preview content
-    content_service = ContentManagementService()
-    preview_data = content_service.generate_preview_content(resume)
-    
-    return render(request, 'resumes/resume_preview.html', {
-        'resume': resume,
-        'preview_data': preview_data
-    })
-
-
-@login_required
-def template_gallery(request):
-    """Show available resume templates"""
-    templates = ResumeTemplate.objects.filter(is_active=True)
-    color_schemes = ColorScheme.objects.filter(is_active=True)
-    
-    return render(request, 'resumes/template_gallery.html', {
-        'templates': templates,
-        'color_schemes': color_schemes
-    })
-
-
-@login_required
-def content_editor(request, resume_id):
-    """Content editor for resume"""
-    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
-    
-    # Get all user's data for editing
-    context = {
-        'resume': resume,
-        'personal_info': PersonalInfo.objects.filter(user=request.user).first(),
-        'experiences': Experience.objects.filter(user=request.user).order_by('-start_date'),
-        'projects': Project.objects.filter(user=request.user).order_by('-start_date'),
-        'educations': Education.objects.filter(user=request.user).order_by('-start_date'),
-        'certifications': Certification.objects.filter(user=request.user).order_by('-issue_date'),
-        'achievements': Achievement.objects.filter(user=request.user).order_by('-date'),
-        'competency_categories': CompetencyCategory.objects.all().prefetch_related('competencies'),
-    }
-    
-    return render(request, 'resumes/content_editor.html', context)
-
-
-# AJAX endpoints
-@login_required
-def add_experience(request):
-    """Add new experience entry"""
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            experience = Experience.objects.create(user=request.user, **data)
-            return JsonResponse({
-                'success': True,
-                'id': experience.id,
-                'message': 'Experience added successfully'
-            })
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
-
-
-@login_required
-def add_project(request):
-    """Add new project entry"""
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            project = Project.objects.create(user=request.user, **data)
-            return JsonResponse({
-                'success': True,
-                'id': project.id,
-                'message': 'Project added successfully'
-            })
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
-
-
-@login_required
-def update_competencies(request):
-    """Update user competencies"""
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            competency_ids = data.get('competency_ids', [])
-            
-            # Clear existing competencies for user
-            Competency.objects.filter(user=request.user).delete()
-            
-            # Add selected competencies
-            for comp_id in competency_ids:
-                competency = Competency.objects.get(id=comp_id)
-                competency.user = request.user
-                competency.save()
-            
-            return JsonResponse({'success': True, 'message': 'Competencies updated'})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
+    def get_queryset(self):
+        return ResumeGenerationJob.objects.filter(user=self.request.user)

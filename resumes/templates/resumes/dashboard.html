@@ -1,0 +1,277 @@
+{% extends 'resumes/base.html' %}
+
+{% block title %}Dashboard - Resume Generator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+            <small class="text-muted">Welcome back, {{ user.first_name|default:user.username }}!</small>
+        </h1>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">{{ resume_data.count }}</h4>
+                        <p class="card-text">Resume Types</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-file-alt fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">{{ resumes.count }}</h4>
+                        <p class="card-text">Generated Resumes</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-download fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">{{ recent_jobs.count }}</h4>
+                        <p class="card-text">Recent Jobs</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-tasks fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 class="card-title">{{ color_schemes.count }}</h4>
+                        <p class="card-text">Color Schemes</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-palette fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Generate New Resume</h6>
+                        <form id="quickGenerateForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <select class="form-select" name="resume_type" required>
+                                        <option value="">Select Resume Type</option>
+                                        {% for value, label in resume_types %}
+                                            <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select" name="length_variant" required>
+                                        <option value="">Select Length</option>
+                                        {% for value, label in length_variants %}
+                                            <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select" name="color_scheme">
+                                        <option value="">Select Color Scheme</option>
+                                        {% for scheme in color_schemes %}
+                                            <option value="{{ scheme.name }}">{{ scheme.name|title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-magic me-1"></i>Generate Resume
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Recent Activity</h6>
+                        {% if recent_jobs %}
+                            <div class="list-group list-group-flush">
+                                {% for job in recent_jobs %}
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>{{ job.resume.title }}</strong>
+                                            <br>
+                                            <small class="text-muted">{{ job.created_at|date:"M d, Y H:i" }}</small>
+                                        </div>
+                                        <span class="badge bg-{% if job.status == 'completed' %}success{% elif job.status == 'failed' %}danger{% else %}warning{% endif %} status-badge">
+                                            {{ job.get_status_display }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No recent activity</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resume Data Overview -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-database me-2"></i>Your Resume Data
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if resume_data %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Resume Type</th>
+                                    <th>Length</th>
+                                    <th>Last Generated</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in resume_data %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ data.get_resume_type_display }}</strong>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{% if data.length_variant == 'long' %}primary{% else %}secondary{% endif %}">
+                                                {{ data.get_length_variant_display }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if data.last_generated %}
+                                                {{ data.last_generated|date:"M d, Y H:i" }}
+                                            {% else %}
+                                                <span class="text-muted">Never</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-{% if data.is_active %}success{% else %}secondary{% endif %}">
+                                                {% if data.is_active %}Active{% else %}Inactive{% endif %}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary" onclick="editResumeData({{ data.id }})">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" onclick="generateResume({{ data.id }})">
+                                                <i class="fas fa-magic"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No Resume Data Found</h5>
+                        <p class="text-muted">Start by creating your first resume data entry.</p>
+                        <button class="btn btn-primary" onclick="createResumeData()">
+                            <i class="fas fa-plus me-1"></i>Create Resume Data
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Quick generate form submission
+document.getElementById('quickGenerateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    fetch('{% url "resumes:generate_resume" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Resume generation started! Job ID: ' + data.job_id);
+            location.reload();
+        } else {
+            alert('Error: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while generating the resume.');
+    });
+});
+
+function editResumeData(id) {
+    // TODO: Implement edit functionality
+    alert('Edit functionality coming soon!');
+}
+
+function generateResume(id) {
+    // TODO: Implement generation functionality
+    alert('Generate functionality coming soon!');
+}
+
+function createResumeData() {
+    // TODO: Implement create functionality
+    alert('Create functionality coming soon!');
+}
+</script>
+{% endblock %}
