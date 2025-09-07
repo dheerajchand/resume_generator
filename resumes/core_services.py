@@ -423,9 +423,16 @@ class ResumeGenerator:
         # Additional info for abbreviated versions (at the very end)
         additional_info = self.data.get("additional_info", "")
         if additional_info:
+            # Create clickable links for LinkedIn and Personal Site
+            linkedin_url = "https://www.linkedin.com/in/dheerajchand/"
+            personal_site_url = "https://www.dheerajchand.com"
+            
+            # Replace the entire text with URLs included
+            additional_info_with_links = f"For a more detailed, full description of my experience, please visit my LinkedIn ({linkedin_url}) and Personal Site ({personal_site_url})."
+            
             sections.append({
                 "name": "",
-                "content": [Paragraph(additional_info, self.styles["Body"])]
+                "content": [Paragraph(additional_info_with_links, self.styles["Body"])]
             })
         
         return sections

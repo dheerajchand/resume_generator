@@ -26,7 +26,7 @@ Creative Data Visualization & Geospatial Analysis Professional with 21 years of 
 - Created data visualization tools for research presentations using Tableau, PowerBI, and custom web-based dashboards
 - Led multi-million dollar research projects with focus on visual communication of insights and findings
 
-For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+For a more detailed, full description of my experience, please visit my <link href="https://www.linkedin.com/in/dheerajchand/" color="blue">LinkedIn</link> and <link href="https://www.dheerajchand.com" color="blue">Personal Site</link>.
 
 ## Core Competencies
 

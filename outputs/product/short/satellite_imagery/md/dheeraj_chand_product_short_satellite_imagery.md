@@ -26,7 +26,7 @@ Strategic Product & Platform Professional with 21 years of experience conceiving
 - Developed advanced data pipelines for machine learning applications enhancing consumer segmentation and predictive modeling
 - Trained analytical and engineering staff on open source geospatial technology for analysis, segmentation, and visualization
 
-For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+For a more detailed, full description of my experience, please visit my <link href="https://www.linkedin.com/in/dheerajchand/" color="blue">LinkedIn</link> and <link href="https://www.dheerajchand.com" color="blue">Personal Site</link>.
 
 ## Core Competencies
 

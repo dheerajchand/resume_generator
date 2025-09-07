@@ -26,7 +26,7 @@ Results-driven Marketing & Data Analytics Professional with 21 years of experien
 - Created comprehensive data visualization solutions that improved clients' understanding of complex research findings
 - Managed national polling team of five data analysts for consumer insights and market intelligence
 
-For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+For a more detailed, full description of my experience, please visit my <link href="https://www.linkedin.com/in/dheerajchand/" color="blue">LinkedIn</link> and <link href="https://www.dheerajchand.com" color="blue">Personal Site</link>.
 
 ## Core Competencies
 
