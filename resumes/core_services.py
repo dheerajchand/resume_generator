@@ -1195,12 +1195,12 @@ class ResumeManager:
     
     def __init__(self):
         self.versions = {
-            "research": "dheeraj_chand_research_focused",
-            "technical": "dheeraj_chand_technical_detailed", 
             "comprehensive": "dheeraj_chand_comprehensive_full",
-            "consulting": "dheeraj_chand_consulting_minimal",
-            "software": "dheeraj_chand_software_engineer",
-            "marketing": "dheeraj_chand_product_marketing"
+            "polling_research_redistricting": "dheeraj_chand_polling_research_redistricting",
+            "marketing": "dheeraj_chand_marketing",
+            "data_analysis": "dheeraj_chand_data_analysis",
+            "visualisation": "dheeraj_chand_visualisation",
+            "product": "dheeraj_chand_product"
         }
         
         self.color_schemes = [
