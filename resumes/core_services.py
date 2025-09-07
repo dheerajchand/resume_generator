@@ -257,14 +257,6 @@ class ResumeGenerator:
                 "content": achievement_content
             })
         
-        # Additional info for abbreviated versions
-        additional_info = self.data.get("additional_info", "")
-        if additional_info:
-            sections.append({
-                "name": "",
-                "content": [Paragraph(additional_info, self.styles["Body"])]
-            })
-        
         # Core Competencies
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -426,6 +418,14 @@ class ResumeGenerator:
             sections.append({
                 "name": "EDUCATION",
                 "content": education_content
+            })
+        
+        # Additional info for abbreviated versions (at the very end)
+        additional_info = self.data.get("additional_info", "")
+        if additional_info:
+            sections.append({
+                "name": "",
+                "content": [Paragraph(additional_info, self.styles["Body"])]
             })
         
         return sections
