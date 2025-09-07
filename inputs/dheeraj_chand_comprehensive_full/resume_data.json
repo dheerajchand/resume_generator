@@ -153,11 +153,29 @@
     }
   ],
   "achievements": {
-    "Software Development and Innovation": [
-      "Conceived and deployed redistricting software used by thousands of analysts nationwide",
-      "Developed boundary estimation system using incomplete data without ML requirements",
-      "Created econometric simulation platform for humanitarian intervention modeling",
-      "Built comprehensive survey operations platform from RFP through deployment"
+    "Technical Innovation & Platform Development": [
+      "Conceived, architected, engineered and deployed cloud-based redistricting software used by thousands of analysts nationwide",
+      "Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party",
+      "Developed RACSO platform for pollsters to fully administer research, analyzing bids from 1,200 vendors",
+      "Engineered FLEEM system using Twilio API for thousands of simultaneous phone calls for IVR polls",
+      "Created SimCrisis platform for humanitarian intervention modeling used by International Red Cross and UNICEF",
+      "Developed boundary estimation system using incomplete data without ML requirements"
+    ],
+    "Data Engineering & Analytics": [
+      "Designed, architected and created multi-tenant data warehouse tracking decades of political, geographical, econometric change",
+      "Modernized legacy ETL processes by implementing dbt and PySpark workflows, reducing processing time by 57%",
+      "Developed advanced data pipelines for machine learning applications enhancing consumer segmentation and predictive modeling",
+      "Built fraud detection systems for campaign finance data analysis across multi-terabyte datasets",
+      "Transformed small data team into big data engineering team using Hadoop Clusters and Hive on AWS",
+      "Introduced version control and Agile methodologies, improving project delivery timelines by 40%"
+    ],
+    "Research Leadership & Client Success": [
+      "Led multi-million dollar research projects involving sensitive consumer data with privacy compliance",
+      "Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders",
+      "Delivered actionable consumer insights and market intelligence for political candidates and major organizations",
+      "Built comprehensive survey operations platform from RFP through deployment",
+      "Regular expert testimony and source on public opinion for journalists, elected officials, and NGO leadership",
+      "Redistricting analysis used in court cases with rigorous methodology and expert testimony"
     ]
   },
   "_metadata": {
