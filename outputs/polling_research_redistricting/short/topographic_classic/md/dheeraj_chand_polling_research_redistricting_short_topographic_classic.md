@@ -26,7 +26,7 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 - Led multi-million dollar research projects involving sensitive consumer data with privacy compliance
 - Developed advanced segmentation models using demographic, psychographic, and behavioral data
 
-For a more detailed, full description of my experience, please visit my <link href="https://www.linkedin.com/in/dheerajchand/" color="blue">LinkedIn</link> and <link href="https://www.dheerajchand.com" color="blue">Personal Site</link>.
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
 
 ## Core Competencies
 
