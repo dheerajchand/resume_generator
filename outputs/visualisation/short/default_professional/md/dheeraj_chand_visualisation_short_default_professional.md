@@ -26,6 +26,8 @@ Creative Data Visualization & Geospatial Analysis Professional with 21 years of 
 - Created data visualization tools for research presentations using Tableau, PowerBI, and custom web-based dashboards
 - Led multi-million dollar research projects with focus on visual communication of insights and findings
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Data Visualization & Design**: **Interactive Dashboards**: *`Tableau`, `PowerBI`, `d3.js`, Custom Web Applications* • **Statistical Visualization**: *`Seaborn`, `Matplotlib`, Plotly, Bokeh* • **Geospatial Mapping**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleth Design**: *`Demographic Mapping`, `Hexagonal Grid Maps`*

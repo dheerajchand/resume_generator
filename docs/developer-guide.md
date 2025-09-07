@@ -2,7 +2,7 @@
 
 ## 🎯 What This Guide Covers
 
-This guide is for developers who want to understand, modify, or extend the Resume Generator system. It covers the technical architecture, code structure, systematic design system, and how to make changes.
+This guide is for developers who want to understand, modify, or extend the Resume Generator system. What began as a simple resume generation need has evolved into a comprehensive system with 6 resume categories, 2 length variants, 8 color schemes, and 4 output formats - generating 384 total resume combinations. This guide covers the technical architecture, code structure, systematic design system, and how to make changes.
 
 ## 🏗️ System Architecture
 

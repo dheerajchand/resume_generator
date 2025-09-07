@@ -26,6 +26,8 @@ Results-driven Marketing & Data Analytics Professional with 21 years of experien
 - Created comprehensive data visualization solutions that improved clients' understanding of complex research findings
 - Managed national polling team of five data analysts for consumer insights and market intelligence
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Product Marketing Core**: **Market Intelligence & Competitive Analysis** • **Product Positioning & Messaging Development** • **Go-to-Market Strategy & Product Launch Management** • **Customer Segmentation & Buyer Persona Development**

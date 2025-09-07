@@ -26,6 +26,8 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 - Led multi-million dollar research projects involving sensitive consumer data with privacy compliance
 - Developed advanced segmentation models using demographic, psychographic, and behavioral data
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Survey Methodology & Research Design**: **Survey Design and Questionnaire Development for Political and Market Research** • **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)** • **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling** • **Expert Testimony and Consultation on Research Methodology**

@@ -26,6 +26,8 @@ Strategic Product & Platform Professional with 21 years of experience conceiving
 - Developed advanced data pipelines for machine learning applications enhancing consumer segmentation and predictive modeling
 - Trained analytical and engineering staff on open source geospatial technology for analysis, segmentation, and visualization
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Product Management & Strategy**: **Product Conception & Ideation**: *`Market Research`, `User Needs Analysis`, `Opportunity Assessment`* • **Product Architecture & Design**: *`Technical Architecture`, System Design, `Scalability Planning`* • **Product Lifecycle Management**: *`Roadmap Development`, `Feature Prioritization`, `Release Planning`* • **B2B SaaS Development**: *`Multi-tenant Architecture`, `Platform Strategy`, API Design*

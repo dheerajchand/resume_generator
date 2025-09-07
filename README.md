@@ -1,12 +1,13 @@
 # Professional Resume Generator
 
-A comprehensive Django-based resume generation system that creates professional resumes in multiple formats (PDF, DOCX, RTF, Markdown) with customizable color schemes and role-specific content.
+What began as a simple need to generate a few resumes has evolved into a comprehensive Django-based resume generation system that creates professional resumes in multiple formats (PDF, DOCX, RTF, Markdown) with customizable color schemes, role-specific content, and both long and short versions for every use case.
 
 ## 🚀 Features
 
 - **Multiple Output Formats**: PDF, DOCX, RTF, and Markdown
 - **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Modern Clean, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
-- **6 Resume Versions**: Research, Technical, Comprehensive, Consulting, Software, and Marketing
+- **6 Resume Categories**: Comprehensive, Polling/Research/Redistricting, Marketing, Data Analysis, Visualization, and Product
+- **2 Length Variants**: Long (3 pages) and Short (2 pages) for every category
 - **Systematic Design System**: Consistent spacing, typography, and color hierarchy
 - **Font Theme System**: ATS-friendly typography with distinctive variations per theme
 - **High Quality Output**: Optimized for maximum quality within service size limits
@@ -27,12 +28,18 @@ resume_generator/
 │   ├── management/commands/         # Django management commands
 │   └── content/                     # Content templates
 ├── inputs/                          # Resume data files
-│   ├── dheeraj_chand_comprehensive_full/
-│   ├── dheeraj_chand_consulting_minimal/
-│   ├── dheeraj_chand_product_marketing/
-│   ├── dheeraj_chand_research_focused/
-│   ├── dheeraj_chand_software_engineer/
-│   └── dheeraj_chand_technical_detailed/
+│   ├── dheeraj_chand_comprehensive_full/           # Long version
+│   ├── dheeraj_chand_comprehensive_full_abbreviated/ # Short version
+│   ├── dheeraj_chand_polling_research_redistricting/
+│   ├── dheeraj_chand_polling_research_redistricting_abbreviated/
+│   ├── dheeraj_chand_marketing/
+│   ├── dheeraj_chand_marketing_abbreviated/
+│   ├── dheeraj_chand_data_analysis/
+│   ├── dheeraj_chand_data_analysis_abbreviated/
+│   ├── dheeraj_chand_visualisation/
+│   ├── dheeraj_chand_visualisation_abbreviated/
+│   ├── dheeraj_chand_product/
+│   └── dheeraj_chand_product_abbreviated/
 ├── outputs/                         # Generated resumes
 ├── color_schemes/                   # Color scheme definitions
 ├── docs/                           # Documentation
@@ -108,7 +115,7 @@ python manage.py generate_all_resumes --confirm
 ```
 
 This generates all combinations:
-- 6 resume versions × 8 color schemes × 4 formats = 192 files
+- 6 resume categories × 2 length variants × 8 color schemes × 4 formats = 384 files
 
 #### Generate Specific Resume
 ```bash
@@ -161,16 +168,21 @@ Each color scheme uses a systematic 4-color hierarchy:
 - **Accent**: Sub-competencies, contact information
 - **Muted**: Bullet points, job titles, subtitles
 
-## 📝 Resume Versions
+## 📝 Resume Categories
 
-Six different resume versions are available:
+Six different resume categories are available, each with both long (3-page) and short (2-page) versions:
 
-1. **Research** - Academic and research focused
-2. **Technical** - Technical skills emphasized
-3. **Comprehensive** - Full detailed resume
-4. **Consulting** - Business consulting focused
-5. **Software** - Software engineering focused
-6. **Marketing** - Product marketing focused
+1. **Comprehensive** - Complete professional profile with full work history
+2. **Polling/Research/Redistricting** - Survey methodology, expert testimony, redistricting software
+3. **Marketing** - Market intelligence, consumer insights, go-to-market strategy
+4. **Data Analysis** - Statistical analysis, machine learning, big data processing
+5. **Visualization** - Data visualization, geospatial analysis, mapping technologies
+6. **Product** - Product management, platform development, technical architecture
+
+### Length Variants
+
+- **Long Versions (3 pages)**: Complete work history with detailed accomplishments, all key achievements and competencies, comprehensive job descriptions
+- **Short Versions (2 pages)**: Focused on key achievements and recent experience, condensed job descriptions, streamlined competencies
 
 ## 🔧 Configuration
 
@@ -218,7 +230,7 @@ python manage.py test resumes.tests.test_core_services
 
 - **Generation Speed**: ~2-3 seconds per resume
 - **Memory Usage**: ~50MB for full generation
-- **Total Generated Files**: 192 files (6 versions × 4 formats × 8 color schemes)
+- **Total Generated Files**: 384 files (6 categories × 2 lengths × 4 formats × 8 color schemes)
 - **File Sizes**: 
   - PDF: ~12KB (optimized for all services)
   - DOCX: ~39KB (excellent compatibility)

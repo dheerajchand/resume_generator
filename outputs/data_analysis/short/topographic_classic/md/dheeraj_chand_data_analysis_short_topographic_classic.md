@@ -26,6 +26,8 @@ Senior Data Analysis & Analytics Professional with 21 years of expertise in stat
 - Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
 - Led multi-million dollar research projects involving sensitive consumer data with privacy compliance
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Statistical Analysis & Machine Learning**: **Advanced Statistical Modeling**: *`Regression`, `Clustering`, Segmentation, `Machine Learning`* • **Predictive Analytics**: *`Time Series Analysis`, `Forecasting`, `Risk Modeling`* • **Data Mining**: *`Pattern Recognition`, Anomaly Detection, `Entity Resolution`* • **Machine Learning**: *`SciKit-Learn`, `TensorFlow`, `PySpark`, `Spark MLlib`*

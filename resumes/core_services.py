@@ -257,6 +257,14 @@ class ResumeGenerator:
                 "content": achievement_content
             })
         
+        # Additional info for abbreviated versions
+        additional_info = self.data.get("additional_info", "")
+        if additional_info:
+            sections.append({
+                "name": "",
+                "content": [Paragraph(additional_info, self.styles["Body"])]
+            })
+        
         # Core Competencies
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -866,6 +874,11 @@ class ResumeGenerator:
                     for achievement in achievement_list:
                         doc.add_paragraph(f"• {achievement}")
         
+        # Additional info for abbreviated versions
+        additional_info = self.data.get("additional_info", "")
+        if additional_info:
+            doc.add_paragraph(additional_info)
+        
         doc.save(filename)
         return filename
     
@@ -914,6 +927,12 @@ class ResumeGenerator:
                     for achievement in achievement_list:
                         content.append(f"• {achievement}")
                     content.append("")
+            content.append("")
+        
+        # Additional info for abbreviated versions
+        additional_info = self.data.get("additional_info", "")
+        if additional_info:
+            content.append(additional_info)
             content.append("")
         
         # Competencies
@@ -1067,6 +1086,12 @@ class ResumeGenerator:
                     for achievement in achievement_list:
                         content.append(f"- {achievement}")
                 content.append("")
+        
+        # Additional info for abbreviated versions
+        additional_info = self.data.get("additional_info", "")
+        if additional_info:
+            content.append(additional_info)
+            content.append("")
         
         # Competencies (enhanced paragraph format with visual hierarchy)
         competencies = self.data.get("competencies", {})

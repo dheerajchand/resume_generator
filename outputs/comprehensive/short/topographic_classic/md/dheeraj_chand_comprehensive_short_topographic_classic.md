@@ -26,6 +26,8 @@ Senior Research & Data Analytics Professional with 21 years of experience in app
 - Delivered actionable consumer insights and market intelligence for political candidates and major organizations
 - Built comprehensive survey operations platform from RFP through deployment
 
+For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+
 ## Core Competencies
 
 **Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, `longitudinal analysis`* • **Statistical Analysis**: *`Regression modeling`, `clustering`, segmentation, `machine learning`* • **Geospatial Analysis**: *`Spatial clustering`, `boundary estimation`, `demographic mapping`* • **Data Visualization**: *`Tableau`, `PowerBI`, `d3.js`, `Matplotlib`, `Seaborn`, `choropleth mapping`*
