@@ -1203,6 +1203,12 @@ class ResumeManager:
             "product": "dheeraj_chand_product"
         }
         
+        # Length variants for each version
+        self.length_variants = {
+            "long": "full",
+            "short": "abbreviated"
+        }
+        
         self.color_schemes = [
             "default_professional",
             "corporate_blue", 
@@ -1216,12 +1222,19 @@ class ResumeManager:
         
         self.formats = ["pdf", "docx", "rtf", "md"]
     
-    def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs") -> bool:
+    def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs", length_variant: str = "long") -> bool:
         """Generate a single resume with specified parameters"""
         if version not in self.versions:
             return False
         
+        if length_variant not in self.length_variants:
+            return False
+        
+        # Determine input directory based on length variant
         input_basename = self.versions[version]
+        if length_variant == "short":
+            input_basename += "_abbreviated"
+        
         input_dir = Path("inputs") / input_basename
         
         if not input_dir.exists():
@@ -1242,11 +1255,11 @@ class ResumeManager:
                 generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme)
             
             # Create output directory
-            output_path = Path(output_dir) / version / color_scheme / format_type
+            output_path = Path(output_dir) / version / length_variant / color_scheme / format_type
             output_path.mkdir(parents=True, exist_ok=True)
             
             # Generate file
-            filename = output_path / f"dheeraj_chand_{version}_{color_scheme}.{format_type}"
+            filename = output_path / f"dheeraj_chand_{version}_{length_variant}_{color_scheme}.{format_type}"
             
             if format_type == "pdf":
                 generator.generate_pdf(str(filename))
@@ -1266,15 +1279,16 @@ class ResumeManager:
             return False
     
     def generate_all_combinations(self, output_dir: str = "outputs") -> Dict[str, int]:
-        """Generate all combinations of versions, color schemes, and formats"""
+        """Generate all combinations of versions, lengths, color schemes, and formats"""
         results = {"success": 0, "failed": 0}
         
         for version in self.versions:
-            for color_scheme in self.color_schemes:
-                for format_type in self.formats:
-                    if self.generate_single_resume(version, color_scheme, format_type, output_dir):
-                        results["success"] += 1
-                    else:
-                        results["failed"] += 1
+            for length_variant in self.length_variants:
+                for color_scheme in self.color_schemes:
+                    for format_type in self.formats:
+                        if self.generate_single_resume(version, color_scheme, format_type, output_dir, length_variant):
+                            results["success"] += 1
+                        else:
+                            results["failed"] += 1
         
         return results

@@ -38,6 +38,7 @@ class Command(BaseCommand):
         manager = ResumeManager()
         total_combinations = (
             len(manager.versions) * 
+            len(manager.length_variants) *
             len(manager.color_schemes) * 
             len(manager.formats)
         )
@@ -48,6 +49,7 @@ class Command(BaseCommand):
         self.stdout.write('=' * 60)
         self.stdout.write(
             f'📊 Total combinations: {len(manager.versions)} versions × '
+            f'{len(manager.length_variants)} lengths × '
             f'{len(manager.formats)} formats × {len(manager.color_schemes)} color schemes'
         )
         self.stdout.write(f'🎯 Total files to generate: {total_combinations}')
