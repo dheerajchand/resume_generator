@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Core Resume Generation Services - MAIN FORMAT
+Core Resume Generation Services - MINIMAL FORMAT
 Consolidated functionality for resume generation across all formats
 
-This is the MAIN FORMAT with optimized spacing and space-efficient design.
-For the minimal/backup format, see core_services_minimal.py
+This is the MINIMAL/BACKUP FORMAT with the original spacing and design.
+For the main optimized format, see core_services.py
 """
 
 import json
@@ -168,6 +168,7 @@ class ResumeGenerator:
                 fontSize=get_font_size('body'),
                 textColor=HexColor(colors.get("DARK_TEXT_COLOR", "#2C3E50")),
                 spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MEDIUM,      # Medium unit spacing
+                leftIndent=12,
                 fontName=get_font('secondary'),
             ),
             "BulletPoint": ParagraphStyle(
@@ -242,42 +243,53 @@ class ResumeGenerator:
                 "content": [Paragraph(summary, self.styles["Body"])]
             })
         
-        # Key Achievements and Impact (abbreviated like Deepak)
+        # Key Achievements and Impact
         achievements = self.data.get("achievements", {})
         if achievements:
             achievement_content = []
-            # Single line with bullet separators (abbreviated format)
-            all_achievements = []
             for category, achievement_list in achievements.items():
-                if isinstance(achievement_list, list) and achievement_list:
-                    # Take first achievement from each category (abbreviated)
-                    if achievement_list:
-                        all_achievements.append(achievement_list[0])
-            
-            # Single line format like Deepak
-            achievement_text = " • ".join(all_achievements)
-            achievement_content.append(Paragraph(achievement_text, self.styles["CompetencyDetail"]))
+                if isinstance(achievement_list, list):
+                    achievement_content.append(Paragraph(category, self.styles["MainCompetency"]))
+                    # Add small spacing between subheader and bullets (consistent with section headers)
+                    achievement_content.append(Spacer(1, self.SPACE_HEADER_TO_CONTENT))
+                    for achievement in achievement_list:
+                        achievement_content.append(Paragraph(f"• {achievement}", self.styles["BulletPoint"]))
             
             sections.append({
                 "name": "KEY ACHIEVEMENTS AND IMPACT",
                 "content": achievement_content
             })
         
-        # CORE COMPETENCIES - Strong categories (space-efficient)
-        core_competencies = [
-            "Software Engineering", "Data Engineering", "Data Analysis", 
-            "Geospatial / Demographic Expertise", "Research & Analytics", 
-            "Programming & Development", "Data Infrastructure"
-        ]
-        
-        # Single line with bullet separators (like Deepak)
-        competency_text = " • ".join(core_competencies)
-        competency_content = [Paragraph(competency_text, self.styles["CompetencyDetail"])]
-        
-        sections.append({
-            "name": "CORE COMPETENCIES",
-            "content": competency_content
-        })
+        # Core Competencies
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            competency_content = []
+            for main_category, sub_skills in competencies.items():
+                if isinstance(sub_skills, list):
+                    # Build compact inline content with color hierarchy
+                    colors = self.config if self.config else {}
+                    accent_color = colors.get("ACCENT_COLOR", "#4682B4") 
+                    muted_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
+                    
+                    sub_content = []
+                    for skill_line in sub_skills:
+                        if ": " in skill_line:
+                            sub_category, details = skill_line.split(": ", 1)
+                            sub_content.append(f'<font color="{accent_color}"><i>{sub_category}</i></font> <font color="{muted_color}">({details})</font>')
+                        else:
+                            sub_content.append(f'<font color="{accent_color}">{skill_line}</font>')
+                    
+                    # Create single paragraph with main category and all sub-skills using color hierarchy
+                    # Main category in primary color, sub-categories in accent color, details in muted color
+                    main_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
+                    
+                    full_text = f'<font color="{main_color}"><b>{main_category}:</b></font> {"; ".join(sub_content)}'
+                    competency_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
+            
+            sections.append({
+                "name": "CORE COMPETENCIES",
+                "content": competency_content
+            })
         
         # Professional Experience
         experience = self.data.get("experience", [])
@@ -426,37 +438,6 @@ class ResumeGenerator:
                 "content": [Paragraph(additional_info_with_links, self.styles["Body"])]
             })
         
-        # Technical Skills (moved to end like Deepak) - WITH VISUAL HIERARCHY
-        competencies = self.data.get("competencies", {})
-        if competencies:
-            technical_skills_content = []
-            for main_category, sub_skills in competencies.items():
-                if isinstance(sub_skills, list):
-                    # Technical skills - format as Deepak does with visual hierarchy
-                    colors = self.config if self.config else {}
-                    accent_color = colors.get("ACCENT_COLOR", "#4682B4") 
-                    muted_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
-                    
-                    sub_content = []
-                    for skill_line in sub_skills:
-                        if ": " in skill_line:
-                            sub_category, details = skill_line.split(": ", 1)
-                            sub_content.append(f'<font color="{accent_color}"><i>{sub_category}</i></font> <font color="{muted_color}">({details})</font>')
-                        else:
-                            sub_content.append(f'<font color="{accent_color}">{skill_line}</font>')
-                    
-                    # Create single paragraph with main category and all sub-skills using color hierarchy
-                    main_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
-                    skill_text = "; ".join(sub_content)
-                    full_text = f'<font color="{main_color}"><b>{main_category.upper()}</b></font> {skill_text}'
-                    technical_skills_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
-            
-            if technical_skills_content:
-                sections.append({
-                    "name": "TECHNICAL SKILLS",
-                    "content": technical_skills_content
-                })
-        
         return sections
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
@@ -469,46 +450,37 @@ class ResumeGenerator:
         return table
     
     def _calculate_header_footer_dimensions(self):
-        """SYSTEMATIC APPROACH: Calculate header bar position for first page (most content)"""
-        # Use the first page header content for spacing calculation since it has the most content
-        # This ensures consistent spacing regardless of page type
+        """SYSTEMATIC APPROACH: Calculate header and footer dimensions first"""
         personal_info = self.data.get("personal_info", {})
-        
-        # Find the lowest text line using the same logic as the header function
-        # This represents the actual header bar position on the first page
-        lowest_line_y = HEADER_TOP_Y  # Start with email line
-        
-        # Check if phone exists
-        phone = personal_info.get("phone", "")
-        if phone:
-            phone_y = HEADER_TOP_Y - HEADER_PHONE_OFFSET
-            lowest_line_y = min(lowest_line_y, phone_y)
-        
-        # Check if GitHub exists
         github_url = personal_info.get("github", "")
+        
+        # Calculate header bar position based on actual content
+        # First page has larger header with name + location, so bar goes under the lowest content
         if github_url:
-            github_y = HEADER_TOP_Y - HEADER_GITHUB_OFFSET
-            lowest_line_y = min(lowest_line_y, github_y)
+            # Header bar goes under GitHub link (lowest left content)
+            header_bar_y = HEADER_FIRST_GITHUB_Y - SPACE_MULTIPLIER_MINIMAL * inch  # Just under GitHub link
+        else:
+            # Header bar goes under phone number (lowest left content)
+            header_bar_y = HEADER_FIRST_PHONE_Y - SPACE_MULTIPLIER_MINIMAL * inch   # Just under phone number
         
-        # Right side text positions (first page has all elements)
-        name_y = HEADER_TOP_Y - HEADER_NAME_OFFSET
-        slogan_y = name_y - 12
-        austin_y = name_y - 24
+        # But first page also has name + location on right side that goes lower
+        # The bar should go under the lowest of either side
+        # Right side: name at HEADER_FIRST_NAME_Y, location at HEADER_FIRST_LOCATION_Y
+        right_side_bottom = HEADER_FIRST_LOCATION_Y - SPACE_MULTIPLIER_MINIMAL * inch  # Just under location
         
-        lowest_line_y = min(lowest_line_y, name_y, slogan_y, austin_y)
+        # Use the lower of the two sides
+        header_bar_y = min(header_bar_y, right_side_bottom)
         
-        # Header bar position: one line height below lowest text
-        header_bar_y = lowest_line_y - FONT_SIZE_9
-        
-        # Footer bar position: fixed at bottom
+        # Calculate footer bar position (fixed at bottom)
         footer_bar_y = FOOTER_BAR_POSITION
         
-        # Body content spacing: use proper spacing constant
-        # This spacing will be the same for all pages since we use the same Spacer
-        body_start_y = header_bar_y - SPACE_HEADER_TO_CONTENT
-        body_end_y = footer_bar_y + FONT_SIZE_11
+        # Calculate available space for body content
+        # Use same spacing as section headers to their content for consistency
+        section_to_subheader_spacing = SPACE_HEADER_TO_CONTENT
+        body_start_y = header_bar_y - section_to_subheader_spacing
+        body_end_y = footer_bar_y + section_to_subheader_spacing
         
-        # Calculate margins based on actual positions
+        # Calculate margins based on actual header/footer positions
         top_margin = PAGE_HEIGHT - body_start_y
         bottom_margin = body_end_y
         
@@ -518,7 +490,8 @@ class ResumeGenerator:
             'body_start_y': body_start_y,
             'body_end_y': body_end_y,
             'top_margin': top_margin,
-            'bottom_margin': bottom_margin
+            'bottom_margin': bottom_margin,
+            'section_to_subheader_spacing': section_to_subheader_spacing
         }
 
     def generate_pdf(self, filename: str) -> str:
@@ -543,9 +516,6 @@ class ResumeGenerator:
         # Define sections in order
         sections = self._get_sections()
         
-        # No additional spacing needed - topMargin already accounts for proper spacing
-        # The dimensions calculation ensures consistent spacing across all pages
-        
         # Render each section
         for i, section in enumerate(sections):
             if section["content"]:
@@ -555,8 +525,8 @@ class ResumeGenerator:
         
         
         # Build with custom header and footer using systematic approach
-        def add_header(canvas, doc):
-            """Add header with dynamic bar positioning for all pages"""
+        def add_first_page_header(canvas, doc):
+            """Add three-cell header for first page using calculated dimensions"""
             canvas.saveState()
             
             # High quality rendering settings
@@ -564,6 +534,8 @@ class ResumeGenerator:
             canvas.setLineJoin(1)  # Round line joins for smoother lines
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
+            # Use calculated dimensions
+            header_bar_y = dimensions['header_bar_y']
             personal_info = self.data.get("personal_info", {})
             
             # Three-cell layout: Email/Phone (left) | Empty (middle) | Name (right)
@@ -581,96 +553,55 @@ class ResumeGenerator:
             left_x = HEADER_LEFT_X
             top_y = HEADER_TOP_Y  # Lowered to prevent bleeding off page
             
-            # Use the same logic as dimensions calculation for consistency
-            # This ensures header bar position matches the spacing calculation
-            lowest_line_y = top_y  # Start with email line
-            
-            if phone:
-                phone_y = top_y - HEADER_PHONE_OFFSET
-                lowest_line_y = min(lowest_line_y, phone_y)
-            
-            # GitHub link under phone on left side with equal spacing
-            github_url = personal_info.get("github", "")
-            if github_url:
-                github_y = top_y - HEADER_GITHUB_OFFSET
-                lowest_line_y = min(lowest_line_y, github_y)
-            
-            # Right side text
-            name_y = top_y - HEADER_NAME_OFFSET
-            slogan_y = name_y - 12
-            austin_y = name_y - 24
-            
-            lowest_line_y = min(lowest_line_y, name_y, slogan_y, austin_y)
-            
-            # Get colors from config for better visual hierarchy
-            primary_color = self.config.get("ACCENT_COLOR", "#4682B4")
-            secondary_color = self.config.get("COMPANY_COLOR", "#2C3E50") 
-            text_color = self.config.get("DARK_TEXT_COLOR", "#2C3E50")
-            muted_color = self.config.get("MEDIUM_TEXT_COLOR", "#666666")
-            link_color = self.config.get("LINK_COLOR", "#4682B4")
-            
-            # LEFT SIDE: Email and Phone (primary accent color)
             if email:
                 canvas.setFont("Helvetica", FONT_SIZE_11)
-                canvas.setFillColor(HexColor(primary_color))
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                 canvas.drawString(left_x, top_y, email)
             
             if phone:
                 canvas.setFont("Helvetica", FONT_SIZE_11)
-                canvas.setFillColor(HexColor(primary_color))
-                canvas.drawString(left_x, phone_y, phone)
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                canvas.drawString(left_x, top_y - HEADER_PHONE_OFFSET, phone)
             
-            # RIGHT SIDE: Name (bigger, aligned with email/phone)
-            canvas.setFont("Helvetica-Bold", FONT_SIZE_14)  # Bigger name
-            canvas.setFillColor(HexColor(text_color))
-            canvas.drawRightString(PAGE_RIGHT_MARGIN, top_y, name)  # Aligned with email
-            
-            # Slogan (smaller, between name and coordinates)
-            canvas.setFont("Helvetica", FONT_SIZE_9)
-            canvas.setFillColor(HexColor(muted_color))
-            slogan = "[RESEARCH, ANALYSIS, ENGINEERING] → UNDERSTANDING"
-            canvas.drawRightString(PAGE_RIGHT_MARGIN, top_y - 14, slogan)
-            
-            # GitHub (aligned with coordinates, different color)
+            # GitHub link under phone on left side with equal spacing
+            github_url = personal_info.get("github", "")
             if github_url:
                 canvas.setFont("Helvetica", FONT_SIZE_9)
-                # Label in secondary color
-                canvas.setFillColor(HexColor(secondary_color))
-                canvas.drawString(left_x, austin_y, "GitHub: ")
-                github_label_width = canvas.stringWidth("GitHub: ", "Helvetica", FONT_SIZE_9)
-                
-                # Link in different color
-                canvas.setFillColor(HexColor(link_color))
-                github_text = github_url.replace('https://', '').replace('http://', '')
-                github_x = left_x + github_label_width
-                # Create clickable link
+                canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
+                github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
+                # Create clickable link to GitHub with equal spacing
                 canvas.linkURL(github_url, 
-                             (github_x, austin_y - 2, github_x + canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_9), austin_y + 10))
-                canvas.drawString(github_x, austin_y, github_text)
+                             (left_x, top_y - HEADER_GITHUB_LINK_OFFSET, left_x + canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_9), top_y - HEADER_GITHUB_OFFSET))
+                canvas.drawString(left_x, top_y - HEADER_GITHUB_OFFSET, github_text)
             
-            # Austin, TX with coordinates (aligned with GitHub)
+            # Right cell: Full name with Austin, TX underneath
+            canvas.setFont("Helvetica-Bold", FONT_SIZE_14)
+            canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
+            # Center name vertically with the middle of the left content
+            name_y = top_y - HEADER_NAME_OFFSET  # Center between email and phone
+            canvas.drawRightString(PAGE_RIGHT_MARGIN, name_y, name)
+            
+            # Austin, TX with coordinates as clickable link under name
             canvas.setFont("Helvetica", FONT_SIZE_9)
-            canvas.setFillColor(HexColor(muted_color))
+            canvas.setFillColor(HexColor(self.config.get("SUBTITLE_COLOR", "#666666")))
             austin_text = "Austin, TX (30.2672°N, 97.7431°W)"
             austin_width = canvas.stringWidth(austin_text, "Helvetica", FONT_SIZE_9)
             austin_x = PAGE_RIGHT_MARGIN - austin_width
             # Create clickable link to OpenStreetMap
             canvas.linkURL("https://www.openstreetmap.org/?mlat=30.2672&mlon=-97.7431&zoom=12", 
-                         (austin_x, austin_y - 2, PAGE_RIGHT_MARGIN, austin_y + 10))
-            canvas.drawRightString(PAGE_RIGHT_MARGIN, austin_y, austin_text)
+                         (austin_x, name_y - HEADER_LOCATION_LINK_OFFSET, PAGE_RIGHT_MARGIN, name_y - HEADER_LOCATION_OFFSET))
+            canvas.drawRightString(PAGE_RIGHT_MARGIN, name_y - HEADER_LOCATION_OFFSET, austin_text)
             
-            # Add horizontal bar separator - simple: one line height below lowest text
-            bar_y = lowest_line_y - FONT_SIZE_9  # One line height below lowest text
+            # Add horizontal bar separator using calculated position
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(BAR_LINE_WIDTH)
-            canvas.line(PAGE_LEFT_MARGIN, bar_y, PAGE_RIGHT_MARGIN, bar_y)
+            canvas.line(PAGE_LEFT_MARGIN, header_bar_y, PAGE_RIGHT_MARGIN, header_bar_y)
             
             canvas.restoreState()
             add_footer(canvas, doc)
         
-        
-        def add_footer(canvas, doc):
-            """Add footer with two-cell structure and dynamic bar positioning"""
+        def add_later_page_header(canvas, doc):
+            """Add header for subsequent pages using systematic approach"""
             canvas.saveState()
             
             # High quality rendering settings
@@ -678,19 +609,87 @@ class ResumeGenerator:
             canvas.setLineJoin(1)  # Round line joins for smoother lines
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
+            # Use calculated dimensions (same as first page)
+            header_bar_y = dimensions['header_bar_y']
             personal_info = self.data.get("personal_info", {})
+            
+            # Three-cell layout: Name (left) | Email (middle) | Phone (right)
+            name = personal_info.get("name", "NAME").upper()  # Bold and all caps
+            email = personal_info.get("email", "").lower()    # Lowercase
+            phone = personal_info.get("phone", "").replace(".", "").replace("-", "").replace(" ", "")  # Remove periods, dashes, spaces
+            
+            # Add US country code to phone if it doesn't have one
+            if phone and not phone.startswith("+1") and not phone.startswith("1"):
+                phone = f"+1 {phone}"
+            elif phone and phone.startswith("1") and not phone.startswith("+1"):
+                phone = f"+{phone}"
+            
+            # Left cell: Name (bold, all caps)
+            canvas.setFont("Helvetica-Bold", FONT_SIZE_10)  # Smaller text
+            canvas.setFillColor(HexColor(self.config.get("NAME_COLOR", "#2C3E50")))
+            canvas.drawString(PAGE_LEFT_MARGIN, HEADER_RECURRING_NAME_Y, name)
+            
+            # Middle cell: Email (centered)
+            if email:
+                canvas.setFont("Helvetica", FONT_SIZE_9)
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                email_text = f"Email: {email}"
+                # Center email in the middle third of the page
+                email_width = canvas.stringWidth(email_text, "Helvetica", FONT_SIZE_9)
+                email_x = (PAGE_LEFT_MARGIN + PAGE_RIGHT_MARGIN) / 2 - email_width / 2
+                canvas.drawString(email_x, HEADER_RECURRING_EMAIL_Y, email_text)
+            
+            # Right cell: Phone and GitHub stacked
+            if phone:
+                canvas.setFont("Helvetica", FONT_SIZE_9)
+                canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
+                phone_text = f"Phone: {phone}"
+                # Create clickable link for phone
+                phone_width = canvas.stringWidth(phone_text, "Helvetica", FONT_SIZE_9)
+                phone_x = PAGE_RIGHT_MARGIN - phone_width
+                canvas.linkURL(f"tel:{phone}", (phone_x, HEADER_RECURRING_PHONE_Y - 0.1*inch, PAGE_RIGHT_MARGIN, HEADER_RECURRING_PHONE_Y + 0.1*inch))
+                canvas.drawRightString(PAGE_RIGHT_MARGIN, HEADER_RECURRING_PHONE_Y, phone_text)
+            
+            # GitHub link under phone on right side
+            github_url = personal_info.get("github", "")
+            if github_url:
+                canvas.setFont("Helvetica", FONT_SIZE_8)
+                canvas.setFillColor(HexColor(self.config.get("LINK_COLOR", "#4682B4")))
+                github_text = f"GitHub: {github_url.replace('https://', '').replace('http://', '')}"
+                # Create clickable link to GitHub
+                canvas.linkURL(github_url, 
+                             (PAGE_RIGHT_MARGIN - canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_8), 
+                              HEADER_RECURRING_GITHUB_Y - 0.05*inch, PAGE_RIGHT_MARGIN, HEADER_RECURRING_GITHUB_Y + 0.05*inch))
+                canvas.drawRightString(PAGE_RIGHT_MARGIN, HEADER_RECURRING_GITHUB_Y, github_text)
+            
+            # Add horizontal bar using calculated position
+            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
+            canvas.setLineWidth(BAR_LINE_WIDTH)
+            canvas.line(PAGE_LEFT_MARGIN, header_bar_y, PAGE_RIGHT_MARGIN, header_bar_y)
+            
+            canvas.restoreState()
+            add_footer(canvas, doc)  # Also add footer
+        
+        def add_footer(canvas, doc):
+            """Add footer with two-cell structure using calculated dimensions"""
+            canvas.saveState()
+            
+            # High quality rendering settings
+            canvas.setLineCap(1)  # Round line caps for smoother lines
+            canvas.setLineJoin(1)  # Round line joins for smoother lines
+            canvas.setLineWidth(1.0)  # Ensure consistent line width
+            
+            # Use calculated footer bar position
+            footer_bar_y = dimensions['footer_bar_y']
+            personal_info = self.data.get("personal_info", {})
+            
+            # Add bar above footer to separate from page text
+            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
+            canvas.setLineWidth(BAR_LINE_WIDTH_FOOTER)
+            canvas.line(PAGE_LEFT_MARGIN, footer_bar_y, PAGE_RIGHT_MARGIN, footer_bar_y)
             
             canvas.setFont("Helvetica", FONT_SIZE_8)
             footer_y = FOOTER_Y
-            
-            # Calculate where the bar should go BEFORE drawing any text
-            # Bar should be 8 points above the footer text
-            bar_y = footer_y + 8
-            
-            # Draw the bar FIRST (above the text)
-            canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
-            canvas.setLineWidth(BAR_LINE_WIDTH_FOOTER)
-            canvas.line(PAGE_LEFT_MARGIN, bar_y, PAGE_RIGHT_MARGIN, bar_y)
             
             # Two-cell footer structure
             website_url = personal_info.get("website", "")
@@ -737,7 +736,7 @@ class ResumeGenerator:
             
             canvas.restoreState()
         
-        doc.build(story, onFirstPage=add_header, onLaterPages=add_header)
+        doc.build(story, onFirstPage=add_first_page_header, onLaterPages=add_later_page_header)
         return filename
     
     def generate_docx(self, filename: str) -> str:
@@ -785,18 +784,14 @@ class ResumeGenerator:
             doc.add_heading("PROFESSIONAL SUMMARY", level=2)
             doc.add_paragraph(summary)
         
-        # CORE COMPETENCIES - Horizontal bullet format
+        # Competencies
         competencies = self.data.get("competencies", {})
         if competencies:
-            competency_categories = []
-            for main_category, sub_skills in competencies.items():
-                if isinstance(sub_skills, list):
-                    competency_categories.append(main_category)
-            
-            # Single line with bullet separators
-            competency_text = " • ".join(competency_categories)
             doc.add_heading("CORE COMPETENCIES", level=2)
-            doc.add_paragraph(competency_text)
+            for category, skills in competencies.items():
+                if isinstance(skills, list):
+                    skill_text = " • ".join(skills)
+                    doc.add_paragraph(f"{category}: {skill_text}")
         
         # Experience
         experience = self.data.get("experience", [])
@@ -889,16 +884,6 @@ class ResumeGenerator:
                     for achievement in achievement_list:
                         doc.add_paragraph(f"• {achievement}")
         
-        # Technical Skills (moved to end like Deepak)
-        competencies = self.data.get("competencies", {})
-        if competencies:
-            doc.add_heading("TECHNICAL SKILLS", level=2)
-            for main_category, sub_skills in competencies.items():
-                if isinstance(sub_skills, list):
-                    # Technical skills - format as Deepak does with specific technologies
-                    skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in sub_skills])
-                    doc.add_paragraph(f"{main_category.upper()} {skill_text}")
-        
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
@@ -960,27 +945,14 @@ class ResumeGenerator:
             content.append(additional_info)
             content.append("")
         
-        # CORE COMPETENCIES - Space-efficient skills section
+        # Competencies
         competencies = self.data.get("competencies", {})
         if competencies:
             content.append("\\b CORE COMPETENCIES\\b0")
             for category, skills in competencies.items():
                 if isinstance(skills, list):
-                    content.append(f"• {category}")
-            content.append("")
-            
-            content.append("\\b TECHNICAL SKILLS\\b0")
-            for category, skills in competencies.items():
-                if isinstance(skills, list):
-                    if category.upper() in ["CODE", "COMPUTE", "INTERACT", "MEASURE", "PLATFORMS", "TRACK"]:
-                        # Technical skills - format as Deepak does
-                        skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in skills])
-                        content.append(f"\\b {category.upper()}\\b0 {skill_text}")
-                    else:
-                        # Other skills - format as bullet points
-                        for skill in skills:
-                            skill_name = skill.split(": ")[0] if ": " in skill else skill
-                            content.append(f"• {skill_name}")
+                    skill_text = " • ".join(skills)
+                    content.append(f"{category}: {skill_text}")
             content.append("")
         
         # Experience
@@ -1131,29 +1103,38 @@ class ResumeGenerator:
             content.append(additional_info)
             content.append("")
         
-        # CORE COMPETENCIES - Space-efficient skills section
+        # Competencies (enhanced paragraph format with visual hierarchy)
         competencies = self.data.get("competencies", {})
         if competencies:
             content.append("## Core Competencies")
             content.append("")
             for category, skills in competencies.items():
                 if isinstance(skills, list):
-                    content.append(f"• **{category}**")
-            content.append("")
-            
-            content.append("## Technical Skills")
-            content.append("")
-            for category, skills in competencies.items():
-                if isinstance(skills, list):
-                    if category.upper() in ["CODE", "COMPUTE", "INTERACT", "MEASURE", "PLATFORMS", "TRACK"]:
-                        # Technical skills - format as Deepak does
-                        skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in skills])
-                        content.append(f"**{category.upper()}** {skill_text}")
-                    else:
-                        # Other skills - format as bullet points
-                        for skill in skills:
-                            skill_name = skill.split(": ")[0] if ": " in skill else skill
-                            content.append(f"• **{skill_name}**")
+                    # Build paragraph format with enhanced Markdown formatting for visual hierarchy
+                    skill_parts = []
+                    for skill_line in skills:
+                        if ": " in skill_line:
+                            sub_category, details = skill_line.split(": ", 1)
+                            # Enhanced formatting to represent color hierarchy
+                            # Main sub-categories: **bold** (like accent color)
+                            # Details: *italics* with `code` for technical terms (like muted color)
+                            # Extract technical terms and format them as code
+                            tech_terms = []
+                            for term in details.split(", "):
+                                if any(tech in term.lower() for tech in ['python', 'sql', 'aws', 'docker', 'git', 'tableau', 'powerbi', 'spark', 'hadoop', 'mongodb', 'postgresql', 'mysql', 'oracle', 'neo4j', 'arcgis', 'qgis', 'osgeo', 'grass', 'django', 'flask', 'pandas', 'numpy', 'scikit', 'tensorflow', 'r', 'spss', 'sas', 'stata', 'javascript', 'react', 'php', 'html', 'css', 'scala', 'java', 'groovy', 'jupyter', 'netlogo', 'd3.js', 'matplotlib', 'seaborn']):
+                                    tech_terms.append(f"`{term.strip()}`")
+                                else:
+                                    tech_terms.append(term.strip())
+                            formatted_details = ", ".join(tech_terms)
+                            skill_parts.append(f"**{sub_category}**: *{formatted_details}*")
+                        else:
+                            # Use **bold** for main skills (like accent color)
+                            skill_parts.append(f"**{skill_line}**")
+                    
+                    # Create single paragraph with main category and all sub-skills
+                    # Main category: **bold** (like primary color)
+                    full_text = f"**{category}**: " + " • ".join(skill_parts)
+                    content.append(full_text)
             content.append("")
         
         # Experience (enhanced formatting with visual hierarchy)
