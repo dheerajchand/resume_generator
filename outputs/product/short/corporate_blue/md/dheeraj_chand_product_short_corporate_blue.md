@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Strategic Product & Platform Professional with 21 years of experience conceiving, architecting, and delivering innovative software products and platforms. Expert in product management, technical architecture, and B2B SaaS development with proven success leading cross-functional teams and launching platforms used by thousands of users. Deep expertise in translating complex business requirements into scalable technical solutions, managing product lifecycles, and driving product strategy.
+Strategic Product & Platform Professional with 15+ years of experience conceiving, architecting, and delivering innovative software products and platforms. Expert in product management, technical architecture, and B2B SaaS development with proven success leading cross-functional teams and launching platforms used by thousands of users. Deep expertise in translating complex business requirements into scalable technical solutions, managing product lifecycles, and driving product strategy.
 
 ## Key Achievements and Impact
 

@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Research & Data Professional with 21 years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.
+Research & Data Professional with 15+ years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.
 
 ## Key Achievements and Impact
 
@@ -106,7 +106,7 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 *Political Research and Data Analysis*
 
-- Conceived, architected, and engineered FLEEM web application using Twilio API for thousands of simultaneous phone calls
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of calls using emulated predictive dialer for regulated political surveys
 - Developed IV`R` polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
 - Built tabular and graphical reporting system with `Python`, Geo`Django`, PostGIS, and Apache webserver
 - Designed survey deployment system facilitating thousands of simultaneous phone surveys, saving PAC nearly $1 million annually in polling costs
@@ -118,11 +118,12 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 *Political Technology Development*
 
-- Maintained and extended comprehensive geospatial analysis and reporting tools for `Java`-based C`R`M system
+- Maintained and extended comprehensive geospatial analysis and reporting tools for `Java`-based C`R`M system used by tens of thousands of users simultaneously
 - Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers
 - Built advanced geospatial analysis capabilities using `Java`, ``Java`Script`, My`SQL`, and TileMill
-- Integrated mapping and visualization tools for political campaign data analysis
+- Integrated mapping and visualization tools for political campaign data analysis interfacing with Government and Activism APIs
 - Collaborated with political strategists to translate geospatial requirements into technical solutions
+- Handled billions of records with millions of columns in high-performance C`R`M system
 
 ### INTERIM TECHNOLOGY MANAGER
 **The Praxis Project, Oakland, CA | April 2009 – October 2009**
@@ -135,6 +136,7 @@ Research & Data Professional with 21 years of experience in applied research, da
 - Led training initiatives for beneficiaries on spatial and Census data analysis for public health research
 - Conducted training programs for NGO staff in web development using Drupal, `PHP`, and My`SQL`
 - Managed technology infrastructure supporting community health initiatives across multiple countries
+- Architected and developed 25 Drupal sites to integrate with membership databases, activism C`R`Ms and government agencies, under guidelines from Kellogg Foundation and `R`obert Wood Johnson Foundation
 
 ### PROGRAMMER
 **Lake Research Partners, Washington, DC | April 2008 – December 2008**
@@ -147,6 +149,7 @@ Research & Data Professional with 21 years of experience in applied research, da
 - Conducted statistical modeling and analysis using `SPSS`, `ArcGIS`, Quantum GIS, `G`R`ASS`, `Stata`, OSCA`R`, Postgre`SQL`, PostGIS, and `Oracle`
 - Pioneered integration of advanced mapping techniques into standard reports including choropleths and hexagonal grid maps
 - Developed innovative approaches to visualizing demographic and market data for enhanced client understanding
+- Trained staff on building `Python` tooling for report generation and analysis
 
 ### FIELD DIRECTOR
 **The Feldman Group, Washington, DC | August 2007 – April 2008**
@@ -159,6 +162,7 @@ Research & Data Professional with 21 years of experience in applied research, da
 - Created custom reports and data visualizations based on specific client requirements
 - Introduced mapping and geospatial analysis into standard reporting procedures
 - Enhanced value of research deliverables through advanced analytical techniques using `SPSS`, OSCA`R`, `PHP`, and My`SQL`
+- Trained staff on `PHP`/My`SQL` for data analysis and reporting systems
 
 ---
 

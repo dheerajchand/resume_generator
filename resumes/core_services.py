@@ -53,10 +53,11 @@ from resume_generator_django.resume_generator.constants import (
 class ResumeGenerator:
     """Core resume generator supporting all formats"""
     
-    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional'):
+    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional', length_variant: str = 'long'):
         self.data = self._load_json(data_file)
         self.config = self._load_json(config_file) if config_file else {}
         self.color_scheme = color_scheme
+        self.length_variant = length_variant
         self.styles = self._create_styles()
         
         # Spacing system constants (imported from settings)
@@ -411,20 +412,21 @@ class ResumeGenerator:
                 "content": education_content
             })
         
-        # Additional info for abbreviated versions (at the very end)
-        additional_info = self.data.get("additional_info", "")
-        if additional_info:
-            # Create clickable links for LinkedIn and Personal Site
-            linkedin_url = "https://www.linkedin.com/in/dheerajchand/"
-            personal_site_url = "https://www.dheerajchand.com"
-            
-            # Replace the entire text with URLs included
-            additional_info_with_links = f"For a more detailed, full description of my experience, please visit my LinkedIn ({linkedin_url}) and Personal Site ({personal_site_url})."
-            
-            sections.append({
-                "name": "",
-                "content": [Paragraph(additional_info_with_links, self.styles["Body"])]
-            })
+        # Additional info for abbreviated versions only (at the very end)
+        if self.length_variant == "short":
+            additional_info = self.data.get("additional_info", "")
+            if additional_info:
+                # Create clickable links for LinkedIn and Personal Site
+                linkedin_url = "https://www.linkedin.com/in/dheerajchand/"
+                personal_site_url = "https://www.dheerajchand.com"
+                
+                # Replace the entire text with URLs included
+                additional_info_with_links = f"For a more detailed, full description of my experience, please visit my LinkedIn ({linkedin_url}) and Personal Site ({personal_site_url})."
+                
+                sections.append({
+                    "name": "",
+                    "content": [Paragraph(additional_info_with_links, self.styles["Body"])]
+                })
         
         # Technical Skills (moved to end like Deepak) - WITH VISUAL HIERARCHY
         competencies = self.data.get("competencies", {})
@@ -1305,9 +1307,9 @@ class ResumeManager:
             # Load color scheme
             color_scheme_file = Path("color_schemes") / f"{color_scheme}.json"
             if color_scheme_file.exists():
-                generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme)
+                generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme, length_variant)
             else:
-                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme)
+                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme, length_variant)
             
             # Create output directory
             output_path = Path(output_dir) / version / length_variant / color_scheme / format_type

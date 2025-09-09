@@ -7,7 +7,7 @@
     "linkedin": "https://www.linkedin.com/in/dheerajchand/",
     "github": "https://github.com/dheerajchand"
   },
-  "summary": "Research & Data Professional with 21 years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.",
+  "summary": "Research & Data Professional with 15+ years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams.",
   "key_achievements": [
     "Conducted polling for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in campaign spending decisions",
     "Built data warehouses processing millions of records with millions of columns for electoral analytics and demographic analysis",
@@ -100,7 +100,7 @@
       "dates": "August 2011 – August 2012",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
-        "Conceived, architected, and engineered FLEEM web application using Twilio API for thousands of simultaneous phone calls",
+        "Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of calls using emulated predictive dialer for regulated political surveys",
         "Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren",
         "Built tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver",
         "Designed survey deployment system facilitating thousands of simultaneous phone surveys, saving PAC nearly $1 million annually in polling costs",
@@ -114,11 +114,12 @@
       "dates": "January 2011 – August 2011",
       "subtitle": "Political Technology Development",
       "responsibilities": [
-        "Maintained and extended comprehensive geospatial analysis and reporting tools for Java-based CRM system",
+        "Maintained and extended comprehensive geospatial analysis and reporting tools for Java-based CRM system used by tens of thousands of users simultaneously",
         "Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers",
         "Built advanced geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill",
-        "Integrated mapping and visualization tools for political campaign data analysis",
-        "Collaborated with political strategists to translate geospatial requirements into technical solutions"
+        "Integrated mapping and visualization tools for political campaign data analysis interfacing with Government and Activism APIs",
+        "Collaborated with political strategists to translate geospatial requirements into technical solutions",
+        "Handled billions of records with millions of columns in high-performance CRM system"
       ]
     },
     {
@@ -132,7 +133,8 @@
         "Developed comprehensive frameworks for internal and external technology audits",
         "Led training initiatives for beneficiaries on spatial and Census data analysis for public health research",
         "Conducted training programs for NGO staff in web development using Drupal, PHP, and MySQL",
-        "Managed technology infrastructure supporting community health initiatives across multiple countries"
+        "Managed technology infrastructure supporting community health initiatives across multiple countries",
+        "Architected and developed 25 Drupal sites to integrate with membership databases, activism CRMs and government agencies, under guidelines from Kellogg Foundation and Robert Wood Johnson Foundation"
       ]
     },
     {
@@ -146,7 +148,8 @@
         "Worked on all aspects of questionnaire design, sampling, reporting and analysis for Congressional, Senate and Presidential elections affecting millions of dollars in campaign spending decisions",
         "Conducted statistical modeling and analysis using SPSS, ArcGIS, Quantum GIS, GRASS, Stata, OSCAR, PostgreSQL, PostGIS, and Oracle",
         "Pioneered integration of advanced mapping techniques into standard reports including choropleths and hexagonal grid maps",
-        "Developed innovative approaches to visualizing demographic and market data for enhanced client understanding"
+        "Developed innovative approaches to visualizing demographic and market data for enhanced client understanding",
+        "Trained staff on building Python tooling for report generation and analysis"
       ]
     },
     {
@@ -160,7 +163,8 @@
         "Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings",
         "Created custom reports and data visualizations based on specific client requirements",
         "Introduced mapping and geospatial analysis into standard reporting procedures",
-        "Enhanced value of research deliverables through advanced analytical techniques using SPSS, OSCAR, PHP, and MySQL"
+        "Enhanced value of research deliverables through advanced analytical techniques using SPSS, OSCAR, PHP, and MySQL",
+        "Trained staff on PHP/MySQL for data analysis and reporting systems"
       ]
     }
   ],

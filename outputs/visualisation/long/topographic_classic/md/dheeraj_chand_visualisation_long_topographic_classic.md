@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Creative Data Visualization & Geospatial Analysis Professional with 21 years of expertise in transforming complex data into compelling visual narratives. Expert in geospatial analysis, demographic mapping, and interactive data visualization with proven success creating stunning visualizations that drive decision-making. Deep specialization in mapping technologies, choropleth design, and spatial data visualization with experience serving major brands, organizations, and political candidates. Skilled at turning complex datasets into beautiful, intuitive visual stories that engage audiences and communicate insights effectively.
+Creative Data Visualization & Geospatial Analysis Professional with 15+ years of expertise in transforming complex data into compelling visual narratives. Expert in geospatial analysis, demographic mapping, and interactive data visualization with proven success creating stunning visualizations that drive decision-making. Deep specialization in mapping technologies, choropleth design, and spatial data visualization with experience serving major brands, organizations, and political candidates. Skilled at turning complex datasets into beautiful, intuitive visual stories that engage audiences and communicate insights effectively.
 
 ## Key Achievements and Impact
 
@@ -129,6 +129,7 @@ Creative Data Visualization & Geospatial Analysis Professional with 21 years of 
 - Conducted statistical modeling and analysis to address multifaceted consumer behavior questions with visual outputs
 - Created data visualization tools for research presentations using `Tableau`, `PowerBI`, and custom web-based dashboards
 - Supported senior researchers with technical analysis and reporting using advanced visualization techniques
+- Trained staff on building `Python` tooling for report generation and analysis
 
 ---
 

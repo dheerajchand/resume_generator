@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Results-driven Marketing & Data Analytics Professional with 21 years of experience translating complex data insights into compelling market strategies and customer narratives. Expert in market intelligence, competitive analysis, and data-driven positioning with proven success leading cross-functional teams and launching B2B SaaS platforms used by thousands of users. Deep expertise in survey methodology, customer segmentation, and go-to-market strategy development.
+Results-driven Marketing & Data Analytics Professional with 15+ years of experience translating complex data insights into compelling market strategies and customer narratives. Expert in market intelligence, competitive analysis, and data-driven positioning with proven success leading cross-functional teams and launching B2B SaaS platforms used by thousands of users. Deep expertise in survey methodology, customer segmentation, and go-to-market strategy development.
 
 ## Key Achievements and Impact
 

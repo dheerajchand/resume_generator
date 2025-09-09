@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Strategic Product & Platform Professional with 21 years of experience conceiving, architecting, and delivering innovative software products and platforms. Expert in product management, technical architecture, and B2B SaaS development with proven success leading cross-functional teams and launching platforms used by thousands of users. Deep expertise in translating complex business requirements into scalable technical solutions, managing product lifecycles, and driving product strategy across political, technology, and consulting sectors. Skilled at building products that solve real-world problems and deliver measurable business value.
+Strategic Product & Platform Professional with 15+ years of experience conceiving, architecting, and delivering innovative software products and platforms. Expert in product management, technical architecture, and B2B SaaS development with proven success leading cross-functional teams and launching platforms used by thousands of users. Deep expertise in translating complex business requirements into scalable technical solutions, managing product lifecycles, and driving product strategy across political, technology, and consulting sectors. Skilled at building products that solve real-world problems and deliver measurable business value.
 
 ## Key Achievements and Impact
 
@@ -111,7 +111,7 @@ Strategic Product & Platform Professional with 21 years of experience conceiving
 
 *Product Development and Survey Platform*
 
-- Engineered FLEEM, a web application using Twilio's API to make thousands of simultaneous phone calls for IV`R` polls
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of calls using emulated predictive dialer for regulated political surveys
 - Used FLEEM for early quantitative research in support of Senators Martin Heinrich and Elizabeth Warren
 - Provided tabular and graphical reporting, with plans for interactive data exploration capabilities
 - Led all aspects of survey design, implementation, data analysis, and reporting for major national studies

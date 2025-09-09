@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Senior Research & Data Analytics Professional with 21 years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams. Deep expertise in survey methodology, consumer insights, voting behavior, and advanced data analysis with experience serving major brands, organizations, and political candidates.
+Senior Research & Data Analytics Professional with 15+ years of experience in applied research, data engineering, and software development. Expert in translating complex analytical requirements into scalable technical solutions with proven track record leading cross-functional teams. Deep expertise in survey methodology, consumer insights, voting behavior, and advanced data analysis with experience serving major brands, organizations, and political candidates.
 
 ## Key Achievements and Impact
 

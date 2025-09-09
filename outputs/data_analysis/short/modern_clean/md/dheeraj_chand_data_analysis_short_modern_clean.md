@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Senior Data Analysis & Analytics Professional with 21 years of expertise in statistical analysis, machine learning, and big data processing. Expert in advanced statistical modeling, predictive analytics, and data visualization with experience serving major brands, organizations, and political candidates. Deep specialization in fraud detection, entity resolution, and pattern analysis across multi-terabyte datasets.
+Senior Data Analysis & Analytics Professional with 15+ years of expertise in statistical analysis, machine learning, and big data processing. Expert in advanced statistical modeling, predictive analytics, and data visualization with experience serving major brands, organizations, and political candidates. Deep specialization in fraud detection, entity resolution, and pattern analysis across multi-terabyte datasets.
 
 ## Key Achievements and Impact
 

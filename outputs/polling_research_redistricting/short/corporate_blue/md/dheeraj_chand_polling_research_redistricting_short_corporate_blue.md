@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Distinguished Polling, Research & Redistricting Professional with 21 years of expertise in survey methodology, consumer insights, voting behavior, and advanced data analysis. Expert in geospatial analysis, demographic segmentation, and consumer behavior modeling with experience serving major brands, organizations, and political candidates. Regular expert testimony and source on public opinion for journalists, with redistricting analysis used in court cases.
+Distinguished Polling, Research & Redistricting Professional with 15+ years of expertise in survey methodology, consumer insights, voting behavior, and advanced data analysis. Expert in geospatial analysis, demographic segmentation, and consumer behavior modeling with experience serving major brands, organizations, and political candidates. Regular expert testimony and source on public opinion for journalists, with redistricting analysis used in court cases.
 
 ## Key Achievements and Impact
 

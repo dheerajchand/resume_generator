@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Results-driven Marketing & Data Analytics Professional with 21 years of experience translating complex data insights into compelling market strategies and customer narratives. Expert in market intelligence, competitive analysis, and data-driven positioning with proven success leading cross-functional teams and launching B2B SaaS platforms used by thousands of users. Deep expertise in survey methodology, customer segmentation, and go-to-market strategy development. Skilled at turning complex technical concepts into clear, actionable messaging that drives customer adoption and business growth across political, technology, and consulting sectors.
+Results-driven Marketing & Data Analytics Professional with 15+ years of experience translating complex data insights into compelling market strategies and customer narratives. Expert in market intelligence, competitive analysis, and data-driven positioning with proven success leading cross-functional teams and launching B2B SaaS platforms used by thousands of users. Deep expertise in survey methodology, customer segmentation, and go-to-market strategy development. Skilled at turning complex technical concepts into clear, actionable messaging that drives customer adoption and business growth across political, technology, and consulting sectors.
 
 ## Key Achievements and Impact
 
@@ -111,7 +111,7 @@ Results-driven Marketing & Data Analytics Professional with 21 years of experien
 
 *Political Marketing and Campaign Strategy*
 
-- Engineered FLEEM web application using Twilio's API to make thousands of simultaneous phone calls for IV`R` polls
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of calls using emulated predictive dialer for regulated political surveys
 - Used FLEEM for early quantitative research in support of Senators Martin Heinrich and Elizabeth Warren
 - Led all aspects of survey design, implementation, data analysis, and reporting for major national studies
 - Developed new statistical methods for boundary estimation techniques, enhancing geographic market segmentation capabilities
@@ -129,6 +129,7 @@ Results-driven Marketing & Data Analytics Professional with 21 years of experien
 - Conducted statistical modeling and analysis to address multifaceted consumer behavior questions
 - Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
 - Developed innovative approaches to visualizing demographic and market data, enhancing clients' understanding of research findings
+- Trained staff on building `Python` tooling for report generation and analysis
 
 ---
 
