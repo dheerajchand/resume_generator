@@ -6,7 +6,7 @@ What began as a simple need to generate a few resumes has evolved into a compreh
 
 - **Multiple Output Formats**: PDF, DOCX, RTF, and Markdown
 - **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Modern Clean, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
-- **6 Resume Categories**: Comprehensive, Polling/Research/Redistricting, Marketing, Data Analysis, Visualization, and Product
+- **7 Resume Categories**: Comprehensive, Polling/Research/Redistricting, Marketing, Data Analysis, Visualization, Product, and Software Engineering
 - **2 Length Variants**: Long (3 pages) and Short (2 pages) for every category
 - **Systematic Design System**: Consistent spacing, typography, and color hierarchy
 - **Font Theme System**: ATS-friendly typography with distinctive variations per theme
@@ -39,7 +39,9 @@ resume_generator/
 │   ├── dheeraj_chand_visualisation/
 │   ├── dheeraj_chand_visualisation_abbreviated/
 │   ├── dheeraj_chand_product/
-│   └── dheeraj_chand_product_abbreviated/
+│   ├── dheeraj_chand_product_abbreviated/
+│   ├── dheeraj_chand_software_engineering/
+│   └── dheeraj_chand_software_engineering_abbreviated/
 ├── outputs/                         # Generated resumes
 ├── color_schemes/                   # Color scheme definitions
 ├── docs/                           # Documentation
