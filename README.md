@@ -6,7 +6,7 @@ What began as a simple need to generate a few resumes has evolved into a compreh
 
 - **Multiple Output Formats**: PDF, DOCX, RTF, and Markdown
 - **8 Professional Color Schemes**: Default Professional, Corporate Blue, Modern Tech, Modern Clean, Satellite Imagery, Terrain Mapping, Cartographic Professional, and Topographic Classic
-- **7 Resume Categories**: Comprehensive, Polling/Research/Redistricting, Marketing, Data Analysis, Visualization, Product, and Software Engineering
+- **8 Resume Categories**: Comprehensive, Polling/Research/Redistricting, Marketing, Data Analysis & Visualization, Data Engineering, Product, Software Engineering, and GIS
 - **2 Length Variants**: Long (3 pages) and Short (2 pages) for every category
 - **Systematic Design System**: Consistent spacing, typography, and color hierarchy
 - **Font Theme System**: ATS-friendly typography with distinctive variations per theme
@@ -34,14 +34,16 @@ resume_generator/
 │   ├── dheeraj_chand_polling_research_redistricting_abbreviated/
 │   ├── dheeraj_chand_marketing/
 │   ├── dheeraj_chand_marketing_abbreviated/
-│   ├── dheeraj_chand_data_analysis/
-│   ├── dheeraj_chand_data_analysis_abbreviated/
-│   ├── dheeraj_chand_visualisation/
-│   ├── dheeraj_chand_visualisation_abbreviated/
+│   ├── dheeraj_chand_data_analysis_visualization/
+│   ├── dheeraj_chand_data_analysis_visualization_abbreviated/
+│   ├── dheeraj_chand_data_engineering/
+│   ├── dheeraj_chand_data_engineering_abbreviated/
 │   ├── dheeraj_chand_product/
 │   ├── dheeraj_chand_product_abbreviated/
 │   ├── dheeraj_chand_software_engineering/
-│   └── dheeraj_chand_software_engineering_abbreviated/
+│   ├── dheeraj_chand_software_engineering_abbreviated/
+│   ├── dheeraj_chand_gis/
+│   └── dheeraj_chand_gis_abbreviated/
 ├── outputs/                         # Generated resumes
 ├── color_schemes/                   # Color scheme definitions
 ├── docs/                           # Documentation
@@ -117,7 +119,7 @@ python manage.py generate_all_resumes --confirm
 ```
 
 This generates all combinations:
-- 6 resume categories × 2 length variants × 8 color schemes × 4 formats = 384 files
+- 8 resume categories × 2 length variants × 8 color schemes × 4 formats = 512 files
 
 #### Generate Specific Resume
 ```bash
@@ -172,14 +174,31 @@ Each color scheme uses a systematic 4-color hierarchy:
 
 ## 📝 Resume Categories
 
-Six different resume categories are available, each with both long (3-page) and short (2-page) versions:
+Eight different resume categories are available, each with both long (3-page) and short (2-page) versions:
 
-1. **Comprehensive** - Complete professional profile with full work history
-2. **Polling/Research/Redistricting** - Survey methodology, expert testimony, redistricting software
-3. **Marketing** - Market intelligence, consumer insights, go-to-market strategy
-4. **Data Analysis** - Statistical analysis, machine learning, big data processing
-5. **Visualization** - Data visualization, geospatial analysis, mapping technologies
-6. **Product** - Product management, platform development, technical architecture
+### 1. [Comprehensive](outputs/comprehensive/) - Complete Professional Profile
+Complete professional profile with full work history spanning 15+ years across research, data engineering, and software development. Includes all major accomplishments, technical skills, and leadership experience.
+
+### 2. [Polling/Research/Redistricting](outputs/polling_research_redistricting/) - Survey Methodology & Redistricting
+Specialized for political polling, market research, and redistricting analysis roles. Highlights survey methodology expertise, expert testimony experience, and redistricting software development including Ballista Redistricting platform.
+
+### 3. [Marketing](outputs/marketing/) - Market Intelligence & Strategy
+Focused on market intelligence, consumer insights, and go-to-market strategy. Emphasizes data-driven marketing decisions, campaign optimization, and revenue generation through marketing analytics.
+
+### 4. [Data Analysis & Visualization](outputs/data_analysis_visualization/) - Statistical Analysis & Data Visualization
+Combines statistical analysis, machine learning, and data visualization expertise. Perfect for data scientist, analyst, and visualization specialist roles requiring both analytical and visual communication skills.
+
+### 5. [Data Engineering](outputs/data_engineering/) - Data Infrastructure & Big Data
+Specialized for data engineering, platform architecture, and big data processing roles. Highlights experience with Apache Spark, Snowflake, AWS, and building scalable data pipelines processing millions of records.
+
+### 6. [Product](outputs/product/) - Product Management & Platform Development
+Focused on product management, platform development, and technical architecture. Emphasizes cross-functional team leadership, product strategy, and technical decision-making experience.
+
+### 7. [Software Engineering](outputs/software_engineering/) - Full-Stack Development
+Highlights software engineering experience including Drupal (versions 4-10), GeoDjango, Flask, and cloud-based applications. Perfect for full-stack developer and software engineer positions.
+
+### 8. [GIS](outputs/gis/) - Geospatial Analysis & Mapping
+Specialized for GIS analyst, cartographer, and geospatial developer roles. Emphasizes ESRI Arc Suite, SAFE Systems, and OSGeo technology stack experience across all career positions.
 
 ### Length Variants
 
@@ -193,21 +212,23 @@ All generated resumes are located in the `outputs/` directory, organized by cate
 ### Directory Structure
 ```
 outputs/
-├── comprehensive/           # Complete professional profile
-│   ├── long/               # 3-page versions
+├── comprehensive/                    # Complete professional profile
+│   ├── long/                        # 3-page versions
 │   │   ├── default_professional/
 │   │   ├── corporate_blue/
 │   │   ├── modern_tech/
 │   │   └── ... (8 color schemes)
-│   └── short/              # 2-page versions
+│   └── short/                       # 2-page versions
 │       ├── default_professional/
 │       ├── corporate_blue/
 │       └── ... (8 color schemes)
 ├── polling_research_redistricting/  # Survey methodology & redistricting
-├── marketing/              # Market intelligence & strategy
-├── data_analysis/          # Statistical analysis & ML
-├── visualisation/          # Data visualization & mapping
-└── product/                # Product management & architecture
+├── marketing/                       # Market intelligence & strategy
+├── data_analysis_visualization/    # Statistical analysis & data visualization
+├── data_engineering/               # Data infrastructure & big data
+├── product/                        # Product management & platform development
+├── software_engineering/           # Full-stack development
+└── gis/                           # Geospatial analysis & mapping
 ```
 
 ### File Naming Convention
@@ -220,12 +241,29 @@ Each resume follows this naming pattern:
 - `dheeraj_chand_marketing_long_modern_tech.md`
 
 ### Quick Access
-- **Most Popular**: `outputs/comprehensive/long/default_professional/`
-- **ATS-Friendly**: `outputs/comprehensive/short/corporate_blue/`
-- **Tech Roles**: `outputs/data_analysis/long/modern_tech/`
-- **Research Roles**: `outputs/polling_research_redistricting/long/default_professional/`
-- **Marketing Roles**: `outputs/marketing/long/corporate_blue/`
-- **Product Roles**: `outputs/product/long/modern_clean/`
+
+#### Most Popular Formats
+- **[Comprehensive Long](outputs/comprehensive/long/default_professional/)** - Complete 3-page professional profile
+- **[Comprehensive Short](outputs/comprehensive/short/corporate_blue/)** - ATS-friendly 2-page version
+- **[Data Analysis & Visualization Long](outputs/data_analysis_visualization/long/modern_tech/)** - Statistical analysis & visualization expertise
+- **[Data Engineering Long](outputs/data_engineering/long/modern_tech/)** - Big data & infrastructure focus
+
+#### Role-Specific Resumes
+- **[Research & Polling](outputs/polling_research_redistricting/long/default_professional/)** - Survey methodology & redistricting
+- **[Marketing & Strategy](outputs/marketing/long/corporate_blue/)** - Market intelligence & consumer insights
+- **[Product Management](outputs/product/long/modern_clean/)** - Product strategy & platform development
+- **[Software Engineering](outputs/software_engineering/long/modern_tech/)** - Full-stack development & Drupal expertise
+- **[GIS & Mapping](outputs/gis/long/cartographic_professional/)** - Geospatial analysis & ESRI/OSGeo stack
+
+#### All Categories
+- [Comprehensive](outputs/comprehensive/) - Complete professional profile
+- [Polling/Research/Redistricting](outputs/polling_research_redistricting/) - Survey methodology & redistricting
+- [Marketing](outputs/marketing/) - Market intelligence & strategy
+- [Data Analysis & Visualization](outputs/data_analysis_visualization/) - Statistical analysis & data visualization
+- [Data Engineering](outputs/data_engineering/) - Data infrastructure & big data
+- [Product](outputs/product/) - Product management & platform development
+- [Software Engineering](outputs/software_engineering/) - Full-stack development
+- [GIS](outputs/gis/) - Geospatial analysis & mapping
 
 ## 🌟 What Makes These Resumes Special
 
@@ -296,7 +334,7 @@ python manage.py test resumes.tests.test_core_services
 
 - **Generation Speed**: ~2-3 seconds per resume
 - **Memory Usage**: ~50MB for full generation
-- **Total Generated Files**: 384 files (6 categories × 2 lengths × 4 formats × 8 color schemes)
+- **Total Generated Files**: 512 files (8 categories × 2 lengths × 4 formats × 8 color schemes)
 - **File Sizes**: 
   - PDF: ~12KB (optimized for all services)
   - DOCX: ~39KB (excellent compatibility)
