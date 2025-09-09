@@ -51,23 +51,23 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 
 *Data, Technology and Strategy Consulting*
 
-- Conduct comprehensive quantitative and qualitative research studies using `Python`, `R`, `SPSS`, and `Stata` for political candidates and organizations
-- Architect cloud-based data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics
-- Design scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
-- Develop custom analytical tools and algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering
-- Manage complex client relationships across political, nonprofit, and technology sectors using `Django`/Geo`Django` web applications
-- Lead technical architecture decisions for data-intensive applications using `Docker`, `Git`, and modern DevOps practices
+- Lead comprehensive polling and research studies for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in strategic spending decisions
+- Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing millions of records with millions of columns for electoral analytics and demographic analysis
+- Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
+- Develop advanced analytical tools and machine learning algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering
+- Manage strategic client relationships across political, nonprofit, and technology sectors using `Django`/Geo`Django` web applications
+- Drive technical architecture decisions for data-intensive applications using `Docker`, `Git`, and modern DevOps practices
 
 ### DATA PRODUCTS MANAGER
 **Helm/Murmuration, Washington, DC | June 2021 – May 2023**
 
 *Data Platform Development and Team Leadership*
 
-- Conceived and developed framework using `Python`, `Pandas`, and Postgre`SQL` to clean, validate, and normalize government data from Census, BLS, and NCES
-- Built multi-tenant data warehouse and data lake using Snowflake, dbt, and `AWS` for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions
-- Trained analytical and engineering staff on open source geospatial technology (`QGIS`, `G`R`ASS`, `OSGeo`) for analysis, segmentation, and visualization using `Tableau` and `PowerBI`
-- Wrote five-year strategic plans for developing data warehouse using `Scala`, Py`Spark`, and Apache `Spark` that became basis of company's distinguishing products
-- Managed teams of seven to eleven engineers, designers, analysts, and external stakeholders using Agile methodologies and modern DevOps practices
+- Conceived and developed comprehensive data framework using `Python`, `Pandas`, and Postgre`SQL` to clean, validate, and normalize government data from Census, BLS, and NCES
+- Architected and built multi-tenant data warehouse and data lake using Snowflake, dbt, and `AWS` processing millions of records with millions of columns for longitudinal analysis across attitudinal, behavioral, demographic, economic and geographical dimensions
+- Led training initiatives for analytical and engineering staff on open source geospatial technology (`QGIS`, `G`R`ASS`, `OSGeo`) for analysis, segmentation, and visualization using `Tableau` and `PowerBI`
+- Developed five-year strategic plans for data warehouse architecture using `Scala`, Py`Spark`, and Apache `Spark` that became foundation of company's distinguishing products
+- Led cross-functional teams of seven to eleven engineers, designers, analysts, and external stakeholders using Agile methodologies and modern DevOps practices
 
 ### SOFTWARE ENGINEER
 **Mautinoa Technologies, Washington, DC | August 2016 – February 2018**
@@ -87,17 +87,18 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 - Developed `R`ACSO, a web application for pollsters to fully administer research including questionnaire creation, versioning, and reporting
 - Wrote `R`FP and analyzed bids from 1,200 vendors before selecting implementation partner
 - Built prototype in `R` for comprehensive polling administration and sample file management
-- Provided strategic counsel to Democratic campaigns, political actors, and NGOs through quantitative and qualitative research
+- Provided strategic counsel to Democratic campaigns, political actors, and NGOs through quantitative and qualitative research affecting millions of dollars in campaign spending decisions
 
 ### RESEARCH DIRECTOR
 **Progressive Change Campaign Committee, Washington, DC | August 2011 – August 2012**
 
 *Political Research and Data Analysis*
 
-- Managed critical research operations for political campaigns
-- Conducted comprehensive polling and demographic analysis
-- Developed strategic recommendations based on data analysis
-- Led research team in support of progressive political initiatives
+- Conceived, architected, and engineered FLEEM web application using Twilio API for thousands of simultaneous phone calls
+- Developed IV`R` polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
+- Built tabular and graphical reporting system with `Python`, Geo`Django`, PostGIS, and Apache webserver
+- Designed survey deployment system facilitating thousands of simultaneous phone surveys, saving PAC nearly $1 million annually in polling costs
+- Managed comprehensive research operations for progressive political initiatives and candidates
 
 ### SOFTWARE ENGINEER
 **Salsa Labs, Inc., Washington, DC | January 2011 – August 2011**
@@ -122,22 +123,26 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 ### PROGRAMMER
 **Lake Research Partners, Washington, DC | April 2008 – December 2008**
 
-*Political Research and Data Analysis*
+*Political Polling, Focus Groups and Demographic Analysis for Democratic Campaigns*
 
-- Developed data analysis tools for political polling and research
-- Built statistical models for voter behavior analysis
-- Created data visualization tools for research presentations
-- Supported senior researchers with technical analysis and reporting
+- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party
+- Developed system that later became the Polling Consortium Database at The Analyst Institute
+- Worked on all aspects of questionnaire design, sampling, reporting and analysis for Congressional, Senate and Presidential elections affecting millions of dollars in campaign spending decisions
+- Conducted statistical modeling and analysis using `SPSS`, `ArcGIS`, Quantum GIS, `G`R`ASS`, `Stata`, OSCA`R`, Postgre`SQL`, PostGIS, and `Oracle`
+- Pioneered integration of advanced mapping techniques into standard reports including choropleths and hexagonal grid maps
+- Developed innovative approaches to visualizing demographic and market data for enhanced client understanding
 
 ### FIELD DIRECTOR
 **The Feldman Group, Washington, DC | August 2007 – April 2008**
 
-*Political Field Operations and Data Management*
+*Political Polling, Focus Groups and Demographic Analysis for Democratic Campaigns*
 
-- Managed field operations for political campaigns and research projects
-- Developed data collection and management systems for field work
-- Trained field staff on data collection protocols and quality control
-- Analyzed field data to inform campaign strategy and research findings
+- Administered all quantitative and qualitative research operations for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in spending decisions
+- Managed team of 6 research analysts and field staff for comprehensive survey fielding at multi-million dollar research firm
+- Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
+- Created custom reports and data visualizations based on specific client requirements
+- Introduced mapping and geospatial analysis into standard reporting procedures
+- Enhanced value of research deliverables through advanced analytical techniques using `SPSS`, OSCA`R`, `PHP`, and My`SQL`
 
 ---
 

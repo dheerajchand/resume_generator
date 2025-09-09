@@ -149,7 +149,7 @@ class ResumeGenerator:
                 parent=styles["Normal"],
                 fontSize=get_font_size('job_title'),
                 textColor=HexColor(colors.get("JOB_TITLE_COLOR", "#666666")),  # Muted color
-                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_MINIMAL,   # Minimal spacing - identical to company-to-tagline distance
+                spaceAfter=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,   # Small spacing - increased gap between job title and subtitle
                 spaceBefore=get_spacing_constant('base') * SPACE_MULTIPLIER_SMALL,  # Small spacing
                 fontName=get_font('accent'),
             ),

@@ -184,6 +184,70 @@ Six different resume categories are available, each with both long (3-page) and 
 - **Long Versions (3 pages)**: Complete work history with detailed accomplishments, all key achievements and competencies, comprehensive job descriptions
 - **Short Versions (2 pages)**: Focused on key achievements and recent experience, condensed job descriptions, streamlined competencies
 
+## 📁 Finding Your Resumes
+
+All generated resumes are located in the `outputs/` directory, organized by category and color scheme:
+
+### Directory Structure
+```
+outputs/
+├── comprehensive/           # Complete professional profile
+│   ├── long/               # 3-page versions
+│   │   ├── default_professional/
+│   │   ├── corporate_blue/
+│   │   ├── modern_tech/
+│   │   └── ... (8 color schemes)
+│   └── short/              # 2-page versions
+│       ├── default_professional/
+│       ├── corporate_blue/
+│       └── ... (8 color schemes)
+├── polling_research_redistricting/  # Survey methodology & redistricting
+├── marketing/              # Market intelligence & strategy
+├── data_analysis/          # Statistical analysis & ML
+├── visualisation/          # Data visualization & mapping
+└── product/                # Product management & architecture
+```
+
+### File Naming Convention
+Each resume follows this naming pattern:
+`dheeraj_chand_[category]_[length]_[color_scheme].[format]`
+
+**Examples:**
+- `dheeraj_chand_comprehensive_long_default_professional.pdf`
+- `dheeraj_chand_polling_research_redistricting_short_corporate_blue.docx`
+- `dheeraj_chand_marketing_long_modern_tech.md`
+
+### Quick Access
+- **Most Popular**: `outputs/comprehensive/long/default_professional/`
+- **ATS-Friendly**: `outputs/comprehensive/short/corporate_blue/`
+- **Tech Roles**: `outputs/data_analysis/long/modern_tech/`
+- **Research Roles**: `outputs/polling_research_redistricting/long/default_professional/`
+- **Marketing Roles**: `outputs/marketing/long/corporate_blue/`
+- **Product Roles**: `outputs/product/long/modern_clean/`
+
+## 🌟 What Makes These Resumes Special
+
+### Professional Impact
+- **Presidential Campaign Experience**: Polling for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in spending decisions
+- **Massive Data Scale**: Built data warehouses processing millions of records with millions of columns for electoral analytics
+- **Cost Savings**: Engineered FLEEM system saving PAC nearly $1 million annually in polling costs
+- **Expert Testimony**: Regular source on public opinion for journalists, elected officials, and NGO leadership
+- **Court Cases**: Redistricting analysis used in court cases with rigorous methodology
+
+### Technical Excellence
+- **Space-Efficient Design**: Optimized layout maximizing content while maintaining readability
+- **ATS-Friendly Format**: Clean structure that passes Applicant Tracking Systems
+- **Systematic Spacing**: Perfectly consistent spacing throughout all documents
+- **Professional Typography**: ATS-friendly fonts with strategic visual hierarchy
+- **Multiple Formats**: PDF, DOCX, RTF, and Markdown for any application system
+
+### Content Highlights
+- **21 Years Experience**: Comprehensive career spanning research, data engineering, and software development
+- **Team Leadership**: Managed teams of 6-11 engineers, designers, and analysts
+- **Platform Development**: Created redistricting software used by thousands of analysts nationwide
+- **Democratic Party Impact**: Built first collaborative poll of polls used by the Democratic Party
+- **Revenue Generation**: Delivered $4.9M additional revenue through marketing optimization
+
 ## 🔧 Configuration
 
 ### Environment Variables
