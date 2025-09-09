@@ -28,9 +28,33 @@ Creative Data Visualization & Geospatial Analysis Professional with 21 years of 
 
 ## Core Competencies
 
-**Data Visualization & Design**: **Interactive Dashboards**: *`Tableau`, `PowerBI`, `d3.js`, Custom Web Applications* • **Statistical Visualization**: *`Seaborn`, `Matplotlib`, Plotly, Bokeh* • **Geospatial Mapping**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleth Design**: *`Demographic Mapping`, `Hexagonal Grid Maps`* • **Web Visualization**: *`React`, `d3.js`, `OpenLayers`, Leaflet, MapBox* • **Presentation Design**: *`PowerPoint`, `Executive Briefings`, `Client Presentations`* • **Data Storytelling**: *`Narrative Development`, Visual Communication*
-**Geospatial Analysis & Mapping**: **Spatial Analysis**: *`Clustering`, `Boundary Estimation`, `Demographic Mapping`* • **Mapping Technologies**: *`ESRI ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`* • **Web Mapping**: *`OpenLayers`, Leaflet, MapBox, `Tile Servers`, WMS/WFS* • **Spatial Data Processing**: *PostGIS, `Oracle Spatial`, GeoTools* • **Census Data Integration**: *`Demographic Visualization`, `Geographic Analysis`* • **Custom Tile Servers**: *WMS Implementation, `Performance Optimization`* • **Spatial Clustering**: *`Advanced Algorithms`, `Pattern Recognition`*
-**Technical Visualization**: **Programming**: *`Python (Pandas`, `GeoPandas)`, `R`, `JavaScript`, `PHP`* • **Database Integration**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`* • **Cloud Platforms**: *`AWS`, `Google Cloud Platform`, `Microsoft Azure`* • **Web Technologies**: *`Django/GeoDjango`, `Flask`, `React`, `jQuery`* • **Statistical Computing**: *`R`, `SPSS`, `SAS`, `Stata for Data Analysis`* • **Version Control**: *`Git`, `GitHub`, `BitBucket for Collaborative Development`* • **DevOps**: *`Docker`, CI/CD Pipelines, Automated Deployment*
+• **Data Visualization & Design**
+• **Geospatial Analysis & Mapping**
+• **Technical Visualization**
+
+## Technical Skills
+
+• **Interactive Dashboards**
+• **Statistical Visualization**
+• **Geospatial Mapping**
+• **Choropleth Design**
+• **Web Visualization**
+• **Presentation Design**
+• **Data Storytelling**
+• **Spatial Analysis**
+• **Mapping Technologies**
+• **Web Mapping**
+• **Spatial Data Processing**
+• **Census Data Integration**
+• **Custom Tile Servers**
+• **Spatial Clustering**
+• **Programming**
+• **Database Integration**
+• **Cloud Platforms**
+• **Web Technologies**
+• **Statistical Computing**
+• **Version Control**
+• **DevOps**
 
 ## Professional Experience
 

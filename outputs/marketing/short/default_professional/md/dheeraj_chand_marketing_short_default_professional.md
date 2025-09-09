@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Product Marketing Core**: **Market Intelligence & Competitive Analysis** • **Product Positioning & Messaging Development** • **Go-to-Market Strategy & Product Launch Management** • **Customer Segmentation & Buyer Persona Development**
-**Research & Analytics**: **Survey Methodology & Customer Insights** • **Market Research Design & Implementation** • **Competitive Intelligence & SWOT Analysis** • **A/B Testing & Conversion Optimization**
-**Communication & Technology**: **Strategic Messaging & Narrative Development** • **Technical Concept Translation for Business Audiences** • **Data Visualization & Reporting (Tableau, PowerBI, d3.js)** • **Client Relationship Management & Business Development**
+• **Product Marketing Core**
+• **Research & Analytics**
+• **Communication & Technology**
+
+## Technical Skills
+
+• **Market Intelligence & Competitive Analysis**
+• **Product Positioning & Messaging Development**
+• **Go-to-Market Strategy & Product Launch Management**
+• **Customer Segmentation & Buyer Persona Development**
+• **Survey Methodology & Customer Insights**
+• **Market Research Design & Implementation**
+• **Competitive Intelligence & SWOT Analysis**
+• **A/B Testing & Conversion Optimization**
+• **Strategic Messaging & Narrative Development**
+• **Technical Concept Translation for Business Audiences**
+• **Data Visualization & Reporting (Tableau, PowerBI, d3.js)**
+• **Client Relationship Management & Business Development**
 
 ## Professional Experience
 

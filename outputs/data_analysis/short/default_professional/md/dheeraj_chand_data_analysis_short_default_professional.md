@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Statistical Analysis & Machine Learning**: **Advanced Statistical Modeling**: *`Regression`, `Clustering`, Segmentation, `Machine Learning`* • **Predictive Analytics**: *`Time Series Analysis`, `Forecasting`, `Risk Modeling`* • **Data Mining**: *`Pattern Recognition`, Anomaly Detection, `Entity Resolution`* • **Machine Learning**: *`SciKit-Learn`, `TensorFlow`, `PySpark`, `Spark MLlib`*
-**Big Data & Data Engineering**: **Big Data Processing**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Data Warehousing**: *`Multi-tenant Architecture`, ETL/ELT Pipelines* • **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Data Pipeline Optimization**: *`Performance Tuning`, `Scalability`, `Monitoring`*
-**Data Visualization & Reporting**: **Data Visualization**: *`Tableau`, `PowerBI`, `Seaborn`, `Matplotlib`, `d3.js`* • **Geospatial Analysis**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Interactive Dashboards**: *`Real-time Analytics`, `Custom Reporting`* • **Business Intelligence**: *KPI Development, `Performance Metrics`*
+• **Statistical Analysis & Machine Learning**
+• **Big Data & Data Engineering**
+• **Data Visualization & Reporting**
+
+## Technical Skills
+
+• **Advanced Statistical Modeling**
+• **Predictive Analytics**
+• **Data Mining**
+• **Machine Learning**
+• **Big Data Processing**
+• **Data Warehousing**
+• **Cloud Platforms**
+• **Data Pipeline Optimization**
+• **Data Visualization**
+• **Geospatial Analysis**
+• **Interactive Dashboards**
+• **Business Intelligence**
 
 ## Professional Experience
 

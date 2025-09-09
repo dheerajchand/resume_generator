@@ -34,9 +34,27 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 ## Core Competencies
 
-**Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, `longitudinal analysis`* • **Statistical Analysis**: *`Regression modeling`, `clustering`, segmentation, `machine learning`* • **Geospatial Analysis**: *`Spatial clustering`, `boundary estimation`, `demographic mapping`* • **Data Visualization**: *`Tableau`, `PowerBI`, `d3.js`, `Matplotlib`, `Seaborn`, `choropleth mapping`* • **Research Management**: *`Team leadership`, methodology design, `stakeholder communication`*
-**Programming and Development**: **Python**: *`Django/GeoDjango`, `Flask`, `Pandas`, `PySpark`, `SciKit-Learn`, `TensorFlow`* • **JVM Languages**: *`Scala (Spark)`, `Java`, `Groovy`* • **Web Technologies**: *`JavaScript`, `React`, `d3.js`, `PHP`, `HTML/CSS`* • **Database Languages**: *`SQL`, `T-SQL`, `PostgreSQL/PostGIS`* • **Statistical Computing**: *`R`, `SPSS`, `SAS`, `Stata`*
-**Data Infrastructure**: **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Big Data**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Databases**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`, `Neo4j`* • **Geospatial**: *`ESRI ArcGIS`, Quantum GIS, `GeoServer`, `OSGeo`, `GRASS`* • **DevOps**: *`Docker`, `Git`, CI/CD pipelines, automated testing, `version control`*
+• **Research and Analytics**
+• **Programming and Development**
+• **Data Infrastructure**
+
+## Technical Skills
+
+• **Survey Methodology**
+• **Statistical Analysis**
+• **Geospatial Analysis**
+• **Data Visualization**
+• **Research Management**
+• **Python**
+• **JVM Languages**
+• **Web Technologies**
+• **Database Languages**
+• **Statistical Computing**
+• **Cloud Platforms**
+• **Big Data**
+• **Databases**
+• **Geospatial**
+• **DevOps**
 
 ## Professional Experience
 
@@ -88,50 +106,59 @@ Research & Data Professional with 21 years of experience in applied research, da
 
 *Political Research and Data Analysis*
 
-- Managed critical research operations for political campaigns
-- Conducted comprehensive polling and demographic analysis
-- Developed strategic recommendations based on data analysis
-- Led research team in support of progressive political initiatives
+- Conceived, architected, and engineered FLEEM web application using Twilio API for thousands of simultaneous phone calls
+- Developed IV`R` polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
+- Built tabular and graphical reporting system with `Python`, Geo`Django`, PostGIS, and Apache webserver
+- Designed survey deployment system facilitating thousands of simultaneous phone surveys
+- Significantly increased data collection efficiency through automated calling infrastructure
+- Managed comprehensive research operations for progressive political initiatives and candidates
 
 ### SOFTWARE ENGINEER
 **Salsa Labs, Inc., Washington, DC | January 2011 – August 2011**
 
 *Political Technology Development*
 
-- Developed software solutions for political campaigns and advocacy groups
-- Built web applications for voter engagement and campaign management
-- Integrated third-party APIs and data sources for campaign tools
-- Collaborated with political strategists to translate requirements into technical solutions
+- Maintained and extended entire geospatial analysis and reporting tools for `Java`-based C`R`M system
+- Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers
+- Built geospatial analysis capabilities using `Java`, ``Java`Script`, My`SQL`, and TileMill
+- Integrated mapping and visualization tools for political campaign data analysis
+- Collaborated with political strategists to translate geospatial requirements into technical solutions
 
 ### INTERIM TECHNOLOGY MANAGER
 **The Praxis Project, Oakland, CA | April 2009 – October 2009**
 
 *Nonprofit Technology Integration*
 
-- Integrated technology solutions within organizational frameworks for social justice organizations
-- Developed data management systems for community organizing efforts
-- Provided technical training and support to nonprofit staff
-- Built custom applications for community engagement and advocacy
+- Assisted in search for full-time CTO while performing all programmatic technology roles for multi-million dollar organization
+- Made all technology decisions and practices for massive multinational non-governmental organization
+- Wrote comprehensive frameworks for internal and external technology audits
+- Trained beneficiaries on spatial and Census data analysis for public health research
+- Trained NGO staff in web development using Drupal, `PHP`, and My`SQL`
+- Managed technology infrastructure supporting community health initiatives across multiple countries
 
 ### PROGRAMMER
 **Lake Research Partners, Washington, DC | April 2008 – December 2008**
 
 *Political Research and Data Analysis*
 
-- Developed data analysis tools for political polling and research
-- Built statistical models for voter behavior analysis
-- Created data visualization tools for research presentations
-- Supported senior researchers with technical analysis and reporting
+- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party
+- Developed system that later became the Polling Consortium Database at The Analyst Institute
+- Worked on all aspects of questionnaire design, sampling, reporting and analysis for Congressional, Senate and Presidential elections
+- Conducted statistical modeling and analysis using `SPSS`, `ArcGIS`, Quantum GIS, `G`R`ASS`, `Stata`, OSCA`R`, Postgre`SQL`, PostGIS, and `Oracle`
+- Pioneered integration of advanced mapping techniques into standard reports including choropleths and hexagonal grid maps
+- Developed innovative approaches to visualizing demographic and market data for enhanced client understanding
 
 ### FIELD DIRECTOR
 **The Feldman Group, Washington, DC | August 2007 – April 2008**
 
 *Political Field Operations and Data Management*
 
-- Managed field operations for political campaigns and research projects
-- Developed data collection and management systems for field work
-- Trained field staff on data collection protocols and quality control
-- Analyzed field data to inform campaign strategy and research findings
+- Administered all quantitative and qualitative research operations ensuring reporting accuracy
+- Managed comprehensive survey fielding for multi-million dollar research firm
+- Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
+- Created custom reports and data visualizations based on specific client requirements
+- Introduced mapping and geospatial analysis into standard reporting procedures
+- Enhanced value of research deliverables through advanced analytical techniques using `SPSS`, OSCA`R`, `PHP`, and My`SQL`
 
 ---
 

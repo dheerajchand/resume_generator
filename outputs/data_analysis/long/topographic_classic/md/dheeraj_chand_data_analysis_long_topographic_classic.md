@@ -28,9 +28,33 @@ Senior Data Analysis & Analytics Professional with 21 years of expertise in stat
 
 ## Core Competencies
 
-**Statistical Analysis & Machine Learning**: **Advanced Statistical Modeling**: *`Regression`, `Clustering`, Segmentation, `Machine Learning`* • **Predictive Analytics**: *`Time Series Analysis`, `Forecasting`, `Risk Modeling`* • **Data Mining**: *`Pattern Recognition`, Anomaly Detection, `Entity Resolution`* • **Machine Learning**: *`SciKit-Learn`, `TensorFlow`, `PySpark`, `Spark MLlib`* • **Statistical Computing**: *`R`, `Python (Pandas`, `NumPy)`, `SPSS`, `SAS`, `Stata`* • **A/B Testing**: *`Experimental Design`, Statistical Significance Testing* • **Meta-analytical Techniques**: *Dimensional Analysis, `Ambiguity Resolution`*
-**Big Data & Data Engineering**: **Big Data Processing**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Data Warehousing**: *`Multi-tenant Architecture`, ETL/ELT Pipelines* • **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Databases**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`, `Neo4j`* • **Data Governance**: *`Quality Control`, `Privacy Compliance`, `Security`* • **Streaming Data**: *`Real-time Processing`, `Kafka Integration`, `Event-driven Architectures`* • **Data Pipeline Optimization**: *`Performance Tuning`, `Scalability`, `Monitoring`*
-**Data Visualization & Reporting**: **Data Visualization**: *`Tableau`, `PowerBI`, `Seaborn`, `Matplotlib`, `d3.js`* • **Geospatial Analysis**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Interactive Dashboards**: *`Real-time Analytics`, `Custom Reporting`* • **Statistical Reporting**: *`Automated Report Generation`, `Data Storytelling`* • **Choropleths and Hexagonal Grid Maps for Demographic Visualization** • **Business Intelligence**: *KPI Development, `Performance Metrics`* • **Client Presentation**: *`Executive Briefings`, Technical Documentation*
+• **Statistical Analysis & Machine Learning**
+• **Big Data & Data Engineering**
+• **Data Visualization & Reporting**
+
+## Technical Skills
+
+• **Advanced Statistical Modeling**
+• **Predictive Analytics**
+• **Data Mining**
+• **Machine Learning**
+• **Statistical Computing**
+• **A/B Testing**
+• **Meta-analytical Techniques**
+• **Big Data Processing**
+• **Data Warehousing**
+• **Cloud Platforms**
+• **Databases**
+• **Data Governance**
+• **Streaming Data**
+• **Data Pipeline Optimization**
+• **Data Visualization**
+• **Geospatial Analysis**
+• **Interactive Dashboards**
+• **Statistical Reporting**
+• **Choropleths and Hexagonal Grid Maps for Demographic Visualization**
+• **Business Intelligence**
+• **Client Presentation**
 
 ## Professional Experience
 

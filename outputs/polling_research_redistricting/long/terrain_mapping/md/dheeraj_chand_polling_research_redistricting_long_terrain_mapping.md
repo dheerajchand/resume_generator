@@ -16,9 +16,33 @@ Distinguished Polling, Research & Redistricting Professional with 21 years of ex
 
 ## Core Competencies
 
-**Survey Methodology & Research Design**: **Survey Design and Questionnaire Development for Political and Market Research** • **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)** • **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling** • **Focus Groups and Qualitative Research Methodologies** • **Meta-analytical Dataset Development for Longitudinal Analysis** • **Survey Instrument Standardization and Call Methods Optimization** • **Expert Testimony and Consultation on Research Methodology**
-**Redistricting & Geospatial Analysis**: **Redistricting Software Development and Boundary Estimation Systems** • **Geospatial Analysis**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleths and Hexagonal Grid Maps for Demographic Visualization** • **Spatial Clustering and Boundary Estimation without ML Requirements** • **Census Data Integration and Demographic Mapping** • **Court Case Analysis and Expert Testimony for Redistricting** • **Multi-tenant Data Warehouse Design for Electoral Analytics**
-**Data Analysis & Visualization**: **Advanced Statistical Modeling and Analysis (Regression, Clustering, Segmentation)** • **Data Visualization**: *`Tableau`, `PowerBI`, `Seaborn`, `Matplotlib`, `d3.js`* • **Consumer Behavior Analysis and Market Segmentation** • **Machine Learning and Predictive Modeling for Targeting** • **Big Data Analytics**: *`Spark/PySpark`, `Hadoop`, Snowflake, dbt* • **Fraud Detection and Entity Resolution Systems** • **Multi-million Dollar Research Project Management**
+• **Survey Methodology & Research Design**
+• **Redistricting & Geospatial Analysis**
+• **Data Analysis & Visualization**
+
+## Technical Skills
+
+• **Survey Design and Questionnaire Development for Political and Market Research**
+• **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)**
+• **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling**
+• **Focus Groups and Qualitative Research Methodologies**
+• **Meta-analytical Dataset Development for Longitudinal Analysis**
+• **Survey Instrument Standardization and Call Methods Optimization**
+• **Expert Testimony and Consultation on Research Methodology**
+• **Redistricting Software Development and Boundary Estimation Systems**
+• **Geospatial Analysis**
+• **Choropleths and Hexagonal Grid Maps for Demographic Visualization**
+• **Spatial Clustering and Boundary Estimation without ML Requirements**
+• **Census Data Integration and Demographic Mapping**
+• **Court Case Analysis and Expert Testimony for Redistricting**
+• **Multi-tenant Data Warehouse Design for Electoral Analytics**
+• **Advanced Statistical Modeling and Analysis (Regression, Clustering, Segmentation)**
+• **Data Visualization**
+• **Consumer Behavior Analysis and Market Segmentation**
+• **Machine Learning and Predictive Modeling for Targeting**
+• **Big Data Analytics**
+• **Fraud Detection and Entity Resolution Systems**
+• **Multi-million Dollar Research Project Management**
 
 ## Professional Experience
 

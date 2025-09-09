@@ -97,10 +97,12 @@
       "dates": "August 2011 – August 2012",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
-        "Managed critical research operations for political campaigns",
-        "Conducted comprehensive polling and demographic analysis",
-        "Developed strategic recommendations based on data analysis",
-        "Led research team in support of progressive political initiatives"
+        "Conceived, architected, and engineered FLEEM web application using Twilio API for thousands of simultaneous phone calls",
+        "Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren",
+        "Built tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver",
+        "Designed survey deployment system facilitating thousands of simultaneous phone surveys",
+        "Significantly increased data collection efficiency through automated calling infrastructure",
+        "Managed comprehensive research operations for progressive political initiatives and candidates"
       ]
     },
     {
@@ -109,10 +111,11 @@
       "dates": "January 2011 – August 2011",
       "subtitle": "Political Technology Development",
       "responsibilities": [
-        "Developed software solutions for political campaigns and advocacy groups",
-        "Built web applications for voter engagement and campaign management",
-        "Integrated third-party APIs and data sources for campaign tools",
-        "Collaborated with political strategists to translate requirements into technical solutions"
+        "Maintained and extended entire geospatial analysis and reporting tools for Java-based CRM system",
+        "Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers",
+        "Built geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill",
+        "Integrated mapping and visualization tools for political campaign data analysis",
+        "Collaborated with political strategists to translate geospatial requirements into technical solutions"
       ]
     },
     {
@@ -121,10 +124,12 @@
       "dates": "April 2009 – October 2009",
       "subtitle": "Nonprofit Technology Integration",
       "responsibilities": [
-        "Integrated technology solutions within organizational frameworks for social justice organizations",
-        "Developed data management systems for community organizing efforts",
-        "Provided technical training and support to nonprofit staff",
-        "Built custom applications for community engagement and advocacy"
+        "Assisted in search for full-time CTO while performing all programmatic technology roles for multi-million dollar organization",
+        "Made all technology decisions and practices for massive multinational non-governmental organization",
+        "Wrote comprehensive frameworks for internal and external technology audits",
+        "Trained beneficiaries on spatial and Census data analysis for public health research",
+        "Trained NGO staff in web development using Drupal, PHP, and MySQL",
+        "Managed technology infrastructure supporting community health initiatives across multiple countries"
       ]
     },
     {
@@ -133,10 +138,12 @@
       "dates": "April 2008 – December 2008",
       "subtitle": "Political Research and Data Analysis",
       "responsibilities": [
-        "Developed data analysis tools for political polling and research",
-        "Built statistical models for voter behavior analysis",
-        "Created data visualization tools for research presentations",
-        "Supported senior researchers with technical analysis and reporting"
+        "Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party",
+        "Developed system that later became the Polling Consortium Database at The Analyst Institute",
+        "Worked on all aspects of questionnaire design, sampling, reporting and analysis for Congressional, Senate and Presidential elections",
+        "Conducted statistical modeling and analysis using SPSS, ArcGIS, Quantum GIS, GRASS, Stata, OSCAR, PostgreSQL, PostGIS, and Oracle",
+        "Pioneered integration of advanced mapping techniques into standard reports including choropleths and hexagonal grid maps",
+        "Developed innovative approaches to visualizing demographic and market data for enhanced client understanding"
       ]
     },
     {
@@ -145,10 +152,12 @@
       "dates": "August 2007 – April 2008",
       "subtitle": "Political Field Operations and Data Management",
       "responsibilities": [
-        "Managed field operations for political campaigns and research projects",
-        "Developed data collection and management systems for field work",
-        "Trained field staff on data collection protocols and quality control",
-        "Analyzed field data to inform campaign strategy and research findings"
+        "Administered all quantitative and qualitative research operations ensuring reporting accuracy",
+        "Managed comprehensive survey fielding for multi-million dollar research firm",
+        "Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings",
+        "Created custom reports and data visualizations based on specific client requirements",
+        "Introduced mapping and geospatial analysis into standard reporting procedures",
+        "Enhanced value of research deliverables through advanced analytical techniques using SPSS, OSCAR, PHP, and MySQL"
       ]
     }
   ],

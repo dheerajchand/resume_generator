@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Data Visualization & Design**: **Interactive Dashboards**: *`Tableau`, `PowerBI`, `d3.js`, Custom Web Applications* • **Statistical Visualization**: *`Seaborn`, `Matplotlib`, Plotly, Bokeh* • **Geospatial Mapping**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleth Design**: *`Demographic Mapping`, `Hexagonal Grid Maps`*
-**Geospatial Analysis & Mapping**: **Spatial Analysis**: *`Clustering`, `Boundary Estimation`, `Demographic Mapping`* • **Mapping Technologies**: *`ESRI ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`* • **Web Mapping**: *`OpenLayers`, Leaflet, MapBox, `Tile Servers`, WMS/WFS* • **Spatial Data Processing**: *PostGIS, `Oracle Spatial`, GeoTools*
-**Technical Visualization**: **Programming**: *`Python (Pandas`, `GeoPandas)`, `R`, `JavaScript`, `PHP`* • **Database Integration**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`* • **Web Technologies**: *`Django/GeoDjango`, `Flask`, `React`, `jQuery`* • **Statistical Computing**: *`R`, `SPSS`, `SAS`, `Stata for Data Analysis`*
+• **Data Visualization & Design**
+• **Geospatial Analysis & Mapping**
+• **Technical Visualization**
+
+## Technical Skills
+
+• **Interactive Dashboards**
+• **Statistical Visualization**
+• **Geospatial Mapping**
+• **Choropleth Design**
+• **Spatial Analysis**
+• **Mapping Technologies**
+• **Web Mapping**
+• **Spatial Data Processing**
+• **Programming**
+• **Database Integration**
+• **Web Technologies**
+• **Statistical Computing**
 
 ## Professional Experience
 

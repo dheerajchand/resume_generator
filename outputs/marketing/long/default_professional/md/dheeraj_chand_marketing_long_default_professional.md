@@ -28,9 +28,33 @@ Results-driven Marketing & Data Analytics Professional with 21 years of experien
 
 ## Core Competencies
 
-**Product Marketing Core**: **Market Intelligence & Competitive Analysis** • **Product Positioning & Messaging Development** • **Go-to-Market Strategy & Product Launch Management** • **Customer Segmentation & Buyer Persona Development** • **Cross-functional Team Leadership & Collaboration** • **Sales Enablement & Training Material Development** • **Data-Driven Decision Making & Analytics Interpretation**
-**Research & Analytics**: **Survey Methodology & Customer Insights** • **Market Research Design & Implementation** • **Competitive Intelligence & SWOT Analysis** • **Customer Journey Mapping & Behavioral Analysis** • **Statistical Modeling & Trend Analysis** • **Performance Metrics & Dashboard Development** • **A/B Testing & Conversion Optimization**
-**Communication & Technology**: **Strategic Messaging & Narrative Development** • **Technical Concept Translation for Business Audiences** • **Stakeholder Communication & Presentation Skills** • **Data Visualization & Reporting (Tableau, PowerBI, d3.js)** • **Marketing Technology Stack Integration** • **Content Strategy & Thought Leadership** • **Client Relationship Management & Business Development**
+• **Product Marketing Core**
+• **Research & Analytics**
+• **Communication & Technology**
+
+## Technical Skills
+
+• **Market Intelligence & Competitive Analysis**
+• **Product Positioning & Messaging Development**
+• **Go-to-Market Strategy & Product Launch Management**
+• **Customer Segmentation & Buyer Persona Development**
+• **Cross-functional Team Leadership & Collaboration**
+• **Sales Enablement & Training Material Development**
+• **Data-Driven Decision Making & Analytics Interpretation**
+• **Survey Methodology & Customer Insights**
+• **Market Research Design & Implementation**
+• **Competitive Intelligence & SWOT Analysis**
+• **Customer Journey Mapping & Behavioral Analysis**
+• **Statistical Modeling & Trend Analysis**
+• **Performance Metrics & Dashboard Development**
+• **A/B Testing & Conversion Optimization**
+• **Strategic Messaging & Narrative Development**
+• **Technical Concept Translation for Business Audiences**
+• **Stakeholder Communication & Presentation Skills**
+• **Data Visualization & Reporting (Tableau, PowerBI, d3.js)**
+• **Marketing Technology Stack Integration**
+• **Content Strategy & Thought Leadership**
+• **Client Relationship Management & Business Development**
 
 ## Professional Experience
 

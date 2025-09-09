@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Product Management & Strategy**: **Product Conception & Ideation**: *`Market Research`, `User Needs Analysis`, `Opportunity Assessment`* • **Product Architecture & Design**: *`Technical Architecture`, System Design, `Scalability Planning`* • **Product Lifecycle Management**: *`Roadmap Development`, `Feature Prioritization`, `Release Planning`* • **B2B SaaS Development**: *`Multi-tenant Architecture`, `Platform Strategy`, API Design*
-**Technical Product Development**: **Full-Stack Development**: *`Python (Django/GeoDjango)`, `JavaScript`, `React`, `PostgreSQL`* • **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Big Data Technologies**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **API Development**: *`RESTful APIs`, `Microservices`, `Third-party Integrations`*
-**Platform & Infrastructure**: **Multi-tenant Architecture**: *`Scalable Platform Design`, Data Isolation, `Performance Optimization`* • **Data Warehousing**: *ETL/ELT Pipelines, `Data Governance`, `Quality Control`* • **Geospatial Platforms**: *PostGIS, `ArcGIS`, Quantum GIS, `OSGeo Integration`* • **Security & Compliance**: *`Data Privacy`, `Access Control`, `Regulatory Compliance`*
+• **Product Management & Strategy**
+• **Technical Product Development**
+• **Platform & Infrastructure**
+
+## Technical Skills
+
+• **Product Conception & Ideation**
+• **Product Architecture & Design**
+• **Product Lifecycle Management**
+• **B2B SaaS Development**
+• **Full-Stack Development**
+• **Cloud Platforms**
+• **Big Data Technologies**
+• **API Development**
+• **Multi-tenant Architecture**
+• **Data Warehousing**
+• **Geospatial Platforms**
+• **Security & Compliance**
 
 ## Professional Experience
 

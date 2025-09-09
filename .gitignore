@@ -8,6 +8,9 @@ user_config.json
 inputs/
 # outputs/ - Commented out to allow generated resumes to be tracked
 
+# Reference Materials (Personal Resumes)
+sources/
+
 # Python
 __pycache__/
 *.py[cod]

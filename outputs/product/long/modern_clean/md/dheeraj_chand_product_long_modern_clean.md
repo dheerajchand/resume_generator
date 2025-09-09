@@ -28,9 +28,33 @@ Strategic Product & Platform Professional with 21 years of experience conceiving
 
 ## Core Competencies
 
-**Product Management & Strategy**: **Product Conception & Ideation**: *`Market Research`, `User Needs Analysis`, `Opportunity Assessment`* • **Product Architecture & Design**: *`Technical Architecture`, System Design, `Scalability Planning`* • **Product Lifecycle Management**: *`Roadmap Development`, `Feature Prioritization`, `Release Planning`* • **B2B SaaS Development**: *`Multi-tenant Architecture`, `Platform Strategy`, API Design* • **Product Strategy**: *`Market Positioning`, Competitive Analysis, `Go-to-Market Planning`* • **Stakeholder Management**: *`Client Relations`, Executive Communication, `Cross-functional Leadership`* • **Product Analytics**: *`Metrics Development`, `Performance Monitoring`, `User Behavior Analysis`*
-**Technical Product Development**: **Full-Stack Development**: *`Python (Django/GeoDjango)`, `JavaScript`, `React`, `PostgreSQL`* • **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Big Data Technologies**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Database Design**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`, `Neo4j`* • **API Development**: *`RESTful APIs`, `Microservices`, `Third-party Integrations`* • **DevOps & Deployment**: *`Docker`, `Git`, CI/CD Pipelines, Automated Testing* • **System Integration**: *`Legacy System Modernization`, Data Pipeline Development*
-**Platform & Infrastructure**: **Multi-tenant Architecture**: *`Scalable Platform Design`, Data Isolation, `Performance Optimization`* • **Data Warehousing**: *ETL/ELT Pipelines, `Data Governance`, `Quality Control`* • **Geospatial Platforms**: *PostGIS, `ArcGIS`, Quantum GIS, `OSGeo Integration`* • **Real-time Systems**: *`Streaming Data`, `Event-driven Architecture`, Live Updates* • **Security & Compliance**: *`Data Privacy`, `Access Control`, `Regulatory Compliance`* • **Monitoring & Analytics**: *`Performance Metrics`, System Health, `User Analytics`* • **Documentation & Training**: *Technical Documentation, `User Guides`, `Team Training`*
+• **Product Management & Strategy**
+• **Technical Product Development**
+• **Platform & Infrastructure**
+
+## Technical Skills
+
+• **Product Conception & Ideation**
+• **Product Architecture & Design**
+• **Product Lifecycle Management**
+• **B2B SaaS Development**
+• **Product Strategy**
+• **Stakeholder Management**
+• **Product Analytics**
+• **Full-Stack Development**
+• **Cloud Platforms**
+• **Big Data Technologies**
+• **Database Design**
+• **API Development**
+• **DevOps & Deployment**
+• **System Integration**
+• **Multi-tenant Architecture**
+• **Data Warehousing**
+• **Geospatial Platforms**
+• **Real-time Systems**
+• **Security & Compliance**
+• **Monitoring & Analytics**
+• **Documentation & Training**
 
 ## Professional Experience
 

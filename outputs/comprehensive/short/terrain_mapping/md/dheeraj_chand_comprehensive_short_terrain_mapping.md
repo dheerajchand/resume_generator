@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Research and Analytics**: **Survey Methodology**: *Design, sampling, weighting, `longitudinal analysis`* • **Statistical Analysis**: *`Regression modeling`, `clustering`, segmentation, `machine learning`* • **Geospatial Analysis**: *`Spatial clustering`, `boundary estimation`, `demographic mapping`* • **Data Visualization**: *`Tableau`, `PowerBI`, `d3.js`, `Matplotlib`, `Seaborn`, `choropleth mapping`*
-**Programming and Development**: **Python**: *`Django/GeoDjango`, `Flask`, `Pandas`, `PySpark`, `SciKit-Learn`, `TensorFlow`* • **JVM Languages**: *`Scala (Spark)`, `Java`, `Groovy`* • **Web Technologies**: *`JavaScript`, `React`, `d3.js`, `PHP`, `HTML/CSS`* • **Database Languages**: *`SQL`, `T-SQL`, `PostgreSQL/PostGIS`*
-**Data Infrastructure**: **Cloud Platforms**: *`AWS (EC2`, `RDS`, S3), `Google Cloud Platform`, `Microsoft Azure`* • **Big Data**: *`Apache Spark`, `PySpark`, `Hadoop`, Snowflake, dbt* • **Databases**: *`PostgreSQL/PostGIS`, `MySQL`, `Oracle`, `MongoDB`, `Neo4j`* • **Geospatial**: *`ESRI ArcGIS`, Quantum GIS, `GeoServer`, `OSGeo`, `GRASS`*
+• **Research and Analytics**
+• **Programming and Development**
+• **Data Infrastructure**
+
+## Technical Skills
+
+• **Survey Methodology**
+• **Statistical Analysis**
+• **Geospatial Analysis**
+• **Data Visualization**
+• **Python**
+• **JVM Languages**
+• **Web Technologies**
+• **Database Languages**
+• **Cloud Platforms**
+• **Big Data**
+• **Databases**
+• **Geospatial**
 
 ## Professional Experience
 

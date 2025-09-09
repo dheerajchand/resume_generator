@@ -133,3 +133,4 @@ class CustomIndexDashboard(Dashboard):
                 },
             ]
         ))
+

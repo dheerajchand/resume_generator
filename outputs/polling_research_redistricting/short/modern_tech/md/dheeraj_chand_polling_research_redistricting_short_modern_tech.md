@@ -30,9 +30,24 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 ## Core Competencies
 
-**Survey Methodology & Research Design**: **Survey Design and Questionnaire Development for Political and Market Research** • **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)** • **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling** • **Expert Testimony and Consultation on Research Methodology**
-**Redistricting & Geospatial Analysis**: **Redistricting Software Development and Boundary Estimation Systems** • **Geospatial Analysis**: *`ArcGIS`, Quantum GIS, `GRASS`, `OSGeo`, PostGIS* • **Choropleths and Hexagonal Grid Maps for Demographic Visualization** • **Court Case Analysis and Expert Testimony for Redistricting**
-**Data Analysis & Visualization**: **Advanced Statistical Modeling and Analysis (Regression, Clustering, Segmentation)** • **Data Visualization**: *`Tableau`, `PowerBI`, `Seaborn`, `Matplotlib`, `d3.js`* • **Consumer Behavior Analysis and Market Segmentation** • **Multi-million Dollar Research Project Management**
+• **Survey Methodology & Research Design**
+• **Redistricting & Geospatial Analysis**
+• **Data Analysis & Visualization**
+
+## Technical Skills
+
+• **Survey Design and Questionnaire Development for Political and Market Research**
+• **Sampling Methodology and Statistical Analysis (R, SPSS, Stata, OSCAR)**
+• **Random Device Engagement (RDE), Text Message, Web Panel, and Live Telephone Calling**
+• **Expert Testimony and Consultation on Research Methodology**
+• **Redistricting Software Development and Boundary Estimation Systems**
+• **Geospatial Analysis**
+• **Choropleths and Hexagonal Grid Maps for Demographic Visualization**
+• **Court Case Analysis and Expert Testimony for Redistricting**
+• **Advanced Statistical Modeling and Analysis (Regression, Clustering, Segmentation)**
+• **Data Visualization**
+• **Consumer Behavior Analysis and Market Segmentation**
+• **Multi-million Dollar Research Project Management**
 
 ## Professional Experience
 
