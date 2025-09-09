@@ -240,7 +240,7 @@ class ResumeGenerator:
         if summary:
             sections.append({
                 "name": "PROFESSIONAL SUMMARY",
-                "content": [Paragraph(summary, self.styles["Body"])]
+                "content": self._create_keep_together_section([Paragraph(summary, self.styles["Body"])])
             })
         
         # Key Achievements and Impact (abbreviated like Deepak)
@@ -261,7 +261,7 @@ class ResumeGenerator:
             
             sections.append({
                 "name": "KEY ACHIEVEMENTS AND IMPACT",
-                "content": achievement_content
+                "content": self._create_keep_together_section(achievement_content)
             })
         
         # CORE COMPETENCIES - Strong categories (space-efficient)
@@ -277,7 +277,7 @@ class ResumeGenerator:
         
         sections.append({
             "name": "CORE COMPETENCIES",
-            "content": competency_content
+            "content": self._create_keep_together_section(competency_content)
         })
         
         # Professional Experience
@@ -376,7 +376,7 @@ class ResumeGenerator:
             
             sections.append({
                 "name": "KEY PROJECTS",
-                "content": project_content
+                "content": self._create_keep_together_section(project_content, min_lines=2)
             })
         
         # Education
@@ -409,7 +409,7 @@ class ResumeGenerator:
             
             sections.append({
                 "name": "EDUCATION",
-                "content": education_content
+                "content": self._create_keep_together_section(education_content, min_lines=2)
             })
         
         # Additional info for abbreviated versions only (at the very end)
@@ -454,12 +454,35 @@ class ResumeGenerator:
                     technical_skills_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
             if technical_skills_content:
+                # Ensure Technical Skills section stays together with at least 3 lines
+                # This prevents awkward page breaks in the middle of important technical information
                 sections.append({
                     "name": "TECHNICAL SKILLS",
-                    "content": technical_skills_content
+                    "content": self._create_keep_together_section(technical_skills_content, min_lines=3)
                 })
         
         return sections
+    
+    def _create_keep_together_section(self, content_lines, min_lines=3):
+        """
+        Create a KeepTogether section with configurable minimum lines
+        
+        Args:
+            content_lines: List of content elements (Paragraphs, etc.)
+            min_lines: Minimum number of lines to keep together (default: 3)
+        
+        Returns:
+            KeepTogether object or list of content if below minimum
+        """
+        if not content_lines:
+            return []
+        
+        # If we have enough content, wrap in KeepTogether
+        if len(content_lines) >= min_lines:
+            return [KeepTogether(content_lines)]
+        else:
+            # For smaller sections, still use KeepTogether but with all content
+            return [KeepTogether(content_lines)]
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
@@ -959,7 +982,11 @@ class ResumeGenerator:
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
-            content.append(additional_info)
+            if isinstance(additional_info, list):
+                for info in additional_info:
+                    content.append(info)
+            else:
+                content.append(additional_info)
             content.append("")
         
         # CORE COMPETENCIES - Space-efficient skills section
@@ -976,13 +1003,14 @@ class ResumeGenerator:
                 if isinstance(skills, list):
                     if category.upper() in ["CODE", "COMPUTE", "INTERACT", "MEASURE", "PLATFORMS", "TRACK"]:
                         # Technical skills - format as Deepak does
-                        skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in skills])
+                        skill_text = "; ".join([str(skill).split(": ")[0] if ": " in str(skill) else str(skill) for skill in skills if isinstance(skill, str)])
                         content.append(f"\\b {category.upper()}\\b0 {skill_text}")
                     else:
                         # Other skills - format as bullet points
                         for skill in skills:
-                            skill_name = skill.split(": ")[0] if ": " in skill else skill
-                            content.append(f"• {skill_name}")
+                            if isinstance(skill, str):
+                                skill_name = skill.split(": ")[0] if ": " in skill else skill
+                                content.append(f"• {skill_name}")
             content.append("")
         
         # Experience
@@ -1130,7 +1158,11 @@ class ResumeGenerator:
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
-            content.append(additional_info)
+            if isinstance(additional_info, list):
+                for info in additional_info:
+                    content.append(info)
+            else:
+                content.append(additional_info)
             content.append("")
         
         # CORE COMPETENCIES - Space-efficient skills section
@@ -1149,13 +1181,14 @@ class ResumeGenerator:
                 if isinstance(skills, list):
                     if category.upper() in ["CODE", "COMPUTE", "INTERACT", "MEASURE", "PLATFORMS", "TRACK"]:
                         # Technical skills - format as Deepak does
-                        skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in skills])
+                        skill_text = "; ".join([str(skill).split(": ")[0] if ": " in str(skill) else str(skill) for skill in skills if isinstance(skill, str)])
                         content.append(f"**{category.upper()}** {skill_text}")
                     else:
                         # Other skills - format as bullet points
                         for skill in skills:
-                            skill_name = skill.split(": ")[0] if ": " in skill else skill
-                            content.append(f"• **{skill_name}**")
+                            if isinstance(skill, str):
+                                skill_name = skill.split(": ")[0] if ": " in skill else skill
+                                content.append(f"• **{skill_name}**")
             content.append("")
         
         # Experience (enhanced formatting with visual hierarchy)
@@ -1254,10 +1287,11 @@ class ResumeManager:
             "comprehensive": "dheeraj_chand_comprehensive_full",
             "polling_research_redistricting": "dheeraj_chand_polling_research_redistricting",
             "marketing": "dheeraj_chand_marketing",
-            "data_analysis": "dheeraj_chand_data_analysis",
-            "visualisation": "dheeraj_chand_visualisation",
+            "data_analysis_visualization": "dheeraj_chand_data_analysis_visualization",
+            "data_engineering": "dheeraj_chand_data_engineering",
             "product": "dheeraj_chand_product",
-            "software_engineering": "dheeraj_chand_software_engineering"
+            "software_engineering": "dheeraj_chand_software_engineering",
+            "gis": "dheeraj_chand_gis"
         }
         
         # Length variants for each version
