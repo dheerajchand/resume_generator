@@ -1254,7 +1254,8 @@ class ResumeManager:
             "marketing": "dheeraj_chand_marketing",
             "data_analysis": "dheeraj_chand_data_analysis",
             "visualisation": "dheeraj_chand_visualisation",
-            "product": "dheeraj_chand_product"
+            "product": "dheeraj_chand_product",
+            "software_engineering": "dheeraj_chand_software_engineering"
         }
         
         # Length variants for each version
