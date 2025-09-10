@@ -44,6 +44,9 @@ Strong background in geospatial data visualization and cartographic design
 
 *GIS & Geospatial Analysis Consulting*
 
+- Utilized ES`R`I Arc Suite and `OSGeo` technology to map and analyze 50,000+ electoral boundaries across federal, state, and local levels
+- Applied geospatial analysis to uncover demographic miscoding affecting 2,000+ precincts nationwide
+- Developed boundary estimation tools enabling smaller organizations to conduct sophisticated redistricting analysis
 - Lead comprehensive research initiatives for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in strategic spending decisions using ES`R`I Arc Suite and SAFE Systems
 - Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics and demographic analysis with advanced geospatial processing
 - Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets

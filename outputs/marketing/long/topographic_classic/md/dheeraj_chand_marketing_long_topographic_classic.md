@@ -63,6 +63,9 @@ Results-driven Marketing & Data Analytics Professional with 15+ years of experie
 
 *Marketing Strategy and Data-Driven Insights*
 
+- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
+- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
 - Conducted comprehensive quantitative and qualitative research studies for political candidates and major organizations, providing actionable consumer insights and market intelligence
 - Designed and implemented advanced segmentation models using demographic, psychographic, and behavioral data to identify high-value targets
 - Led multi-million dollar market research projects involving sensitive consumer data, ensuring compliance with privacy regulations while delivering actionable insights

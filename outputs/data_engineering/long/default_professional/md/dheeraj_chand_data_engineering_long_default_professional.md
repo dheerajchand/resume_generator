@@ -46,6 +46,9 @@ Extensive experience with microservices, event-driven architectures, and modern 
 
 *Data Engineering and Infrastructure Architecture*
 
+- Architected data infrastructure processing 15+ billion voter records to support meta-analytical voter file corrections
+- Built scalable ETL pipelines enabling analysis of 50,000+ electoral boundaries across all levels of government
+- Developed `Python` boundary estimation algorithm that reduced mapping costs by 75% for 200+ organizations
 - Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics and demographic analysis
 - Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
 - Develop advanced analytical tools and machine learning algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering

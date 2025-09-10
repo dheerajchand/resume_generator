@@ -64,6 +64,9 @@ Research & Data Professional with 15+ years of experience in applied research, d
 *Data, Technology and Strategy Consulting*
 
 - Lead comprehensive research initiatives for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in strategic spending decisions
+- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
+- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
 - Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics and demographic analysis
 - Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets
 - Develop advanced analytical tools and machine learning algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering

@@ -56,6 +56,9 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 *Research & Data Analytics Leadership*
 
+- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
+- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
 - Conceived, architected, engineered and deployed cloud-based redistricting software used by thousands of analysts nationwide
 - Developed and deployed custom research software that processed billions of consumer records for pattern analysis, fraud detection and entity resolution
 - Built multi-tenant data infrastructure supporting concurrent access from diverse client organizations

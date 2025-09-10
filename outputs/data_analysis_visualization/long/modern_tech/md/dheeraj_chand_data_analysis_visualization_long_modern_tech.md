@@ -49,10 +49,12 @@ Extensive experience with interactive dashboards, custom web applications, and d
 
 *Advanced Data Analysis and Statistical Modeling*
 
+- Developed meta-analytical techniques that identified systematic data quality issues across 20+ years of voter registration data
+- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Created fraud detection systems analyzing 5+ terabyte datasets, uncovering demographic miscoding patterns across 2,000+ precincts
 - Developed and deployed custom analytical tools and algorithms using `Python`, `Pandas`, `NumPy`, and Scikit-learn for fraud detection and spatial clustering
 - Developed parametric spatial clustering algorithms for voter analysis, resulting in 88% improved targeting efficacy
 - Developed meta-analytical techniques to resolve ambiguous dimensions, resulting in discovery of 170% more viable targets
-- Created fraud detection systems for campaign finance data analysis across multi-terabyte datasets
 - Created comprehensive data visualization solutions that improved clients' understanding of complex research findings
 - Built interactive data exploration capabilities and comprehensive reporting solutions
 - Built multi-tenant data infrastructure supporting concurrent access from diverse client organizations

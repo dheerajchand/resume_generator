@@ -43,6 +43,10 @@ Strong background in cloud architecture and DevOps practices
 
 *Full-Stack Development and Data Engineering*
 
+- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
+- Built scalable web applications processing 50,000+ electoral boundaries with sub-200ms response times
+- Architected systems supporting 2,500+ concurrent users conducting redistricting analysis
+- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
 - Lead comprehensive research initiatives for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in strategic spending decisions
 - Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing billions of records for electoral analytics and demographic analysis
 - Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets

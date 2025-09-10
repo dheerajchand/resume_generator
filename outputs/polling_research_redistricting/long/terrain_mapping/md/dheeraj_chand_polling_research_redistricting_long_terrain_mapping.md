@@ -51,6 +51,9 @@ Distinguished Polling, Research & Redistricting Professional with 15+ years of e
 
 *Data, Technology and Strategy Consulting*
 
+- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
+- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
 - Lead comprehensive polling and research studies for presidential, gubernatorial, congressional, and senatorial campaigns affecting millions of dollars in strategic spending decisions
 - Architect enterprise-scale cloud data warehouse solutions on `AWS` (EC2, `R`DS, S3) processing millions of records with millions of columns for electoral analytics and demographic analysis
 - Design and implement scalable ETL pipelines using Py`Spark`, dbt, and Postgre`SQL`/PostGIS for large-scale geospatial and demographic datasets

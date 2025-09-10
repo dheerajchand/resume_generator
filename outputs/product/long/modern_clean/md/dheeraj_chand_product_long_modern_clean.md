@@ -63,6 +63,9 @@ Strategic Product & Platform Professional with 15+ years of experience conceivin
 
 *Product Development and Platform Architecture*
 
+- Conceived and architected redistricting platform incorporating boundary estimation algorithm used by 2,500+ analysts
+- Built multi-tenant data warehouse tracking decades of demographic data, enabling discovery of 500,000+ mischaracterized voters
+- Platform democratized redistricting analysis, reducing costs by 75% and enabling 200+ smaller organizations to participate
 - Conceived, architected, engineered and deployed cloud-based redistricting software used by thousands of analysts nationwide
 - Designed, architected and created multi-tenant data warehouse tracking decades of political, geographical, econometric change
 - Developed and deployed custom research software that processed billions of consumer records for pattern analysis, fraud detection and entity resolution
