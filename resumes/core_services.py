@@ -53,11 +53,12 @@ from resume_generator_django.resume_generator.constants import (
 class ResumeGenerator:
     """Core resume generator supporting all formats"""
     
-    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional', length_variant: str = 'long'):
+    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional', length_variant: str = 'long', output_type: str = 'ats'):
         self.data = self._load_json(data_file)
         self.config = self._load_json(config_file) if config_file else {}
         self.color_scheme = color_scheme
         self.length_variant = length_variant
+        self.output_type = output_type
         self.styles = self._create_styles()
         
         # Spacing system constants (imported from settings)
@@ -376,7 +377,7 @@ class ResumeGenerator:
             
             sections.append({
                 "name": "KEY PROJECTS",
-                "content": self._create_keep_together_section(project_content, min_lines=2)
+                "content": self._create_keep_together_section(project_content, min_lines=4)
             })
         
         # Education
@@ -1313,7 +1314,7 @@ class ResumeManager:
         
         self.formats = ["pdf", "docx", "rtf", "md"]
     
-    def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs", length_variant: str = "long") -> bool:
+    def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs", length_variant: str = "long", output_type: str = "ats") -> bool:
         """Generate a single resume with specified parameters"""
         if version not in self.versions:
             return False
@@ -1321,8 +1322,10 @@ class ResumeManager:
         if length_variant not in self.length_variants:
             return False
         
-        # Determine input directory based on length variant
+        # Determine input directory based on length variant and output type
         input_basename = self.versions[version]
+        if output_type == "human":
+            input_basename += "_human"
         if length_variant == "short":
             input_basename += "_abbreviated"
         
@@ -1341,12 +1344,13 @@ class ResumeManager:
             # Load color scheme
             color_scheme_file = Path("color_schemes") / f"{color_scheme}.json"
             if color_scheme_file.exists():
-                generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme, length_variant)
+                generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme, length_variant, output_type)
             else:
-                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme, length_variant)
+                generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme, length_variant, output_type)
             
-            # Create output directory
-            output_path = Path(output_dir) / version / length_variant / color_scheme / format_type
+            # Create output directory using the correct structure: output_type/version/length/color_scheme
+            base_output_dir = Path(output_dir) / output_type
+            output_path = base_output_dir / version / length_variant / color_scheme
             output_path.mkdir(parents=True, exist_ok=True)
             
             # Generate file
@@ -1369,7 +1373,7 @@ class ResumeManager:
             print(f"Error generating {version} {color_scheme} {format_type}: {e}")
             return False
     
-    def generate_all_combinations(self, output_dir: str = "outputs") -> Dict[str, int]:
+    def generate_all_combinations(self, output_dir: str = "outputs", output_type: str = "ats") -> Dict[str, int]:
         """Generate all combinations of versions, lengths, color schemes, and formats"""
         results = {"success": 0, "failed": 0}
         
@@ -1377,7 +1381,7 @@ class ResumeManager:
             for length_variant in self.length_variants:
                 for color_scheme in self.color_schemes:
                     for format_type in self.formats:
-                        if self.generate_single_resume(version, color_scheme, format_type, output_dir, length_variant):
+                        if self.generate_single_resume(version, color_scheme, format_type, output_dir, length_variant, output_type):
                             results["success"] += 1
                         else:
                             results["failed"] += 1

@@ -99,9 +99,9 @@
     },
     {
       "title": "RESEARCH DIRECTOR",
-      "company": "Progressive Change Campaign Committee, Washington, DC",
+      "company": "PCCC, Washington, DC",
       "dates": "August 2011 – August 2012",
-      "subtitle": "Political Research and Data Analysis",
+      "subtitle": "Political Research and Data Analysis (FLEEM System)",
       "responsibilities": [
         "Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of calls using emulated predictive dialer for regulated political surveys",
         "Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren",
