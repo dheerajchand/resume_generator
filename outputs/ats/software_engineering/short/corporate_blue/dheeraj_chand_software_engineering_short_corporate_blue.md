@@ -9,9 +9,9 @@ Experienced data scientist and software engineer with 15+ years of expertise in 
 ## Key Achievements and Impact
 
 ### Data Discovery
-- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Uncovered decades of demographic miscoding in voter files, discovering 2.7M previously mischaracterized Democratic voters
 - Developed Python boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
-- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
+- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct redistricting analysis
 
 ### System Architecture
 - Architected and built Ballista Redistricting, cloud-based GeoDjango redistricting software on AWS, backed by OSGeo technology stack, serving thousands of analysts with real-time collaborative editing and Census integration
@@ -47,9 +47,9 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 *Data Science & Political Analytics*
 
-- Uncovered decades of demographic miscoding in voter files, discovering 500,000+ previously mischaracterized Democratic voters
+- Uncovered decades of demographic miscoding in voter files, discovering 2.7M previously mischaracterized Democratic voters
 - Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
-- Algorithm reduced mapping costs by 75%, saving campaigns and organizations $5M+ and enabling smaller nonprofits to conduct redistricting analysis
+- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct redistricting analysis
 
 ### Senior Data Scientist
 **Lake Research Partners | Washington, DC | 2018 - 2020**
@@ -87,6 +87,16 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 *Political Data Analysis*
 
 - Trained staff on `PHP`/My`SQL` for data analysis and reporting systems
+
+## Key Projects
+
+### Polling Consortium Dataset Meta-Analysis
+*2013 - 2016*
+
+Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems, creating unified analytical framework
+
+**Technologies:** Python, R, Statistical Analysis, Meta-Analysis, Data Standardization
+**Impact:** Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B
 
 ---
 

@@ -348,7 +348,7 @@ class ResumeGenerator:
                 "content": experience_content
             })
         
-        # Key Projects
+        # Key Projects - Individual project KeepTogether logic
         projects = self.data.get("projects", [])
         if projects:
             project_content = []
@@ -359,28 +359,37 @@ class ResumeGenerator:
                 technologies = project.get("technologies", [])
                 impact = project.get("impact", "")
                 
+                # Build individual project unit
+                project_unit = []
+                
                 title_line = project_name
                 if dates:
                     title_line += f" ({dates})"
-                
-                project_content.append(Paragraph(title_line, self.styles["SubCompetency"]))
+                project_unit.append(Paragraph(title_line, self.styles["SubCompetency"]))
                 
                 if description:
-                    project_content.append(Paragraph(description, self.styles["CompetencyDetail"]))
+                    project_unit.append(Paragraph(description, self.styles["CompetencyDetail"]))
                 
                 if technologies:
                     tech_text = "Technologies: " + ", ".join(technologies)
-                    project_content.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
+                    project_unit.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
                 
                 if impact:
-                    project_content.append(Paragraph(f"Impact: {impact}", self.styles["CompetencyDetail"]))
+                    project_unit.append(Paragraph(f"Impact: {impact}", self.styles["CompetencyDetail"]))
+                
+                # Keep each individual project together
+                project_content.append(KeepTogether(project_unit))
+                
+                # Add spacing between projects (but not after last)
+                if project != projects[-1]:
+                    project_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
             
             sections.append({
-                "name": "KEY PROJECTS",
-                "content": self._create_keep_together_section(project_content, min_lines=4)
+                "name": "KEY PROJECTS", 
+                "content": project_content
             })
         
-        # Education
+        # Education - Individual education KeepTogether logic
         education = self.data.get("education", [])
         if education:
             education_content = []
@@ -392,6 +401,9 @@ class ResumeGenerator:
                 gpa = edu.get("gpa", "")
                 honors = edu.get("honors", "")
                 
+                # Build individual education unit
+                edu_unit = []
+                
                 title_line = degree
                 if institution:
                     title_line += f" - {institution}"
@@ -400,17 +412,24 @@ class ResumeGenerator:
                 if dates:
                     title_line += f" | {dates}"
                 
-                education_content.append(Paragraph(title_line, self.styles["JobTitle"]))
+                edu_unit.append(Paragraph(title_line, self.styles["JobTitle"]))
                 
                 if gpa:
-                    education_content.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
+                    edu_unit.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
                 
                 if honors:
-                    education_content.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
+                    edu_unit.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
+                
+                # Keep each education entry together
+                education_content.append(KeepTogether(edu_unit))
+                
+                # Add spacing between education entries (but not after last)
+                if edu != education[-1]:
+                    education_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
             
             sections.append({
                 "name": "EDUCATION",
-                "content": self._create_keep_together_section(education_content, min_lines=2)
+                "content": education_content
             })
         
         # Additional info for abbreviated versions only (at the very end)
@@ -455,11 +474,11 @@ class ResumeGenerator:
                     technical_skills_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
             if technical_skills_content:
-                # Ensure Technical Skills section stays together with at least 3 lines
-                # This prevents awkward page breaks in the middle of important technical information
+                # Technical Skills - don't use KeepTogether to avoid excessive spacing
+                # Individual skill paragraphs will naturally flow across pages if needed
                 sections.append({
                     "name": "TECHNICAL SKILLS",
-                    "content": self._create_keep_together_section(technical_skills_content, min_lines=3)
+                    "content": technical_skills_content
                 })
         
         return sections
@@ -468,22 +487,26 @@ class ResumeGenerator:
         """
         Create a KeepTogether section with configurable minimum lines
         
+        NOTE: This method should only be used for short sections like:
+        - Professional Summary (single paragraph)
+        - Key Achievements (single line with bullets)
+        - Core Competencies (single line with bullets)
+        
+        For longer sections like Projects, Education, Experience, use individual
+        KeepTogether logic to prevent excessive spacing issues.
+        
         Args:
             content_lines: List of content elements (Paragraphs, etc.)
             min_lines: Minimum number of lines to keep together (default: 3)
         
         Returns:
-            KeepTogether object or list of content if below minimum
+            KeepTogether object containing all content
         """
         if not content_lines:
             return []
         
-        # If we have enough content, wrap in KeepTogether
-        if len(content_lines) >= min_lines:
-            return [KeepTogether(content_lines)]
-        else:
-            # For smaller sections, still use KeepTogether but with all content
-            return [KeepTogether(content_lines)]
+        # Always wrap in KeepTogether for these short sections
+        return [KeepTogether(content_lines)]
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""

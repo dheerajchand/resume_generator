@@ -4,13 +4,13 @@
 
 ## Professional Summary
 
-Data scientist and software engineer with 15+ years building systems that matter. I've discovered 500,000+ misclassified voters, saved organizations $5M+ through better algorithms, and built platforms used by thousands of analysts nationwide.
+Data scientist and software engineer with 15+ years building systems that matter. I've discovered 2.7M misclassified voters, saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide.
 
 ## Key Achievements and Impact
 
 ### Impact
-- Discovered 500,000+ misclassified Democratic voters through data analysis
-- Saved organizations $5M+ with algorithm that reduced mapping costs by 75%
+- Discovered 2.7M misclassified Democratic voters through data analysis
+- Saved organizations $4.7M with algorithm that reduced mapping costs by 73.5%
 - Built redistricting platform used by thousands of analysts nationwide
 
 ### Scale
@@ -44,8 +44,8 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 
 *Data Science & Political Analytics*
 
-- Discovered 500,000+ misclassified Democratic voters through data analysis
-- Built algorithm that reduced mapping costs by 75%, saving organizations $5M+
+- Discovered 2.7M misclassified Democratic voters through data analysis
+- Built algorithm that reduced mapping costs by 73.5%, saving organizations $4.7M
 
 ### Senior Data Scientist
 **Lake Research Partners | Washington, DC | 2018 - 2020**
@@ -95,7 +95,15 @@ For a more detailed, full description of my experience, please visit my LinkedIn
 Cloud-based GeoDjango platform for redistricting analysis, used by thousands of analysts nationwide
 
 **Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python
-**Impact:** Reduced mapping costs by 75%, saving organizations $5M+
+**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M
+
+### Polling Consortium Dataset Meta-Analysis
+*2013 - 2016*
+
+Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems, creating unified analytical framework
+
+**Technologies:** Python, R, Statistical Analysis, Meta-Analysis, Data Standardization
+**Impact:** Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B
 
 ---
 
