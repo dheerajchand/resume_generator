@@ -1,0 +1,165 @@
+{
+  "resume_type_configurations": {
+    "comprehensive": {
+      "summary_key": "comprehensive",
+      "achievements": {
+        "include_achievements": ["demographic_breakthrough", "algorithmic_innovation", "platform_impact", "predictive_excellence", "fraud_detection_systems", "expert_authority", "methodological_advancement", "revenue_generation", "data_infrastructure", "technical_architecture"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "mautinoa_technologies", "myers_research", "pccc", "salsa_labs", "praxis_project", "lake_research_partners", "feldman_group"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 6
+      },
+      "projects": {
+        "include_projects": ["redistricting_platform", "fleem_polling_system", "demographic_ml_system", "civic_graph", "tile_server_platform"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "geospatial_stack", "machine_learning_ai", "data_engineering", "cloud_devops"],
+        "detail_level": "comprehensive"
+      }
+    },
+    "data_engineering": {
+      "summary_key": "data_engineering",
+      "achievements": {
+        "include_achievements": ["fraud_detection_systems", "data_infrastructure", "technical_architecture", "algorithmic_innovation", "platform_impact", "demographic_breakthrough"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "mautinoa_technologies", "myers_research", "pccc"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["redistricting_platform", "demographic_ml_system", "tile_server_platform"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["data_engineering", "programming_expertise", "cloud_devops"],
+        "detail_level": "focused"
+      }
+    },
+    "software_engineering": {
+      "summary_key": "software_engineering", 
+      "achievements": {
+        "include_achievements": ["platform_impact", "technical_architecture", "algorithmic_innovation", "demographic_breakthrough", "predictive_excellence", "data_infrastructure"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "mautinoa_technologies", "salsa_labs", "praxis_project", "pccc", "helm_murmuration"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["redistricting_platform", "fleem_polling_system", "tile_server_platform"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "cloud_devops", "data_engineering"],
+        "detail_level": "focused"
+      }
+    },
+    "gis": {
+      "summary_key": "gis",
+      "achievements": {
+        "include_achievements": ["demographic_breakthrough", "platform_impact", "algorithmic_innovation", "methodological_advancement", "technical_architecture", "data_infrastructure"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "myers_research", "pccc", "salsa_labs", "mautinoa_technologies"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["redistricting_platform", "demographic_ml_system", "tile_server_platform"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["geospatial_stack", "programming_expertise", "machine_learning_ai"],
+        "detail_level": "focused"
+      }
+    },
+    "product": {
+      "summary_key": "product",
+      "achievements": {
+        "include_achievements": ["revenue_generation", "platform_impact", "predictive_excellence", "algorithmic_innovation", "demographic_breakthrough", "methodological_advancement"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "myers_research", "pccc"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["redistricting_platform", "fleem_polling_system", "demographic_ml_system"],
+        "show_technical_details": false
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "data_engineering", "machine_learning_ai"],
+        "detail_level": "business_focused"
+      }
+    },
+    "marketing": {
+      "summary_key": "marketing",
+      "achievements": {
+        "include_achievements": ["predictive_excellence", "revenue_generation", "platform_impact", "methodological_advancement", "demographic_breakthrough", "algorithmic_innovation"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "gsdm", "helm_murmuration", "myers_research", "pccc"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["fleem_polling_system", "demographic_ml_system", "redistricting_platform"],
+        "show_technical_details": false
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "machine_learning_ai", "data_engineering"],
+        "detail_level": "business_focused"
+      }
+    },
+    "data_analysis_visualization": {
+      "summary_key": "data_analysis_visualization",
+      "achievements": {
+        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "data_infrastructure", "platform_impact", "methodological_advancement", "technical_architecture"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "myers_research", "gsdm", "pccc", "helm_murmuration"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["demographic_ml_system", "redistricting_platform", "tile_server_platform"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "machine_learning_ai", "geospatial_stack"],
+        "detail_level": "focused"
+      }
+    },
+    "polling_research_redistricting": {
+      "summary_key": "polling_research_redistricting",
+      "achievements": {
+        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "platform_impact", "methodological_advancement", "expert_authority", "regulatory_innovation"],
+        "total_max": 6
+      },
+      "experience": {
+        "include_positions": ["siege_analytics", "pccc", "myers_research", "lake_research_partners", "feldman_group"],
+        "max_responsibilities_per_job": 3,
+        "siege_analytics_max": 5
+      },
+      "projects": {
+        "include_projects": ["fleem_polling_system", "redistricting_platform", "demographic_ml_system"],
+        "show_technical_details": true
+      },
+      "competencies": {
+        "include_categories": ["programming_expertise", "machine_learning_ai", "data_engineering"],
+        "detail_level": "focused"
+      }
+    }
+  }
+}

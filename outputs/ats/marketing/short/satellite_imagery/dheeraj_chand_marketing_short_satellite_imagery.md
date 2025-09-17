@@ -1,103 +1,121 @@
 # Dheeraj Chand
 
-**Phone:** +1 (512) 555-0123 | **Email:** dheeraj@dheerajchand.com | **Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/ | **Location:** Austin, TX
-
 ## Professional Summary
 
-Experienced data scientist and software engineer with 15+ years of expertise in geospatial analysis, demographic research, and political data. Proven track record of building scalable systems, conducting complex analyses, and delivering actionable insights for campaigns, organizations, and government agencies.
+Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.
 
 ## Key Achievements and Impact
 
-### Data Discovery
-- Uncovered decades of demographic miscoding in voter files, discovering 2.7M previously mischaracterized Democratic voters
-- Developed Python boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
-- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct redistricting analysis
-
-### System Architecture
-- Architected and built Ballista Redistricting, cloud-based GeoDjango redistricting software on AWS, backed by OSGeo technology stack, serving thousands of analysts with real-time collaborative editing and Census integration
-
-### Scale & Performance
-- Built high-performance CRM system handling billions of records with millions of columns, used by tens of thousands of users simultaneously
-- Interfaced with Government and Activism APIs for seamless data integration
-
-For a more detailed, full description of my experience, please visit my LinkedIn and Personal Site.
+### Impact
+- Discovered systematic race coding errors affecting all Black and Asian-American voters
+- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M
+- Built redistricting platform used by thousands of analysts nationwide
+- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%
 
 ## Core Competencies
 
-• **CODE**
-• **COMPUTE**
-• **INTERACT**
-• **MEASURE**
-• **PLATFORMS**
-• **TRACK**
 
 ## Technical Skills
 
-**CODE** Python; R; SQL; JavaScript; PHP
-**COMPUTE** AWS; Docker; Linux; Git
-**INTERACT** Drupal; Django; Flask
-**MEASURE** ArcGIS; QGIS; PostGIS; GRASS
-**PLATFORMS** Tableau; Power BI; Jupyter
-**TRACK** Git; Jira
 
 ## Professional Experience
 
 ### Partner
-**Siege Analytics | Austin, TX | 2020 - Present**
+**Siege Analytics | Austin, TX | 2005 - Present**
 
-*Data Science & Political Analytics*
+*Data, Technology and Strategy Consulting*
 
-- Uncovered decades of demographic miscoding in voter files, discovering 2.7M previously mischaracterized Democratic voters
-- Developed `Python` boundary estimation algorithm enabling mapping and analysis at every level of election in the United States
-- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct redistricting analysis
+- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%
+- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
+- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
 
-### Senior Data Scientist
-**Lake Research Partners | Washington, DC | 2018 - 2020**
+### Data Products Manager
+**Helm/Murmuration | Austin, TX | June 2021 - May 2023**
+
+*Civic Graph & Civic Pulse Director*
+
+- Conceived, architected and built Civic Graph multi-tenant data warehouse processing government data from Census, Bureau of Labor Statistics, National Council of Educational Statistics
+- Built multi-dimensional data warehouse measuring socio-economic changes in America at every level across attitudinal, behavioral, demographic, economic and geographical dimensions
+- Managed engineering teams of 7-11 professionals while setting technical direction for data architecture
+
+### Analytics Supervisor
+**GSD&M | Austin, TX | November 2019 - June 2020**
+
+*Big Data Engineering Transformation*
+
+- Transformed small data team into big data engineering team, scaling from laptop datasets to Hadoop Clusters and Hive on AWS
+- Managed accounts including United States Air Force, Southwest Airlines/Chase and Indeed
+- Rewrote mission and offerings of department and drafted integration plan with strategy team
+
+### Software Engineer
+**Mautinoa Technologies | Austin, TX | August 2016 - February 2018**
+
+*SimCrisis Product Owner/Engineer*
+
+- Conceived, architected and engineered econometric simulation software for humanitarian crises intervention measurement
+- Built SimCrisis GeoDjango web application using multi-agent modeling to create econometric simulations of crisis economies
+- Designed modular application accepting rules extensions for ethnic strife, different crises/disasters, supply failures
+
+### Senior Analyst
+**Myers Research | Austin, TX | August 2012 - February 2014**
+
+*RACSO Product Owner/Engineer*
+
+- Designed comprehensive survey instruments for specialized voting segments and niche markets
+- Co-developed RACSO web application managing all aspects of survey operations from instrument design to data analysis
+- Wrote RFP and analyzed bids from 1,200 vendors for research platform development
+
+### Research Director
+**PCCC | Washington, DC | 2010 - 2012**
+
+*Political Research & Data Analysis (FLEEM System)*
+
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys
+- Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
+- Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
+
+### Software Engineer
+**Salsa Labs | Washington, DC | January 2011 - August 2011**
+
+*Geospatial CRM Development*
+
+- Maintained and extended comprehensive geospatial analysis and reporting tools for Java-based CRM system used by tens of thousands simultaneously
+- Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers
+- Built advanced geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill
+
+### Programmer
+**Lake Research Partners | Washington, DC | April 2008 - December 2008**
 
 *Political Research & Analytics*
 
-- Trained staff on building `Python` tooling for report generation and analysis
-- Conducted statistical analysis and modeling for political campaigns and advocacy groups
-
-### Technical Director
-**The Praxis Project | Oakland, CA | 2015 - 2018**
-
-*Technology & Data Infrastructure*
-
-- Architected and developed 25 Drupal sites to integrate with membership databases, activism C`R`Ms and government agencies, under guidelines from Kellogg Foundation and `R`obert Wood Johnson Foundation
-
-### Senior Software Engineer
-**Salsa Labs | Washington, DC | 2012 - 2015**
-
-*CRM & Data Platform Development*
-
-- Built high-performance C`R`M system handling billions of records with millions of columns, used by tens of thousands of users simultaneously
-- Interfaced with Government and Activism APIs for seamless data integration
-
-### Research Analyst
-**PCCC (FLEEM) | Washington, DC | 2010 - 2012**
-
-*Political Research & Data Analysis*
-
-- Handled tens of thousands of calls using emulated predictive dialer for regulated political surveys
-
-### Data Analyst
-**The Feldman Group | Washington, DC | 2008 - 2010**
-
-*Political Data Analysis*
-
-- Trained staff on `PHP`/My`SQL` for data analysis and reporting systems
+- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party
+- Harmonized data from 20+ polling firms with incompatible methodologies and encoding systems
+- Created comprehensive meta-analysis framework handling millions of survey responses that became the $400M Polling Consortium Database at The Analyst Institute, now valued at $1B+
 
 ## Key Projects
 
-### Polling Consortium Dataset Meta-Analysis
+### National Redistricting Platform
+*2020 - 2021*
+
+Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide
+
+**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python
+**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses
+
+### FLEEM Political Polling System
+*2010 - 2012*
+
+Completely self-built IVR system using Twilio API that contacted tens of thousands of voters daily, replicated call center functionality to performance parity
+
+**Technologies:** Twilio API, Python, Django, PostgreSQL, JavaScript
+**Impact:** Saved $840K in operational costs plus millions in avoided software licensing
+
+### Geospatial Demographic Classification System
 *2013 - 2016*
 
-Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems, creating unified analytical framework
+Machine learning platform that discovered systematic coding errors and improved demographic classification accuracy from 23% to 64%
 
-**Technologies:** Python, R, Statistical Analysis, Meta-Analysis, Data Standardization
-**Impact:** Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B
+**Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow
+**Impact:** Corrected demographic data affecting all Black and Asian-American voters nationwide
 
 ---
-
-*Generated using Resume Generator System*

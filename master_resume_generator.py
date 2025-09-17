@@ -15,169 +15,144 @@ def load_master_achievements():
     with open('comprehensive_master_achievements.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
+def load_resume_type_definitions():
+    """Load the resume type configuration definitions"""
+    with open('resume_type_definitions.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
 def create_specialized_resume(master_data, resume_type, output_type="ats"):
-    """Create a specialized resume from master data"""
+    """Create a specialized resume from master data using configuration-driven inheritance"""
     
     master = master_data["comprehensive_master_achievements"]
+    type_definitions = load_resume_type_definitions()
+    config = type_definitions["resume_type_configurations"].get(resume_type, type_definitions["resume_type_configurations"]["comprehensive"])
     
-    # Base structure
+    # INHERIT EVERYTHING from master (like abstract class inheritance)
     resume = {
         "personal_info": master["personal_info"],
-        "summary": "",
-        "achievements": {"Impact": []},
-        "competencies": {},
-        "experience": [],
-        "projects": [],
-        "education": [
-            {
-                "degree": "Bachelor of Arts in Plan II Honors",
-                "institution": "University of Texas at Austin",
-                "location": "Austin, TX",
-                "dates": "2008",
-                "gpa": "",
-                "honors": "Interdisciplinary liberal arts program"
-            }
-        ],
+        "summary": "",  # Will be set from master using config
+        "achievements": {},  # Will be built from master using config
+        "competencies": {},  # Will be built from master using config
+        "experience": [],  # Will be built from master using config
+        "projects": [],  # Will be built from master using config
+        "education": [],  # Keep empty as requested
         "additional_info": ""
     }
     
-    # Select summary based on resume type and output type
-    if output_type == "human":
-        if resume_type == "comprehensive":
-            resume["summary"] = master["professional_summary"]["comprehensive"]
-        elif resume_type == "data_engineering":
-            resume["summary"] = "Data engineering professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Built Civic Graph data warehouse processing billions of records and platforms serving thousands of analysts nationwide."
-        elif resume_type == "software_engineering":
-            resume["summary"] = "Software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in translating complex analytical requirements into scalable technical solutions."
-        elif resume_type == "gis":
-            resume["summary"] = "GIS and geospatial data scientist with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in geospatial analysis, redistricting, and demographic modeling."
-        elif resume_type == "product":
-            resume["summary"] = "Product-focused data scientist with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in translating technical solutions into business value."
-        elif resume_type == "marketing":
-            resume["summary"] = "Marketing analytics professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in campaign optimization and audience segmentation."
-        elif resume_type == "data_analysis_visualization":
-            resume["summary"] = "Data analysis and visualization expert with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in statistical modeling and data storytelling."
-        elif resume_type == "polling_research_redistricting":
-            resume["summary"] = "Polling and research professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in survey methodology and electoral forecasting."
-        else:
-            resume["summary"] = master["professional_summary"]["comprehensive"]
-    else:  # ATS version
-        resume["summary"] = master["professional_summary"]["technical_focused"]
-    
-    # Select achievements based on resume type (always include core achievements)
-    core_achievements = [
-        master["core_achievements"]["demographic_discovery"]["headline"],
-        "Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M",
-        "Built redistricting platform used by thousands of analysts nationwide",
-        "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%"
-    ]
-    
-    # Add role-specific achievements
-    if resume_type == "data_engineering":
-        core_achievements.extend([
-            "Built Civic Graph data warehouse processing billions of records for electoral analytics",
-            "Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for geospatial datasets",
-            "Maintained sub-200ms query response across billion-record datasets"
-        ])
-    elif resume_type == "software_engineering":
-        core_achievements.extend([
-            "Developed custom tile server enabling interactive visualization improving contact rates by 53%",
-            "Built scalable web applications supporting thousands of concurrent users",
-            "Engineered distributed systems architecture for population-scale analysis"
-        ])
-    elif resume_type == "gis":
-        core_achievements.extend([
-            "Processed geospatial data covering 3.8 million square miles of US electoral territory",
-            "Developed boundary analysis algorithms for redistricting optimization",
-            "Built custom tile server for Web Map Service (WMS) integration"
-        ])
-    
-    resume["achievements"]["Impact"] = core_achievements[:8]  # Limit for readability
-    
-    # Build experience from master data (always include all major roles)
-    resume["experience"] = [
-        {
-            "title": "Founder & Principal Data Scientist",
-            "company": "Siege Analytics",
-            "location": "Austin, TX", 
-            "dates": "2012 - Present",
-            "subtitle": "Data Science & Political Analytics",
-            "responsibilities": master["core_achievements"]["demographic_discovery"]["details"][:6]
-        },
-        {
-            "title": "Senior Software Engineer",
-            "company": "NGP VAN",
-            "location": "Washington, DC",
-            "dates": "2012 - 2015", 
-            "subtitle": "Political Technology & CRM Systems",
-            "responsibilities": [
-                "Maintained geospatial analysis tools for Java-based CRM system used by tens of thousands simultaneously",
-                "Developed custom tile server enabling interactive visualization improving contact rates by 53% and segmentation accuracy by 88%",
-                "Built advanced geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill",
-                "Integrated mapping and visualization tools for political campaign data analysis"
-            ]
-        },
-        {
-            "title": "Research Director", 
-            "company": "PCCC",
-            "location": "Washington, DC",
-            "dates": "2010 - 2012",
-            "subtitle": "Political Research & Data Analysis (FLEEM System)",
-            "responsibilities": master["core_achievements"]["platform_development"]["fleem_system"][:5]
-        }
-    ]
-    
-    # Build projects from master data
-    resume["projects"] = [
-        {
-            "name": "National Redistricting Platform",
-            "dates": "2020 - 2021",
-            "description": "Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide",
-            "technologies": ["GeoDjango", "PostGIS", "AWS", "Docker", "React", "Python"],
-            "impact": "Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses"
-        },
-        {
-            "name": "FLEEM Political Polling System", 
-            "dates": "2010 - 2012",
-            "description": "Completely self-built IVR system using Twilio API that contacted tens of thousands of voters daily, replicated call center functionality to performance parity",
-            "technologies": ["Twilio API", "Python", "Django", "PostgreSQL", "JavaScript"],
-            "impact": "Saved $840K in operational costs plus millions in avoided software licensing"
-        },
-        {
-            "name": "Geospatial Demographic Classification System",
-            "dates": "2013 - 2016", 
-            "description": "Machine learning platform that discovered systematic coding errors and improved demographic classification accuracy from 23% to 64%",
-            "technologies": ["Python", "Scikit-learn", "PostGIS", "GeoPandas", "TensorFlow"],
-            "impact": "Corrected demographic data affecting all Black and Asian-American voters nationwide"
-        },
-        {
-            "name": "Polling Consortium Dataset Meta-Analysis",
-            "dates": "2013 - 2016",
-            "description": "Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems",
-            "technologies": ["Python", "R", "Statistical Analysis", "Meta-Analysis", "Data Standardization"], 
-            "impact": "Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B"
-        }
-    ]
-    
-    # Build competencies based on resume type
-    if resume_type == "data_engineering":
-        resume["competencies"] = {
-            "Data Engineering": [
-                "Apache Spark, PySpark, Dask: Large-scale data processing and distributed computing",
-                "dbt, Airflow: Data transformation pipelines and workflow orchestration", 
-                "PostgreSQL/PostGIS, Snowflake: Database design and geospatial data management",
-                "AWS (EC2, RDS, S3), Docker: Cloud infrastructure and containerization"
-            ],
-            "Programming": [
-                "Python: NumPy, Pandas, Scikit-learn, Django, Flask (15+ years)",
-                "SQL: Complex queries, optimization, spatial analysis (15+ years)",
-                "R: Statistical modeling, ggplot2, spatial packages (12+ years)",
-                "JavaScript: React, D3.js, Node.js, real-time applications (10+ years)"
-            ]
-        }
+    # OVERRIDE: Select summary from master using configuration
+    summary_key = config["summary_key"]
+    if summary_key in master["professional_summary"]:
+        resume["summary"] = master["professional_summary"][summary_key]
     else:
-        # Default comprehensive competencies
-        resume["competencies"] = master["technical_skills_comprehensive"]["programming_expertise"]
+        resume["summary"] = master["professional_summary"]["comprehensive"]
+    
+    # REFINE: Build achievements from master using configuration
+    achievement_config = config["achievements"]
+    # Use curated key achievements from master file
+    key_achievements = master["key_achievements"]
+    selected_achievements = []
+    
+    for achievement_key in achievement_config["include_achievements"]:
+        if achievement_key in key_achievements:
+            selected_achievements.append(key_achievements[achievement_key])
+    
+    resume["achievements"] = {"Impact": selected_achievements[:achievement_config["total_max"]]}
+    
+    # REFINE: Build work experience from master using configuration
+    work_exp = master["work_experience"]
+    experience_config = config["experience"]
+    
+    # Build positions from master data using configuration (everything traceable to master)
+    resume["experience"] = []
+    for position_key in experience_config["include_positions"]:
+        if position_key in work_exp:
+            # Special handling for Siege Analytics - always give it maximum responsibilities
+            if position_key == "siege_analytics":
+                max_resp = experience_config.get("siege_analytics_max", 10)
+            else:
+                max_resp = experience_config["max_responsibilities_per_job"]
+                
+            position = {
+                "title": work_exp[position_key]["title"],
+                "company": work_exp[position_key]["company"],
+                "location": work_exp[position_key]["location"],
+                "dates": work_exp[position_key]["dates"],
+                "subtitle": work_exp[position_key]["subtitle"],
+                "responsibilities": work_exp[position_key]["comprehensive_responsibilities"][:max_resp]
+            }
+            resume["experience"].append(position)
+    
+    # REFINE: Build projects from master using configuration
+    key_projects = master["key_projects"]
+    projects_config = config["projects"]
+    
+    # Build projects from master data using configuration (everything traceable to master)
+    resume["projects"] = []
+    for project_key in projects_config["include_projects"]:
+        if project_key in key_projects:
+            project_data = key_projects[project_key]
+            project = {
+                "name": project_data["name"],
+                "dates": project_data.get("dates", ""),
+                "description": project_data["description"],
+                "technologies": project_data["technologies"],
+                "impact": project_data["impact"]
+            }
+            # Add technical details if configuration specifies
+            if projects_config["show_technical_details"] and "technical_details" in project_data:
+                project["technical_details"] = project_data["technical_details"][:2]
+            
+            resume["projects"].append(project)
+    
+    # REFINE: Build competencies from master using configuration
+    competencies_config = config["competencies"]
+    tech_skills = master["technical_skills_comprehensive"]
+    
+    # Build competencies by selecting categories from master (everything traceable to master)
+    resume["competencies"] = {}
+    for category_key in competencies_config["include_categories"]:
+        if category_key in tech_skills:
+            category_data = tech_skills[category_key]
+            # Map technical category names to display names
+            display_name = {
+                "programming_expertise": "Programming and Development",
+                "geospatial_stack": "Geospatial Technologies", 
+                "machine_learning_ai": "Machine Learning & AI",
+                "data_engineering": "Data Infrastructure",
+                "cloud_devops": "Cloud & DevOps"
+            }.get(category_key, category_key.title())
+            
+            # Build skills list from master data with proper formatting
+            skills_list = []
+            for skill_key, skill_detail in category_data.items():
+                # Format skill names properly
+                formatted_skill_name = {
+                    "python": "Python",
+                    "r": "R", 
+                    "sql": "SQL/PostGIS",
+                    "javascript": "JavaScript",
+                    "java": "Java",
+                    "other": "Other Technologies",
+                    "databases": "Databases",
+                    "analysis": "Analysis Tools",
+                    "web_mapping": "Web Mapping",
+                    "processing": "Processing",
+                    "frameworks": "ML Frameworks",
+                    "geospatial_ml": "Geospatial ML",
+                    "techniques": "Techniques",
+                    "validation": "Validation",
+                    "pipelines": "Pipelines",
+                    "storage": "Storage",
+                    "streaming": "Streaming",
+                    "aws": "AWS",
+                    "containerization": "Containerization", 
+                    "monitoring": "Monitoring",
+                    "cicd": "CI/CD"
+                }.get(skill_key, skill_key.title())
+                
+                skills_list.append(f"{formatted_skill_name}: {skill_detail}")
+            
+            resume["competencies"][display_name] = skills_list
     
     return resume
 

@@ -3,138 +3,277 @@
     "name": "Dheeraj Chand",
     "title": "Data Scientist & Software Engineer",
     "contact": {
-      "email": "dheeraj@example.com",
-      "phone": "(555) 123-4567",
-      "website": "https://dheerajchand.com",
-      "linkedin": "https://linkedin.com/in/dheerajchand",
+      "email": "dheeraj.chand@gmail.com",
+      "phone": "202.550.7110",
+      "website": "https://www.dheerajchand.com",
+      "linkedin": "https://www.linkedin.com/in/dheerajchand/",
       "github": "https://github.com/dheerajchand",
       "location": "Austin, TX"
     }
   },
-  "summary": "Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.",
+  "summary": "Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.",
   "achievements": {
     "Impact": [
-      "Discovered systematic race coding errors affecting all Black and Asian-American voters",
-      "Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M",
-      "Built redistricting platform used by thousands of analysts nationwide",
-      "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%"
+      "Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%",
+      "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
+      "Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations",
+      "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%",
+      "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
+      "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy"
     ]
   },
   "competencies": {
-    "python": "15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio",
-    "r": "12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny",
-    "sql": "15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design",
-    "javascript": "10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets",
-    "java": "8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)",
-    "other": "Shell scripting, Git, Docker, Kubernetes, infrastructure as code"
+    "Programming and Development": [
+      "Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio",
+      "R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny",
+      "SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design",
+      "JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets",
+      "Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)",
+      "Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code"
+    ],
+    "Geospatial Technologies": [
+      "Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions",
+      "Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations",
+      "Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS",
+      "Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines"
+    ],
+    "Machine Learning & AI": [
+      "ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM",
+      "Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering",
+      "Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision",
+      "Validation: Cross-validation, A/B testing, statistical significance, model interpretability"
+    ],
+    "Data Infrastructure": [
+      "Processing: Apache Spark, PySpark, Dask, parallel computing, distributed systems",
+      "Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing",
+      "Storage: Data warehousing, data lakes, columnar storage (Parquet), data modeling",
+      "Streaming: Kafka, Redis, real-time processing, event-driven architecture"
+    ],
+    "Cloud & DevOps": [
+      "AWS: EC2, RDS, S3, Lambda, CloudFormation, Auto Scaling, Load Balancing",
+      "Containerization: Docker, Kubernetes, container orchestration, microservices",
+      "Monitoring: CloudWatch, Prometheus, Grafana, application performance monitoring",
+      "CI/CD: Jenkins, GitHub Actions, automated testing, deployment pipelines"
+    ]
   },
   "experience": [
     {
-      "title": "Founder & Principal Data Scientist",
+      "title": "Partner",
       "company": "Siege Analytics",
       "location": "Austin, TX",
-      "dates": "2012 - Present",
+      "dates": "2005 - Present",
       "subtitle": "Data Science & Political Analytics",
       "responsibilities": [
-        "Identified decades of systematic demographic miscoding in national voter databases",
-        "Developed geospatial machine learning algorithms that improved automated demographic classification accuracy from 23% to 64% (178% improvement)",
-        "Applied meta-analytical approaches to detect and correct population-scale demographic errors",
-        "Corrected systematic bias affecting millions of voters across all US electoral districts",
-        "Built validation frameworks ensuring demographic accuracy across 178,000+ precincts"
+        "Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%",
+        "Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration",
+        "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%",
+        "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
+        "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
+        "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy"
       ]
     },
     {
-      "title": "Senior Software Engineer",
-      "company": "NGP VAN",
-      "location": "Washington, DC",
-      "dates": "2012 - 2015",
-      "subtitle": "Political Technology & CRM Systems",
+      "title": "Data Products Manager",
+      "company": "Helm/Murmuration",
+      "location": "Austin, TX",
+      "dates": "2021 - 2023",
+      "subtitle": "Democratic Electoral Technology",
       "responsibilities": [
-        "Maintained geospatial analysis tools for Java-based CRM system used by tens of thousands simultaneously",
-        "Developed custom tile server enabling interactive visualization improving contact rates by 53% and segmentation accuracy by 88%",
-        "Built advanced geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill",
-        "Integrated mapping and visualization tools for political campaign data analysis"
+        "Led design and implementation of enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data",
+        "Managed engineering team of 11 professionals while setting technical direction for data architecture",
+        "Modernized legacy ETL processes by implementing dbt and PySpark workflows, reducing processing time by 57%"
+      ]
+    },
+    {
+      "title": "Analytics Supervisor",
+      "company": "GSD&M",
+      "location": "Austin, TX",
+      "dates": "2018 - 2019",
+      "subtitle": "Advertising Analytics",
+      "responsibilities": [
+        "Restructured the Decision Sciences Department to scale capabilities from small-scale data analysis to comprehensive big data operations",
+        "Implemented spatial analysis and consumer segmentation methodologies that revealed new insights about existing customers",
+        "Advanced Statistical and ML techniques for segmentation and behavioral clustering"
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Mautinoa Technologies",
+      "location": "Austin, TX",
+      "dates": "2016 - 2018",
+      "subtitle": "Software Development",
+      "responsibilities": [
+        "Conceived, architected and engineered econometric simulation software for humanitarian crises intervention measurement",
+        "Liaised with data and engineering directors at multinational NGOs (UNICEF, IFRC)",
+        "Geospatial analysis on populations and boundaries for impact assessment"
+      ]
+    },
+    {
+      "title": "Senior Analyst",
+      "company": "Myers Research",
+      "location": "Austin, TX",
+      "dates": "2012 - 2014",
+      "subtitle": "Political Research & Analysis",
+      "responsibilities": [
+        "Designed comprehensive survey instruments for specialized voting segments and niche markets",
+        "Developed sophisticated analytical products and reports that delivered actionable insights to clients",
+        "Co-developed a web application to manage all aspects of survey operations, from instrument design to data collection and analysis"
       ]
     },
     {
       "title": "Research Director",
       "company": "PCCC",
       "location": "Washington, DC",
-      "dates": "2010 - 2012",
+      "dates": "August 2011 - August 2012",
       "subtitle": "Political Research & Data Analysis (FLEEM System)",
       "responsibilities": [
-        "Conceived, architected, and engineered FLEEM web application using Twilio API",
-        "Handled tens of thousands of simultaneous phone calls using emulated predictive dialer",
-        "Built IVR polling system supporting Senators Martin Heinrich and Elizabeth Warren",
-        "Developed survey deployment system facilitating thousands of simultaneous surveys",
-        "Saved PAC $840,000 annually in polling costs through automated infrastructure"
+        "Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys",
+        "Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren",
+        "Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver"
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Salsa Labs",
+      "location": "Washington, DC",
+      "dates": "January 2011 - August 2011",
+      "subtitle": "Political Technology & CRM Systems",
+      "responsibilities": [
+        "Developed geospatial analysis and mapping tools for political CRM platform serving progressive campaigns nationwide",
+        "Built database integration systems connecting voter files with campaign management tools",
+        "Created automated data processing pipelines for voter contact and engagement optimization"
+      ]
+    },
+    {
+      "title": "Interim Technology Manager",
+      "company": "The Praxis Project",
+      "location": "Washington, DC",
+      "dates": "April 2009 - October 2009",
+      "subtitle": "Public Health Technology",
+      "responsibilities": [
+        "Managed technology infrastructure for public health advocacy organization",
+        "Developed database systems for tracking policy initiatives and outcomes",
+        "Implemented CRM systems for stakeholder engagement and outreach"
+      ]
+    },
+    {
+      "title": "Programmer",
+      "company": "Lake Research Partners",
+      "location": "Austin, TX",
+      "dates": "2008",
+      "subtitle": "Political Polling & Research",
+      "responsibilities": [
+        "Designed questionnaires and analyzed data for complex market research studies across diverse industries",
+        "Conducted statistical modeling and analysis to address multifaceted consumer behavior questions",
+        "Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps"
+      ]
+    },
+    {
+      "title": "Field Director",
+      "company": "The Feldman Group",
+      "location": "Austin, TX",
+      "dates": "2011 - 2012",
+      "subtitle": "Political Campaign Management",
+      "responsibilities": [
+        "Managed all aspects of survey fielding for a multi-million dollar research firm, including scheduling, oversight, sampling, and quality control",
+        "Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings",
+        "Created custom reports and data visualizations based on specific client requirements"
       ]
     }
   ],
   "projects": [
     {
       "name": "National Redistricting Platform",
-      "dates": "2020 - 2021",
-      "description": "Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide",
+      "dates": "",
+      "description": "Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide during 2021 redistricting cycle",
       "technologies": [
         "GeoDjango",
         "PostGIS",
         "AWS",
         "Docker",
         "React",
-        "Python"
+        "Python",
+        "Redis"
       ],
-      "impact": "Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses"
+      "impact": "Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses. Served 12,847 analysts across 89 organizations.",
+      "technical_details": [
+        "Processed data for all 435 congressional districts and 7,383 state legislative districts",
+        "Built real-time collaborative editing supporting 156 concurrent projects"
+      ]
     },
     {
       "name": "FLEEM Political Polling System",
-      "dates": "2010 - 2012",
-      "description": "Completely self-built IVR system using Twilio API that contacted tens of thousands of voters daily, replicated call center functionality to performance parity",
+      "dates": "",
+      "description": "Web application using Twilio API for regulated political surveys, handling tens of thousands of simultaneous calls with predictive dialer functionality",
       "technologies": [
         "Twilio API",
         "Python",
         "Django",
         "PostgreSQL",
-        "JavaScript"
+        "JavaScript",
+        "Apache"
       ],
-      "impact": "Saved $840K in operational costs plus millions in avoided software licensing"
+      "impact": "Saved PAC $840,000 annually in polling costs while significantly improving data collection efficiency",
+      "technical_details": [
+        "Handled peak loads of 10,000+ simultaneous phone calls",
+        "Built IVR system supporting major political campaigns"
+      ]
     },
     {
       "name": "Geospatial Demographic Classification System",
-      "dates": "2013 - 2016",
-      "description": "Machine learning platform that discovered systematic coding errors and improved demographic classification accuracy from 23% to 64%",
+      "dates": "",
+      "description": "Machine learning platform for demographic analysis that discovered systematic coding errors and improved classification accuracy from 23% to 64%",
       "technologies": [
         "Python",
         "Scikit-learn",
         "PostGIS",
         "GeoPandas",
-        "TensorFlow"
+        "TensorFlow",
+        "AWS"
       ],
-      "impact": "Corrected demographic data affecting all Black and Asian-American voters nationwide"
+      "impact": "Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%",
+      "technical_details": [
+        "Processed demographic data across 178,000+ precincts",
+        "Built meta-analysis frameworks for systematic error detection"
+      ]
     },
     {
-      "name": "Polling Consortium Dataset Meta-Analysis",
+      "name": "Civic Graph Multi-Tenant Data Warehouse",
       "dates": "2013 - 2016",
-      "description": "Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems",
+      "description": "Multi-tenant data warehouse harmonizing polling data from tens of polling and mail firms with different methodologies and encoding systems",
       "technologies": [
         "Python",
-        "R",
-        "Statistical Analysis",
-        "Meta-Analysis",
-        "Data Standardization"
+        "PostgreSQL",
+        "PostGIS",
+        "ETL Pipelines",
+        "Data Standardization",
+        "Meta-Analysis"
       ],
-      "impact": "Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B"
-    }
-  ],
-  "education": [
+      "impact": "Created $1B+ dataset that became foundation for modern electoral analytics, serving tens of polling and mail firms with different methodologies",
+      "technical_details": [
+        "Harmonized data from different methodologies and encoding systems",
+        "Built meta-analysis frameworks for systematic data integration"
+      ]
+    },
     {
-      "degree": "Bachelor of Arts in Plan II Honors",
-      "institution": "University of Texas at Austin",
-      "location": "Austin, TX",
-      "dates": "2008",
-      "gpa": "",
-      "honors": "Interdisciplinary liberal arts program"
+      "name": "High-Performance Geospatial Tile Server",
+      "dates": "",
+      "description": "Custom tile server for Web Map Service integration enabling interactive visualization of CRM and Census data",
+      "technologies": [
+        "GeoTools",
+        "OpenLayers",
+        "Java",
+        "MySQL",
+        "TileMill",
+        "JavaScript"
+      ],
+      "impact": "Improved contact rates by 53% and segmentation accuracy by 88% through enhanced data visualization",
+      "technical_details": [
+        "Supported tens of thousands of simultaneous users",
+        "Built WMS/WFS service integration for data sharing"
+      ]
     }
   ],
+  "education": [],
   "additional_info": ""
 }

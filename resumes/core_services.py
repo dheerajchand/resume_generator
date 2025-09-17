@@ -265,16 +265,16 @@ class ResumeGenerator:
                 "content": self._create_keep_together_section(achievement_content)
             })
         
-        # CORE COMPETENCIES - Strong categories (space-efficient)
-        core_competencies = [
-            "Software Engineering", "Data Engineering", "Data Analysis", 
-            "Geospatial / Demographic Expertise", "Research & Analytics", 
-            "Programming & Development", "Data Infrastructure"
-        ]
-        
-        # Single line with bullet separators (like Deepak)
-        competency_text = " • ".join(core_competencies)
-        competency_content = [Paragraph(competency_text, self.styles["CompetencyDetail"])]
+        # CORE COMPETENCIES - Use actual categories from data
+        competencies_data = self.data.get("competencies", {})
+        if competencies_data:
+            core_competencies = list(competencies_data.keys())
+            
+            # Single line with bullet separators (like Deepak)
+            competency_text = " • ".join(core_competencies)
+            competency_content = [Paragraph(competency_text, self.styles["CompetencyDetail"])]
+        else:
+            competency_content = []
         
         sections.append({
             "name": "CORE COMPETENCIES",
@@ -348,16 +348,66 @@ class ResumeGenerator:
                 "content": experience_content
             })
         
-        # Key Projects - Individual project KeepTogether logic
+        # Key Projects - Keep header with first project (minimum 4 lines)
         projects = self.data.get("projects", [])
         if projects:
             project_content = []
-            for project in projects:
+            
+            # For the first project, include it in a KeepTogether with the section header
+            # to ensure the header doesn't appear alone at the bottom of a page
+            first_project = projects[0]
+            first_project_name = first_project.get("name", "")
+            first_dates = first_project.get("dates", "")
+            first_description = first_project.get("description", "")
+            first_technologies = first_project.get("technologies", [])
+            first_impact = first_project.get("impact", "")
+            
+            # Build first project unit with header
+            first_project_unit = []
+            
+            # Add section header as part of first project unit
+            first_project_unit.append(Paragraph("KEY PROJECTS", self.styles["SectionHeader"]))
+            
+            # Add first project content
+            first_title_line = first_project_name
+            if first_dates:
+                first_title_line += f" ({first_dates})"
+            first_project_unit.append(Paragraph(first_title_line, self.styles["SubCompetency"]))
+            
+            if first_description:
+                # Add "About:" with different color formatting
+                colors = self.config if self.config else {}
+                medium_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
+                about_text = f'<font color="{medium_color}"><b>About:</b></font> {first_description}'
+                first_project_unit.append(Paragraph(about_text, self.styles["CompetencyDetail"]))
+            
+            if first_technologies:
+                # Add "Technologies:" with color formatting
+                colors = self.config if self.config else {}
+                tech_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
+                first_tech_text = f'<font color="{tech_color}"><b>Technologies:</b></font> {", ".join(first_technologies)}'
+                first_project_unit.append(Paragraph(first_tech_text, self.styles["CompetencyDetail"]))
+            
+            if first_impact:
+                # Add "Impact:" with color formatting
+                colors = self.config if self.config else {}
+                accent_color = colors.get("ACCENT_COLOR", "#4682B4")
+                impact_text = f'<font color="{accent_color}"><b>Impact:</b></font> {first_impact}'
+                first_project_unit.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
+            
+            # Keep header with first project together (ensures 4+ lines)
+            project_content.append(KeepTogether(first_project_unit))
+            
+            # Handle remaining projects normally
+            for project in projects[1:]:
                 project_name = project.get("name", "")
                 dates = project.get("dates", "")
                 description = project.get("description", "")
                 technologies = project.get("technologies", [])
                 impact = project.get("impact", "")
+                
+                # Add spacing before each subsequent project
+                project_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
                 
                 # Build individual project unit
                 project_unit = []
@@ -368,24 +418,32 @@ class ResumeGenerator:
                 project_unit.append(Paragraph(title_line, self.styles["SubCompetency"]))
                 
                 if description:
-                    project_unit.append(Paragraph(description, self.styles["CompetencyDetail"]))
+                    # Add "About:" with different color formatting
+                    colors = self.config if self.config else {}
+                    medium_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
+                    about_text = f'<font color="{medium_color}"><b>About:</b></font> {description}'
+                    project_unit.append(Paragraph(about_text, self.styles["CompetencyDetail"]))
                 
                 if technologies:
-                    tech_text = "Technologies: " + ", ".join(technologies)
+                    # Add "Technologies:" with color formatting
+                    colors = self.config if self.config else {}
+                    tech_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
+                    tech_text = f'<font color="{tech_color}"><b>Technologies:</b></font> {", ".join(technologies)}'
                     project_unit.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
                 
                 if impact:
-                    project_unit.append(Paragraph(f"Impact: {impact}", self.styles["CompetencyDetail"]))
+                    # Add "Impact:" with color formatting
+                    colors = self.config if self.config else {}
+                    accent_color = colors.get("ACCENT_COLOR", "#4682B4")
+                    impact_text = f'<font color="{accent_color}"><b>Impact:</b></font> {impact}'
+                    project_unit.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
                 
                 # Keep each individual project together
                 project_content.append(KeepTogether(project_unit))
-                
-                # Add spacing between projects (but not after last)
-                if project != projects[-1]:
-                    project_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
             
+            # Add section without separate header (header is included in first project)
             sections.append({
-                "name": "KEY PROJECTS", 
+                "name": "", 
                 "content": project_content
             })
         
@@ -522,19 +580,20 @@ class ResumeGenerator:
         # Use the first page header content for spacing calculation since it has the most content
         # This ensures consistent spacing regardless of page type
         personal_info = self.data.get("personal_info", {})
+        contact_info = personal_info.get("contact", {})
         
         # Find the lowest text line using the same logic as the header function
         # This represents the actual header bar position on the first page
         lowest_line_y = HEADER_TOP_Y  # Start with email line
         
         # Check if phone exists
-        phone = personal_info.get("phone", "")
+        phone = contact_info.get("phone", "")
         if phone:
             phone_y = HEADER_TOP_Y - HEADER_PHONE_OFFSET
             lowest_line_y = min(lowest_line_y, phone_y)
         
         # Check if GitHub exists
-        github_url = personal_info.get("github", "")
+        github_url = contact_info.get("github", "")
         if github_url:
             github_y = HEADER_TOP_Y - HEADER_GITHUB_OFFSET
             lowest_line_y = min(lowest_line_y, github_y)
@@ -614,11 +673,12 @@ class ResumeGenerator:
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
             personal_info = self.data.get("personal_info", {})
+            contact_info = personal_info.get("contact", {})
             
             # Three-cell layout: Email/Phone (left) | Empty (middle) | Name (right)
             name = personal_info.get("name", "NAME")
-            email = personal_info.get("email", "")
-            phone = personal_info.get("phone", "").replace(".", "").replace("-", "").replace(" ", "")
+            email = contact_info.get("email", "")
+            phone = contact_info.get("phone", "").replace(".", "").replace("-", "").replace(" ", "")
             
             # Add US country code to phone if it doesn't have one
             if phone and not phone.startswith("+1") and not phone.startswith("1"):
@@ -639,7 +699,7 @@ class ResumeGenerator:
                 lowest_line_y = min(lowest_line_y, phone_y)
             
             # GitHub link under phone on left side with equal spacing
-            github_url = personal_info.get("github", "")
+            github_url = contact_info.get("github", "")
             if github_url:
                 github_y = top_y - HEADER_GITHUB_OFFSET
                 lowest_line_y = min(lowest_line_y, github_y)
@@ -728,6 +788,7 @@ class ResumeGenerator:
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
             personal_info = self.data.get("personal_info", {})
+            contact_info = personal_info.get("contact", {})
             
             canvas.setFont("Helvetica", FONT_SIZE_8)
             footer_y = FOOTER_Y
@@ -742,8 +803,8 @@ class ResumeGenerator:
             canvas.line(PAGE_LEFT_MARGIN, bar_y, PAGE_RIGHT_MARGIN, bar_y)
             
             # Two-cell footer structure
-            website_url = personal_info.get("website", "")
-            linkedin_url = personal_info.get("linkedin", "")
+            website_url = contact_info.get("website", "")
+            linkedin_url = contact_info.get("linkedin", "")
             
             # Left cell: Site and LinkedIn with pipe separator
             if website_url or linkedin_url:
@@ -803,6 +864,7 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
+        contact_info = personal_info.get("contact", {})
         
         # Name
         name_para = doc.add_paragraph()
@@ -813,16 +875,16 @@ class ResumeGenerator:
         
         # Contact info
         contact_parts = []
-        if personal_info.get("phone"):
-            contact_parts.append(personal_info["phone"])
-        if personal_info.get("email"):
-            contact_parts.append(personal_info["email"])
-        if personal_info.get("website"):
-            contact_parts.append(personal_info["website"])
-        if personal_info.get("linkedin"):
-            contact_parts.append(personal_info["linkedin"])
-        if personal_info.get("location"):
-            contact_parts.append(personal_info["location"])
+        if contact_info.get("phone"):
+            contact_parts.append(contact_info["phone"])
+        if contact_info.get("email"):
+            contact_parts.append(contact_info["email"])
+        if contact_info.get("website"):
+            contact_parts.append(contact_info["website"])
+        if contact_info.get("linkedin"):
+            contact_parts.append(contact_info["linkedin"])
+        if contact_info.get("location"):
+            contact_parts.append(contact_info["location"])
         
         if contact_parts:
             contact_para = doc.add_paragraph(" | ".join(contact_parts))
@@ -963,21 +1025,22 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
+        contact_info = personal_info.get("contact", {})
         content.append(f"\\b {personal_info.get('name', 'NAME')}\\b0")
         content.append("")
         
         # Contact info
         contact_parts = []
-        if personal_info.get("phone"):
-            contact_parts.append(personal_info["phone"])
-        if personal_info.get("email"):
-            contact_parts.append(personal_info["email"])
-        if personal_info.get("website"):
-            contact_parts.append(personal_info["website"])
-        if personal_info.get("linkedin"):
-            contact_parts.append(personal_info["linkedin"])
-        if personal_info.get("location"):
-            contact_parts.append(personal_info["location"])
+        if contact_info.get("phone"):
+            contact_parts.append(contact_info["phone"])
+        if contact_info.get("email"):
+            contact_parts.append(contact_info["email"])
+        if contact_info.get("website"):
+            contact_parts.append(contact_info["website"])
+        if contact_info.get("linkedin"):
+            contact_parts.append(contact_info["linkedin"])
+        if contact_info.get("location"):
+            contact_parts.append(contact_info["location"])
         
         if contact_parts:
             content.append(" | ".join(contact_parts))
@@ -1139,21 +1202,22 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
+        contact_info = personal_info.get("contact", {})
         content.append(f"# {personal_info.get('name', 'NAME')}")
         content.append("")
         
         # Contact information
         contact_parts = []
-        if personal_info.get('phone'):
-            contact_parts.append(f"**Phone:** {personal_info['phone']}")
-        if personal_info.get('email'):
-            contact_parts.append(f"**Email:** {personal_info['email']}")
-        if personal_info.get('website'):
-            contact_parts.append(f"**Website:** {personal_info['website']}")
-        if personal_info.get('linkedin'):
-            contact_parts.append(f"**LinkedIn:** {personal_info['linkedin']}")
-        if personal_info.get('location'):
-            contact_parts.append(f"**Location:** {personal_info['location']}")
+        if contact_info.get('phone'):
+            contact_parts.append(f"**Phone:** {contact_info['phone']}")
+        if contact_info.get('email'):
+            contact_parts.append(f"**Email:** {contact_info['email']}")
+        if contact_info.get('website'):
+            contact_parts.append(f"**Website:** {contact_info['website']}")
+        if contact_info.get('linkedin'):
+            contact_parts.append(f"**LinkedIn:** {contact_info['linkedin']}")
+        if contact_info.get('location'):
+            contact_parts.append(f"**Location:** {contact_info['location']}")
         
         if contact_parts:
             content.append(" | ".join(contact_parts))
@@ -1203,16 +1267,10 @@ class ResumeGenerator:
             content.append("")
             for category, skills in competencies.items():
                 if isinstance(skills, list):
-                    if category.upper() in ["CODE", "COMPUTE", "INTERACT", "MEASURE", "PLATFORMS", "TRACK"]:
-                        # Technical skills - format as Deepak does
-                        skill_text = "; ".join([str(skill).split(": ")[0] if ": " in str(skill) else str(skill) for skill in skills if isinstance(skill, str)])
-                        content.append(f"**{category.upper()}** {skill_text}")
-                    else:
-                        # Other skills - format as bullet points
-                        for skill in skills:
-                            if isinstance(skill, str):
-                                skill_name = skill.split(": ")[0] if ": " in skill else skill
-                                content.append(f"• **{skill_name}**")
+                    # Show detailed skills with descriptions for all categories
+                    for skill in skills:
+                        if isinstance(skill, str):
+                            content.append(f"• **{skill}**")
             content.append("")
         
         # Experience (enhanced formatting with visual hierarchy)
@@ -1238,19 +1296,11 @@ class ResumeGenerator:
                     content.append(f"*{job['subtitle']}*")
                     content.append("")
                 
-                # Responsibilities with enhanced formatting
+                # Responsibilities - clean formatting without tech term highlighting
                 responsibilities = job.get('responsibilities', [])
                 if responsibilities:
                     for resp in responsibilities:
-                        # Extract and format technical terms in responsibilities
-                        enhanced_resp = resp
-                        tech_terms = ['Python', 'SQL', 'AWS', 'Docker', 'Git', 'Tableau', 'PowerBI', 'Spark', 'Hadoop', 'MongoDB', 'PostgreSQL', 'MySQL', 'Oracle', 'Neo4j', 'ArcGIS', 'QGIS', 'OSGeo', 'GRASS', 'Django', 'Flask', 'Pandas', 'NumPy', 'SciKit', 'TensorFlow', 'R', 'SPSS', 'SAS', 'Stata', 'JavaScript', 'React', 'PHP', 'HTML', 'CSS', 'Scala', 'Java', 'Groovy', 'Jupyter', 'NetLogo', 'd3.js', 'Matplotlib', 'Seaborn']
-                        
-                        for term in tech_terms:
-                            if term in enhanced_resp:
-                                enhanced_resp = enhanced_resp.replace(term, f"`{term}`")
-                        
-                        content.append(f"- {enhanced_resp}")
+                        content.append(f"- {resp}")
                 content.append("")
         
         # Projects
@@ -1292,10 +1342,22 @@ class ResumeGenerator:
                 content.append("")
         
         
-        # Footer
+        # Footer with contact information
         content.append("---")
         content.append("")
-        content.append("*Generated using Resume Generator System*")
+        
+        # Add footer contact info similar to PDF footer
+        personal_info = self.data.get("personal_info", {})
+        contact_info = personal_info.get("contact", {})
+        footer_parts = []
+        
+        if contact_info.get("website"):
+            footer_parts.append(f"**Website:** {contact_info['website']}")
+        if contact_info.get("linkedin"):
+            footer_parts.append(f"**LinkedIn:** {contact_info['linkedin']}")
+            
+        if footer_parts:
+            content.append(" | ".join(footer_parts))
         
         with open(filename, "w", encoding="utf-8") as f:
             f.write("\n".join(content))

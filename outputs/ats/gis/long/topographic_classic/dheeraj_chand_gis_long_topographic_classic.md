@@ -1,100 +1,113 @@
 # Dheeraj Chand
 
+**Phone:** 202.550.7110 | **Email:** dheeraj.chand@gmail.com | **Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/ | **Location:** Austin, TX
+
 ## Professional Summary
 
-Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.
+GIS and geospatial data scientist with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in geospatial analysis, redistricting, and demographic modeling.
 
 ## Key Achievements and Impact
 
 ### Impact
-- Discovered systematic race coding errors affecting all Black and Asian-American voters
-- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M
-- Built redistricting platform used by thousands of analysts nationwide
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%
-- Processed geospatial data covering 3.8 million square miles of US electoral territory
-- Developed boundary analysis algorithms for redistricting optimization
-- Built custom tile server for Web Map Service (WMS) integration
+- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%
+- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations
+- Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis
+- Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality
+- Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial datasets
+- Built cloud-based data warehouse solutions on AWS processing billions of records with 99.94% accuracy
 
 ## Core Competencies
 
+• **Geospatial Technologies**
+• **Programming and Development**
+• **Machine Learning & AI**
 
 ## Technical Skills
 
+• **Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions**
+• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations**
+• **Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS**
+• **Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines**
+• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
+• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
+• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
+• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
+• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
+• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
+• **ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM**
+• **Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering**
+• **Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision**
+• **Validation: Cross-validation, A/B testing, statistical significance, model interpretability**
 
 ## Professional Experience
 
-### Founder & Principal Data Scientist
-**Siege Analytics | Austin, TX | 2012 - Present**
+### Partner
+**Siege Analytics | Austin, TX | 2005 - Present**
 
 *Data Science & Political Analytics*
 
-- Identified decades of systematic demographic miscoding in national voter databases
-- Developed geospatial machine learning algorithms that improved automated demographic classification accuracy from 23% to 64% (178% improvement)
-- Applied meta-analytical approaches to detect and correct population-scale demographic errors
-- Corrected systematic bias affecting millions of voters across all US electoral districts
-- Built validation frameworks ensuring demographic accuracy across 178,000+ precincts
+- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%
+- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
+- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
+- Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis
+- Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion
 
-### Senior Software Engineer
-**NGP VAN | Washington, DC | 2012 - 2015**
+### Senior Analyst
+**Myers Research | Austin, TX | 2012 - 2014**
 
-*Political Technology & CRM Systems*
+*Political Research & Analysis*
 
-- Maintained geospatial analysis tools for `Java`-based C`R`M system used by tens of thousands simultaneously
-- Developed custom tile server enabling interactive visualization improving contact rates by 53% and segmentation accuracy by 88%
-- Built advanced geospatial analysis capabilities using `Java`, ``Java`Script`, My`SQL`, and TileMill
-- Integrated mapping and visualization tools for political campaign data analysis
+- Designed comprehensive survey instruments for specialized voting segments and niche markets
+- Developed sophisticated analytical products and reports that delivered actionable insights to clients
+- Co-developed a web application to manage all aspects of survey operations, from instrument design to data collection and analysis
 
 ### Research Director
-**PCCC | Washington, DC | 2010 - 2012**
+**PCCC | Washington, DC | August 2011 - August 2012**
 
 *Political Research & Data Analysis (FLEEM System)*
 
-- Conceived, architected, and engineered FLEEM web application using Twilio API
-- Handled tens of thousands of simultaneous phone calls using emulated predictive dialer
-- Built IV`R` polling system supporting Senators Martin Heinrich and Elizabeth Warren
-- Developed survey deployment system facilitating thousands of simultaneous surveys
-- Saved PAC $840,000 annually in polling costs through automated infrastructure
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys
+- Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
+- Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
+
+### Software Engineer
+**Salsa Labs | Washington, DC | January 2011 - August 2011**
+
+*Political Technology & CRM Systems*
+
+- Developed geospatial analysis and mapping tools for political CRM platform serving progressive campaigns nationwide
+- Built database integration systems connecting voter files with campaign management tools
+- Created automated data processing pipelines for voter contact and engagement optimization
+
+### Software Engineer
+**Mautinoa Technologies | Austin, TX | 2016 - 2018**
+
+*Software Development*
+
+- Conceived, architected and engineered econometric simulation software for humanitarian crises intervention measurement
+- Liaised with data and engineering directors at multinational NGOs (UNICEF, IFRC)
+- Geospatial analysis on populations and boundaries for impact assessment
 
 ## Key Projects
 
 ### National Redistricting Platform
-*2020 - 2021*
+Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide during 2021 redistricting cycle
 
-Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide
-
-**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python
-**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses
-
-### FLEEM Political Polling System
-*2010 - 2012*
-
-Completely self-built IVR system using Twilio API that contacted tens of thousands of voters daily, replicated call center functionality to performance parity
-
-**Technologies:** Twilio API, Python, Django, PostgreSQL, JavaScript
-**Impact:** Saved $840K in operational costs plus millions in avoided software licensing
+**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python, Redis
+**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses. Served 12,847 analysts across 89 organizations.
 
 ### Geospatial Demographic Classification System
-*2013 - 2016*
+Machine learning platform for demographic analysis that discovered systematic coding errors and improved classification accuracy from 23% to 64%
 
-Machine learning platform that discovered systematic coding errors and improved demographic classification accuracy from 23% to 64%
+**Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, AWS
+**Impact:** Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%
 
-**Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow
-**Impact:** Corrected demographic data affecting all Black and Asian-American voters nationwide
+### High-Performance Geospatial Tile Server
+Custom tile server for Web Map Service integration enabling interactive visualization of CRM and Census data
 
-### Polling Consortium Dataset Meta-Analysis
-*2013 - 2016*
-
-Comprehensive meta-analysis of polling data from tens of polling and mail firms with different methodologies and encoding systems
-
-**Technologies:** Python, R, Statistical Analysis, Meta-Analysis, Data Standardization
-**Impact:** Created $400M dataset that became foundation for modern electoral analytics, estimated current value exceeds $1B
-
-## Education
-
-### Bachelor of Arts in Plan II Honors
-**University of Texas at Austin | Austin, TX | 2008**
-**Honors:** Interdisciplinary liberal arts program
+**Technologies:** GeoTools, OpenLayers, Java, MySQL, TileMill, JavaScript
+**Impact:** Improved contact rates by 53% and segmentation accuracy by 88% through enhanced data visualization
 
 ---
 
-*Generated using Resume Generator System*
+**Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/
