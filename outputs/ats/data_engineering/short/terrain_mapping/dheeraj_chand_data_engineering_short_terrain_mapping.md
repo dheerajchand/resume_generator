@@ -1,5 +1,7 @@
 # Dheeraj Chand
 
+**Phone:** 202.550.7110 | **Email:** dheeraj.chand@gmail.com | **Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/ | **Location:** Austin, TX
+
 ## Professional Summary
 
 Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.
@@ -129,3 +131,5 @@ Machine learning platform that discovered systematic coding errors and improved 
 • **JavaScript: React, D3.js, Node.js, real-time applications (10+ years)**
 
 ---
+
+**Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/

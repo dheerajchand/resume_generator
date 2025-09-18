@@ -52,6 +52,7 @@ from resume_generator_django.resume_generator.constants import (
 
 import re
 
+
 def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: str = "#2C3E50") -> str:
     """
     Highlight quantitative impact metrics in text using bold and color formatting.
@@ -99,7 +100,36 @@ class ResumeGenerator:
         self.length_variant = length_variant
         self.output_type = output_type
         self.styles = self._create_styles()
+        self._init_spacing_constants()
+    
+    def _get_contact_info(self, personal_info: dict) -> dict:
+        """
+        Get contact information from personal_info, handling both nested and flat structures.
         
+        Args:
+            personal_info: Personal info dictionary from resume data
+            
+        Returns:
+            Dictionary with contact information (phone, email, website, linkedin, location, github)
+        """
+        # Try nested structure first (long resumes)
+        contact_info = personal_info.get("contact", {})
+        
+        # If nested structure is empty, try flat structure (short resumes)
+        if not contact_info:
+            contact_info = {
+                "phone": personal_info.get("phone", ""),
+                "email": personal_info.get("email", ""),
+                "website": personal_info.get("website", ""),
+                "linkedin": personal_info.get("linkedin", ""),
+                "location": personal_info.get("location", ""),
+                "github": personal_info.get("github", "")
+            }
+        
+        return contact_info
+    
+    def _init_spacing_constants(self):
+        """Initialize spacing constants as instance variables"""
         # Spacing system constants (imported from settings)
         self.SPACE_BASE = SPACE_BASE
         self.SPACE_BETWEEN_SECTIONS = SPACE_BETWEEN_SECTIONS
@@ -628,7 +658,7 @@ class ResumeGenerator:
         # Use the first page header content for spacing calculation since it has the most content
         # This ensures consistent spacing regardless of page type
         personal_info = self.data.get("personal_info", {})
-        contact_info = personal_info.get("contact", {})
+        contact_info = self._get_contact_info(personal_info)
         
         # Find the lowest text line using the same logic as the header function
         # This represents the actual header bar position on the first page
@@ -721,7 +751,7 @@ class ResumeGenerator:
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
             personal_info = self.data.get("personal_info", {})
-            contact_info = personal_info.get("contact", {})
+            contact_info = self._get_contact_info(personal_info)
             
             # Three-cell layout: Email/Phone (left) | Empty (middle) | Name (right)
             name = personal_info.get("name", "NAME")
@@ -836,7 +866,7 @@ class ResumeGenerator:
             canvas.setLineWidth(1.0)  # Ensure consistent line width
             
             personal_info = self.data.get("personal_info", {})
-            contact_info = personal_info.get("contact", {})
+            contact_info = self._get_contact_info(personal_info)
             
             canvas.setFont("Helvetica", FONT_SIZE_8)
             footer_y = FOOTER_Y
@@ -946,7 +976,7 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
-        contact_info = personal_info.get("contact", {})
+        contact_info = self._get_contact_info(personal_info)
         
         # Name
         name_para = doc.add_paragraph()
@@ -1109,7 +1139,7 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
-        contact_info = personal_info.get("contact", {})
+        contact_info = self._get_contact_info(personal_info)
         content.append(f"\\b {personal_info.get('name', 'NAME')}\\b0")
         content.append("")
         
@@ -1288,7 +1318,7 @@ class ResumeGenerator:
         
         # Personal info
         personal_info = self.data.get("personal_info", {})
-        contact_info = personal_info.get("contact", {})
+        contact_info = self._get_contact_info(personal_info)
         content.append(f"# {personal_info.get('name', 'NAME')}")
         content.append("")
         
@@ -1439,7 +1469,7 @@ class ResumeGenerator:
         
         # Add footer contact info similar to PDF footer
         personal_info = self.data.get("personal_info", {})
-        contact_info = personal_info.get("contact", {})
+        contact_info = self._get_contact_info(personal_info)
         footer_parts = []
         
         if contact_info.get("website"):

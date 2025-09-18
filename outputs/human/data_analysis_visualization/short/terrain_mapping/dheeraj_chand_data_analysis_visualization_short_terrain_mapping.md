@@ -1,5 +1,7 @@
 # Dheeraj Chand
 
+**Phone:** 202.550.7110 | **Email:** dheeraj.chand@gmail.com | **Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/ | **Location:** Austin, TX
+
 ## Professional Summary
 
 Data analysis and visualization expert with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in statistical modeling and data storytelling.
@@ -119,3 +121,5 @@ Machine learning platform that discovered systematic coding errors and improved 
 
 
 ---
+
+**Website:** https://www.dheerajchand.com | **LinkedIn:** https://www.linkedin.com/in/dheerajchand/
