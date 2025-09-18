@@ -9,12 +9,10 @@ Political research and redistricting expert with 15+ years building systems that
 ## Key Achievements and Impact
 
 ### Impact
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
-- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations
-- Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality
-- Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy
-- Demystified FEC compliance through real-time processing systems enabling transparent campaign finance monitoring
+- Predictive excellence: Achieved 87% voter turnout accuracy vs. 71% industry standard
+- Reduced polling margins from ±4.2% to ±2.1%
+- Executive authority: Briefed Presidents, Congressmen, Senators, Governors on election integrity, voter sentiment and postmortem analysis
+- Methodological advancement: Improved segmentation accuracy 34% and survey incidence 28%
 
 ## Core Competencies
 

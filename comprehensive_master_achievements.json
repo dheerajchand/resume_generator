@@ -25,17 +25,17 @@
       "business_focused": "Results-driven data scientist with 15+ years delivering measurable business impact. Saved organizations $4.7M through algorithmic innovations, generated $4.9M in additional revenue, and achieved 87% prediction accuracy vs. industry standard of 71%. Expert in translating technical solutions into business value."
     },
     "key_achievements": {
-      "demographic_breakthrough": "Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%",
-      "algorithmic_innovation": "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
-      "fraud_detection_systems": "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
-      "predictive_excellence": "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%",
-      "platform_impact": "Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations",
-      "expert_authority": "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy",
-      "regulatory_innovation": "Demystified FEC compliance through real-time processing systems enabling transparent campaign finance monitoring",
-      "methodological_advancement": "Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality",
-      "revenue_generation": "Delivered $4.9M additional revenue through continuous testing and optimization, increased conversion rates by 23%",
-      "data_infrastructure": "Built cloud-based data warehouse solutions on AWS processing billions of records with 99.94% accuracy",
-      "technical_architecture": "Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial datasets"
+      "demographic_breakthrough": "Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions | 178% accuracy improvement in racial classification algorithms",
+      "trigonometric_algorithm": "Algorithmic innovation: Pioneered trigonometric boundary estimation reducing mapping costs 73.5% | $4.7M savings enabled nonprofit access",
+      "fraud_detection_systems": "Financial crime detection: Built real-time FEC fraud detection processing billions of records daily | Analyzed trillions in political spending data",
+      "predictive_excellence": "Predictive excellence: Achieved 87% voter turnout accuracy vs. 71% industry standard | Reduced polling margins from ±4.2% to ±2.1%",
+      "platform_impact": "Platform impact: Built redistricting system serving 12,847 analysts across 89 organizations | Real-time collaboration at national scale",
+      "expert_testimony": "Executive authority: Briefed Presidents, Congressmen, Senators, Governors on election integrity, voter sentiment and postmortem analysis",
+      "regulatory_innovation": "Regulatory innovation: Demystified FEC compliance through real-time processing | Enabled transparent campaign finance monitoring",
+      "methodological_advancement": "Methodological advancement: Improved segmentation accuracy 34% and survey incidence 28% | Reduced polling costs while increasing quality",
+      "revenue_generation": "Revenue generation: Delivered $4.9M additional revenue through optimization | 23% conversion rate improvement",
+      "data_infrastructure": "Data infrastructure: Built cloud-based warehouse processing billions of records with 99.94% accuracy | Scalable real-time analytics architecture",
+      "technical_architecture": "Technical architecture: Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS | Automated data quality monitoring at scale"
     },
     "core_achievements": {
       "demographic_discovery": {

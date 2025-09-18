@@ -54,8 +54,16 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
     
     for achievement_key in achievement_config["include_achievements"]:
         if achievement_key in key_achievements:
-            selected_achievements.append(key_achievements[achievement_key])
+            # Split pipe-delimited achievements into separate bullet points
+            achievement_text = key_achievements[achievement_key]
+            if " | " in achievement_text:
+                # Split on pipe delimiter and add each part as separate bullet
+                parts = [part.strip() for part in achievement_text.split(" | ")]
+                selected_achievements.extend(parts)
+            else:
+                selected_achievements.append(achievement_text)
     
+    # Apply total_max limit after processing all achievements
     resume["achievements"] = {"Impact": selected_achievements[:achievement_config["total_max"]]}
     
     # REFINE: Build work experience from master using configuration

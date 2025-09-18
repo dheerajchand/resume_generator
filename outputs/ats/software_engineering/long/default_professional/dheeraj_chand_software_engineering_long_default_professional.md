@@ -9,12 +9,10 @@ Software engineer with 15+ years building systems that matter. Discovered system
 ## Key Achievements and Impact
 
 ### Impact
-- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations
-- Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial datasets
-- Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
-- Built cloud-based data warehouse solutions on AWS processing billions of records with 99.94% accuracy
+- Algorithmic innovation: Pioneered trigonometric boundary estimation reducing mapping costs 73.5%
+- $4.7M savings enabled nonprofit access
+- Platform impact: Built redistricting system serving 12,847 analysts across 89 organizations
+- Real-time collaboration at national scale
 
 ## Core Competencies
 

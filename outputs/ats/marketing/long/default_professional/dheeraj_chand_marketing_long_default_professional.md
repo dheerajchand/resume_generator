@@ -9,12 +9,10 @@ Marketing analytics professional with 15+ years building systems that matter. Di
 ## Key Achievements and Impact
 
 ### Impact
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
-- Delivered $4.9M additional revenue through continuous testing and optimization, increased conversion rates by 23%
-- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations
-- Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%
-- Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis
+- Revenue generation: Delivered $4.9M additional revenue through optimization
+- 23% conversion rate improvement
+- Executive authority: Briefed Presidents, Congressmen, Senators, Governors on election integrity, voter sentiment and postmortem analysis
+- Platform impact: Built redistricting system serving 12,847 analysts across 89 organizations
 
 ## Core Competencies
 

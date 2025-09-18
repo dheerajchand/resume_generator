@@ -9,12 +9,10 @@ Data analysis and visualization expert with 15+ years building systems that matt
 ## Key Achievements and Impact
 
 ### Impact
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
-- Built cloud-based data warehouse solutions on AWS processing billions of records with 99.94% accuracy
-- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations
-- Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality
-- Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS for large-scale geospatial datasets
+- Predictive excellence: Achieved 87% voter turnout accuracy vs. 71% industry standard
+- Reduced polling margins from ±4.2% to ±2.1%
+- Methodological advancement: Improved segmentation accuracy 34% and survey incidence 28%
+- Reduced polling costs while increasing quality
 
 ## Core Competencies
 

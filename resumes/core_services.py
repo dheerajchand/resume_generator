@@ -252,11 +252,10 @@ class ResumeGenerator:
             all_achievements = []
             for category, achievement_list in achievements.items():
                 if isinstance(achievement_list, list) and achievement_list:
-                    # Take first achievement from each category (abbreviated)
-                    if achievement_list:
-                        all_achievements.append(achievement_list[0])
+                    # Add all achievements from the list
+                    all_achievements.extend(achievement_list)
             
-            # Single line format like Deepak
+            # Single line format like Deepak with bullet separators
             achievement_text = " • ".join(all_achievements)
             achievement_content.append(Paragraph(achievement_text, self.styles["CompetencyDetail"]))
             

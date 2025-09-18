@@ -14,12 +14,11 @@
   "summary": "Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.",
   "achievements": {
     "Impact": [
-      "Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving classification accuracy from 23% to 64%",
-      "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
-      "Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration, serving 12,847 analysts across 89 organizations",
-      "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%",
-      "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
-      "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy"
+      "Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions",
+      "178% accuracy improvement in racial classification algorithms",
+      "Algorithmic innovation: Pioneered trigonometric boundary estimation reducing mapping costs 73.5%",
+      "$4.7M savings enabled nonprofit access",
+      "Platform impact: Built redistricting system serving 12,847 analysts across 89 organizations"
     ]
   },
   "competencies": {

@@ -3,8 +3,8 @@
     "comprehensive": {
       "summary_key": "comprehensive",
       "achievements": {
-        "include_achievements": ["demographic_breakthrough", "algorithmic_innovation", "platform_impact", "predictive_excellence", "fraud_detection_systems", "expert_authority", "methodological_advancement", "revenue_generation", "data_infrastructure", "technical_architecture"],
-        "total_max": 6
+        "include_achievements": ["demographic_breakthrough", "trigonometric_algorithm", "platform_impact", "predictive_excellence", "expert_testimony"],
+        "total_max": 5
       },
       "experience": {
         "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "mautinoa_technologies", "myers_research", "pccc", "salsa_labs", "praxis_project", "lake_research_partners", "feldman_group"],
@@ -23,8 +23,8 @@
     "data_engineering": {
       "summary_key": "data_engineering",
       "achievements": {
-        "include_achievements": ["fraud_detection_systems", "data_infrastructure", "technical_architecture", "algorithmic_innovation", "platform_impact", "demographic_breakthrough"],
-        "total_max": 6
+        "include_achievements": ["trigonometric_algorithm", "demographic_breakthrough", "technical_architecture", "data_infrastructure"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "mautinoa_technologies", "myers_research", "pccc"],
@@ -44,8 +44,8 @@
     "software_engineering": {
       "summary_key": "software_engineering", 
       "achievements": {
-        "include_achievements": ["platform_impact", "technical_architecture", "algorithmic_innovation", "demographic_breakthrough", "predictive_excellence", "data_infrastructure"],
-        "total_max": 6
+        "include_achievements": ["trigonometric_algorithm", "platform_impact", "technical_architecture", "demographic_breakthrough"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "mautinoa_technologies", "salsa_labs", "praxis_project", "pccc", "helm_murmuration"],
@@ -64,8 +64,8 @@
     "gis": {
       "summary_key": "gis",
       "achievements": {
-        "include_achievements": ["demographic_breakthrough", "platform_impact", "algorithmic_innovation", "methodological_advancement", "technical_architecture", "data_infrastructure"],
-        "total_max": 6
+        "include_achievements": ["trigonometric_algorithm", "demographic_breakthrough", "platform_impact", "technical_architecture"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "myers_research", "pccc", "salsa_labs", "mautinoa_technologies"],
@@ -84,8 +84,8 @@
     "product": {
       "summary_key": "product",
       "achievements": {
-        "include_achievements": ["revenue_generation", "platform_impact", "predictive_excellence", "algorithmic_innovation", "demographic_breakthrough", "methodological_advancement"],
-        "total_max": 6
+        "include_achievements": ["platform_impact", "revenue_generation", "trigonometric_algorithm", "predictive_excellence"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "helm_murmuration", "gsdm", "myers_research", "pccc"],
@@ -104,8 +104,8 @@
     "marketing": {
       "summary_key": "marketing",
       "achievements": {
-        "include_achievements": ["predictive_excellence", "revenue_generation", "platform_impact", "methodological_advancement", "demographic_breakthrough", "algorithmic_innovation"],
-        "total_max": 6
+        "include_achievements": ["revenue_generation", "expert_testimony", "platform_impact", "predictive_excellence"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "gsdm", "helm_murmuration", "myers_research", "pccc"],
@@ -124,8 +124,8 @@
     "data_analysis_visualization": {
       "summary_key": "data_analysis_visualization",
       "achievements": {
-        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "data_infrastructure", "platform_impact", "methodological_advancement", "technical_architecture"],
-        "total_max": 6
+        "include_achievements": ["predictive_excellence", "methodological_advancement", "demographic_breakthrough", "platform_impact"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "myers_research", "gsdm", "pccc", "helm_murmuration"],
@@ -144,8 +144,8 @@
     "polling_research_redistricting": {
       "summary_key": "polling_research_redistricting",
       "achievements": {
-        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "platform_impact", "methodological_advancement", "expert_authority", "regulatory_innovation"],
-        "total_max": 6
+        "include_achievements": ["predictive_excellence", "expert_testimony", "methodological_advancement", "demographic_breakthrough"],
+        "total_max": 4
       },
       "experience": {
         "include_positions": ["siege_analytics", "pccc", "myers_research", "lake_research_partners", "feldman_group"],
