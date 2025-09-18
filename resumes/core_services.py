@@ -50,6 +50,45 @@ from resume_generator_django.resume_generator.constants import (
 
 
 
+import re
+
+def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: str = "#2C3E50") -> str:
+    """
+    Highlight quantitative impact metrics in text using bold and color formatting.
+    
+    Args:
+        text: The text to process
+        format_type: The output format ("pdf", "docx", "rtf", "md")
+        color: The color to use for highlighting (ignored for markdown)
+    
+    Returns:
+        Text with quantitative metrics highlighted
+    """
+    def format_match(match_text: str) -> str:
+        """Format a matched metric based on output format"""
+        if format_type == "md":
+            # Markdown: bold only
+            return f"**{match_text}**"
+        elif format_type == "pdf":
+            # PDF: bold + color using ReportLab markup
+            return f'<font color="{color}"><b>{match_text}</b></font>'
+        elif format_type == "docx":
+            # DOCX: will be handled separately in DOCX generation
+            return f"**METRIC_HIGHLIGHT_START**{match_text}**METRIC_HIGHLIGHT_END**"
+        elif format_type == "rtf":
+            # RTF: bold markup
+            return f"\\b {match_text}\\b0"
+        else:
+            return match_text
+    
+    # Single comprehensive pattern for all quantitative metrics
+    # Order matters - more specific patterns first
+    pattern = r'(\$[\d,]+(?:\.\d+)?[KMB]?|±[\d,]+(?:\.\d+)?%|[\d,]+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b|\b\d+(?:\.\d+)?[KMB]\b|[\d,]+(?:\.\d+)?x)'
+    
+    result = re.sub(pattern, lambda m: format_match(m.group(1)), text)
+    return result
+
+
 class ResumeGenerator:
     """Core resume generator supporting all formats"""
     
@@ -236,6 +275,10 @@ class ResumeGenerator:
         """Define and render all resume sections in order"""
         sections = []
         
+        # Get colors for highlighting quantitative metrics
+        colors = self.config if self.config else {}
+        highlight_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
+        
         # Professional Summary
         summary = self.data.get("summary", "")
         if summary:
@@ -257,7 +300,9 @@ class ResumeGenerator:
             
             # Single line format like Deepak with bullet separators
             achievement_text = " • ".join(all_achievements)
-            achievement_content.append(Paragraph(achievement_text, self.styles["CompetencyDetail"]))
+            # Highlight quantitative metrics in achievement text
+            highlighted_achievement_text = highlight_quantitative_metrics(achievement_text, "pdf", highlight_color)
+            achievement_content.append(Paragraph(highlighted_achievement_text, self.styles["CompetencyDetail"]))
             
             sections.append({
                 "name": "KEY ACHIEVEMENTS AND IMPACT",
@@ -316,26 +361,31 @@ class ResumeGenerator:
                     # Keep company + title + subtitle + first bullet together
                     header_unit = job_unit.copy()
                     # Add first bullet to header to ensure at least one stays with header
-                    header_unit.append(Paragraph(f"• {responsibilities[0]}", self.styles["BulletPoint"]))
+                    highlighted_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
+                    header_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
                     experience_content.append(KeepTogether(header_unit))
                     
                     # Add remaining bullets (can split across pages)
                     for resp in responsibilities[1:]:
-                        experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        experience_content.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
                 elif len(responsibilities) > 1:  # For jobs with 2-4 responsibilities
                     # Keep header + at least one bullet together
                     header_unit = job_unit.copy()
                     # Add first bullet to header to ensure at least one stays with header
-                    header_unit.append(Paragraph(f"• {responsibilities[0]}", self.styles["BulletPoint"]))
+                    highlighted_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
+                    header_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
                     experience_content.append(KeepTogether(header_unit))
                     
                     # Add remaining bullets (can split across pages)
                     for resp in responsibilities[1:]:
-                        experience_content.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        experience_content.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
                 else:
                     # For shorter jobs, keep everything together
                     for resp in responsibilities:
-                        job_unit.append(Paragraph(f"• {resp}", self.styles["BulletPoint"]))
+                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        job_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
                     experience_content.append(KeepTogether(job_unit))
                 
                 # Add spacer between job units (but not after the last job)
@@ -848,6 +898,40 @@ class ResumeGenerator:
         doc.build(story, onFirstPage=add_header, onLaterPages=add_header)
         return filename
     
+    def _process_docx_highlights(self, doc, text):
+        """Process DOCX metric highlighting markers and apply formatting"""
+        if "**METRIC_HIGHLIGHT_START**" not in text:
+            return doc.add_paragraph(text)
+        
+        # Split text by highlighting markers
+        parts = text.split("**METRIC_HIGHLIGHT_START**")
+        p = doc.add_paragraph()
+        
+        # Add first part (before any highlights)
+        if parts[0]:
+            p.add_run(parts[0])
+        
+        # Process highlighted parts
+        for part in parts[1:]:
+            if "**METRIC_HIGHLIGHT_END**" in part:
+                highlight_text, remaining = part.split("**METRIC_HIGHLIGHT_END**", 1)
+                # Add highlighted text with bold formatting and color
+                highlight_run = p.add_run(highlight_text)
+                highlight_run.bold = True
+                try:
+                    # Try to set color (may not work in all DOCX viewers)
+                    from docx.shared import RGBColor
+                    highlight_run.font.color.rgb = RGBColor(44, 62, 80)  # #2C3E50
+                except:
+                    pass  # Color setting failed, just use bold
+                # Add remaining text
+                if remaining:
+                    p.add_run(remaining)
+            else:
+                p.add_run(part)
+        
+        return p
+
     def generate_docx(self, filename: str) -> str:
         """Generate DOCX resume with high quality settings"""
         doc = Document()
@@ -932,7 +1016,8 @@ class ResumeGenerator:
                 
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
-                    doc.add_paragraph(f"• {resp}")
+                    highlighted_resp = highlight_quantitative_metrics(resp, "docx")
+                    self._process_docx_highlights(doc, f"• {highlighted_resp}")
         
         # Projects
         projects = self.data.get("projects", [])
@@ -996,7 +1081,8 @@ class ResumeGenerator:
                 if isinstance(achievement_list, list):
                     doc.add_heading(category, level=3)
                     for achievement in achievement_list:
-                        doc.add_paragraph(f"• {achievement}")
+                        highlighted_achievement = highlight_quantitative_metrics(achievement, "docx")
+                        self._process_docx_highlights(doc, f"• {highlighted_achievement}")
         
         # Technical Skills (moved to end like Deepak)
         competencies = self.data.get("competencies", {})
@@ -1060,7 +1146,8 @@ class ResumeGenerator:
                 if isinstance(achievement_list, list):
                     content.append(f"\\b {category}\\b0")
                     for achievement in achievement_list:
-                        content.append(f"• {achievement}")
+                        highlighted_achievement = highlight_quantitative_metrics(achievement, "rtf")
+                        content.append(f"• {highlighted_achievement}")
                     content.append("")
             content.append("")
         
@@ -1123,7 +1210,8 @@ class ResumeGenerator:
                 
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
-                    content.append(f"• {resp}")
+                    highlighted_resp = highlight_quantitative_metrics(resp, "rtf")
+                    content.append(f"• {highlighted_resp}")
                 
                 content.append("")
         
@@ -1238,7 +1326,8 @@ class ResumeGenerator:
                 content.append(f"### {category}")
                 if isinstance(achievement_list, list):
                     for achievement in achievement_list:
-                        content.append(f"- {achievement}")
+                        highlighted_achievement = highlight_quantitative_metrics(achievement, "md")
+                        content.append(f"- {highlighted_achievement}")
                 content.append("")
         
         # Additional info for abbreviated versions
@@ -1288,7 +1377,8 @@ class ResumeGenerator:
                 responsibilities = job.get('responsibilities', [])
                 if responsibilities:
                     for resp in responsibilities:
-                        content.append(f"- {resp}")
+                        highlighted_resp = highlight_quantitative_metrics(resp, "md")
+                        content.append(f"- {highlighted_resp}")
                 content.append("")
         
         # Projects

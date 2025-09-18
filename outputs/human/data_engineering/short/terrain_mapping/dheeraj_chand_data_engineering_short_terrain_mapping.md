@@ -8,9 +8,9 @@ Data engineering professional with 15+ years building systems that matter. Disco
 
 ### Impact
 - Discovered systematic race coding errors affecting all Black and Asian-American voters
-- Algorithm reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M
+- Algorithm reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M**
 - Built redistricting platform used by thousands of analysts nationwide
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%
+- Achieved **87%** prediction accuracy for voter turnout vs. industry standard of **71%**
 
 ## Core Competencies
 
@@ -24,9 +24,9 @@ Data engineering professional with 15+ years building systems that matter. Disco
 
 *Data, Technology and Strategy Consulting*
 
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%
+- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
-- Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%, reducing polling error margins from ±4.2% to ±2.1%
+- Achieved **87%** prediction accuracy for voter turnout vs. industry standard of **71%**, reducing polling error margins from **±4.2%** to **±2.1%**
 
 ### Data Products Manager
 **Helm/Murmuration | Austin, TX | June 2021 - May 2023**
@@ -62,7 +62,7 @@ Data engineering professional with 15+ years building systems that matter. Disco
 
 - Designed comprehensive survey instruments for specialized voting segments and niche markets
 - Co-developed RACSO web application managing all aspects of survey operations from instrument design to data analysis
-- Wrote RFP and analyzed bids from 1,200 vendors for research platform development
+- Wrote RFP and analyzed bids from **1,200** vendors for research platform development
 
 ### Research Director
 **PCCC | Washington, DC | 2010 - 2012**
@@ -89,7 +89,7 @@ Data engineering professional with 15+ years building systems that matter. Disco
 
 - Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party
 - Harmonized data from 20+ polling firms with incompatible methodologies and encoding systems
-- Created comprehensive meta-analysis framework handling millions of survey responses that became the $400M Polling Consortium Database at The Analyst Institute, now valued at $1B+
+- Created comprehensive meta-analysis framework handling millions of survey responses that became the **$400M** Polling Consortium Database at The Analyst Institute, now valued at **$1B**+
 
 ## Key Projects
 
