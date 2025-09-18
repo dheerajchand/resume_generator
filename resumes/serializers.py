@@ -5,7 +5,7 @@ Serializers for Resume Generator API
 from rest_framework import serializers
 from .models import (
     CustomUser, UserProfile, UserResumeData, UserDirectory,
-    Resume, ResumeTemplate, ColorScheme, ResumeGenerationJob
+    Resume, ResumeTemplate, ColorScheme, UserColorScheme, ResumeGenerationJob
 )
 
 
@@ -90,6 +90,25 @@ class ResumeSerializer(serializers.ModelSerializer):
             'id', 'created_at', 'updated_at', 'generated_at',
             'pdf_path', 'docx_path', 'rtf_path'
         ]
+
+
+class UserColorSchemeSerializer(serializers.ModelSerializer):
+    """Serializer for UserColorScheme"""
+    
+    class Meta:
+        model = UserColorScheme
+        fields = [
+            'id', 'name', 'slug', 'description', 'primary_color',
+            'secondary_color', 'accent_color', 'muted_color',
+            'background_color', 'text_color', 'is_active',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def create(self, validated_data):
+        """Automatically assign the current user when creating"""
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
 
 
 class ResumeGenerationJobSerializer(serializers.ModelSerializer):

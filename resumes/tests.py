@@ -1,3 +1,10 @@
-from django.test import TestCase
+"""
+Main test module for Resume Generator
 
-# Create your tests here.
+This module imports all test suites to ensure they're discovered by Django's test runner.
+"""
+
+# Import all test modules
+from .test_models import *
+from .test_services import *
+from .test_api import *

@@ -1,0 +1,29 @@
+# Heroku Environment Variables Configuration
+# Run these commands to set up your Heroku app:
+
+# Required variables
+heroku config:set SECRET_KEY="your-secret-key-here"
+heroku config:set DEBUG=False
+heroku config:set DJANGO_SETTINGS_MODULE=resume_generator_django.settings_production
+
+# Database (automatically set by Heroku PostgreSQL add-on)
+heroku addons:create heroku-postgresql:mini
+# This automatically sets DATABASE_URL
+
+# Optional: Redis for caching (better performance)
+heroku addons:create heroku-redis:mini
+# This automatically sets REDIS_URL
+
+# Optional: Email settings
+heroku config:set EMAIL_HOST=smtp.gmail.com
+heroku config:set EMAIL_PORT=587
+heroku config:set EMAIL_HOST_USER=your-email@gmail.com
+heroku config:set EMAIL_HOST_PASSWORD=your-app-password
+
+# Resume generation settings
+heroku config:set RESUME_GENERATION_TIMEOUT=300
+heroku config:set MAX_CONCURRENT_GENERATIONS=5
+heroku config:set ENABLE_RESUME_CACHING=True
+
+# Deploy
+git push heroku main

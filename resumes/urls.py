@@ -11,6 +11,7 @@ router = DefaultRouter()
 router.register(r'resume-data', views.UserResumeDataViewSet, basename='resume-data')
 router.register(r'resumes', views.ResumeViewSet, basename='resumes')
 router.register(r'color-schemes', views.ColorSchemeViewSet, basename='color-schemes')
+router.register(r'user-color-schemes', views.UserColorSchemeViewSet, basename='user-color-schemes')
 router.register(r'generation-jobs', views.ResumeGenerationJobViewSet, basename='generation-jobs')
 
 app_name = 'resumes'

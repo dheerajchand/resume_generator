@@ -3,7 +3,7 @@ from .models import (
     CustomUser, UserProfile, UserResumeData, UserDirectory,
     ResumeTemplate, PersonalInfo, CompetencyCategory, Competency,
     Experience, Project, Education, Certification, Achievement,
-    Resume, ColorScheme, ResumeGenerationJob
+    Resume, ColorScheme, UserColorScheme, ResumeGenerationJob
 )
 from .user_admin import CustomUserAdmin, UserProfileAdmin, UserResumeDataAdmin, UserDirectoryAdmin
 
@@ -25,4 +25,5 @@ admin.site.register(Certification)
 admin.site.register(Achievement)
 admin.site.register(Resume)
 admin.site.register(ColorScheme)
+admin.site.register(UserColorScheme)
 admin.site.register(ResumeGenerationJob)

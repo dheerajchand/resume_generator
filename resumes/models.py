@@ -560,6 +560,35 @@ class ColorScheme(models.Model):
         super().save(*args, **kwargs)
 
 
+class UserColorScheme(models.Model):
+    """User-specific custom color schemes"""
+    
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='custom_color_schemes')
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    description = models.TextField(blank=True)
+    
+    # Color definitions
+    primary_color = models.CharField(max_length=7, help_text="Hex color code (e.g., #FF0000)")
+    secondary_color = models.CharField(max_length=7, help_text="Hex color code")
+    accent_color = models.CharField(max_length=7, help_text="Hex color code")
+    muted_color = models.CharField(max_length=7, help_text="Hex color code")
+    background_color = models.CharField(max_length=7, default="#FFFFFF", help_text="Hex color code")
+    text_color = models.CharField(max_length=7, default="#000000", help_text="Hex color code")
+    
+    # Metadata
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ['user', 'slug']
+        ordering = ['name']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.name}"
+
+
 class ResumeGenerationJob(models.Model):
     """Track resume generation jobs"""
     

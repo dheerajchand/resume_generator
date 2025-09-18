@@ -20,11 +20,11 @@ from pathlib import Path
 
 from .models import (
     CustomUser, UserProfile, UserResumeData, UserDirectory,
-    Resume, ResumeTemplate, ColorScheme, ResumeGenerationJob
+    Resume, ResumeTemplate, ColorScheme, UserColorScheme, ResumeGenerationJob
 )
 from .serializers import (
     UserResumeDataSerializer, ResumeSerializer, ColorSchemeSerializer,
-    ResumeGenerationJobSerializer
+    UserColorSchemeSerializer, ResumeGenerationJobSerializer
 )
 
 User = get_user_model()
@@ -206,6 +206,44 @@ class ColorSchemeViewSet(viewsets.ReadOnlyModelViewSet):
     """API viewset for color schemes"""
     serializer_class = ColorSchemeSerializer
     queryset = ColorScheme.objects.filter(is_active=True)
+
+
+class UserColorSchemeViewSet(viewsets.ModelViewSet):
+    """API viewset for user custom color schemes"""
+    serializer_class = UserColorSchemeSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        """Return only the current user's color schemes"""
+        return UserColorScheme.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        """Automatically assign the current user when creating"""
+        serializer.save(user=self.request.user)
+    
+    @action(detail=True, methods=['post'])
+    def duplicate(self, request, pk=None):
+        """Duplicate a color scheme"""
+        original = self.get_object()
+        
+        # Create a copy with a new name
+        copy_data = {
+            'name': f"{original.name} (Copy)",
+            'slug': f"{original.slug}-copy",
+            'description': original.description,
+            'primary_color': original.primary_color,
+            'secondary_color': original.secondary_color,
+            'accent_color': original.accent_color,
+            'muted_color': original.muted_color,
+            'background_color': original.background_color,
+            'text_color': original.text_color,
+        }
+        
+        serializer = self.get_serializer(data=copy_data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ResumeGenerationJobViewSet(viewsets.ReadOnlyModelViewSet):
