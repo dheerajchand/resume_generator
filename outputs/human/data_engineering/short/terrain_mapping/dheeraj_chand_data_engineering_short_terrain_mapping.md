@@ -4,15 +4,17 @@
 
 ## Professional Summary
 
-Data engineering professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Built Civic Graph data warehouse processing billions of records and platforms serving thousands of analysts nationwide.
+Data engineering professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting 50M voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Built Civic Graph data warehouse processing billions of records and platforms serving thousands of analysts nationwide.
 
 ## Key Achievements and Impact
 
 ### Impact
-- Discovered systematic race coding errors affecting all Black and Asian-American voters
-- Algorithm reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M**
-- Built redistricting platform used by thousands of analysts nationwide
-- Achieved **87%** prediction accuracy for voter turnout vs. industry standard of **71%**
+- Algorithmic innovation: Pioneered trigonometric boundary estimation reducing mapping costs ****73.5%****
+- ****$4.7M**** savings enabled nonprofit access
+- Legal precedent: Data analysis utilized in Supreme Court case
+- Expert methodology validated at highest judicial level
+- Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions
+- ****178%**** accuracy improvement in racial classification algorithms
 
 ## Core Competencies
 

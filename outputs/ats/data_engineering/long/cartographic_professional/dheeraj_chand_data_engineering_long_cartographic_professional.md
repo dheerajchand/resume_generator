@@ -13,6 +13,8 @@ Data engineering professional with 15+ years building systems that matter. Disco
 - **$4.7M** savings enabled nonprofit access
 - Legal precedent: Data analysis utilized in Supreme Court case
 - Expert methodology validated at highest judicial level
+- Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions
+- **178%** accuracy improvement in racial classification algorithms
 
 ## Core Competencies
 
