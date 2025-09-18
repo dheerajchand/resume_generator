@@ -36,11 +36,13 @@ class Command(BaseCommand):
         
         # Calculate total combinations
         manager = ResumeManager()
+        output_types = ["ats", "human"]
         total_combinations = (
             len(manager.versions) * 
             len(manager.length_variants) *
             len(manager.color_schemes) * 
-            len(manager.formats)
+            len(manager.formats) *
+            len(output_types)
         )
         
         self.stdout.write(
@@ -50,7 +52,8 @@ class Command(BaseCommand):
         self.stdout.write(
             f'📊 Total combinations: {len(manager.versions)} versions × '
             f'{len(manager.length_variants)} lengths × '
-            f'{len(manager.formats)} formats × {len(manager.color_schemes)} color schemes'
+            f'{len(manager.formats)} formats × {len(manager.color_schemes)} color schemes × '
+            f'{len(output_types)} output types (ATS + human)'
         )
         self.stdout.write(f'🎯 Total files to generate: {total_combinations}')
         self.stdout.write('')
@@ -67,8 +70,14 @@ class Command(BaseCommand):
         self.stdout.write('🚀 Launching nuclear generation sequence...')
         self.stdout.write('=' * 60)
         
-        # Generate all combinations
-        results = manager.generate_all_combinations(output_dir)
+        # Generate all combinations for both ATS and human versions
+        results = {"success": 0, "failed": 0}
+        
+        for output_type in output_types:
+            self.stdout.write(f'🎯 Generating {output_type.upper()} versions...')
+            type_results = manager.generate_all_combinations(output_dir, output_type)
+            results["success"] += type_results["success"]
+            results["failed"] += type_results["failed"]
         
         self.stdout.write('')
         self.stdout.write('☢️  NUCLEAR GENERATION COMPLETE!')
