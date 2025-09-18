@@ -33,15 +33,6 @@ Political research and redistricting expert with 15+ years building systems that
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
 - Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over **$2** trillion
 
-### Research Director
-**PCCC | Washington, DC | August 2011 - August 2012**
-
-*Political Research & Data Analysis (FLEEM System)*
-
-- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys
-- Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
-- Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
-
 ### Senior Analyst
 **Myers Research | Austin, TX | 2012 - 2014**
 
@@ -51,14 +42,14 @@ Political research and redistricting expert with 15+ years building systems that
 - Developed sophisticated analytical products and reports that delivered actionable insights to clients
 - Co-developed a web application to manage all aspects of survey operations, from instrument design to data collection and analysis
 
-### Programmer
-**Lake Research Partners | Austin, TX | 2008**
+### Research Director
+**PCCC | Washington, DC | August 2011 - August 2012**
 
-*Political Polling & Research*
+*Political Research & Data Analysis (FLEEM System)*
 
-- Designed questionnaires and analyzed data for complex market research studies across diverse industries
-- Conducted statistical modeling and analysis to address multifaceted consumer behavior questions
-- Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
+- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys
+- Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
+- Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
 
 ### Field Director
 **The Feldman Group | Austin, TX | 2011 - 2012**
@@ -68,6 +59,15 @@ Political research and redistricting expert with 15+ years building systems that
 - Managed all aspects of survey fielding for a multi-million dollar research firm, including scheduling, oversight, sampling, and quality control
 - Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
 - Created custom reports and data visualizations based on specific client requirements
+
+### Programmer
+**Lake Research Partners | Austin, TX | 2008**
+
+*Political Polling & Research*
+
+- Designed questionnaires and analyzed data for complex market research studies across diverse industries
+- Conducted statistical modeling and analysis to address multifaceted consumer behavior questions
+- Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
 
 ## Key Projects
 

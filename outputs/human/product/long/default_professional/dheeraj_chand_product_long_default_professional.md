@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Product-focused data scientist with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in translating technical solutions into business value.
+Product-focused data scientist with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting 50M voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in translating technical solutions into business value.
 
 ## Key Achievements and Impact
 
@@ -27,7 +27,7 @@ Product-focused data scientist with 15+ years building systems that matter. Disc
 
 *Data Science & Political Analytics*
 
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
+- Discovered systematic race coding errors affecting **50M** voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
 - Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**, increasing voter turnout prediction accuracy from **71%** to **87%**, and ensuring survey results more closely reflected true population attitudes
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
@@ -87,7 +87,7 @@ Web application using Twilio API for regulated political surveys, handling tens 
 Machine learning platform for demographic analysis that discovered systematic coding errors and improved classification accuracy from 23% to 64%
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, AWS
-**Impact:** Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%
+**Impact:** Corrected demographic data affecting 50M voters nationwide, improved electoral prediction accuracy by 22%
 
 ## Technical Skills
 

@@ -80,13 +80,22 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
             else:
                 max_resp = experience_config["max_responsibilities_per_job"]
                 
+            # Use neutral language for non-electoral resume types
+            is_electoral_resume = resume_type in ["polling_research_redistricting"]
+            
+            if is_electoral_resume:
+                responsibilities_key = "comprehensive_responsibilities"
+            else:
+                # Use neutral version if available, otherwise fall back to comprehensive
+                responsibilities_key = "comprehensive_responsibilities_neutral" if "comprehensive_responsibilities_neutral" in work_exp[position_key] else "comprehensive_responsibilities"
+            
             position = {
                 "title": work_exp[position_key]["title"],
                 "company": work_exp[position_key]["company"],
                 "location": work_exp[position_key]["location"],
                 "dates": work_exp[position_key]["dates"],
                 "subtitle": work_exp[position_key]["subtitle"],
-                "responsibilities": work_exp[position_key]["comprehensive_responsibilities"][:max_resp]
+                "responsibilities": work_exp[position_key][responsibilities_key][:max_resp]
             }
             resume["experience"].append(position)
     
@@ -99,12 +108,19 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
     for project_key in projects_config["include_projects"]:
         if project_key in key_projects:
             project_data = key_projects[project_key]
+            # Use neutral language for non-electoral resume types
+            if is_electoral_resume:
+                impact_text = project_data["impact"]
+            else:
+                # Use neutral version if available, otherwise fall back to standard impact
+                impact_text = project_data.get("impact_neutral", project_data["impact"])
+            
             project = {
                 "name": project_data["name"],
                 "dates": project_data.get("dates", ""),
                 "description": project_data["description"],
                 "technologies": project_data["technologies"],
-                "impact": project_data["impact"]
+                "impact": impact_text
             }
             # Add technical details if configuration specifies
             if projects_config["show_technical_details"] and "technical_details" in project_data:

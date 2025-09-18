@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.
+Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting 50M voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.
 
 ## Key Achievements and Impact
 
@@ -34,7 +34,7 @@ Data scientist and software engineer with 15+ years building systems that matter
 
 *Data Science & Political Analytics*
 
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
+- Discovered systematic race coding errors affecting **50M** voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
 - Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**, increasing voter turnout prediction accuracy from **71%** to **87%**, and ensuring survey results more closely reflected true population attitudes
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
@@ -86,6 +86,15 @@ Data scientist and software engineer with 15+ years building systems that matter
 - Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
 - Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
 
+### Field Director
+**The Feldman Group | Austin, TX | 2011 - 2012**
+
+*Political Campaign Management*
+
+- Managed all aspects of survey fielding for a multi-million dollar research firm, including scheduling, oversight, sampling, and quality control
+- Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
+- Created custom reports and data visualizations based on specific client requirements
+
 ### Software Engineer
 **Salsa Labs | Washington, DC | January 2011 - August 2011**
 
@@ -113,15 +122,6 @@ Data scientist and software engineer with 15+ years building systems that matter
 - Conducted statistical modeling and analysis to address multifaceted consumer behavior questions
 - Pioneered the integration of advanced mapping techniques into standard reports, including choropleths and hexagonal grid maps
 
-### Field Director
-**The Feldman Group | Austin, TX | 2011 - 2012**
-
-*Political Campaign Management*
-
-- Managed all aspects of survey fielding for a multi-million dollar research firm, including scheduling, oversight, sampling, and quality control
-- Developed and implemented data warehousing solutions for efficient storage and retrieval of research findings
-- Created custom reports and data visualizations based on specific client requirements
-
 ## Key Projects
 
 ### National Redistricting Platform
@@ -140,7 +140,7 @@ Web application using Twilio API for regulated political surveys, handling tens 
 Machine learning platform for demographic analysis that discovered systematic coding errors and improved classification accuracy from 23% to 64%
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, AWS
-**Impact:** Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%
+**Impact:** Corrected demographic data affecting 50M voters nationwide, improved electoral prediction accuracy by 22%
 
 ### Civic Graph Multi-Tenant Data Warehouse
 *2013 - 2016*

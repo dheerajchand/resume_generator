@@ -11,7 +11,7 @@
       "location": "Austin, TX"
     }
   },
-  "summary": "Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.",
+  "summary": "Data scientist and software engineer with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting 50M voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Saved organizations $4.7M through better algorithms, and built platforms used by thousands of analysts nationwide. Expert in translating complex analytical requirements into scalable technical solutions.",
   "achievements": {
     "Impact": [
       "Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions",
@@ -67,7 +67,7 @@
       "dates": "2005 - Present",
       "subtitle": "Data Science & Political Analytics",
       "responsibilities": [
-        "Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%",
+        "Discovered systematic race coding errors affecting 50M voters, developed geospatial machine learning algorithms improving demographic classification accuracy from 23% to 64%",
         "Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration",
         "Utilized advanced sampling methods to decrease survey margin of error from ±4.2% to ±2.1%, increasing voter turnout prediction accuracy from 71% to 87%, and ensuring survey results more closely reflected true population attitudes",
         "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
@@ -234,7 +234,7 @@
         "TensorFlow",
         "AWS"
       ],
-      "impact": "Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%",
+      "impact": "Corrected demographic data affecting 50M voters nationwide, improved electoral prediction accuracy by 22%",
       "technical_details": [
         "Processed demographic data across 178,000+ precincts",
         "Built meta-analysis frameworks for systematic error detection"

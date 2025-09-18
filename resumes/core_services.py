@@ -128,6 +128,59 @@ class ResumeGenerator:
         
         return contact_info
     
+    def _parse_date_for_sorting(self, date_string: str) -> tuple:
+        """
+        Parse a date string and return a tuple for sorting (most recent first).
+        
+        Args:
+            date_string: Date string like "2021 - 2023", "2005 - Present", "January 2011 - August 2011"
+            
+        Returns:
+            Tuple (end_year, start_year) for sorting, with "Present" treated as 9999
+        """
+        import re
+        
+        # Handle "Present" as current year (9999 for sorting)
+        if "Present" in date_string:
+            # Extract start year from "2005 - Present"
+            match = re.search(r'(\d{4})', date_string)
+            start_year = int(match.group(1)) if match else 0
+            return (9999, start_year)
+        
+        # Extract all 4-digit years from the date string
+        years = re.findall(r'\b(\d{4})\b', date_string)
+        
+        if len(years) >= 2:
+            # Assume first year is start, last year is end
+            start_year = int(years[0])
+            end_year = int(years[-1])
+            return (end_year, start_year)
+        elif len(years) == 1:
+            # Single year, treat as both start and end
+            year = int(years[0])
+            return (year, year)
+        else:
+            # No years found, put at bottom
+            return (0, 0)
+    
+    def _sort_experience_chronologically(self, experience: list) -> list:
+        """
+        Sort experience entries by most recent first.
+        
+        Args:
+            experience: List of job dictionaries with 'dates' field
+            
+        Returns:
+            Sorted list with most recent jobs first
+        """
+        def sort_key(job):
+            dates = job.get("dates", "")
+            end_year, start_year = self._parse_date_for_sorting(dates)
+            # Sort by end year descending, then start year descending
+            return (-end_year, -start_year)
+        
+        return sorted(experience, key=sort_key)
+    
     def _init_spacing_constants(self):
         """Initialize spacing constants as instance variables"""
         # Spacing system constants (imported from settings)
@@ -358,6 +411,8 @@ class ResumeGenerator:
         # Professional Experience
         experience = self.data.get("experience", [])
         if experience:
+            # Sort experience chronologically (most recent first)
+            experience = self._sort_experience_chronologically(experience)
             experience_content = []
             for job in experience:
                 job_title = job.get("title", "")
@@ -1024,6 +1079,8 @@ class ResumeGenerator:
         # Experience
         experience = self.data.get("experience", [])
         if experience:
+            # Sort experience chronologically (most recent first)
+            experience = self._sort_experience_chronologically(experience)
             doc.add_heading("PROFESSIONAL EXPERIENCE", level=2)
             for job in experience:
                 job_title = job.get("title", "")
@@ -1218,6 +1275,8 @@ class ResumeGenerator:
         # Experience
         experience = self.data.get("experience", [])
         if experience:
+            # Sort experience chronologically (most recent first)
+            experience = self._sort_experience_chronologically(experience)
             content.append("\\b PROFESSIONAL EXPERIENCE\\b0")
             for job in experience:
                 job_title = job.get("title", "")
@@ -1383,6 +1442,8 @@ class ResumeGenerator:
         # Experience (enhanced formatting with visual hierarchy)
         experience = self.data.get("experience", [])
         if experience:
+            # Sort experience chronologically (most recent first)
+            experience = self._sort_experience_chronologically(experience)
             content.append("## Professional Experience")
             content.append("")
             for job in experience:

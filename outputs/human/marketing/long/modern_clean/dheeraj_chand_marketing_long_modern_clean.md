@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Marketing analytics professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in campaign optimization and audience segmentation.
+Marketing analytics professional with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting 50M voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in campaign optimization and audience segmentation.
 
 ## Key Achievements and Impact
 
@@ -27,20 +27,11 @@ Marketing analytics professional with 15+ years building systems that matter. Di
 
 *Data Science & Political Analytics*
 
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
+- Discovered systematic race coding errors affecting **50M** voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
 - Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**, increasing voter turnout prediction accuracy from **71%** to **87%**, and ensuring survey results more closely reflected true population attitudes
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
 - Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over **$2** trillion
-
-### Analytics Supervisor
-**GSD&M | Austin, TX | 2018 - 2019**
-
-*Advertising Analytics*
-
-- Restructured the Decision Sciences Department to scale capabilities from small-scale data analysis to comprehensive big data operations
-- Implemented spatial analysis and consumer segmentation methodologies that revealed new insights about existing customers
-- Advanced Statistical and ML techniques for segmentation and behavioral clustering
 
 ### Data Products Manager
 **Helm/Murmuration | Austin, TX | 2021 - 2023**
@@ -50,6 +41,15 @@ Marketing analytics professional with 15+ years building systems that matter. Di
 - Led design and implementation of enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data
 - Managed engineering team of 11 professionals while setting technical direction for data architecture
 - Modernized legacy ETL processes by implementing dbt and PySpark workflows, reducing processing time by **57%**
+
+### Analytics Supervisor
+**GSD&M | Austin, TX | 2018 - 2019**
+
+*Advertising Analytics*
+
+- Restructured the Decision Sciences Department to scale capabilities from small-scale data analysis to comprehensive big data operations
+- Implemented spatial analysis and consumer segmentation methodologies that revealed new insights about existing customers
+- Advanced Statistical and ML techniques for segmentation and behavioral clustering
 
 ### Senior Analyst
 **Myers Research | Austin, TX | 2012 - 2014**
@@ -81,7 +81,7 @@ Web application using Twilio API for regulated political surveys, handling tens 
 Machine learning platform for demographic analysis that discovered systematic coding errors and improved classification accuracy from 23% to 64%
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, AWS
-**Impact:** Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%
+**Impact:** Corrected demographic data affecting 50M voters nationwide, improved electoral prediction accuracy by 22%
 
 ### National Redistricting Platform
 Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide during 2021 redistricting cycle
