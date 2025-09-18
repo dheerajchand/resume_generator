@@ -22,7 +22,7 @@
       "data_analysis_visualization": "Data analysis and visualization expert with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in statistical modeling and data storytelling.",
       "polling_research_redistricting": "Political research and redistricting expert with 15+ years building systems that matter. Discovered systematic demographic coding errors affecting all Black and Asian-American voters, developed geospatial ML algorithms improving classification accuracy from 23% to 64%. Expert in electoral analysis and redistricting optimization.",
       "technical_focused": "Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.",
-      "business_focused": "Results-driven data scientist with 15+ years delivering measurable business impact. Saved organizations $4.7M through algorithmic innovations, generated $4.9M in additional revenue, and achieved 87% prediction accuracy vs. industry standard of 71%. Expert in translating technical solutions into business value."
+      "business_focused": "Results-driven data scientist with 15+ years delivering measurable business impact. Saved organizations $4.7M through algorithmic innovations, generated $4.9M in additional revenue, and utilized advanced sampling methods to increase voter turnout prediction accuracy from 71% to 87%. Expert in translating technical solutions into business value."
     },
     "key_achievements": {
       "demographic_breakthrough": "Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions | 178% accuracy improvement in racial classification algorithms",
@@ -63,7 +63,6 @@
       },
       "predictive_excellence": {
         "survey_polling": [
-          "Achieved 87% prediction accuracy for voter turnout vs. industry standard of 71%",
           "Utilized advanced sampling methods to decrease survey margin of error from ±4.2% to ±2.1%, increasing voter turnout prediction accuracy from 71% to 87%, and ensuring survey results more closely reflected true population attitudes",
           "Delivered 22% more accurate vote choice predictions compared to traditional segmentation",
           "Survey samples validated at 89% accuracy vs. traditional methods at 67%",
