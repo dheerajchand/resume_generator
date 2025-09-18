@@ -32,6 +32,7 @@ Product-focused data scientist with 15+ years building systems that matter. Disc
 - Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**, increasing voter turnout prediction accuracy from **71%** to **87%**, and ensuring survey results more closely reflected true population attitudes
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
 - Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over **$2** trillion
+- Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy
 
 ### Data Products Manager
 **Helm/Murmuration | Austin, TX | 2021 - 2023**

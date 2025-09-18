@@ -17,7 +17,7 @@ Data scientist and software engineer with 15+ years building systems that matter
 - Real-time collaboration at national scale
 - Predictive excellence: Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**
 - Increased voter turnout prediction accuracy from **71%** to **87%**
-- Executive authority: Briefed Presidents, Congressmen, Senators, Governors on election integrity, voter sentiment and postmortem analysis
+- Legal precedent: Data analysis utilized in Supreme Court case
 
 ## Core Competencies
 
@@ -40,6 +40,7 @@ Data scientist and software engineer with 15+ years building systems that matter
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
 - Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over **$2** trillion
 - Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy
+- Data analysis utilized in Supreme Court case, with expert methodology validated at the highest judicial level
 
 ### Data Products Manager
 **Helm/Murmuration | Austin, TX | 2021 - 2023**

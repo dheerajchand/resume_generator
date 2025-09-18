@@ -11,8 +11,8 @@ Political research and redistricting expert with 15+ years building systems that
 ### Impact
 - Predictive excellence: Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**
 - Increased voter turnout prediction accuracy from **71%** to **87%**
-- Executive authority: Briefed Presidents, Congressmen, Senators, Governors on election integrity, voter sentiment and postmortem analysis
-- Methodological advancement: Improved segmentation accuracy **34%** and survey incidence **28%**
+- Legal precedent: Data analysis utilized in Supreme Court case
+- Expert methodology validated at highest judicial level
 
 ## Core Competencies
 
@@ -32,6 +32,7 @@ Political research and redistricting expert with 15+ years building systems that
 - Utilized advanced sampling methods to decrease survey margin of error from **±4.2%** to **±2.1%**, increasing voter turnout prediction accuracy from **71%** to **87%**, and ensuring survey results more closely reflected true population attitudes
 - Trigonometric algorithm for boundary estimation reduced mapping costs by **73.5%**, saving campaigns and organizations **$4.7M** and enabling smaller nonprofits to conduct analysis
 - Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over **$2** trillion
+- Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy
 
 ### Senior Analyst
 **Myers Research | Austin, TX | 2012 - 2014**

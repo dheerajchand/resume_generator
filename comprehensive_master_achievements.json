@@ -35,7 +35,8 @@
       "methodological_advancement": "Methodological advancement: Improved segmentation accuracy 34% and survey incidence 28% | Reduced polling costs while increasing quality",
       "revenue_generation": "Revenue generation: Delivered $4.9M additional revenue through optimization | 23% conversion rate improvement",
       "data_infrastructure": "Data infrastructure: Built cloud-based warehouse processing billions of records with 99.94% accuracy | Scalable real-time analytics architecture",
-      "technical_architecture": "Technical architecture: Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS | Automated data quality monitoring at scale"
+      "technical_architecture": "Technical architecture: Designed ETL pipelines using PySpark, dbt, and PostgreSQL/PostGIS | Automated data quality monitoring at scale",
+      "supreme_court_impact": "Legal precedent: Data analysis utilized in Supreme Court case | Expert methodology validated at highest judicial level"
     },
     "core_achievements": {
       "demographic_discovery": {
@@ -269,6 +270,7 @@
           "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
           "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
           "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy",
+          "Data analysis utilized in Supreme Court case, with expert methodology validated at the highest judicial level",
           "Demystified FEC compliance through real-time processing systems enabling transparent campaign finance monitoring",
           "Developed longitudinal data analysis methods using geospatial techniques that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality",
           "Processed voter data across 178,000+ precincts and ~10,600 electoral districts with sub-200ms query response times",
@@ -284,6 +286,7 @@
           "Trigonometric algorithm for boundary estimation reduced mapping costs by 73.5%, saving campaigns and organizations $4.7M and enabling smaller nonprofits to conduct analysis",
           "Built real-time FEC analysis systems using Python, Pandas and PySpark to detect likely fraud, money laundering and financial crimes across billions of records daily, performing time series analysis on trillions of records in the political spending sub-economy valued over $2 trillion",
           "Provided expert testimony and press briefings on electoral data integrity and demographic modeling accuracy",
+          "Data analysis utilized in Supreme Court case, with expert methodology validated at the highest judicial level",
           "Developed FEC demystification through real time processing, improving transparency and fraud detection capabilities",
           "Longitudinal data analysis improvements enabled better understanding of demographic trends and voting patterns over time"
         ],
