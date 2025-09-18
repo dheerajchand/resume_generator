@@ -20,23 +20,6 @@ Data analysis and visualization expert with 15+ years building systems that matt
 • **Machine Learning & AI**
 • **Geospatial Technologies**
 
-## Technical Skills
-
-• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
-• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
-• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
-• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
-• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
-• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
-• **ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM**
-• **Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering**
-• **Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision**
-• **Validation: Cross-validation, A/B testing, statistical significance, model interpretability**
-• **Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions**
-• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations**
-• **Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS**
-• **Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines**
-
 ## Professional Experience
 
 ### Partner
@@ -105,6 +88,23 @@ Custom tile server for Web Map Service integration enabling interactive visualiz
 
 **Technologies:** GeoTools, OpenLayers, Java, MySQL, TileMill, JavaScript
 **Impact:** Improved contact rates by 53% and segmentation accuracy by 88% through enhanced data visualization
+
+## Technical Skills
+
+• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
+• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
+• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
+• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
+• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
+• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
+• **ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM**
+• **Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering**
+• **Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision**
+• **Validation: Cross-validation, A/B testing, statistical significance, model interpretability**
+• **Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions**
+• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations**
+• **Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS**
+• **Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines**
 
 ---
 

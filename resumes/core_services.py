@@ -531,11 +531,10 @@ class ResumeGenerator:
                     technical_skills_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
             
             if technical_skills_content:
-                # Technical Skills - don't use KeepTogether to avoid excessive spacing
-                # Individual skill paragraphs will naturally flow across pages if needed
+                # Technical Skills - use minimal KeepTogether for entire section to prevent orphaned headers
                 sections.append({
                     "name": "TECHNICAL SKILLS",
-                    "content": technical_skills_content
+                    "content": self._create_keep_together_section(technical_skills_content, min_lines=1)
                 })
         
         return sections
@@ -1261,16 +1260,6 @@ class ResumeGenerator:
                 if isinstance(skills, list):
                     content.append(f"• **{category}**")
             content.append("")
-            
-            content.append("## Technical Skills")
-            content.append("")
-            for category, skills in competencies.items():
-                if isinstance(skills, list):
-                    # Show detailed skills with descriptions for all categories
-                    for skill in skills:
-                        if isinstance(skill, str):
-                            content.append(f"• **{skill}**")
-            content.append("")
         
         # Experience (enhanced formatting with visual hierarchy)
         experience = self.data.get("experience", [])
@@ -1340,6 +1329,19 @@ class ResumeGenerator:
                     content.append(f"**Honors:** {edu['honors']}")
                 content.append("")
         
+        
+        # Technical Skills (moved here from after file write)
+        competencies = self.data.get("competencies", {})
+        if competencies:
+            content.append("## Technical Skills")
+            content.append("")
+            for category, skills in competencies.items():
+                if isinstance(skills, list):
+                    # Show detailed skills with descriptions for all categories
+                    for skill in skills:
+                        if isinstance(skill, str):
+                            content.append(f"• **{skill}**")
+            content.append("")
         
         # Footer with contact information
         content.append("---")

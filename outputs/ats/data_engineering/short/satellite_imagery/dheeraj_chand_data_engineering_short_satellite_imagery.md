@@ -17,17 +17,6 @@ Senior data scientist and software engineer specializing in geospatial machine l
 • **Data Engineering**
 • **Programming**
 
-## Technical Skills
-
-• **Apache Spark, PySpark, Dask: Large-scale data processing and distributed computing**
-• **dbt, Airflow: Data transformation pipelines and workflow orchestration**
-• **PostgreSQL/PostGIS, Snowflake: Database design and geospatial data management**
-• **AWS (EC2, RDS, S3), Docker: Cloud infrastructure and containerization**
-• **Python: NumPy, Pandas, Scikit-learn, Django, Flask (15+ years)**
-• **SQL: Complex queries, optimization, spatial analysis (15+ years)**
-• **R: Statistical modeling, ggplot2, spatial packages (12+ years)**
-• **JavaScript: React, D3.js, Node.js, real-time applications (10+ years)**
-
 ## Professional Experience
 
 ### Partner
@@ -127,5 +116,16 @@ Machine learning platform that discovered systematic coding errors and improved 
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow
 **Impact:** Corrected demographic data affecting all Black and Asian-American voters nationwide
+
+## Technical Skills
+
+• **Apache Spark, PySpark, Dask: Large-scale data processing and distributed computing**
+• **dbt, Airflow: Data transformation pipelines and workflow orchestration**
+• **PostgreSQL/PostGIS, Snowflake: Database design and geospatial data management**
+• **AWS (EC2, RDS, S3), Docker: Cloud infrastructure and containerization**
+• **Python: NumPy, Pandas, Scikit-learn, Django, Flask (15+ years)**
+• **SQL: Complex queries, optimization, spatial analysis (15+ years)**
+• **R: Statistical modeling, ggplot2, spatial packages (12+ years)**
+• **JavaScript: React, D3.js, Node.js, real-time applications (10+ years)**
 
 ---

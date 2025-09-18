@@ -20,23 +20,6 @@ Data engineering professional with 15+ years building systems that matter. Disco
 • **Programming and Development**
 • **Cloud & DevOps**
 
-## Technical Skills
-
-• **Processing: Apache Spark, PySpark, Dask, parallel computing, distributed systems**
-• **Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing**
-• **Storage: Data warehousing, data lakes, columnar storage (Parquet), data modeling**
-• **Streaming: Kafka, Redis, real-time processing, event-driven architecture**
-• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
-• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
-• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
-• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
-• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
-• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
-• **AWS: EC2, RDS, S3, Lambda, CloudFormation, Auto Scaling, Load Balancing**
-• **Containerization: Docker, Kubernetes, container orchestration, microservices**
-• **Monitoring: CloudWatch, Prometheus, Grafana, application performance monitoring**
-• **CI/CD: Jenkins, GitHub Actions, automated testing, deployment pipelines**
-
 ## Professional Experience
 
 ### Partner
@@ -114,6 +97,23 @@ Custom tile server for Web Map Service integration enabling interactive visualiz
 
 **Technologies:** GeoTools, OpenLayers, Java, MySQL, TileMill, JavaScript
 **Impact:** Improved contact rates by 53% and segmentation accuracy by 88% through enhanced data visualization
+
+## Technical Skills
+
+• **Processing: Apache Spark, PySpark, Dask, parallel computing, distributed systems**
+• **Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing**
+• **Storage: Data warehousing, data lakes, columnar storage (Parquet), data modeling**
+• **Streaming: Kafka, Redis, real-time processing, event-driven architecture**
+• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
+• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
+• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
+• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
+• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
+• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
+• **AWS: EC2, RDS, S3, Lambda, CloudFormation, Auto Scaling, Load Balancing**
+• **Containerization: Docker, Kubernetes, container orchestration, microservices**
+• **Monitoring: CloudWatch, Prometheus, Grafana, application performance monitoring**
+• **CI/CD: Jenkins, GitHub Actions, automated testing, deployment pipelines**
 
 ---
 

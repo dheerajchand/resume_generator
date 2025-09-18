@@ -15,9 +15,6 @@ Marketing analytics professional with 15+ years building systems that matter. Di
 ## Core Competencies
 
 
-## Technical Skills
-
-
 ## Professional Experience
 
 ### Partner
@@ -117,5 +114,8 @@ Machine learning platform that discovered systematic coding errors and improved 
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow
 **Impact:** Corrected demographic data affecting all Black and Asian-American voters nationwide
+
+## Technical Skills
+
 
 ---

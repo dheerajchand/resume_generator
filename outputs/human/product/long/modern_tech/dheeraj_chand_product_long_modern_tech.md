@@ -20,23 +20,6 @@ Product-focused data scientist with 15+ years building systems that matter. Disc
 • **Data Infrastructure**
 • **Machine Learning & AI**
 
-## Technical Skills
-
-• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
-• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
-• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
-• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
-• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
-• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
-• **Processing: Apache Spark, PySpark, Dask, parallel computing, distributed systems**
-• **Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing**
-• **Storage: Data warehousing, data lakes, columnar storage (Parquet), data modeling**
-• **Streaming: Kafka, Redis, real-time processing, event-driven architecture**
-• **ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM**
-• **Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering**
-• **Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision**
-• **Validation: Cross-validation, A/B testing, statistical significance, model interpretability**
-
 ## Professional Experience
 
 ### Partner
@@ -105,6 +88,23 @@ Machine learning platform for demographic analysis that discovered systematic co
 
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, AWS
 **Impact:** Corrected demographic data affecting all Black and Asian-American voters, improved electoral prediction accuracy by 22%
+
+## Technical Skills
+
+• **Python: 15+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django, Flask, GeoPandas, Asyncio**
+• **R: 12+ years: Statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
+• **SQL/PostGIS: 15+ years: PostgreSQL/PostGIS, MySQL, complex spatial queries, optimization, database design**
+• **JavaScript: 10+ years: React, D3.js, OpenLayers, Node.js, real-time applications, WebSockets**
+• **Java: 8+ years: Enterprise applications, Spring framework, geospatial libraries (GeoTools)**
+• **Other Technologies: Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
+• **Processing: Apache Spark, PySpark, Dask, parallel computing, distributed systems**
+• **Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing**
+• **Storage: Data warehousing, data lakes, columnar storage (Parquet), data modeling**
+• **Streaming: Kafka, Redis, real-time processing, event-driven architecture**
+• **ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM**
+• **Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering**
+• **Techniques: Classification, regression, ensemble methods, time series, NLP, computer vision**
+• **Validation: Cross-validation, A/B testing, statistical significance, model interpretability**
 
 ---
 
