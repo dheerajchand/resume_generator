@@ -1615,9 +1615,9 @@ class ResumeManager:
             else:
                 generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme, length_variant, output_type)
             
-            # Create output directory using the correct structure: output_type/version/length/color_scheme
+            # Create output directory using the correct structure: output_type/version/length/color_scheme/format
             base_output_dir = Path(output_dir) / output_type
-            output_path = base_output_dir / version / length_variant / color_scheme
+            output_path = base_output_dir / version / length_variant / color_scheme / format_type
             output_path.mkdir(parents=True, exist_ok=True)
             
             # Generate file
@@ -1636,8 +1636,18 @@ class ResumeManager:
             
             return True
             
+        except FileNotFoundError as e:
+            print(f"ERROR: Input file not found for {version} {color_scheme} {format_type}: {e}")
+            return False
+        except PermissionError as e:
+            print(f"ERROR: Permission denied for {version} {color_scheme} {format_type}: {e}")
+            return False
+        except ValueError as e:
+            print(f"ERROR: Invalid data for {version} {color_scheme} {format_type}: {e}")
+            return False
         except Exception as e:
-            print(f"Error generating {version} {color_scheme} {format_type}: {e}")
+            print(f"ERROR: Unexpected error generating {version} {color_scheme} {format_type}: {e}")
+            print(f"ERROR: Exception type: {type(e).__name__}")
             return False
     
     def generate_all_combinations(self, output_dir: str = "outputs", output_type: str = "ats") -> Dict[str, int]:
