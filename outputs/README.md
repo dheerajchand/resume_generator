@@ -4,14 +4,14 @@
 
 This is a selection of resumes I've made. For quick navigation, without browsing anything else, here are human-oriented, PDF formatted, longer form resumes oriented towards different roles:
 
-1. **[Comprehensive](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/comprehensive/long/modern_tech/dheeraj_chand_comprehensive_long_modern_tech.pdf)** - Complete career overview
-2. **[Data Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_engineering/long/corporate_blue/dheeraj_chand_data_engineering_long_corporate_blue.pdf)** - Data infrastructure focus
-3. **[Software Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/long/satellite_imagery/dheeraj_chand_software_engineering_long_satellite_imagery.pdf)** - Software development expertise
-4. **[GIS & Geospatial](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/long/terrain_mapping/dheeraj_chand_gis_long_terrain_mapping.pdf)** - Mapping and spatial analysis
-5. **[Product Management](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/long/cartographic_professional/dheeraj_chand_product_long_cartographic_professional.pdf)** - Business strategy focus
-6. **[Marketing Analytics](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/long/modern_clean/dheeraj_chand_marketing_long_modern_clean.pdf)** - Data-driven marketing
-7. **[Data Analysis & Visualization](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/long/topographic_classic/dheeraj_chand_data_analysis_visualization_long_topographic_classic.pdf)** - Data science specialization
-8. **[Political Research](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/long/default_professional/dheeraj_chand_polling_research_redistricting_long_default_professional.pdf)** - Research and redistricting
+1. **[Comprehensive](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/comprehensive/long/modern_tech/dheeraj_chand_comprehensive_long_modern_tech.pdf)** - Complete career overview
+2. **[Data Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/data_engineering/long/corporate_blue/dheeraj_chand_data_engineering_long_corporate_blue.pdf)** - Data infrastructure focus
+3. **[Software Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/software_engineering/long/satellite_imagery/dheeraj_chand_software_engineering_long_satellite_imagery.pdf)** - Software development expertise
+4. **[GIS & Geospatial](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/gis/long/terrain_mapping/dheeraj_chand_gis_long_terrain_mapping.pdf)** - Mapping and spatial analysis
+5. **[Product Management](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/product/long/cartographic_professional/dheeraj_chand_product_long_cartographic_professional.pdf)** - Business strategy focus
+6. **[Marketing Analytics](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/marketing/long/modern_clean/dheeraj_chand_marketing_long_modern_clean.pdf)** - Data-driven marketing
+7. **[Data Analysis & Visualization](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/data_analysis_visualization/long/topographic_classic/dheeraj_chand_data_analysis_visualization_long_topographic_classic.pdf)** - Data science specialization
+8. **[Political Research](https://raw.githubusercontent.com/dheerajchand/resume_generator/cleanup/outputs/human/polling_research_redistricting/long/default_professional/dheeraj_chand_polling_research_redistricting_long_default_professional.pdf)** - Research and redistricting
 
 ---
 
