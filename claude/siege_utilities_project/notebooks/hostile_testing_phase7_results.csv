@@ -1,0 +1,47 @@
+function,module,test_category,passed,error_message,severity
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',critical
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',high
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',critical
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',high
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',high
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+generate_local_path_from_url,files.remote,hostile_urls,False,generate_local_path_from_url() missing 1 required positional argument: 'directory_path',medium
+is_downloadable,files.remote,hostile_urls,True,,high
+is_downloadable,files.remote,hostile_urls,True,,high
+is_downloadable,files.remote,hostile_urls,True,,critical
+is_downloadable,files.remote,hostile_urls,True,,high
+is_downloadable,files.remote,hostile_urls,True,,high
+run_subprocess,files.shell,hostile_commands,False,'NoneType' object is not iterable,medium
+run_subprocess,files.shell,hostile_commands,True,,medium
+run_subprocess,files.shell,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_subprocess,files.shell,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_subprocess,files.shell,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,high
+run_subprocess,files.shell,hostile_commands,True,,medium
+run_subprocess,files.shell,hostile_commands,True,,medium
+run_subprocess,files.shell,hostile_commands,False,embedded null byte,medium
+run_subprocess,files.shell,hostile_commands,True,,medium
+run_command,files.operations,hostile_commands,True,,medium
+run_command,files.operations,hostile_commands,True,,medium
+run_command,files.operations,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_command,files.operations,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_command,files.operations,hostile_commands,True,,CRITICAL_VULNERABILITY
+run_command,files.operations,hostile_commands,True,,high
+run_command,files.operations,hostile_commands,True,,high
+run_command,files.operations,hostile_commands,True,,high
+run_command,files.operations,hostile_commands,True,,high
+run_command,files.operations,hostile_commands,True,,high

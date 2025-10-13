@@ -1,0 +1,49 @@
+function,module,test_category,passed,error_message,severity
+list_available_datasets,data.sample_data,basic_call,True,,low
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,high
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+get_dataset_info,data.sample_data,hostile_names,True,,high
+get_dataset_info,data.sample_data,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,False,'NoneType' object has no attribute 'lower',medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,high
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+categorize_function,hygiene.generate_docstrings,hostile_names,True,,medium
+generate_docstring_template,hygiene.generate_docstrings,hostile_templates,False,generate_docstring_template() got an unexpected keyword argument 'params',medium
+generate_docstring_template,hygiene.generate_docstrings,hostile_templates,False,generate_docstring_template() got an unexpected keyword argument 'params',high
+generate_docstring_template,hygiene.generate_docstrings,hostile_templates,False,generate_docstring_template() got an unexpected keyword argument 'params',medium
+generate_docstring_template,hygiene.generate_docstrings,hostile_templates,False,generate_docstring_template() got an unexpected keyword argument 'params',medium
+generate_docstring_template,hygiene.generate_docstrings,hostile_templates,False,generate_docstring_template() got an unexpected keyword argument 'params',medium
+find_python_files,hygiene.generate_docstrings,hostile_paths,False,find_python_files() takes 1 positional argument but 2 were given,high
+find_python_files,hygiene.generate_docstrings,hostile_paths,False,find_python_files() takes 1 positional argument but 2 were given,medium
+find_python_files,hygiene.generate_docstrings,hostile_paths,False,find_python_files() takes 1 positional argument but 2 were given,medium
+find_python_files,hygiene.generate_docstrings,hostile_paths,False,find_python_files() takes 1 positional argument but 2 were given,medium
+find_python_files,hygiene.generate_docstrings,hostile_paths,False,find_python_files() takes 1 positional argument but 2 were given,medium
+process_python_file,hygiene.generate_docstrings,hostile_paths,False,'../../../etc' is not in the subpath of '/Users/dheerajchand/Desktop/claude/siege_utilities_project/notebooks' OR one path is relative and the other is absolute.,high
+process_python_file,hygiene.generate_docstrings,hostile_paths,False,'/dev/null' is not in the subpath of '/Users/dheerajchand/Desktop/claude/siege_utilities_project/notebooks' OR one path is relative and the other is absolute.,medium
+process_python_file,hygiene.generate_docstrings,hostile_paths,False,'/nonexistent' is not in the subpath of '/Users/dheerajchand/Desktop/claude/siege_utilities_project/notebooks' OR one path is relative and the other is absolute.,medium
+process_python_file,hygiene.generate_docstrings,hostile_paths,False,'path; rm -rf ' is not in the subpath of '/Users/dheerajchand/Desktop/claude/siege_utilities_project/notebooks' OR one path is relative and the other is absolute.,medium
+process_python_file,hygiene.generate_docstrings,hostile_paths,False,'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' is not in the subpath of '/Users/dheerajchand/Desktop/claude/siege_utilities_project/notebooks' OR one path is relative and the other is absolute.,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,high
+analyze_package_structure,development.architecture,hostile_packages,True,,critical
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+analyze_package_structure,development.architecture,hostile_packages,True,,medium
+generate_architecture_diagram,development.architecture,hostile_configs,True,,medium
+generate_architecture_diagram,development.architecture,hostile_configs,True,,high
+generate_architecture_diagram,development.architecture,hostile_configs,True,,medium
+generate_architecture_diagram,development.architecture,hostile_configs,True,,medium
