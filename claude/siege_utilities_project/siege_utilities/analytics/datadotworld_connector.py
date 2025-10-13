@@ -548,17 +548,104 @@ def list_datasets(limit: int = 50,
                  **kwargs) -> Optional[List[Dict[str, Any]]]:
     """
     Standalone function to list available datasets.
-    
+
     Args:
         limit: Maximum number of results to return
         config_file: Optional configuration file path
         **kwargs: Additional arguments to pass to search_datasets
-    
+
     Returns:
         List of dataset information dictionaries
     """
     with get_datadotworld_connector(config_file) as dw:
         return dw.search_datasets("*", limit=limit, **kwargs)
+
+
+def get_dataset_metadata(dataset_id: str,
+                        config_file: Optional[Union[str, Path]] = None) -> Optional[Dict[str, Any]]:
+    """
+    Get metadata for a specific dataset.
+    Alias for get_dataset_info for backward compatibility.
+
+    Args:
+        dataset_id: Dataset identifier (format: owner/dataset)
+        config_file: Optional configuration file path
+
+    Returns:
+        Dictionary with dataset metadata
+    """
+    connector = get_datadotworld_connector(config_file)
+    return connector.get_dataset_info(dataset_id)
+
+
+def download_dataset(dataset_id: str,
+                    file_name: Optional[str] = None,
+                    config_file: Optional[Union[str, Path]] = None,
+                    **kwargs) -> Optional['pd.DataFrame']:
+    """
+    Download and load a dataset as a DataFrame.
+    Alias for load_datadotworld_dataset for backward compatibility.
+
+    Args:
+        dataset_id: Dataset identifier (format: owner/dataset)
+        file_name: Specific file to load (optional)
+        config_file: Optional configuration file path
+        **kwargs: Additional arguments
+
+    Returns:
+        Pandas DataFrame with the data
+    """
+    return load_datadotworld_dataset(dataset_id, config_file, file_name=file_name, **kwargs)
+
+
+def upload_dataset(dataset_id: str,
+                  file_path: Union[str, Path],
+                  file_name: Optional[str] = None,
+                  config_file: Optional[Union[str, Path]] = None) -> bool:
+    """
+    Upload a file to an existing dataset.
+    Standalone wrapper for upload_file method.
+
+    Args:
+        dataset_id: Dataset identifier (format: owner/dataset)
+        file_path: Local path to the file to upload
+        file_name: Name to use for the file on data.world (optional)
+        config_file: Optional configuration file path
+
+    Returns:
+        True if successful, False otherwise
+    """
+    connector = get_datadotworld_connector(config_file)
+    return connector.upload_file(dataset_id, file_path, file_name)
+
+
+def create_dataset(owner: str,
+                  dataset_id: str,
+                  title: str,
+                  description: str,
+                  tags: Optional[List[str]] = None,
+                  license: str = 'Public Domain',
+                  visibility: str = 'OPEN',
+                  config_file: Optional[Union[str, Path]] = None) -> Optional[str]:
+    """
+    Create a new dataset on data.world.
+    Standalone wrapper for create_dataset method.
+
+    Args:
+        owner: Dataset owner username
+        dataset_id: Unique dataset identifier
+        title: Dataset title
+        description: Dataset description
+        tags: List of tags (optional)
+        license: Dataset license (optional)
+        visibility: Dataset visibility ('OPEN' or 'PRIVATE')
+        config_file: Optional configuration file path
+
+    Returns:
+        Created dataset ID if successful, None otherwise
+    """
+    connector = get_datadotworld_connector(config_file)
+    return connector.create_dataset(owner, dataset_id, title, description, tags, license, visibility)
 
 
 # Global instance for easy access
@@ -568,6 +655,11 @@ __all__ = [
     'DataDotWorldConnector',
     'get_datadotworld_connector',
     'search_datasets',
+    'list_datasets',
+    'get_dataset_metadata',
+    'download_dataset',
+    'upload_dataset',
+    'create_dataset',
     'search_datadotworld_datasets',
     'load_datadotworld_dataset',
     'query_datadotworld_dataset',

@@ -421,7 +421,15 @@ class ChartGenerator:
                                    title: str = "", width: float = 8.0, height: float = 6.0) -> Image:
         """
         Create a bivariate choropleth map from data using Folium.
-        
+
+        WARNING: This is a simplified placeholder implementation that does NOT create
+        a true bivariate choropleth visualization. It saves a basic map to HTML but
+        returns a placeholder image.
+
+        For TRUE bivariate choropleth maps with proper 2D color classification and
+        bivariate legend, use create_bivariate_choropleth_matplotlib() instead, which
+        requires geodata (GeoDataFrame or GeoJSON file path).
+
         Args:
             data: DataFrame or dictionary with data
             location_column: Column name for locations (country codes, state names, etc.)
@@ -430,9 +438,9 @@ class ChartGenerator:
             title: Map title
             width: Map width in inches
             height: Map height in inches
-            
+
         Returns:
-            ReportLab Image object
+            ReportLab Image object (placeholder)
         """
         if not FOLIUM_AVAILABLE:
             return self._create_placeholder_chart(width, height, "Folium not available")
@@ -1905,16 +1913,16 @@ def create_bivariate_choropleth(data: Union['pd.DataFrame', Dict[str, Any]],
     )
 
 def create_heatmap(data: Union['pd.DataFrame', Dict[str, Any]],
-                  x_column: str = None, 
-                  y_column: str = None, 
+                  x_column: str = None,
+                  y_column: str = None,
                   value_column: str = None,
-                  title: str = "", 
-                  width: float = 8.0, 
+                  title: str = "",
+                  width: float = 8.0,
                   height: float = 6.0,
                   **kwargs) -> Optional['Image']:
     """
     Standalone function to create a heatmap.
-    
+
     Args:
         data: DataFrame or dictionary with data
         x_column: Column name for X-axis
@@ -1924,11 +1932,76 @@ def create_heatmap(data: Union['pd.DataFrame', Dict[str, Any]],
         width: Chart width in inches
         height: Chart height in inches
         **kwargs: Additional arguments to pass to create_heatmap
-    
+
     Returns:
         PIL Image object or None if error
     """
     generator = ChartGenerator()
     return generator.create_heatmap(
         data, x_column, y_column, value_column, title, width, height, **kwargs
+    )
+
+def create_choropleth_map(data: Union['pd.DataFrame', Dict[str, Any]],
+                         location_column: str,
+                         value_column: str,
+                         title: str = "",
+                         width: float = 8.0,
+                         height: float = 6.0,
+                         map_type: str = "world",
+                         **kwargs) -> Optional['Image']:
+    """
+    Standalone function to create a choropleth map.
+
+    Args:
+        data: DataFrame or dictionary with data
+        location_column: Column name for locations (country codes, state names, etc.)
+        value_column: Column name for values to color by
+        title: Map title
+        width: Map width in inches
+        height: Map height in inches
+        map_type: Type of map ('world', 'us', 'europe', etc.)
+        **kwargs: Additional arguments
+
+    Returns:
+        ReportLab Image object or None if error
+    """
+    generator = ChartGenerator()
+    return generator.create_choropleth_map(
+        data, location_column, value_column, title, width, height, map_type, **kwargs
+    )
+
+def create_marker_map(data: Union['pd.DataFrame', Dict[str, Any]],
+                     latitude_column: str,
+                     longitude_column: str,
+                     value_column: str = None,
+                     label_column: str = None,
+                     title: str = "",
+                     width: float = 10.0,
+                     height: float = 8.0,
+                     map_style: str = "open-street-map",
+                     zoom_level: int = 10,
+                     **kwargs) -> Optional['Image']:
+    """
+    Standalone function to create a marker map.
+
+    Args:
+        data: DataFrame or dictionary with data
+        latitude_column: Column name for latitude values
+        longitude_column: Column name for longitude values
+        value_column: Column name for marker size/color values
+        label_column: Column name for marker labels
+        title: Map title
+        width: Map width in inches
+        height: Map height in inches
+        map_style: Map tile style
+        zoom_level: Initial zoom level
+        **kwargs: Additional arguments
+
+    Returns:
+        ReportLab Image object or None if error
+    """
+    generator = ChartGenerator()
+    return generator.create_marker_map(
+        data, latitude_column, longitude_column, value_column, label_column,
+        title, width, height, map_style, zoom_level
     )

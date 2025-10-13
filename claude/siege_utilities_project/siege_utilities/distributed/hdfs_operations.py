@@ -1,6 +1,15 @@
 """
 HDFS operations utilities for siege_utilities.
-Provides operations for interacting with HDFS filesystem.
+
+**IMPORTANT: These functions are NOT IMPLEMENTED.**
+They are placeholder stubs that return None/False and log warnings.
+
+To use HDFS operations, you will need to:
+1. Install PyArrow (`pip install pyarrow`) or HDFS3 (`pip install hdfs3`)
+2. Implement actual HDFS connection and operations
+3. These functions currently do not connect to any HDFS cluster
+
+**Production Status:** NOT PRODUCTION READY - Stubs only
 """
 
 import logging
@@ -14,20 +23,32 @@ def hdfs_list_directory(path: str, config: Optional[dict] = None) -> Optional[Li
     """
     List files in HDFS directory.
 
+    **WARNING: NOT IMPLEMENTED - This is a stub function that always returns None.**
+
     Args:
         path: HDFS path
         config: HDFS configuration
 
     Returns:
-        List of file paths or None
+        Always returns None (not implemented)
+
+    Raises:
+        NotImplementedError: If you attempt to use this in production
     """
-    logger.warning("HDFS operations require PyArrow or HDFS3 library")
-    return None
+    logger.error("hdfs_list_directory is NOT IMPLEMENTED. This is a stub function.")
+    logger.warning("HDFS operations require PyArrow or HDFS3 library and actual implementation")
+    raise NotImplementedError(
+        "HDFS operations are not implemented. "
+        "This is a placeholder stub. "
+        "To use HDFS, install pyarrow and implement actual HDFS connection logic."
+    )
 
 
 def hdfs_upload_file(local_path: Path, hdfs_path: str, config: Optional[dict] = None) -> bool:
     """
     Upload file to HDFS.
+
+    **WARNING: NOT IMPLEMENTED - This is a stub function that always raises NotImplementedError.**
 
     Args:
         local_path: Local file path
@@ -35,15 +56,24 @@ def hdfs_upload_file(local_path: Path, hdfs_path: str, config: Optional[dict] = 
         config: HDFS configuration
 
     Returns:
-        True if successful
+        Never returns (raises exception)
+
+    Raises:
+        NotImplementedError: Always raised
     """
-    logger.warning("HDFS operations require PyArrow or HDFS3 library")
-    return False
+    logger.error("hdfs_upload_file is NOT IMPLEMENTED. This is a stub function.")
+    raise NotImplementedError(
+        "HDFS operations are not implemented. "
+        "This is a placeholder stub. "
+        "To use HDFS, install pyarrow and implement actual HDFS connection logic."
+    )
 
 
 def hdfs_download_file(hdfs_path: str, local_path: Path, config: Optional[dict] = None) -> bool:
     """
     Download file from HDFS.
+
+    **WARNING: NOT IMPLEMENTED - This is a stub function that always raises NotImplementedError.**
 
     Args:
         hdfs_path: HDFS source path
@@ -51,25 +81,41 @@ def hdfs_download_file(hdfs_path: str, local_path: Path, config: Optional[dict] 
         config: HDFS configuration
 
     Returns:
-        True if successful
+        Never returns (raises exception)
+
+    Raises:
+        NotImplementedError: Always raised
     """
-    logger.warning("HDFS operations require PyArrow or HDFS3 library")
-    return False
+    logger.error("hdfs_download_file is NOT IMPLEMENTED. This is a stub function.")
+    raise NotImplementedError(
+        "HDFS operations are not implemented. "
+        "This is a placeholder stub. "
+        "To use HDFS, install pyarrow and implement actual HDFS connection logic."
+    )
 
 
 def hdfs_delete_file(path: str, config: Optional[dict] = None) -> bool:
     """
     Delete file from HDFS.
 
+    **WARNING: NOT IMPLEMENTED - This is a stub function that always raises NotImplementedError.**
+
     Args:
         path: HDFS file path
         config: HDFS configuration
 
     Returns:
-        True if successful
+        Never returns (raises exception)
+
+    Raises:
+        NotImplementedError: Always raised
     """
-    logger.warning("HDFS operations require PyArrow or HDFS3 library")
-    return False
+    logger.error("hdfs_delete_file is NOT IMPLEMENTED. This is a stub function.")
+    raise NotImplementedError(
+        "HDFS operations are not implemented. "
+        "This is a placeholder stub. "
+        "To use HDFS, install pyarrow and implement actual HDFS connection logic."
+    )
 
 
 __all__ = [
