@@ -53,6 +53,24 @@ from resume_generator_django.resume_generator.constants import (
 import re
 
 
+def convert_markdown_links(text: str, format_type: str = "pdf") -> str:
+    """Convert markdown-style [text](url) links to format-appropriate output."""
+    def format_link(match):
+        link_text = match.group(1)
+        link_url = match.group(2)
+        if format_type == "pdf":
+            return f'<a href="{link_url}" color="blue">{link_text}</a>'
+        elif format_type == "md":
+            return f'[{link_text}]({link_url})'
+        elif format_type == "docx":
+            return link_text  # DOCX doesn't support inline links easily in this pipeline
+        elif format_type == "rtf":
+            return link_text
+        else:
+            return link_text
+    return re.sub(r'\[([^\]]+)\]\(([^)]+)\)', format_link, text)
+
+
 def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: str = "#2C3E50") -> str:
     """
     Highlight quantitative impact metrics in text using bold and color formatting.
@@ -82,10 +100,13 @@ def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: s
         else:
             return match_text
     
+    # Convert markdown-style links before processing metrics
+    text = convert_markdown_links(text, format_type)
+
     # Single comprehensive pattern for all quantitative metrics
     # Order matters - more specific patterns first
     pattern = r'(\$[\d,]+(?:\.\d+)?[KMB]?|±[\d,]+(?:\.\d+)?%|[\d,]+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b|\b\d+(?:\.\d+)?[KMB]\b|[\d,]+(?:\.\d+)?x)'
-    
+
     result = re.sub(pattern, lambda m: format_match(m.group(1)), text)
     return result
 
@@ -503,7 +524,7 @@ class ResumeGenerator:
             first_project_unit.append(Paragraph("KEY PROJECTS", self.styles["SectionHeader"]))
             
             # Add first project content
-            first_title_line = first_project_name
+            first_title_line = convert_markdown_links(first_project_name, "pdf")
             if first_dates:
                 first_title_line += f" ({first_dates})"
             first_project_unit.append(Paragraph(first_title_line, self.styles["SubCompetency"]))
@@ -546,7 +567,7 @@ class ResumeGenerator:
                 # Build individual project unit
                 project_unit = []
                 
-                title_line = project_name
+                title_line = convert_markdown_links(project_name, "pdf")
                 if dates:
                     title_line += f" ({dates})"
                 project_unit.append(Paragraph(title_line, self.styles["SubCompetency"]))

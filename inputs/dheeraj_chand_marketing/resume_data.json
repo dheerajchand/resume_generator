@@ -1,0 +1,161 @@
+{
+  "personal_info": {
+    "name": "Dheeraj Chand",
+    "title": "Data Scientist & Software Engineer",
+    "contact": {
+      "email": "dheeraj.chand@gmail.com",
+      "phone": "202.550.7110",
+      "website": "https://www.dheerajchand.com",
+      "linkedin": "https://www.linkedin.com/in/dheerajchand/",
+      "github": "https://github.com/dheerajchand",
+      "location": "Austin, TX"
+    }
+  },
+  "summary": "Marketing analytics professional with 20+ years turning demographic and behavioral data into audience strategy. At GSD&M, I restructured the Decision Sciences Department — introduced spatial analysis, version control, and Agile to a team that had been doing everything in Excel. Built consumer segmentation systems that revealed patterns in existing customer data nobody had seen. Delivered $4.9M in additional revenue through testing and optimization. I bring statistical rigor to creative problems.",
+  "achievements": {
+    "Impact": [
+      "Delivered $4.9M in additional revenue through continuous testing and optimization, with 23% improvement in conversion rates.",
+      "Developed longitudinal geospatial analysis methods that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality.",
+      "Built a redistricting platform serving 12,847 analysts across 89 organizations during the 2021 redistricting cycle, with real-time collaborative editing and Census integration.",
+      "Redesigned sampling methodologies to achieve stronger sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions across presidential, gubernatorial, congressional, and senatorial campaigns."
+    ]
+  },
+  "competencies": {
+    "Programming and Development": [
+      "Python: 20+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django/GeoDjango, Flask, GeoPandas, Pydantic, Hydra, Asyncio",
+      "R: 12+ years: statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny",
+      "SQL/PostGIS: 20+ years: PostgreSQL/PostGIS, Snowflake, MySQL, complex spatial queries, optimization, database design",
+      "JavaScript: 10+ years: React, D3.js, OpenLayers, Leaflet, Node.js, WebSockets, real-time applications",
+      "Java: 8+ years: enterprise applications, Spring, GeoTools for geospatial processing",
+      "Other Technologies: QML, Shell scripting, Git, Docker, Kubernetes, infrastructure as code"
+    ],
+    "Machine Learning & AI": [
+      "ML Frameworks: Scikit-learn, TensorFlow, PyTorch, XGBoost, LightGBM",
+      "Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering, demographic classification",
+      "Techniques: Classification, regression, ensemble methods, time series, NLP, agent-based modeling",
+      "Validation: Cross-validation, A/B testing, statistical significance, model interpretability, bias detection"
+    ],
+    "Data Infrastructure": [
+      "Processing: Databricks, Apache Spark, PySpark, Apache Sedona, Dask, distributed computing",
+      "Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing",
+      "Storage: Snowflake, data warehousing, data lakes, columnar storage (Parquet), data modeling",
+      "Streaming: Kafka, Redis, real-time processing, event-driven architecture"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Partner",
+      "company": "Siege Analytics",
+      "location": "Austin, TX",
+      "dates": "2005 - Present",
+      "subtitle": "Data Science & Political Analytics",
+      "responsibilities": [
+        "Discovered systematic race coding errors in national voter databases affecting 50M+ voters. Built geospatial ML algorithms improving demographic classification accuracy from 23% to 64%",
+        "Built a redistricting platform used by 12,847 analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration",
+        "Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level",
+        "Invented trigonometric boundary estimation algorithm that cut mapping costs 73.5%, saving organizations $4.7M",
+        "Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records",
+        "Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings"
+      ]
+    },
+    {
+      "title": "Analytics Supervisor",
+      "company": "GSD&M",
+      "location": "Austin, TX",
+      "dates": "2018 - 2019",
+      "subtitle": "Advertising Analytics",
+      "responsibilities": [
+        "Rebuilt the Decision Sciences Department from scratch — introduced version control, Agile, and spatial analysis to a team that had been doing everything in Excel",
+        "Implemented spatial analysis and consumer segmentation that revealed patterns in existing customer data nobody had seen before",
+        "Built ML-based segmentation and behavioral clustering models for multi-million dollar advertising campaigns"
+      ]
+    },
+    {
+      "title": "Data Products Manager",
+      "company": "Helm/Murmuration",
+      "location": "Austin, TX",
+      "dates": "2021 - 2023",
+      "subtitle": "Democratic Electoral Technology",
+      "responsibilities": [
+        "Led design and implementation of an enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data",
+        "Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization",
+        "Modernized legacy ETL processes with dbt, PySpark, Snowflake, and Databricks workflows — cut processing time by 57%"
+      ]
+    },
+    {
+      "title": "Senior Analyst",
+      "company": "Myers Research",
+      "location": "Austin, TX",
+      "dates": "2012 - 2014",
+      "subtitle": "Political Research & Analysis",
+      "responsibilities": [
+        "Designed survey instruments for specialized voting segments and niche markets",
+        "Co-developed a web application managing all aspects of survey operations — instrument design through data collection and analysis",
+        "Introduced geospatial techniques to enhance market segmentation, providing location-based consumer insights the firm had never offered"
+      ]
+    },
+    {
+      "title": "Research Director",
+      "company": "PCCC",
+      "location": "Washington, DC",
+      "dates": "August 2011 - August 2012",
+      "subtitle": "Political Research & Data Analysis",
+      "responsibilities": [
+        "Conceived and built FLEEM — a Twilio-based web application emulating a predictive dialer for regulated political surveys, handling 10,000+ simultaneous calls",
+        "Built IVR polling system supporting early quantitative research for Senators Martin Heinrich and Elizabeth Warren",
+        "Developed reporting system with Python, GeoDjango, PostGIS, and Apache — tabular and graphical outputs for campaign decision-making"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Geospatial Demographic Classification System",
+      "dates": "2014 - Present",
+      "description": "Machine learning system that discovered systematic race coding errors in national voter databases and improved demographic classification accuracy from 23% to 64%. The finding affected all Black and Asian-American voters in the system.",
+      "technologies": [
+        "Python",
+        "Scikit-learn",
+        "PostGIS",
+        "GeoPandas",
+        "TensorFlow",
+        "PySpark",
+        "AWS"
+      ],
+      "impact": "Corrected demographic data affecting 50M+ voters nationwide. Improved electoral prediction accuracy by 22%. Analysis cited in Supreme Court proceedings."
+    },
+    {
+      "name": "FLEEM Political Polling System",
+      "dates": "2011 - 2012",
+      "description": "Web application using Twilio API for regulated political surveys, emulating a predictive dialer to handle 10,000+ simultaneous calls. Built for PCCC, used in campaigns for Senators Heinrich and Warren.",
+      "technologies": [
+        "Twilio API",
+        "Python",
+        "Django",
+        "PostgreSQL",
+        "GeoDjango",
+        "PostGIS",
+        "JavaScript",
+        "Apache"
+      ],
+      "impact": "Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren."
+    },
+    {
+      "name": "National Redistricting Platform",
+      "dates": "2020 - 2022",
+      "description": "Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by 12,847 analysts across 89 organizations during the 2021 redistricting cycle.",
+      "technologies": [
+        "GeoDjango",
+        "PostGIS",
+        "AWS",
+        "Docker",
+        "React",
+        "Python",
+        "Redis",
+        "WebSockets"
+      ],
+      "impact": "Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it."
+    }
+  ],
+  "education": [],
+  "additional_info": ""
+}
