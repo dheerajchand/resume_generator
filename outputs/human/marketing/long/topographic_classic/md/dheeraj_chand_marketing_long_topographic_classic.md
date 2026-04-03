@@ -12,7 +12,7 @@ Marketing analytics professional with 20+ years turning demographic and behavior
 - Delivered **$4.9M** in additional revenue through continuous testing and optimization, with **23%** improvement in conversion rates.
 - Developed longitudinal geospatial analysis methods that improved segmentation accuracy by **34%** and survey incidence rates by **28%**, reducing polling costs while increasing response quality.
 - Built a redistricting platform serving **12,847** analysts across 89 organizations during the 2021 redistricting cycle, with real-time collaborative editing and Census integration.
-- Designed sampling methods that cut survey margin of error from **±4.2%** to **±2.1%** and improved voter turnout prediction accuracy from **71%** to **87%**. Consistently outperformed competing firms by 15-20 percentage points.
+- Redesigned sampling methodologies to achieve stronger sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions across presidential, gubernatorial, congressional, and senatorial campaigns.
 
 ## Core Competencies
 
@@ -29,7 +29,7 @@ Marketing analytics professional with 20+ years turning demographic and behavior
 
 - Discovered systematic race coding errors in national voter databases affecting **50M**+ voters. Built geospatial ML algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
-- Designed sampling methods cutting survey margin of error from **±4.2%** to **±2.1%** and improving turnout prediction accuracy from **71%** to **87%**
+- Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
 - Built real-time FEC fraud detection using Python, Pandas, and PySpark — processing billions of records daily
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings

@@ -30,7 +30,7 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 
 - Discovered systematic race coding errors in national voter databases affecting **50M**+ voters. Built geospatial ML algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
-- Designed sampling methods cutting survey margin of error from **±4.2%** to **±2.1%** and improving turnout prediction accuracy from **71%** to **87%**
+- Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
 - Built real-time FEC fraud detection using Python, Pandas, and PySpark — processing billions of records daily
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings

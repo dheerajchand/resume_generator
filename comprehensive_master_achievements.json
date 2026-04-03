@@ -20,15 +20,15 @@
       "product": "Product leader with 20+ years shipping data platforms. Managed an 11-person engineering team at Helm/Murmuration, setting technical direction for an enterprise data warehouse serving democratic electoral organizations. Built a redistricting platform used by 12,847 analysts across 89 organizations. At GSD&M, rebuilt a data department from scratch and rewrote their services offering. I understand both the technical architecture and the business case — because I've usually had to build and sell both.",
       "marketing": "Marketing analytics professional with 20+ years turning demographic and behavioral data into audience strategy. At GSD&M, I restructured the Decision Sciences Department — introduced spatial analysis, version control, and Agile to a team that had been doing everything in Excel. Built consumer segmentation systems that revealed patterns in existing customer data nobody had seen. Delivered $4.9M in additional revenue through testing and optimization. I bring statistical rigor to creative problems.",
       "data_analysis_visualization": "Data analyst with 20+ years and a focus on finding errors everyone else missed. I discovered systematic race coding errors in national voter databases — decades of miscoding that affected every Black and Asian-American voter in the system. Built geospatial ML algorithms that improved classification accuracy from 23% to 64%. I introduced choropleths and hexagonal grid maps to firms that had never seen spatial visualization. My analysis has been cited in Supreme Court proceedings. The job isn't just finding patterns — it's making sure the patterns are real.",
-      "polling_research_redistricting": "Political researcher and redistricting specialist with 20+ years in survey methodology, electoral prediction, and demographic modeling. I built FLEEM, a polling system that saved $840K annually and supported campaigns for Senators Heinrich and Warren. My sampling methods cut survey margin of error from ±4.2% to ±2.1% and improved turnout prediction accuracy from 71% to 87%. I've briefed Presidents, Senators, and Governors on election integrity. My analysis has been used in Supreme Court cases. The instruments I build don't just collect data — they're designed to get the truth.",
+      "polling_research_redistricting": "Political researcher and redistricting specialist with 20+ years in survey methodology, electoral prediction, and demographic modeling. I built FLEEM, a polling system that saved $840K annually and supported campaigns for Senators Heinrich and Warren. I redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions. I've briefed Presidents, Senators, and Governors on election integrity. My analysis has been used in Supreme Court cases. The instruments I build don't just collect data — they're designed to get the truth.",
       "technical_focused": "Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. 20+ years building algorithms, platforms, and infrastructure. Developed demographic classification algorithms improving accuracy from 23% to 64% across 178,000+ precincts. Maintain siege_utilities, a production geospatial library with PySpark/Sedona distributed computing, 37 GeoDjango models, and 1,884+ tests. Built platforms serving 13,000 analysts at national scale.",
-      "business_focused": "Data scientist with 20+ years delivering measurable outcomes. Saved organizations $4.7M through a single algorithmic innovation. Generated $4.9M in additional revenue through optimization and testing. Cut polling costs by $840K annually through automated infrastructure. Improved survey accuracy by halving margin of error. Built platforms used by nearly 13,000 analysts. I don't just build models — I build systems that change how organizations make decisions."
+      "business_focused": "Data scientist with 20+ years delivering measurable outcomes. Saved organizations $4.7M through a single algorithmic innovation. Generated $4.9M in additional revenue through optimization and testing. Cut polling costs by $840K annually through automated infrastructure. Redesigned sampling methods to produce more representative surveys. Built platforms used by nearly 13,000 analysts. I don't just build models — I build systems that change how organizations make decisions."
     },
     "key_achievements": {
       "demographic_breakthrough": "Discovered systematic race coding errors in national voter databases affecting all Black and Asian-American voters — decades of miscoding nobody else had caught. Built geospatial ML algorithms improving classification accuracy from 23% to 64%.",
       "trigonometric_algorithm": "Invented a trigonometric boundary estimation algorithm that reduced mapping costs by 73.5%, saving campaigns and nonprofits $4.7M and making redistricting analysis accessible to organizations that couldn't previously afford it.",
       "fraud_detection_systems": "Built real-time FEC fraud detection systems using Python, Pandas, and PySpark — processing billions of records daily to identify likely fraud, money laundering, and financial crimes in a political spending sub-economy valued over $2 trillion.",
-      "predictive_excellence": "Designed sampling methods that cut survey margin of error from ±4.2% to ±2.1% and improved voter turnout prediction accuracy from 71% to 87%. Consistently outperformed competing firms by 15-20 percentage points.",
+      "predictive_excellence": "Redesigned sampling methodologies to achieve stronger sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions across presidential, gubernatorial, congressional, and senatorial campaigns.",
       "platform_impact": "Built a redistricting platform serving 12,847 analysts across 89 organizations during the 2021 redistricting cycle, with real-time collaborative editing and Census integration.",
       "expert_testimony": "Briefed Presidents, Congressmen, Senators, and Governors on election integrity, voter sentiment, and postmortem analysis. Provided expert testimony on electoral data integrity.",
       "regulatory_innovation": "Built real-time FEC compliance and demystification systems — turning opaque campaign finance data into transparent, searchable, analyzable records.",
@@ -65,10 +65,10 @@
       },
       "predictive_excellence": {
         "survey_polling": [
-          "Designed sampling methods that cut survey margin of error from ±4.2% to ±2.1% and improved voter turnout prediction accuracy from 71% to 87%",
-          "Delivered 22% more accurate vote choice predictions compared to traditional segmentation approaches",
-          "Survey samples validated at 89% accuracy vs. traditional methods at 67%",
-          "Consistently outperformed competing polling firms by 15-20 percentage points"
+          "Redesigned sampling methodologies to improve sample-to-universe correspondence, producing surveys that more accurately reflected target populations",
+          "Improved demographic representativeness of survey samples through geospatial stratification techniques",
+          "Built survey infrastructure (FLEEM) that enabled rapid-cycle polling at a fraction of traditional costs",
+          "Conducted polling across presidential, gubernatorial, congressional, and senatorial campaigns"
         ],
         "focus_groups": [
           "Improved focus group representativeness to 94% demographic accuracy vs. industry average of 76%",
@@ -262,7 +262,7 @@
         "comprehensive_responsibilities": [
           "Found systematic race coding errors in national voter databases affecting all Black and Asian-American voters — decades of miscoding nobody else had caught. Built geospatial ML algorithms improving classification accuracy from 23% to 64%",
           "Built a redistricting platform used by 12,847 analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing, Census integration, and automated compliance checking",
-          "Designed sampling methods cutting survey margin of error from ±4.2% to ±2.1% and improving turnout prediction accuracy from 71% to 87%",
+          "Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level",
           "Invented trigonometric boundary estimation algorithm that cut mapping costs 73.5%, saving organizations $4.7M and making redistricting analysis accessible to nonprofits that couldn't afford it before",
           "Built real-time FEC fraud detection using Python, Pandas, and PySpark — processing billions of records daily across a political spending sub-economy valued over $2 trillion",
           "Briefed Presidents, Congressmen, Senators, and Governors on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings",
@@ -276,7 +276,7 @@
         "comprehensive_responsibilities_neutral": [
           "Discovered systematic race coding errors in national voter databases affecting 50M+ voters. Built geospatial ML algorithms improving demographic classification accuracy from 23% to 64%",
           "Built a redistricting platform used by 12,847 analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration",
-          "Designed sampling methods cutting survey margin of error from ±4.2% to ±2.1% and improving turnout prediction accuracy from 71% to 87%",
+          "Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level",
           "Invented trigonometric boundary estimation algorithm that cut mapping costs 73.5%, saving organizations $4.7M",
           "Built real-time FEC fraud detection using Python, Pandas, and PySpark — processing billions of records daily",
           "Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings",
