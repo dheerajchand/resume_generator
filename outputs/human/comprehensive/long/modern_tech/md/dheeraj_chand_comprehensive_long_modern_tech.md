@@ -154,7 +154,7 @@ Machine learning system that discovered systematic race coding errors in nationa
 **Impact:** Corrected demographic data affecting 50M+ voters nationwide. Improved electoral prediction accuracy by 22%. Analysis cited in Supreme Court proceedings.
 
 ### Civic Graph Multi-Tenant Data Warehouse
-*2013 - 2016*
+*2021 - 2023*
 
 Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
 

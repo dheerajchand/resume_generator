@@ -496,7 +496,7 @@
       },
       "civic_graph": {
         "name": "Civic Graph Multi-Tenant Data Warehouse",
-        "dates": "2013 - 2016",
+        "dates": "2021 - 2023",
         "description": "Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.",
         "technologies": ["Python", "PostgreSQL", "PostGIS", "PySpark", "ETL Pipelines", "Meta-Analysis"],
         "impact": "Created a $1B+ dataset that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.",

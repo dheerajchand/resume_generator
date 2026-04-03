@@ -99,7 +99,7 @@ Cloud-based GeoDjango platform for redistricting analysis with real-time collabo
 **Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it.
 
 ### Civic Graph Multi-Tenant Data Warehouse
-*2013 - 2016*
+*2021 - 2023*
 
 Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
 
