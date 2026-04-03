@@ -32,7 +32,7 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
-- Built real-time FEC fraud detection using Python, Pandas, and PySpark — processing billions of records daily
+- Built real-time FEC fraud detection and analysis system (live at elect.info) using Python, Pandas, and PySpark — processing billions of records
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
 
 ### Data Products Manager
@@ -42,7 +42,7 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 
 - Led design and implementation of an enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data
 - Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization
-- Modernized legacy ETL processes with dbt, PySpark, and Databricks workflows — cut processing time by **57%**
+- Modernized legacy ETL processes with dbt, PySpark, Snowflake, and Databricks workflows — cut processing time by **57%**
 
 ### Analytics Supervisor
 **GSD&M | Austin, TX | 2018 - 2019**
