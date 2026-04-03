@@ -35,9 +35,9 @@ I've spent 20+ years at the intersection of geography, demographics, and softwar
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
-- Built real-time FEC fraud detection and analysis system (live at https://elect.info) using Python, Pandas, and PySpark — processing billions of records
+- Built real-time FEC fraud detection and analysis system (live at elect.info) using Python, Pandas, and PySpark — processing billions of records
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
-- Built and maintain siege_utilities (https://github.com/siege-analytics/siege_utilities) — open-source geospatial data sciences library with 37 GeoDjango models, PySpark/Sedona integration, and **1,884**+ tests
+- Built and maintain siege_utilities — open-source geospatial data sciences library with 37 GeoDjango models, PySpark/Sedona integration, and **1,884**+ tests
 
 ### Data Products Manager
 **Helm/Murmuration | Austin, TX | 2021 - 2023**
