@@ -12,7 +12,7 @@
         "siege_analytics_max": 7
       },
       "projects": {
-        "include_projects": ["redistricting_platform", "fleem_polling_system", "demographic_ml_system", "civic_graph", "tile_server_platform"],
+        "include_projects": ["siege_utilities", "redistricting_platform", "fleem_polling_system", "demographic_ml_system", "civic_graph", "tile_server_platform", "musescore_chord_library"],
         "show_technical_details": true
       },
       "competencies": {
@@ -23,7 +23,7 @@
     "data_engineering": {
       "summary_key": "data_engineering",
       "achievements": {
-        "include_achievements": ["trigonometric_algorithm", "supreme_court_impact", "demographic_breakthrough", "technical_architecture", "data_infrastructure"],
+        "include_achievements": ["data_infrastructure", "technical_architecture", "demographic_breakthrough", "trigonometric_algorithm", "supreme_court_impact"],
         "total_max": 6
       },
       "experience": {
@@ -32,7 +32,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["redistricting_platform", "demographic_ml_system", "tile_server_platform"],
+        "include_projects": ["siege_utilities", "redistricting_platform", "civic_graph", "demographic_ml_system"],
         "show_technical_details": true
       },
       "competencies": {
@@ -41,18 +41,18 @@
       }
     },
     "software_engineering": {
-      "summary_key": "software_engineering", 
+      "summary_key": "software_engineering",
       "achievements": {
-        "include_achievements": ["trigonometric_algorithm", "supreme_court_impact", "platform_impact", "technical_architecture", "demographic_breakthrough"],
+        "include_achievements": ["platform_impact", "technical_architecture", "trigonometric_algorithm", "demographic_breakthrough", "supreme_court_impact"],
         "total_max": 4
       },
       "experience": {
-        "include_positions": ["siege_analytics", "mautinoa_technologies", "salsa_labs", "praxis_project", "pccc", "helm_murmuration"],
+        "include_positions": ["siege_analytics", "mautinoa_technologies", "salsa_labs", "pccc", "helm_murmuration", "praxis_project"],
         "max_responsibilities_per_job": 3,
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["redistricting_platform", "fleem_polling_system", "tile_server_platform"],
+        "include_projects": ["siege_utilities", "redistricting_platform", "fleem_polling_system", "musescore_chord_library", "tile_server_platform"],
         "show_technical_details": true
       },
       "competencies": {
@@ -72,7 +72,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["redistricting_platform", "demographic_ml_system", "tile_server_platform"],
+        "include_projects": ["siege_utilities", "redistricting_platform", "demographic_ml_system", "tile_server_platform"],
         "show_technical_details": true
       },
       "competencies": {
@@ -92,7 +92,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["redistricting_platform", "fleem_polling_system", "demographic_ml_system"],
+        "include_projects": ["redistricting_platform", "siege_utilities", "fleem_polling_system", "musescore_chord_library"],
         "show_technical_details": false
       },
       "competencies": {
@@ -103,7 +103,7 @@
     "marketing": {
       "summary_key": "marketing",
       "achievements": {
-        "include_achievements": ["revenue_generation", "expert_testimony", "platform_impact", "predictive_excellence"],
+        "include_achievements": ["revenue_generation", "methodological_advancement", "platform_impact", "predictive_excellence"],
         "total_max": 4
       },
       "experience": {
@@ -112,7 +112,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["fleem_polling_system", "demographic_ml_system", "redistricting_platform"],
+        "include_projects": ["demographic_ml_system", "fleem_polling_system", "redistricting_platform"],
         "show_technical_details": false
       },
       "competencies": {
@@ -123,7 +123,7 @@
     "data_analysis_visualization": {
       "summary_key": "data_analysis_visualization",
       "achievements": {
-        "include_achievements": ["predictive_excellence", "methodological_advancement", "demographic_breakthrough", "platform_impact"],
+        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "methodological_advancement", "platform_impact"],
         "total_max": 4
       },
       "experience": {
@@ -132,7 +132,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["demographic_ml_system", "redistricting_platform", "tile_server_platform"],
+        "include_projects": ["demographic_ml_system", "siege_utilities", "redistricting_platform", "tile_server_platform"],
         "show_technical_details": true
       },
       "competencies": {
@@ -152,7 +152,7 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["fleem_polling_system", "redistricting_platform", "demographic_ml_system"],
+        "include_projects": ["fleem_polling_system", "redistricting_platform", "demographic_ml_system", "siege_utilities"],
         "show_technical_details": true
       },
       "competencies": {
