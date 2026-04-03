@@ -31,7 +31,7 @@ Political researcher and redistricting specialist with 20+ years in survey metho
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing, Census integration, and automated compliance checking
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M** and making redistricting analysis accessible to nonprofits that couldn't afford it before
-- Built real-time FEC fraud detection and analysis system (live at elect.info) using Python, Pandas, and PySpark — processing billions of records across a political spending sub-economy valued over **$2** trillion
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records across a political spending sub-economy valued over **$2** trillion
 - Briefed Presidents, Congressmen, Senators, and Governors on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
 
 ### Senior Analyst
@@ -96,7 +96,7 @@ Machine learning system that discovered systematic race coding errors in nationa
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, PySpark, AWS
 **Impact:** Corrected demographic data affecting all Black and Asian-American voters. Improved electoral prediction accuracy by 22%. Analysis cited in Supreme Court proceedings.
 
-### siege_utilities — Geospatial Data Sciences Library
+### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
 *2019 - Present*
 
 Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
