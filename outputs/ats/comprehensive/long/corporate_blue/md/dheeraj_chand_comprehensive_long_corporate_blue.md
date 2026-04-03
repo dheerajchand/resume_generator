@@ -186,7 +186,7 @@ MuseScore Studio 4.6+ plugin replacing the flat palette system with a searchable
 • **Java: 8+ years: enterprise applications, Spring, GeoTools for geospatial processing**
 • **Other Technologies: QML, Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
 • **Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions, Snowflake**
-• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing**
+• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing and format conversion (LAS, LAZ, E57, PLY, PCD)**
 • **Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS**
 • **Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines, Apache Sedona**
 • **Library: siege_utilities: 37 GeoDjango models, 9 population services, Census API integration, PySpark/Sedona distributed computing**

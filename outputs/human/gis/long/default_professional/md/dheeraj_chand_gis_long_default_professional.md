@@ -107,7 +107,7 @@ Custom tile server for WMS integration enabling interactive visualization of CRM
 ## Technical Skills
 
 • **Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions, Snowflake**
-• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing**
+• **Analysis Tools: GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing and format conversion (LAS, LAZ, E57, PLY, PCD)**
 • **Web Mapping: OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS**
 • **Processing: GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines, Apache Sedona**
 • **Library: siege_utilities: 37 GeoDjango models, 9 population services, Census API integration, PySpark/Sedona distributed computing**

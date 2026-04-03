@@ -184,7 +184,7 @@
           "PostGIS for spatial database design and complex geospatial queries",
           "GDAL/OGR for data format conversion and geospatial ETL",
           "QGIS and ArcGIS for desktop analysis and cartography",
-          "LiDAR/PointCloud data processing and 3D spatial analysis",
+          "LiDAR/PointCloud data processing, 3D spatial analysis, and format conversion (LAS, LAZ, E57, PLY, PCD)",
           "Coordinate system transformations and spatial reference management",
           "Spatial indexing and query performance optimization"
         ],
@@ -199,7 +199,7 @@
           "Trigonometric boundary estimation algorithms for redistricting",
           "Spatial clustering and pattern analysis for demographic modeling",
           "Network analysis for transportation and accessibility",
-          "Raster analysis, remote sensing, and PointCloud/LiDAR processing",
+          "PointCloud/LiDAR processing and format conversion (LAS, LAZ, E57, PLY, PCD)",
           "Geocoding and address standardization at population scale"
         ]
       },
@@ -553,7 +553,7 @@
       },
       "geospatial_stack": {
         "databases": "PostGIS, SpatiaLite, MongoDB with geospatial extensions, Snowflake",
-        "analysis": "GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing",
+        "analysis": "GDAL/OGR, QGIS, ArcGIS, spatial indexing, coordinate transformations, LiDAR/PointCloud processing and format conversion (LAS, LAZ, E57, PLY, PCD)",
         "web_mapping": "OpenLayers, Leaflet, Mapbox GL JS, custom tile servers, WMS/WFS",
         "processing": "GeoPandas, Shapely, Fiona, rasterio, spatial ETL pipelines, Apache Sedona",
         "library": "siege_utilities: 37 GeoDjango models, 9 population services, Census API integration, PySpark/Sedona distributed computing"
