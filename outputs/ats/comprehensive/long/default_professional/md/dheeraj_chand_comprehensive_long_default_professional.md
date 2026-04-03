@@ -63,7 +63,7 @@ I've spent 20+ years at the intersection of geography, demographics, and softwar
 *Humanitarian Technology*
 
 - Conceived, architected, and built econometric simulation software for measuring humanitarian crisis interventions
-- Worked directly with data and engineering directors at UNICEF and IFRC on impact assessment tools
+- Liaised with senior analysts and executives at the International Federation of Red Cross and UNICEF on impact assessment methodology and tooling
 - Built geospatial analysis systems for population and boundary assessment in crisis zones
 
 ### Senior Analyst
