@@ -143,7 +143,7 @@ Cloud-based GeoDjango platform for redistricting analysis with real-time collabo
 Web application using Twilio API for regulated political surveys, emulating a predictive dialer to handle 10,000+ simultaneous calls. Built for PCCC, used in campaigns for Senators Heinrich and Warren.
 
 **Technologies:** Twilio API, Python, Django, PostgreSQL, GeoDjango, PostGIS, JavaScript, Apache
-**Impact:** Saved PAC $840,000 annually in polling costs. Supported polling for presidential, gubernatorial, congressional, and senatorial campaigns.
+**Impact:** Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.
 
 ### Geospatial Demographic Classification System
 *2014 - Present*
@@ -159,7 +159,7 @@ Machine learning system that discovered systematic race coding errors in nationa
 Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
 
 **Technologies:** Python, PostgreSQL, PostGIS, PySpark, ETL Pipelines, Meta-Analysis
-**Impact:** Created a $1B+ dataset that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
+**Impact:** Created a dataset representing $1B+ in accumulated investment that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
 
 ### High-Performance Geospatial Tile Server
 *2010 - 2011*

@@ -86,7 +86,7 @@ Machine learning system that discovered systematic race coding errors in nationa
 Web application using Twilio API for regulated political surveys, emulating a predictive dialer to handle 10,000+ simultaneous calls. Built for PCCC, used in campaigns for Senators Heinrich and Warren.
 
 **Technologies:** Twilio API, Python, Django, PostgreSQL, GeoDjango, PostGIS, JavaScript, Apache
-**Impact:** Saved PAC $840,000 annually in polling costs. Supported polling for presidential, gubernatorial, congressional, and senatorial campaigns.
+**Impact:** Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.
 
 ### National Redistricting Platform
 *2020 - 2022*

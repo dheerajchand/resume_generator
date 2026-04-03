@@ -4,7 +4,7 @@
 
 ## Professional Summary
 
-Political researcher and redistricting specialist with 20+ years in survey methodology, electoral prediction, and demographic modeling. I built FLEEM, a polling system that saved $840K annually and supported campaigns for Senators Heinrich and Warren. I redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions. I've briefed Presidents, Senators, and Governors on election integrity. My analysis has been used in Supreme Court cases. The instruments I build don't just collect data — they're designed to get the truth.
+Political researcher and redistricting specialist with 20+ years in survey methodology, electoral prediction, and demographic modeling. I built FLEEM, a polling system that saved $500K+ annually and supported campaigns for Senators Heinrich and Warren. I redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions. I've briefed Presidents, Senators, and Governors on election integrity. My analysis has been used in Supreme Court cases. The instruments I build don't just collect data — they're designed to get the truth.
 
 ## Key Achievements and Impact
 
@@ -78,7 +78,7 @@ Political researcher and redistricting specialist with 20+ years in survey metho
 Web application using Twilio API for regulated political surveys, emulating a predictive dialer to handle 10,000+ simultaneous calls. Built for PCCC, used in campaigns for Senators Heinrich and Warren.
 
 **Technologies:** Twilio API, Python, Django, PostgreSQL, GeoDjango, PostGIS, JavaScript, Apache
-**Impact:** Saved PAC $840,000 annually in polling costs. Supported polling for presidential, gubernatorial, congressional, and senatorial campaigns.
+**Impact:** Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.
 
 ### National Redistricting Platform
 *2020 - 2022*

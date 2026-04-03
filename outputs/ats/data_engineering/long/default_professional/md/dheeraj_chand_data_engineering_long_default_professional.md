@@ -4,12 +4,12 @@
 
 ## Professional Summary
 
-Data engineer with 20+ years building infrastructure for demographic and geospatial data at national scale. I built the Civic Graph data warehouse that harmonized polling data from dozens of firms into a $1B+ dataset. I modernized ETL pipelines with PySpark, dbt, and Databricks — cutting processing times by 57% on one engagement. I maintain siege_utilities, an open-source library with 37 GeoDjango models and PySpark/Sedona distributed computing utilities. My systems process billions of records across 178,000+ precincts with sub-200ms query times.
+Data engineer with 20+ years building infrastructure for demographic and geospatial data at national scale. I built the Civic Graph data warehouse that harmonized polling data from dozens of firms into a dataset representing $1B+ in accumulated investment. I modernized ETL pipelines with PySpark, dbt, and Databricks — cutting processing times by 57% on one engagement. I maintain siege_utilities, an open-source library with 37 GeoDjango models and PySpark/Sedona distributed computing utilities. My geospatial methods return accurate results in roughly 15% of the time that traditional string comparison approaches require.
 
 ## Key Achievements and Impact
 
 ### Impact
-- Built cloud-based data warehouse on AWS processing billions of records with **99.94%** accuracy and sub-200ms query response times across **178,000**+ precincts.
+- Built cloud-based data warehouse on AWS processing billions of records with **99.94%** accuracy across **178,000**+ precincts. Geospatial query methods returned results in ~**15%** of the time traditional string comparison required.
 - Designed ETL pipelines using PySpark, dbt, Databricks, and PostgreSQL/PostGIS — processing large-scale geospatial datasets with automated quality monitoring.
 - Discovered systematic race coding errors in national voter databases affecting all Black and Asian-American voters — decades of miscoding nobody else had caught. Built geospatial ML algorithms improving classification accuracy from **23%** to **64%**.
 - Invented a trigonometric boundary estimation algorithm that reduced mapping costs by **73.5%**, saving campaigns and nonprofits **$4.7M** and making redistricting analysis accessible to organizations that couldn't previously afford it.
@@ -104,7 +104,7 @@ Cloud-based GeoDjango platform for redistricting analysis with real-time collabo
 Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
 
 **Technologies:** Python, PostgreSQL, PostGIS, PySpark, ETL Pipelines, Meta-Analysis
-**Impact:** Created a $1B+ dataset that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
+**Impact:** Created a dataset representing $1B+ in accumulated investment that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
 
 ### Geospatial Demographic Classification System
 *2014 - Present*

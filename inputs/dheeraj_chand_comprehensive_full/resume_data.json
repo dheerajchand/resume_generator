@@ -238,7 +238,7 @@
         "JavaScript",
         "Apache"
       ],
-      "impact": "Saved PAC $840,000 annually in polling costs. Supported polling for presidential, gubernatorial, congressional, and senatorial campaigns.",
+      "impact": "Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.",
       "technical_details": [
         "Handled peak loads of 10,000+ simultaneous phone calls via Twilio API",
         "IVR system for automated survey collection with real-time response aggregation"
@@ -275,7 +275,7 @@
         "ETL Pipelines",
         "Meta-Analysis"
       ],
-      "impact": "Created a $1B+ dataset that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.",
+      "impact": "Created a dataset representing $1B+ in accumulated investment that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.",
       "technical_details": [
         "Harmonized data from firms with completely different methodologies and encoding systems",
         "Built meta-analysis frameworks for systematic cross-firm data integration"

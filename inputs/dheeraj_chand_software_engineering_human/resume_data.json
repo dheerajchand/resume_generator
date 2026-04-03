@@ -174,7 +174,7 @@
         "JavaScript",
         "Apache"
       ],
-      "impact": "Saved PAC $840,000 annually in polling costs. Supported polling for presidential, gubernatorial, congressional, and senatorial campaigns.",
+      "impact": "Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.",
       "technical_details": [
         "Handled peak loads of 10,000+ simultaneous phone calls via Twilio API",
         "IVR system for automated survey collection with real-time response aggregation"
