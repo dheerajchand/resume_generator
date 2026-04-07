@@ -23,7 +23,7 @@
     "data_engineering": {
       "summary_key": "data_engineering",
       "achievements": {
-        "include_achievements": ["data_infrastructure", "technical_architecture", "demographic_breakthrough", "trigonometric_algorithm", "supreme_court_impact"],
+        "include_achievements": ["data_infrastructure", "technical_architecture", "fraud_detection_systems", "demographic_breakthrough", "trigonometric_algorithm", "supreme_court_impact"],
         "total_max": 6
       },
       "experience": {
@@ -123,7 +123,7 @@
     "data_analysis_visualization": {
       "summary_key": "data_analysis_visualization",
       "achievements": {
-        "include_achievements": ["demographic_breakthrough", "predictive_excellence", "methodological_advancement", "platform_impact"],
+        "include_achievements": ["demographic_breakthrough", "data_infrastructure", "technical_architecture", "predictive_excellence", "methodological_advancement", "platform_impact"],
         "total_max": 4
       },
       "experience": {
@@ -132,11 +132,11 @@
         "siege_analytics_max": 6
       },
       "projects": {
-        "include_projects": ["demographic_ml_system", "siege_utilities", "redistricting_platform", "tile_server_platform"],
+        "include_projects": ["demographic_ml_system", "civic_graph", "siege_utilities", "redistricting_platform", "tile_server_platform"],
         "show_technical_details": true
       },
       "competencies": {
-        "include_categories": ["programming_expertise", "machine_learning_ai", "geospatial_stack"],
+        "include_categories": ["programming_expertise", "machine_learning_ai", "data_engineering", "geospatial_stack"],
         "detail_level": "focused"
       }
     },

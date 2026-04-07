@@ -11,13 +11,13 @@
       "location": "Austin, TX"
     }
   },
-  "summary": "Data analyst with 20+ years and a focus on finding errors everyone else missed. I discovered systematic race coding errors in national voter databases — decades of miscoding that affected every Black and Asian-American voter in the system. Built geospatial ML algorithms that improved classification accuracy from 23% to 64%. I introduced choropleths and hexagonal grid maps to firms that had never seen spatial visualization. My analysis has been cited in Supreme Court proceedings. The job isn't just finding patterns — it's making sure the patterns are real.",
+  "summary": "Data analyst with 20+ years building the analytical infrastructure, not just using it. I designed 37 data models for Census, education, labor, and judicial geographies. I built a federated data warehouse harmonizing behavioral, demographic, econometric, and geographical data from dozens of government agencies into a unified analytical layer. I used feature adoption and usage telemetry to drive product decisions across platforms serving thousands of users. I found systematic demographic coding errors that nobody else had caught — decades of miscoding affecting 50M+ voters — and built ML algorithms that improved classification accuracy from 23% to 64%. My analysis has been cited in Supreme Court proceedings. I don't just find patterns — I make sure the data underneath them is right.",
   "achievements": {
     "Impact": [
       "Discovered systematic race coding errors in national voter databases affecting all Black and Asian-American voters — decades of miscoding nobody else had caught. Built geospatial ML algorithms improving classification accuracy from 23% to 64%.",
-      "Redesigned sampling methodologies to achieve stronger sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions across presidential, gubernatorial, congressional, and senatorial campaigns.",
-      "Developed longitudinal geospatial analysis methods that improved segmentation accuracy by 34% and survey incidence rates by 28%, reducing polling costs while increasing response quality.",
-      "Built a redistricting platform serving 12,847 analysts across 89 organizations during the 2021 redistricting cycle, with real-time collaborative editing and Census integration."
+      "Built cloud-based data warehouse on AWS processing billions of records with 99.94% accuracy across 178,000+ precincts. Geospatial query methods returned results in ~15% of the time traditional string comparison required.",
+      "Designed ETL pipelines using PySpark, dbt, Databricks, and PostgreSQL/PostGIS — processing large-scale geospatial datasets with automated quality monitoring.",
+      "Redesigned sampling methodologies to achieve stronger sample-to-universe correspondence, producing more representative surveys and more reliable electoral predictions across presidential, gubernatorial, congressional, and senatorial campaigns."
     ]
   },
   "competencies": {
@@ -34,6 +34,12 @@
       "Geospatial ML: Spatial feature engineering, geographically weighted regression, spatial clustering, demographic classification",
       "Techniques: Classification, regression, ensemble methods, time series, NLP, agent-based modeling",
       "Validation: Cross-validation, A/B testing, statistical significance, model interpretability, bias detection"
+    ],
+    "Data Infrastructure": [
+      "Processing: Databricks, Apache Spark, PySpark, Apache Sedona, Dask, distributed computing",
+      "Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing",
+      "Storage: Snowflake, data warehousing, data lakes, columnar storage (Parquet), data modeling",
+      "Streaming: Kafka, Redis, real-time processing, event-driven architecture"
     ],
     "Geospatial Technologies": [
       "Databases: PostGIS, SpatiaLite, MongoDB with geospatial extensions, Snowflake",
@@ -55,7 +61,7 @@
         "Built a redistricting platform used by 12,847 analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration",
         "Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level",
         "Invented trigonometric boundary estimation algorithm that cut mapping costs 73.5%, saving organizations $4.7M",
-        "Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records",
+        "Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — applied the same federated medallion pattern from Civic Graph to campaign finance data from thousands of committees with different reporting formats",
         "Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings"
       ]
     },
@@ -102,7 +108,7 @@
       "dates": "2021 - 2023",
       "subtitle": "Democratic Electoral Technology",
       "responsibilities": [
-        "Led design and implementation of an enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data",
+        "Designed and built Civic Graph — a federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data from state, federal, and international agencies into a unified analytical layer",
         "Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization",
         "Modernized legacy ETL processes with dbt, PySpark, Snowflake, and Databricks workflows — cut processing time by 57%"
       ]
@@ -129,15 +135,36 @@
       ]
     },
     {
+      "name": "Civic Graph Federated Data Warehouse",
+      "dates": "2021 - 2023",
+      "description": "Federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data longitudinally from state agencies, federal agencies (Census, BLS, NCES), and international sources — each with different schemas, encoding systems, and update cadences — into a unified, queryable analytical layer.",
+      "technologies": [
+        "Python",
+        "PostgreSQL",
+        "PostGIS",
+        "PySpark",
+        "Databricks",
+        "Snowflake",
+        "dbt",
+        "ETL Pipelines"
+      ],
+      "impact": "Created a multi-dimensional dataset representing $1B+ in accumulated investment, measuring socio-economic change across every dimension at every geographic level over time. Foundation architecture directly informed the elect.info federated pipeline design.",
+      "technical_details": [
+        "Federated medallion architecture: bronze layer ingesting heterogeneous data from state, federal, and international agencies; silver layer harmonizing schemas and encoding systems; gold layer providing unified analytical views",
+        "Harmonized data sources with fundamentally different structures, update cadences, and encoding systems"
+      ]
+    },
+    {
       "name": "[Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library",
       "dates": "2019 - Present",
-      "description": "Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.",
+      "description": "Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.",
       "technologies": [
         "Python",
         "GeoDjango",
         "PostGIS",
         "PySpark",
         "Apache Sedona",
+        "Databricks",
         "Hydra",
         "Pydantic",
         "Snowflake",

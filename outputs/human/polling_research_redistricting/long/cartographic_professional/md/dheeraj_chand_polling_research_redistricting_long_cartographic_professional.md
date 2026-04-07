@@ -99,9 +99,9 @@ Machine learning system that discovered systematic race coding errors in nationa
 ### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
 *2019 - Present*
 
-Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
+Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
 
-**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Hydra, Pydantic, Snowflake, Census API
+**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
 **Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
 
 ## Technical Skills

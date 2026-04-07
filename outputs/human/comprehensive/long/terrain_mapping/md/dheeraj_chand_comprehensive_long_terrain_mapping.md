@@ -35,7 +35,7 @@ I've spent 20+ years at the intersection of geography, demographics, and softwar
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
-- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — applied the same federated medallion pattern from Civic Graph to campaign finance data from thousands of committees with different reporting formats
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
 - Built and maintain [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — open-source geospatial data sciences library with 37 GeoDjango models, PySpark/Sedona integration, and **1,884**+ tests
 
@@ -44,7 +44,7 @@ I've spent 20+ years at the intersection of geography, demographics, and softwar
 
 *Democratic Electoral Technology*
 
-- Led design and implementation of an enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data
+- Designed and built Civic Graph — a federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data from state, federal, and international agencies into a unified analytical layer
 - Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization
 - Modernized legacy ETL processes with dbt, PySpark, Snowflake, and Databricks workflows — cut processing time by **57%**
 
@@ -124,9 +124,9 @@ I've spent 20+ years at the intersection of geography, demographics, and softwar
 ### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
 *2019 - Present*
 
-Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
+Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
 
-**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Hydra, Pydantic, Snowflake, Census API
+**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
 **Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
 
 ### National Redistricting Platform
@@ -153,13 +153,13 @@ Machine learning system that discovered systematic race coding errors in nationa
 **Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, PySpark, AWS
 **Impact:** Corrected demographic data affecting 50M+ voters nationwide. Improved electoral prediction accuracy by 22%. Analysis cited in Supreme Court proceedings.
 
-### Civic Graph Multi-Tenant Data Warehouse
+### Civic Graph Federated Data Warehouse
 *2021 - 2023*
 
-Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
+Federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data longitudinally from state agencies, federal agencies (Census, BLS, NCES), and international sources — each with different schemas, encoding systems, and update cadences — into a unified, queryable analytical layer.
 
-**Technologies:** Python, PostgreSQL, PostGIS, PySpark, ETL Pipelines, Meta-Analysis
-**Impact:** Created a dataset representing $1B+ in accumulated investment that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
+**Technologies:** Python, PostgreSQL, PostGIS, PySpark, Databricks, Snowflake, dbt, ETL Pipelines
+**Impact:** Created a multi-dimensional dataset representing $1B+ in accumulated investment, measuring socio-economic change across every dimension at every geographic level over time. Foundation architecture directly informed the elect.info federated pipeline design.
 
 ### High-Performance Geospatial Tile Server
 *2010 - 2011*

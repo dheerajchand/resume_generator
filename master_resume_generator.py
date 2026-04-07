@@ -180,23 +180,74 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
     
     return resume
 
+def create_abbreviated_resume(full_resume, resume_type):
+    """Create an abbreviated (short) version of a full resume for 1-page output.
+
+    Rules:
+    - Summary: first 2-3 sentences of type-specific summary
+    - Achievements: max 3
+    - Responsibilities per job: 2 (Siege Analytics: 3)
+    - Projects: top 3 only, no technical_details
+    - Competencies: same categories and detail level
+    - Additional info: footer pointing to full version
+    """
+    import copy
+    abbreviated = copy.deepcopy(full_resume)
+
+    # Truncate summary to first 2-3 sentences
+    summary = abbreviated["summary"]
+    sentences = []
+    current = ""
+    for char in summary:
+        current += char
+        if char in ".!?" and len(sentences) < 3:
+            # Check it's not an abbreviation or URL
+            if len(current.strip()) > 20:
+                sentences.append(current.strip())
+                current = ""
+    if len(sentences) >= 2:
+        abbreviated["summary"] = " ".join(sentences[:3])
+
+    # Limit achievements to 3
+    for category in abbreviated["achievements"]:
+        abbreviated["achievements"][category] = abbreviated["achievements"][category][:3]
+
+    # Limit responsibilities per job
+    for position in abbreviated["experience"]:
+        if position["company"] == "Siege Analytics":
+            position["responsibilities"] = position["responsibilities"][:3]
+        else:
+            position["responsibilities"] = position["responsibilities"][:2]
+
+    # Limit projects to top 3 and remove technical_details
+    abbreviated["projects"] = abbreviated["projects"][:3]
+    for project in abbreviated["projects"]:
+        if "technical_details" in project:
+            del project["technical_details"]
+
+    # Add footer
+    abbreviated["additional_info"] = "For a more detailed description of my experience, please visit https://www.dheerajchand.com"
+
+    return abbreviated
+
+
 def generate_all_specialized_resumes():
-    """Generate all specialized resume types from master data"""
-    
+    """Generate all specialized resume types from master data — both long and abbreviated"""
+
     master_data = load_master_achievements()
-    
+
     resume_types = [
-        "comprehensive", "data_engineering", "software_engineering", 
+        "comprehensive", "data_engineering", "software_engineering",
         "gis", "product", "marketing", "data_analysis_visualization",
         "polling_research_redistricting"
     ]
-    
+
     output_types = ["ats", "human"]
-    
+
     # Map to actual directory names
     type_mapping = {
         "comprehensive": "dheeraj_chand_comprehensive_full",
-        "data_engineering": "dheeraj_chand_data_engineering", 
+        "data_engineering": "dheeraj_chand_data_engineering",
         "software_engineering": "dheeraj_chand_software_engineering",
         "gis": "dheeraj_chand_gis",
         "product": "dheeraj_chand_product",
@@ -204,31 +255,44 @@ def generate_all_specialized_resumes():
         "data_analysis_visualization": "dheeraj_chand_data_analysis_visualization",
         "polling_research_redistricting": "dheeraj_chand_polling_research_redistricting"
     }
-    
+
     generated = 0
-    
+
     for resume_type in resume_types:
         for output_type in output_types:
-            
-            # Generate specialized resume
+
+            # Generate specialized resume (long version)
             specialized_resume = create_specialized_resume(master_data, resume_type, output_type)
-            
-            # Determine output path
+
+            # --- Long variant ---
             dir_name = type_mapping[resume_type]
             if output_type == "human":
                 dir_name += "_human"
-                
+
             output_dir = Path("inputs") / dir_name
             output_dir.mkdir(exist_ok=True)
-            
-            # Write resume file
+
             output_file = output_dir / "resume_data.json"
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(specialized_resume, f, indent=2, ensure_ascii=False)
-            
+
             print(f"✅ Generated: {output_file}")
             generated += 1
-    
+
+            # --- Abbreviated variant ---
+            abbreviated_resume = create_abbreviated_resume(specialized_resume, resume_type)
+
+            abbrev_dir_name = dir_name + "_abbreviated"
+            abbrev_output_dir = Path("inputs") / abbrev_dir_name
+            abbrev_output_dir.mkdir(exist_ok=True)
+
+            abbrev_output_file = abbrev_output_dir / "resume_data.json"
+            with open(abbrev_output_file, 'w', encoding='utf-8') as f:
+                json.dump(abbreviated_resume, f, indent=2, ensure_ascii=False)
+
+            print(f"✅ Generated: {abbrev_output_file}")
+            generated += 1
+
     print(f"\n🎯 Generated {generated} specialized resumes from master data!")
 
 if __name__ == "__main__":

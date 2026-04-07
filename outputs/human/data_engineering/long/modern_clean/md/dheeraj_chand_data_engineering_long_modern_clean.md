@@ -4,13 +4,14 @@
 
 ## Professional Summary
 
-Data engineer with 20+ years building infrastructure for demographic and geospatial data at national scale. I built the Civic Graph data warehouse that harmonized polling data from dozens of firms into a dataset representing $1B+ in accumulated investment. I modernized ETL pipelines with PySpark, dbt, and Databricks — cutting processing times by 57% on one engagement. I maintain siege_utilities, an open-source library with 37 GeoDjango models and PySpark/Sedona distributed computing utilities. My geospatial methods return accurate results in roughly 15% of the time that traditional string comparison approaches require.
+I've spent 20+ years building and owning data environments end-to-end — not just pipelines, but the whole ecosystem. At Helm, I designed Civic Graph as a federated medallion architecture: behavioral, attitudinal, demographic, econometric, and geographical data arriving longitudinally from state, federal, and international agencies with different schemas and update cadences, harmonized into a unified warehouse. I used Databricks, dbt, PySpark, and Snowflake to modernize the ETL layer and cut processing time by 57%. I then applied that same federated medallion pattern to build elect.info — a real-time FEC analysis platform processing billions of records. I maintain siege_utilities, an open-source library whose geospatial computation functions run inside Databricks without requiring Apache Sedona or low-level C GIS libraries. I've built self-service platforms used by nearly 13,000 analysts without hand-holding.
 
 ## Key Achievements and Impact
 
 ### Impact
 - Built cloud-based data warehouse on AWS processing billions of records with **99.94%** accuracy across **178,000**+ precincts. Geospatial query methods returned results in ~**15%** of the time traditional string comparison required.
 - Designed ETL pipelines using PySpark, dbt, Databricks, and PostgreSQL/PostGIS — processing large-scale geospatial datasets with automated quality monitoring.
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records to identify likely fraud, money laundering, and financial crimes in a political spending sub-economy valued over **$2** trillion.
 - Discovered systematic race coding errors in national voter databases affecting all Black and Asian-American voters — decades of miscoding nobody else had caught. Built geospatial ML algorithms improving classification accuracy from **23%** to **64%**.
 - Invented a trigonometric boundary estimation algorithm that reduced mapping costs by **73.5%**, saving campaigns and nonprofits **$4.7M** and making redistricting analysis accessible to organizations that couldn't previously afford it.
 - Data analysis cited in Supreme Court case proceedings, with expert methodology validated at the highest judicial level.
@@ -32,7 +33,7 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
-- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — applied the same federated medallion pattern from Civic Graph to campaign finance data from thousands of committees with different reporting formats
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
 
 ### Data Products Manager
@@ -40,7 +41,7 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 
 *Democratic Electoral Technology*
 
-- Led design and implementation of an enterprise-scale multi-tenant data warehouse for geo-referenced demographic, econometric, and electoral data
+- Designed and built Civic Graph — a federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data from state, federal, and international agencies into a unified analytical layer
 - Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization
 - Modernized legacy ETL processes with dbt, PySpark, Snowflake, and Databricks workflows — cut processing time by **57%**
 
@@ -85,9 +86,9 @@ Data engineer with 20+ years building infrastructure for demographic and geospat
 ### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
 *2019 - Present*
 
-Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
+Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
 
-**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Hydra, Pydantic, Snowflake, Census API
+**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
 **Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
 
 ### National Redistricting Platform
@@ -98,13 +99,13 @@ Cloud-based GeoDjango platform for redistricting analysis with real-time collabo
 **Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python, Redis, WebSockets
 **Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it.
 
-### Civic Graph Multi-Tenant Data Warehouse
+### Civic Graph Federated Data Warehouse
 *2021 - 2023*
 
-Multi-tenant data warehouse harmonizing polling data from dozens of firms with different methodologies and encoding systems into a unified, queryable dataset.
+Federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data longitudinally from state agencies, federal agencies (Census, BLS, NCES), and international sources — each with different schemas, encoding systems, and update cadences — into a unified, queryable analytical layer.
 
-**Technologies:** Python, PostgreSQL, PostGIS, PySpark, ETL Pipelines, Meta-Analysis
-**Impact:** Created a dataset representing $1B+ in accumulated investment that became a foundation for modern electoral analytics, serving dozens of polling and mail firms.
+**Technologies:** Python, PostgreSQL, PostGIS, PySpark, Databricks, Snowflake, dbt, ETL Pipelines
+**Impact:** Created a multi-dimensional dataset representing $1B+ in accumulated investment, measuring socio-economic change across every dimension at every geographic level over time. Foundation architecture directly informed the elect.info federated pipeline design.
 
 ### Geospatial Demographic Classification System
 *2014 - Present*

@@ -31,7 +31,7 @@ I grew up moving across three continents — Queens, Dhaka, Hong Kong, Singapore
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
 - Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 - Invented trigonometric boundary estimation algorithm that cut mapping costs **73.5%**, saving organizations **$4.7M**
-- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — applied the same federated medallion pattern from Civic Graph to campaign finance data from thousands of committees with different reporting formats
 - Briefed senior government officials on election integrity and voter sentiment. Data analysis cited in Supreme Court case proceedings
 
 ### Software Engineer
@@ -75,9 +75,9 @@ I grew up moving across three continents — Queens, Dhaka, Hong Kong, Singapore
 ### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
 *2019 - Present*
 
-Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
+Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
 
-**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Hydra, Pydantic, Snowflake, Census API
+**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
 **Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
 
 ### National Redistricting Platform

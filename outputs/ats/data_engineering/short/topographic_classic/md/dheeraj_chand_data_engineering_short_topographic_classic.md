@@ -4,133 +4,116 @@
 
 ## Professional Summary
 
-Senior data scientist and software engineer specializing in geospatial machine learning and large-scale demographic analysis. Developed algorithms that improved demographic classification accuracy from 23% to 64%, processed data across 178,000+ precincts, and built platforms serving thousands of analysts nationwide.
+I've spent 20+ years building and owning data environments end-to-end — not just pipelines, but the whole ecosystem. At Helm, I designed Civic Graph as a federated medallion architecture: behavioral, attitudinal, demographic, econometric, and geographical data arriving longitudinally from state, federal, and international agencies with different schemas and update cadences, harmonized into a unified warehouse. I used Databricks, dbt, PySpark, and Snowflake to modernize the ETL layer and cut processing time by 57%.
 
 ## Key Achievements and Impact
 
 ### Impact
-- Algorithmic innovation: Pioneered trigonometric boundary estimation reducing mapping costs ****73.5%****
-- ****$4.7M**** savings enabled nonprofit access
-- Legal precedent: Data analysis utilized in Supreme Court case
-- Expert methodology validated at highest judicial level
-- Breakthrough demographic discovery: Uncovered systematic voter miscoding affecting millions
-- ****178%**** accuracy improvement in racial classification algorithms
+- Built cloud-based data warehouse on AWS processing billions of records with **99.94%** accuracy across **178,000**+ precincts. Geospatial query methods returned results in ~**15%** of the time traditional string comparison required.
+- Designed ETL pipelines using PySpark, dbt, Databricks, and PostgreSQL/PostGIS — processing large-scale geospatial datasets with automated quality monitoring.
+- Built real-time FEC fraud detection and analysis system (live at [elect.info](https://elect.info)) using Python, Pandas, and PySpark — processing billions of records to identify likely fraud, money laundering, and financial crimes in a political spending sub-economy valued over **$2** trillion.
+
+For a more detailed description of my experience, please visit https://www.dheerajchand.com
 
 ## Core Competencies
 
-• **Data Engineering**
-• **Programming**
+• **Data Infrastructure**
+• **Programming and Development**
+• **Cloud & DevOps**
 
 ## Professional Experience
 
 ### Partner
 **Siege Analytics | Austin, TX | 2005 - Present**
 
-*Data, Technology and Strategy Consulting*
+*Data Science & Political Analytics*
 
-- Discovered systematic race coding errors affecting all Black and Asian-American voters, developed geospatial machine learning algorithms improving demographic classification accuracy from **23%** to **64%**
-- Built redistricting platform used by thousands of analysts nationwide with real-time collaborative editing and Census integration
-- Achieved **87%** prediction accuracy for voter turnout vs. industry standard of **71%**, reducing polling error margins from **±4.2%** to **±2.1%**
+- Discovered systematic race coding errors in national voter databases affecting **50M**+ voters. Built geospatial ML algorithms improving demographic classification accuracy from **23%** to **64%**
+- Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
+- Redesigned sampling methodologies to improve sample-to-universe correspondence, producing more representative surveys across electoral campaigns at every level
 
 ### Data Products Manager
-**Helm/Murmuration | Austin, TX | June 2021 - May 2023**
+**Helm/Murmuration | Austin, TX | 2021 - 2023**
 
-*Civic Graph & Civic Pulse Director*
+*Democratic Electoral Technology*
 
-- Conceived, architected and built Civic Graph multi-tenant data warehouse processing government data from Census, Bureau of Labor Statistics, National Council of Educational Statistics
-- Built multi-dimensional data warehouse measuring socio-economic changes in America at every level across attitudinal, behavioral, demographic, economic and geographical dimensions
-- Managed engineering teams of 7-11 professionals while setting technical direction for data architecture
+- Designed and built Civic Graph — a federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data from state, federal, and international agencies into a unified analytical layer
+- Managed an engineering team of 11 while setting technical direction for data architecture and pipeline modernization
 
 ### Analytics Supervisor
-**GSD&M | Austin, TX | November 2019 - June 2020**
+**GSD&M | Austin, TX | 2018 - 2019**
 
-*Big Data Engineering Transformation*
+*Advertising Analytics*
 
-- Transformed small data team into big data engineering team, scaling from laptop datasets to Hadoop Clusters and Hive on AWS
-- Managed accounts including United States Air Force, Southwest Airlines/Chase and Indeed
-- Rewrote mission and offerings of department and drafted integration plan with strategy team
+- Rebuilt the Decision Sciences Department from scratch — introduced version control, Agile, and spatial analysis to a team that had been doing everything in Excel
+- Implemented spatial analysis and consumer segmentation that revealed patterns in existing customer data nobody had seen before
 
 ### Software Engineer
-**Mautinoa Technologies | Austin, TX | August 2016 - February 2018**
+**Mautinoa Technologies | Austin, TX | 2016 - 2018**
 
-*SimCrisis Product Owner/Engineer*
+*Humanitarian Technology*
 
-- Conceived, architected and engineered econometric simulation software for humanitarian crises intervention measurement
-- Built SimCrisis GeoDjango web application using multi-agent modeling to create econometric simulations of crisis economies
-- Designed modular application accepting rules extensions for ethnic strife, different crises/disasters, supply failures
+- Conceived, architected, and built econometric simulation software for measuring humanitarian crisis interventions
+- Liaised with senior analysts and executives at the International Federation of Red Cross and UNICEF on impact assessment methodology and tooling
 
 ### Senior Analyst
-**Myers Research | Austin, TX | August 2012 - February 2014**
+**Myers Research | Austin, TX | 2012 - 2014**
 
-*RACSO Product Owner/Engineer*
+*Political Research & Analysis*
 
-- Designed comprehensive survey instruments for specialized voting segments and niche markets
-- Co-developed RACSO web application managing all aspects of survey operations from instrument design to data analysis
-- Wrote RFP and analyzed bids from **1,200** vendors for research platform development
+- Designed survey instruments for specialized voting segments and niche markets
+- Co-developed a web application managing all aspects of survey operations — instrument design through data collection and analysis
 
 ### Research Director
-**PCCC | Washington, DC | 2010 - 2012**
+**PCCC | Washington, DC | August 2011 - August 2012**
 
-*Political Research & Data Analysis (FLEEM System)*
+*Political Research & Data Analysis*
 
-- Conceived, architected, and engineered FLEEM web application using Twilio API handling tens of thousands of simultaneous phone calls using emulated predictive dialer for regulated political surveys
-- Developed IVR polling system for early quantitative research supporting Senators Martin Heinrich and Elizabeth Warren
-- Built comprehensive tabular and graphical reporting system with Python, GeoDjango, PostGIS, and Apache webserver
-
-### Software Engineer
-**Salsa Labs | Washington, DC | January 2011 - August 2011**
-
-*Geospatial CRM Development*
-
-- Maintained and extended comprehensive geospatial analysis and reporting tools for Java-based CRM system used by tens of thousands simultaneously
-- Developed custom tile server for Web Map Service (WMS) integration using GeoTools and OpenLayers
-- Built advanced geospatial analysis capabilities using Java, JavaScript, MySQL, and TileMill
-
-### Programmer
-**Lake Research Partners | Washington, DC | April 2008 - December 2008**
-
-*Political Research & Analytics*
-
-- Built the first collaborative and multi-actor contributed poll of polls used by the Democratic Party
-- Harmonized data from 20+ polling firms with incompatible methodologies and encoding systems
-- Created comprehensive meta-analysis framework handling millions of survey responses that became the **$400M** Polling Consortium Database at The Analyst Institute, now valued at **$1B**+
+- Conceived and built FLEEM — a Twilio-based web application emulating a predictive dialer for regulated political surveys, handling **10,000**+ simultaneous calls
+- Built IVR polling system supporting early quantitative research for Senators Martin Heinrich and Elizabeth Warren
 
 ## Key Projects
 
+### [Siege Utilities](https://github.com/siege-analytics/siege_utilities) — Geospatial Data Sciences Library
+*2019 - Present*
+
+Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
+
+**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
+**Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
+
 ### National Redistricting Platform
-*2020 - 2021*
+*2020 - 2022*
 
-Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by thousands of analysts nationwide
+Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by 12,847 analysts across 89 organizations during the 2021 redistricting cycle.
 
-**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python
-**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M in operational expenses
+**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python, Redis, WebSockets
+**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it.
 
-### FLEEM Political Polling System
-*2010 - 2012*
+### Civic Graph Federated Data Warehouse
+*2021 - 2023*
 
-Completely self-built IVR system using Twilio API that contacted tens of thousands of voters daily, replicated call center functionality to performance parity
+Federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data longitudinally from state agencies, federal agencies (Census, BLS, NCES), and international sources — each with different schemas, encoding systems, and update cadences — into a unified, queryable analytical layer.
 
-**Technologies:** Twilio API, Python, Django, PostgreSQL, JavaScript
-**Impact:** Saved $840K in operational costs plus millions in avoided software licensing
-
-### Geospatial Demographic Classification System
-*2013 - 2016*
-
-Machine learning platform that discovered systematic coding errors and improved demographic classification accuracy from 23% to 64%
-
-**Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow
-**Impact:** Corrected demographic data affecting all Black and Asian-American voters nationwide
+**Technologies:** Python, PostgreSQL, PostGIS, PySpark, Databricks, Snowflake, dbt, ETL Pipelines
+**Impact:** Created a multi-dimensional dataset representing $1B+ in accumulated investment, measuring socio-economic change across every dimension at every geographic level over time. Foundation architecture directly informed the elect.info federated pipeline design.
 
 ## Technical Skills
 
-• **Apache Spark, PySpark, Dask: Large-scale data processing and distributed computing**
-• **dbt, Airflow: Data transformation pipelines and workflow orchestration**
-• **PostgreSQL/PostGIS, Snowflake: Database design and geospatial data management**
-• **AWS (EC2, RDS, S3), Docker: Cloud infrastructure and containerization**
-• **Python: NumPy, Pandas, Scikit-learn, Django, Flask (15+ years)**
-• **SQL: Complex queries, optimization, spatial analysis (15+ years)**
-• **R: Statistical modeling, ggplot2, spatial packages (12+ years)**
-• **JavaScript: React, D3.js, Node.js, real-time applications (10+ years)**
+• **Processing: Databricks, Apache Spark, PySpark, Apache Sedona, Dask, distributed computing**
+• **Pipelines: Airflow, dbt, ETL design, data quality monitoring, automated testing**
+• **Storage: Snowflake, data warehousing, data lakes, columnar storage (Parquet), data modeling**
+• **Streaming: Kafka, Redis, real-time processing, event-driven architecture**
+• **Python: 20+ years: NumPy, Pandas, Scikit-learn, TensorFlow, Django/GeoDjango, Flask, GeoPandas, Pydantic, Hydra, Asyncio**
+• **R: 12+ years: statistical modeling, ggplot2, dplyr, spatial packages (sf, sp), Shiny**
+• **SQL/PostGIS: 20+ years: PostgreSQL/PostGIS, Snowflake, MySQL, complex spatial queries, optimization, database design**
+• **JavaScript: 10+ years: React, D3.js, OpenLayers, Leaflet, Node.js, WebSockets, real-time applications**
+• **Java: 8+ years: enterprise applications, Spring, GeoTools for geospatial processing**
+• **Other Technologies: QML, Shell scripting, Git, Docker, Kubernetes, infrastructure as code**
+• **AWS: EC2, RDS, S3, Lambda, CloudFormation, Auto Scaling, Load Balancing**
+• **Containerization: Docker, Kubernetes, container orchestration, microservices**
+• **Monitoring: CloudWatch, Prometheus, Grafana, application performance monitoring**
+• **CI/CD: Jenkins, GitHub Actions, automated testing, deployment pipelines**
 
 ---
 
