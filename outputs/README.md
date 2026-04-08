@@ -4,48 +4,22 @@
 
 This is a selection of resumes I've made. For quick navigation, without browsing anything else, here are human-oriented, PDF formatted, longer form resumes oriented towards different roles:
 
-1. **[Comprehensive](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/comprehensive/long/modern_tech/pdf/dheeraj_chand_comprehensive_long_modern_tech.pdf)** - Complete career overview
-2. **[Data Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_engineering/long/corporate_blue/pdf/dheeraj_chand_data_engineering_long_corporate_blue.pdf)** - Data infrastructure focus
-3. **[Software Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/long/satellite_imagery/pdf/dheeraj_chand_software_engineering_long_satellite_imagery.pdf)** - Software development expertise
-4. **[GIS & Geospatial](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/long/terrain_mapping/pdf/dheeraj_chand_gis_long_terrain_mapping.pdf)** - Mapping and spatial analysis
-5. **[Product Management](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/long/cartographic_professional/pdf/dheeraj_chand_product_long_cartographic_professional.pdf)** - Business strategy focus
-6. **[Marketing Analytics](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/long/modern_clean/pdf/dheeraj_chand_marketing_long_modern_clean.pdf)** - Data-driven marketing
-7. **[Data Analysis & Visualization](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/long/topographic_classic/pdf/dheeraj_chand_data_analysis_visualization_long_topographic_classic.pdf)** - Data science specialization
-8. **[Political Research](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/long/default_professional/pdf/dheeraj_chand_polling_research_redistricting_long_default_professional.pdf)** - Research and redistricting
+1. **[Comprehensive](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/comprehensive/long/modern_tech/pdf/dheeraj_chand_comprehensive_long_modern_tech.pdf)** - Comprehensive
+2. **[Data Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_engineering/long/corporate_blue/pdf/dheeraj_chand_data_engineering_long_corporate_blue.pdf)** - Data Engineering
+3. **[Software Engineering](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/long/satellite_imagery/pdf/dheeraj_chand_software_engineering_long_satellite_imagery.pdf)** - Software Engineering
+4. **[GIS & Geospatial Analysis](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/long/terrain_mapping/pdf/dheeraj_chand_gis_long_terrain_mapping.pdf)** - GIS & Geospatial Analysis
+5. **[Product Management](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/long/cartographic_professional/pdf/dheeraj_chand_product_long_cartographic_professional.pdf)** - Product Management
+6. **[Marketing Analytics](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/long/modern_clean/pdf/dheeraj_chand_marketing_long_modern_clean.pdf)** - Marketing Analytics
+7. **[Data Analysis & Visualization](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/long/topographic_classic/pdf/dheeraj_chand_data_analysis_visualization_long_topographic_classic.pdf)** - Data Analysis & Visualization
+8. **[Political Research & Redistricting](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/long/default_professional/pdf/dheeraj_chand_polling_research_redistricting_long_default_professional.pdf)** - Political Research & Redistricting
 
 ---
 
-
-
-**1,024 professionally formatted resumes** systematically generated for different industries and use cases.
-
-## Quick Navigation
-- [Overview](#overview)
-- [Resume Types](#resume-types)
-  - [Comprehensive](#comprehensive)
-  - [Data Engineering](#data-engineering)
-  - [Software Engineering](#software-engineering)
-  - [GIS & Geospatial Analysis](#gis)
-  - [Product Management](#product)
-  - [Marketing Analytics](#marketing)
-  - [Data Analysis & Visualization](#data-analysis-visualization)
-  - [Political Research & Redistricting](#polling-research-redistricting)
-- [Format Guide](#format-guide)
-- [Color Scheme Guide](#color-scheme-guide)
-
-## Overview
-**📊 Total Files:** 1,024 resumes organized by specialization and format
-**🎯 Output Types:** ATS-optimized and Human-readable versions
-**🎨 Color Schemes:** 8 professional color variations
-**📄 Formats:** PDF, DOCX, RTF, and Markdown
-
----
-
-## Resume Types
+**1024 professionally formatted resumes** systematically generated for different industries and use cases.
 
 ## Comprehensive
 
-Complete career overview showcasing the full breadth of experience across data science, software engineering, and political analytics. Includes all major achievements, technical skills, and project highlights. Best for senior-level positions and comprehensive career representation.
+Complete career overview showcasing the full breadth of experience across data science, software engineering, and political analytics.
 
 ### Long Format
 
@@ -75,7 +49,7 @@ Complete career overview showcasing the full breadth of experience across data s
 
 ## Data Engineering
 
-Focused on data infrastructure, ETL processes, and scalable data systems. Highlights experience with big data technologies, cloud platforms, and data pipeline optimization. Ideal for data engineering and infrastructure roles.
+Data infrastructure focus: pipelines, warehouses, ETL, Databricks, and federated architectures.
 
 ### Long Format
 
@@ -105,7 +79,7 @@ Focused on data infrastructure, ETL processes, and scalable data systems. Highli
 
 ## Software Engineering
 
-Emphasizes software development, system architecture, and technical leadership. Showcases programming expertise, code quality, and engineering best practices. Perfect for software development and technical leadership positions.
+Software development expertise: full-stack systems, distributed computing, and production platforms.
 
 ### Long Format
 
@@ -133,9 +107,9 @@ Emphasizes software development, system architecture, and technical leadership. 
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/cartographic_professional/pdf/dheeraj_chand_software_engineering_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/cartographic_professional/pdf/dheeraj_chand_software_engineering_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/cartographic_professional/docx/dheeraj_chand_software_engineering_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/cartographic_professional/docx/dheeraj_chand_software_engineering_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/cartographic_professional/rtf/dheeraj_chand_software_engineering_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/cartographic_professional/rtf/dheeraj_chand_software_engineering_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/cartographic_professional/md/dheeraj_chand_software_engineering_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/topographic_classic/pdf/dheeraj_chand_software_engineering_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/topographic_classic/pdf/dheeraj_chand_software_engineering_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/topographic_classic/docx/dheeraj_chand_software_engineering_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/topographic_classic/docx/dheeraj_chand_software_engineering_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/software_engineering/short/topographic_classic/rtf/dheeraj_chand_software_engineering_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/topographic_classic/rtf/dheeraj_chand_software_engineering_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/software_engineering/short/topographic_classic/md/dheeraj_chand_software_engineering_short_topographic_classic.md) |
 
-## Gis
+## GIS & Geospatial Analysis
 
-Specialized for geospatial analysis, mapping, and location intelligence. Features GIS software expertise, spatial analysis skills, and cartographic design. Tailored for GIS analyst and geospatial developer roles.
+Mapping and spatial analysis: PostGIS, GDAL, custom tile servers, and geospatial ML.
 
 ### Long Format
 
@@ -163,9 +137,9 @@ Specialized for geospatial analysis, mapping, and location intelligence. Feature
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/cartographic_professional/pdf/dheeraj_chand_gis_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/cartographic_professional/pdf/dheeraj_chand_gis_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/cartographic_professional/docx/dheeraj_chand_gis_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/cartographic_professional/docx/dheeraj_chand_gis_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/cartographic_professional/rtf/dheeraj_chand_gis_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/cartographic_professional/rtf/dheeraj_chand_gis_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/cartographic_professional/md/dheeraj_chand_gis_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/topographic_classic/pdf/dheeraj_chand_gis_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/topographic_classic/pdf/dheeraj_chand_gis_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/topographic_classic/docx/dheeraj_chand_gis_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/topographic_classic/docx/dheeraj_chand_gis_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/gis/short/topographic_classic/rtf/dheeraj_chand_gis_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/topographic_classic/rtf/dheeraj_chand_gis_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/gis/short/topographic_classic/md/dheeraj_chand_gis_short_topographic_classic.md) |
 
-## Product
+## Product Management
 
-Business-focused approach highlighting product strategy, user experience, and market analysis. Emphasizes product management skills, stakeholder communication, and business impact. Ideal for product management and business strategy roles.
+Business strategy focus: team leadership, platform development, and revenue generation.
 
 ### Long Format
 
@@ -193,9 +167,9 @@ Business-focused approach highlighting product strategy, user experience, and ma
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/cartographic_professional/pdf/dheeraj_chand_product_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/cartographic_professional/pdf/dheeraj_chand_product_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/cartographic_professional/docx/dheeraj_chand_product_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/cartographic_professional/docx/dheeraj_chand_product_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/cartographic_professional/rtf/dheeraj_chand_product_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/cartographic_professional/rtf/dheeraj_chand_product_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/cartographic_professional/md/dheeraj_chand_product_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/topographic_classic/pdf/dheeraj_chand_product_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/topographic_classic/pdf/dheeraj_chand_product_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/topographic_classic/docx/dheeraj_chand_product_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/topographic_classic/docx/dheeraj_chand_product_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/product/short/topographic_classic/rtf/dheeraj_chand_product_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/topographic_classic/rtf/dheeraj_chand_product_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/product/short/topographic_classic/md/dheeraj_chand_product_short_topographic_classic.md) |
 
-## Marketing
+## Marketing Analytics
 
-Marketing analytics and data-driven decision making focus. Showcases campaign analysis, customer insights, and marketing technology expertise. Perfect for marketing analytics and data-driven marketing roles.
+Data-driven marketing: consumer segmentation, testing, and optimization.
 
 ### Long Format
 
@@ -223,9 +197,9 @@ Marketing analytics and data-driven decision making focus. Showcases campaign an
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/cartographic_professional/pdf/dheeraj_chand_marketing_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/cartographic_professional/pdf/dheeraj_chand_marketing_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/cartographic_professional/docx/dheeraj_chand_marketing_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/cartographic_professional/docx/dheeraj_chand_marketing_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/cartographic_professional/rtf/dheeraj_chand_marketing_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/cartographic_professional/rtf/dheeraj_chand_marketing_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/cartographic_professional/md/dheeraj_chand_marketing_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/topographic_classic/pdf/dheeraj_chand_marketing_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/topographic_classic/pdf/dheeraj_chand_marketing_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/topographic_classic/docx/dheeraj_chand_marketing_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/topographic_classic/docx/dheeraj_chand_marketing_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/marketing/short/topographic_classic/rtf/dheeraj_chand_marketing_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/topographic_classic/rtf/dheeraj_chand_marketing_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/marketing/short/topographic_classic/md/dheeraj_chand_marketing_short_topographic_classic.md) |
 
-## Data Analysis Visualization
+## Data Analysis & Visualization
 
-Data science and visualization specialization. Features statistical analysis, machine learning, and data storytelling capabilities. Best for data scientist and analytics roles.
+Data science specialization: ML algorithms, demographic analysis, and spatial visualization.
 
 ### Long Format
 
@@ -253,9 +227,9 @@ Data science and visualization specialization. Features statistical analysis, ma
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/cartographic_professional/pdf/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/cartographic_professional/pdf/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/cartographic_professional/docx/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/cartographic_professional/docx/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/cartographic_professional/rtf/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/cartographic_professional/rtf/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/cartographic_professional/md/dheeraj_chand_data_analysis_visualization_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/topographic_classic/pdf/dheeraj_chand_data_analysis_visualization_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/topographic_classic/pdf/dheeraj_chand_data_analysis_visualization_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/topographic_classic/docx/dheeraj_chand_data_analysis_visualization_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/topographic_classic/docx/dheeraj_chand_data_analysis_visualization_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/data_analysis_visualization/short/topographic_classic/rtf/dheeraj_chand_data_analysis_visualization_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/topographic_classic/rtf/dheeraj_chand_data_analysis_visualization_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/data_analysis_visualization/short/topographic_classic/md/dheeraj_chand_data_analysis_visualization_short_topographic_classic.md) |
 
-## Polling Research Redistricting
+## Political Research & Redistricting
 
-Political research and redistricting expertise. Highlights polling methodology, demographic analysis, and political data science. Tailored for political research and policy analysis roles.
+Research and redistricting: survey methodology, electoral prediction, and demographic modeling.
 
 ### Long Format
 
@@ -282,27 +256,3 @@ Political research and redistricting expertise. Highlights polling methodology, 
 | **Terrain Mapping** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/terrain_mapping/pdf/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/terrain_mapping/pdf/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/terrain_mapping/docx/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/terrain_mapping/docx/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/terrain_mapping/rtf/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/terrain_mapping/rtf/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/terrain_mapping/md/dheeraj_chand_polling_research_redistricting_short_terrain_mapping.md) |
 | **Cartographic Professional** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/cartographic_professional/pdf/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/cartographic_professional/pdf/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/cartographic_professional/docx/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/cartographic_professional/docx/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/cartographic_professional/rtf/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/cartographic_professional/rtf/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/cartographic_professional/md/dheeraj_chand_polling_research_redistricting_short_cartographic_professional.md) |
 | **Topographic Classic** | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/topographic_classic/pdf/dheeraj_chand_polling_research_redistricting_short_topographic_classic.pdf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/topographic_classic/pdf/dheeraj_chand_polling_research_redistricting_short_topographic_classic.pdf) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/topographic_classic/docx/dheeraj_chand_polling_research_redistricting_short_topographic_classic.docx) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/topographic_classic/docx/dheeraj_chand_polling_research_redistricting_short_topographic_classic.docx) | [ATS](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/ats/polling_research_redistricting/short/topographic_classic/rtf/dheeraj_chand_polling_research_redistricting_short_topographic_classic.rtf) \| [Human](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/topographic_classic/rtf/dheeraj_chand_polling_research_redistricting_short_topographic_classic.rtf) | [View](https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs/human/polling_research_redistricting/short/topographic_classic/md/dheeraj_chand_polling_research_redistricting_short_topographic_classic.md) |
-
----
-
-## Format Guide
-
-- **PDF**: High-quality print-ready format, optimized for ATS systems and professional printing
-- **DOCX**: Microsoft Word format for easy editing and customization
-- **RTF**: Rich Text Format for broad compatibility across different word processors
-- **Markdown**: Plain text format for web display and version control
-
-## Color Scheme Guide
-
-- **Default Professional**: Classic black and white design for maximum ATS compatibility
-- **Corporate Blue**: Professional blue theme for corporate environments
-- **Modern Tech**: Contemporary design with tech industry styling
-- **Modern Clean**: Minimalist design with clean typography
-- **Satellite Imagery**: Earth observation theme with geographic color palette
-- **Terrain Mapping**: Topographic mapping theme with elevation-based colors
-- **Cartographic Professional**: Professional cartography theme with map-inspired design
-- **Topographic Classic**: Classic topographic styling with traditional map colors
-
----
-
-*All resumes are generated from the same master data but tailored for different audiences and use cases. Each file is optimized for its specific format and audience requirements.*
