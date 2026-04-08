@@ -17,11 +17,15 @@ router.register(r'generation-jobs', views.ResumeGenerationJobViewSet, basename='
 app_name = 'resumes'
 
 urlpatterns = [
-    # Web views
-    path('', views.dashboard, name='dashboard'),
+    # Public pages — no login required
+    path('', views.download_form, name='download_form'),
+    path('download/', views.generate_on_demand, name='generate_on_demand'),
+
+    # Authenticated views
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('resume/<int:resume_id>/', views.resume_detail, name='resume_detail'),
     path('resume/<int:resume_id>/download/<str:format_type>/', views.download_resume, name='download_resume'),
-    
+
     # API endpoints
     path('api/', include(router.urls)),
     path('api/generate/', views.generate_resume, name='generate_resume'),

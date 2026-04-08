@@ -123,6 +123,19 @@ class ResumeGenerator:
         self.output_type = output_type
         self.styles = self._create_styles()
         self._init_spacing_constants()
+
+    @classmethod
+    def from_data(cls, resume_data: dict, config: dict = None, color_scheme: str = 'default_professional', length_variant: str = 'long', output_type: str = 'ats'):
+        """Create a ResumeGenerator from data dicts instead of file paths."""
+        instance = object.__new__(cls)
+        instance.data = resume_data
+        instance.config = config or {}
+        instance.color_scheme = color_scheme
+        instance.length_variant = length_variant
+        instance.output_type = output_type
+        instance.styles = instance._create_styles()
+        instance._init_spacing_constants()
+        return instance
     
     def _get_contact_info(self, personal_info: dict) -> dict:
         """

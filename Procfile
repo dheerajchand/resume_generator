@@ -1,1 +1,1 @@
-web: gunicorn resume_generator_django.wsgi --log-file -
+web: gunicorn resume_generator_django.wsgi --bind 0.0.0.0:$PORT --log-file -

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dheeraj Chand - Resume Download</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #228B22;
+            --secondary: #B8860B;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0 2rem;
+        }
+        .form-card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .btn-download {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+        }
+        .btn-download:hover {
+            background: #1e7a1e;
+            border-color: #1e7a1e;
+            color: white;
+        }
+        footer {
+            margin-top: auto;
+            padding: 1.5rem 0;
+            background: #343a40;
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="fw-bold mb-2">Dheeraj Chand</h1>
+                    <p class="lead mb-0">Data Scientist & Software Engineer</p>
+                    <p class="mb-0 opacity-75">
+                        <a href="https://www.dheerajchand.com" class="text-white text-decoration-none">dheerajchand.com</a>
+                        &nbsp;&bull;&nbsp;
+                        <a href="https://www.linkedin.com/in/dheerajchand/" class="text-white text-decoration-none">LinkedIn</a>
+                        &nbsp;&bull;&nbsp;
+                        <a href="https://github.com/dheerajchand" class="text-white text-decoration-none">GitHub</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card form-card">
+                    <div class="card-body p-4">
+                        <h3 class="card-title mb-4">
+                            <i class="fas fa-download me-2"></i>Download Resume
+                        </h3>
+                        <form method="post" action="{% url 'resumes:generate_on_demand' %}">
+                            {% csrf_token %}
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="resume_type" class="form-label fw-semibold">Resume Type</label>
+                                    <select class="form-select" id="resume_type" name="resume_type" required>
+                                        {% for value, label in resume_types %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="length_variant" class="form-label fw-semibold">Length</label>
+                                    <select class="form-select" id="length_variant" name="length_variant" required>
+                                        {% for value, label in length_variants %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="color_scheme" class="form-label fw-semibold">Color Scheme</label>
+                                    <select class="form-select" id="color_scheme" name="color_scheme">
+                                        {% for value, label in color_schemes %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="format_type" class="form-label fw-semibold">Format</label>
+                                    <select class="form-select" id="format_type" name="format_type">
+                                        {% for value, label in formats %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="output_type" class="form-label fw-semibold">Output Style</label>
+                                    <select class="form-select" id="output_type" name="output_type">
+                                        <option value="ats">ATS-Optimized</option>
+                                        <option value="human">Human-Readable</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-download w-100">
+                                        <i class="fas fa-file-download me-2"></i>Generate & Download
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card form-card mt-4">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-3">About These Resumes</h5>
+                        <p class="text-muted mb-2">
+                            Each resume is generated on-demand from a single master dataset, tailored to different roles and industries.
+                            The content is identical across formats — only the emphasis and selection changes.
+                        </p>
+                        <div class="row text-center mt-3">
+                            <div class="col-4">
+                                <div class="fw-bold text-primary fs-4">8</div>
+                                <small class="text-muted">Resume Types</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold text-primary fs-4">3</div>
+                                <small class="text-muted">Length Tiers</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="fw-bold text-primary fs-4">8</div>
+                                <small class="text-muted">Color Schemes</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <small>&copy; 2026 Dheeraj Chand. Built with Django and ReportLab.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
