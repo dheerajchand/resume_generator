@@ -231,8 +231,76 @@ def create_abbreviated_resume(full_resume, resume_type):
     return abbreviated
 
 
+def create_brief_resume(full_resume, resume_type):
+    """Create a brief (1-2 page) version of a full resume.
+
+    Rules:
+    - Summary: first 1-2 sentences only
+    - Achievements: max 2
+    - All positions kept, 1 bullet each (Siege Analytics: 2)
+    - Projects: top 2, description only (no technologies/impact/technical_details)
+    - Competencies: category names as compact single line per category
+    - Additional info: footer pointing to full version
+    """
+    import copy
+    brief = copy.deepcopy(full_resume)
+
+    # Truncate summary to first 1-2 sentences
+    summary = brief["summary"]
+    sentences = []
+    current = ""
+    for char in summary:
+        current += char
+        if char in ".!?" and len(sentences) < 2:
+            if len(current.strip()) > 20:
+                sentences.append(current.strip())
+                current = ""
+    if sentences:
+        brief["summary"] = " ".join(sentences[:2])
+
+    # Limit achievements to 2
+    for category in brief["achievements"]:
+        brief["achievements"][category] = brief["achievements"][category][:2]
+
+    # Keep all positions but limit to 1 bullet each (Siege: 2)
+    for position in brief["experience"]:
+        if position["company"] == "Siege Analytics":
+            position["responsibilities"] = position["responsibilities"][:2]
+        else:
+            position["responsibilities"] = position["responsibilities"][:1]
+
+    # Limit projects to top 2, strip to description only
+    brief["projects"] = brief["projects"][:2]
+    for project in brief["projects"]:
+        if "technical_details" in project:
+            del project["technical_details"]
+        if "impact" in project:
+            del project["impact"]
+        if "technologies" in project:
+            del project["technologies"]
+
+    # Compact competencies: keep categories but flatten skills to a single line
+    compact_competencies = {}
+    for category, skills in brief["competencies"].items():
+        if isinstance(skills, list) and skills:
+            # Extract just the sub-category names, not the details
+            names = []
+            for skill_line in skills:
+                if ": " in skill_line:
+                    names.append(skill_line.split(": ", 1)[0])
+                else:
+                    names.append(skill_line)
+            compact_competencies[category] = [", ".join(names)]
+    brief["competencies"] = compact_competencies
+
+    # Add footer
+    brief["additional_info"] = "For a more detailed description of my experience, please visit https://www.dheerajchand.com"
+
+    return brief
+
+
 def generate_all_specialized_resumes():
-    """Generate all specialized resume types from master data — both long and abbreviated"""
+    """Generate all specialized resume types from master data — long, abbreviated, and brief"""
 
     master_data = load_master_achievements()
 
@@ -291,6 +359,20 @@ def generate_all_specialized_resumes():
                 json.dump(abbreviated_resume, f, indent=2, ensure_ascii=False)
 
             print(f"✅ Generated: {abbrev_output_file}")
+            generated += 1
+
+            # --- Brief variant ---
+            brief_resume = create_brief_resume(specialized_resume, resume_type)
+
+            brief_dir_name = dir_name + "_brief"
+            brief_output_dir = Path("inputs") / brief_dir_name
+            brief_output_dir.mkdir(exist_ok=True)
+
+            brief_output_file = brief_output_dir / "resume_data.json"
+            with open(brief_output_file, 'w', encoding='utf-8') as f:
+                json.dump(brief_resume, f, indent=2, ensure_ascii=False)
+
+            print(f"✅ Generated: {brief_output_file}")
             generated += 1
 
     print(f"\n🎯 Generated {generated} specialized resumes from master data!")
