@@ -14,6 +14,13 @@ Data analyst with 20+ years building the analytical infrastructure, not just usi
 
 For a more detailed description of my experience, please visit https://www.dheerajchand.com
 
+## Core Competencies
+
+• **Programming and Development**
+• **Machine Learning & AI**
+• **Data Infrastructure**
+• **Geospatial Technologies**
+
 ## Professional Experience
 
 ### Partner
@@ -23,6 +30,13 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 - Discovered systematic race coding errors in national voter databases affecting **50M**+ voters. Built geospatial ML algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
+
+### Data Products Manager
+**Helm/Murmuration | Austin, TX | 2021 - 2023**
+
+*Democratic Electoral Technology*
+
+- Designed and built Civic Graph — a federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data from state, federal, and international agencies into a unified analytical layer
 
 ### Analytics Supervisor
 **GSD&M | Austin, TX | 2018 - 2019**
@@ -52,16 +66,19 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 Machine learning system that discovered systematic race coding errors in national voter databases and improved demographic classification accuracy from 23% to 64%. The finding affected all Black and Asian-American voters in the system.
 
-**Technologies:** Python, Scikit-learn, PostGIS, GeoPandas, TensorFlow, PySpark, AWS
-**Impact:** Corrected demographic data affecting 50M+ voters nationwide. Improved electoral prediction accuracy by 22%. Analysis cited in Supreme Court proceedings.
 
 ### Civic Graph Federated Data Warehouse
 *2021 - 2023*
 
 Federated medallion architecture data warehouse harmonizing behavioral, attitudinal, demographic, econometric, and geographical data longitudinally from state agencies, federal agencies (Census, BLS, NCES), and international sources — each with different schemas, encoding systems, and update cadences — into a unified, queryable analytical layer.
 
-**Technologies:** Python, PostgreSQL, PostGIS, PySpark, Databricks, Snowflake, dbt, ETL Pipelines
-**Impact:** Created a multi-dimensional dataset representing $1B+ in accumulated investment, measuring socio-economic change across every dimension at every geographic level over time. Foundation architecture directly informed the elect.info federated pipeline design.
+
+## Technical Skills
+
+• **Python, R, SQL/PostGIS, JavaScript, Java, Other Technologies**
+• **ML Frameworks, Geospatial ML, Techniques, Validation**
+• **Processing, Pipelines, Storage, Streaming**
+• **Databases, Analysis Tools, Web Mapping, Processing, Library**
 
 ---
 

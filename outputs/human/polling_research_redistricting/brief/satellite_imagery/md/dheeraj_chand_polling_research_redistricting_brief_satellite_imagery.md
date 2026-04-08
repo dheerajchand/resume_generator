@@ -14,6 +14,12 @@ Political researcher and redistricting specialist with 20+ years in survey metho
 
 For a more detailed description of my experience, please visit https://www.dheerajchand.com
 
+## Core Competencies
+
+• **Programming and Development**
+• **Machine Learning & AI**
+• **Data Infrastructure**
+
 ## Professional Experience
 
 ### Partner
@@ -38,6 +44,13 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 - Conceived and built FLEEM — a Twilio-based web application emulating a predictive dialer for regulated political surveys, handling **10,000**+ simultaneous calls
 
+### Field Director
+**The Feldman Group | Washington, DC | 2011 - 2012**
+
+*Political Research*
+
+- Managed survey fielding for a multi-million dollar research firm — scheduling, oversight, sampling, and quality control
+
 ### Programmer
 **Lake Research Partners | Austin, TX | 2008**
 
@@ -52,16 +65,18 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 Web application using Twilio API for regulated political surveys, emulating a predictive dialer to handle 10,000+ simultaneous calls. Built for PCCC, used in campaigns for Senators Heinrich and Warren.
 
-**Technologies:** Twilio API, Python, Django, PostgreSQL, GeoDjango, PostGIS, JavaScript, Apache
-**Impact:** Saved PAC $500K+ annually by doing IVR polling in-house instead of contracting with Public Policy Polling. Supported campaigns for Senators Heinrich and Warren.
 
 ### National Redistricting Platform
 *2020 - 2022*
 
 Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by 12,847 analysts across 89 organizations during the 2021 redistricting cycle.
 
-**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python, Redis, WebSockets
-**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it.
+
+## Technical Skills
+
+• **Python, R, SQL/PostGIS, JavaScript, Java, Other Technologies**
+• **ML Frameworks, Geospatial ML, Techniques, Validation**
+• **Processing, Pipelines, Storage, Streaming**
 
 ---
 

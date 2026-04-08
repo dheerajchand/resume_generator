@@ -237,10 +237,9 @@ def create_brief_resume(full_resume, resume_type):
     Rules:
     - Summary: first 1-2 sentences only
     - Achievements: max 2
-    - Responsibilities per job: 1 (Siege Analytics: 2)
-    - Top 4 positions only
-    - Projects: top 2 only, no technical_details
-    - No technical skills section (competencies kept as category names only)
+    - All positions kept, 1 bullet each (Siege Analytics: 2)
+    - Projects: top 2, description only (no technologies/impact/technical_details)
+    - Competencies: category names as compact single line per category
     - Additional info: footer pointing to full version
     """
     import copy
@@ -263,22 +262,36 @@ def create_brief_resume(full_resume, resume_type):
     for category in brief["achievements"]:
         brief["achievements"][category] = brief["achievements"][category][:2]
 
-    # Limit to top 4 positions, 1 bullet each (Siege: 2)
-    brief["experience"] = brief["experience"][:4]
+    # Keep all positions but limit to 1 bullet each (Siege: 2)
     for position in brief["experience"]:
         if position["company"] == "Siege Analytics":
             position["responsibilities"] = position["responsibilities"][:2]
         else:
             position["responsibilities"] = position["responsibilities"][:1]
 
-    # Limit projects to top 2, no technical_details
+    # Limit projects to top 2, strip to description only
     brief["projects"] = brief["projects"][:2]
     for project in brief["projects"]:
         if "technical_details" in project:
             del project["technical_details"]
+        if "impact" in project:
+            del project["impact"]
+        if "technologies" in project:
+            del project["technologies"]
 
-    # Strip competencies down to category names only (no skill details)
-    brief["competencies"] = {}
+    # Compact competencies: keep categories but flatten skills to a single line
+    compact_competencies = {}
+    for category, skills in brief["competencies"].items():
+        if isinstance(skills, list) and skills:
+            # Extract just the sub-category names, not the details
+            names = []
+            for skill_line in skills:
+                if ": " in skill_line:
+                    names.append(skill_line.split(": ", 1)[0])
+                else:
+                    names.append(skill_line)
+            compact_competencies[category] = [", ".join(names)]
+    brief["competencies"] = compact_competencies
 
     # Add footer
     brief["additional_info"] = "For a more detailed description of my experience, please visit https://www.dheerajchand.com"

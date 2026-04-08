@@ -14,6 +14,12 @@ I grew up moving across three continents — Queens, Dhaka, Hong Kong, Singapore
 
 For a more detailed description of my experience, please visit https://www.dheerajchand.com
 
+## Core Competencies
+
+• **Geospatial Technologies**
+• **Programming and Development**
+• **Machine Learning & AI**
+
 ## Professional Experience
 
 ### Partner
@@ -23,6 +29,13 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 - Discovered systematic race coding errors in national voter databases affecting **50M**+ voters. Built geospatial ML algorithms improving demographic classification accuracy from **23%** to **64%**
 - Built a redistricting platform used by **12,847** analysts across 89 organizations during the 2021 cycle, with real-time collaborative editing and Census integration
+
+### Software Engineer
+**Mautinoa Technologies | Austin, TX | 2016 - 2018**
+
+*Humanitarian Technology*
+
+- Conceived, architected, and built econometric simulation software for measuring humanitarian crisis interventions
 
 ### Senior Analyst
 **Myers Research | Austin, TX | 2012 - 2014**
@@ -52,16 +65,18 @@ For a more detailed description of my experience, please visit https://www.dheer
 
 Open-source Python library powering all Siege Analytics workflows. 37 GeoDjango models for Census TIGER, NCES, NLRB, and Federal Judicial Districts. 9 population services for demographic analysis. PySpark/Apache Sedona distributed computing utilities. Includes geospatial computation functions that run inside Databricks without Apache Sedona or C library dependencies. Census API integration for ACS, Decennial, and PL 94-171 redistricting data. Hydra + Pydantic configuration system. 1,884+ tests. Dual-licensed AGPLv3/Commercial.
 
-**Technologies:** Python, GeoDjango, PostGIS, PySpark, Apache Sedona, Databricks, Hydra, Pydantic, Snowflake, Census API
-**Impact:** Foundation infrastructure for all Siege Analytics projects — every analysis pipeline and data product depends on it. Demonstrates commitment to open-source and rigorous engineering practices.
 
 ### National Redistricting Platform
 *2020 - 2022*
 
 Cloud-based GeoDjango platform for redistricting analysis with real-time collaborative editing and Census integration, used by 12,847 analysts across 89 organizations during the 2021 redistricting cycle.
 
-**Technologies:** GeoDjango, PostGIS, AWS, Docker, React, Python, Redis, WebSockets
-**Impact:** Reduced mapping costs by 73.5%, saving organizations $4.7M. Made redistricting analysis accessible to organizations that previously couldn't afford it.
+
+## Technical Skills
+
+• **Databases, Analysis Tools, Web Mapping, Processing, Library**
+• **Python, R, SQL/PostGIS, JavaScript, Java, Other Technologies**
+• **ML Frameworks, Geospatial ML, Techniques, Validation**
 
 ---
 
