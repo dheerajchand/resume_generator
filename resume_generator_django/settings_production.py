@@ -14,21 +14,19 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY environment variable must be set in production")
 
-# Allowed hosts for production
-ALLOWED_HOSTS = [
-    'your-app-name.herokuapp.com',
-    'localhost',
-    '127.0.0.1',
-] + os.environ.get('ALLOWED_HOSTS', '').split(',')
+# Allowed hosts — environment variable only, no hardcoded domains
+ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
 # Database configuration for production (PostgreSQL on Heroku)
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://localhost/resume_generator',
         conn_max_age=600,
         conn_health_checks=True,
     )
 }
+
+if not os.environ.get('DATABASE_URL'):
+    raise ValueError("DATABASE_URL environment variable must be set in production")
 
 # Static files configuration for production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -37,19 +35,16 @@ STATIC_URL = '/static/'
 # Whitenoise configuration for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Security settings for production
+# Security settings for production — always on, not gated by DEBUG
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 3600  # Start with 1 hour, increase after stability confirmed
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-
-# Use HTTPS in production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+SECURE_HSTS_PRELOAD = False  # Enable after HSTS is stable
 
 # Email configuration for production
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -59,7 +54,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-# Logging configuration for production
+# Logging — console only, no file handler (Heroku has ephemeral filesystem)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -68,19 +63,10 @@ LOGGING = {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
             'style': '{',
         },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'filename': '/tmp/django.log',
             'formatter': 'verbose',
         },
     },
@@ -95,28 +81,36 @@ LOGGING = {
             'propagate': False,
         },
         'resumes': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
     },
 }
 
-# Cache configuration for production
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/1'),
+# Cache — use Redis if available, fall back to database cache
+REDIS_URL = os.environ.get('REDIS_URL')
+if REDIS_URL:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': REDIS_URL,
+        }
     }
-}
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    SESSION_CACHE_ALIAS = 'default'
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'LOCATION': 'django_cache',
+        }
+    }
+    SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-# Session configuration
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
-
-# CORS settings for production
+# CORS settings for production — environment variable
 CORS_ALLOWED_ORIGINS = [
-    "https://your-frontend-domain.com",
+    o.strip() for o in os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',') if o.strip()
 ]
 
 # File upload settings
@@ -126,14 +120,5 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 # Performance optimizations
 CONN_MAX_AGE = 600
 
-# Content Security Policy
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
-CSP_IMG_SRC = ("'self'", "data:", "https:")
-CSP_FONT_SRC = ("'self'", "https:")
-
 # Resume generation settings
 RESUME_GENERATION_TIMEOUT = 300  # 5 minutes
-MAX_CONCURRENT_GENERATIONS = 5
-ENABLE_RESUME_CACHING = True
