@@ -769,7 +769,7 @@ class ResumeGenerator:
             # Slogan (smaller, between name and coordinates)
             canvas.setFont("Helvetica", FONT_SIZE_9)
             canvas.setFillColor(HexColor(muted_color))
-            slogan = "[RESEARCH, ANALYSIS, ENGINEERING] → UNDERSTANDING"
+            slogan = personal_info.get("slogan", "")
             canvas.drawRightString(PAGE_RIGHT_MARGIN, top_y - 14, slogan)
             
             # GitHub (aligned with coordinates, different color)
@@ -792,7 +792,7 @@ class ResumeGenerator:
             # Austin, TX with coordinates (aligned with GitHub)
             canvas.setFont("Helvetica", FONT_SIZE_9)
             canvas.setFillColor(HexColor(muted_color))
-            austin_text = "Austin, TX (30.2672°N, 97.7431°W)"
+            austin_text = personal_info.get("location_display", personal_info.get("location", ""))
             austin_width = canvas.stringWidth(austin_text, "Helvetica", FONT_SIZE_9)
             austin_x = PAGE_RIGHT_MARGIN - austin_width
             # Create clickable link to OpenStreetMap
