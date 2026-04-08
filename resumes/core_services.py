@@ -44,7 +44,8 @@ from resume_generator_django.resume_generator.constants import (
     HEADER_FIRST_NAME_Y, HEADER_FIRST_LOCATION_Y, HEADER_RECURRING_NAME_Y,
     HEADER_RECURRING_EMAIL_Y, HEADER_RECURRING_PHONE_Y, HEADER_RECURRING_GITHUB_Y,
     FOOTER_Y, FONT_THEMES, FONT_ROLES, FONT_SIZE_THEMES,
-    get_spacing_constant, get_font_size, get_color_role, get_theme_font, get_theme_font_size
+    get_spacing_constant, get_font_size, get_color_role, get_theme_font, get_theme_font_size,
+    MAX_BULLETS_FOR_KEEP_TOGETHER, BULLETS_WITH_HEADER
 )
 
 
@@ -376,302 +377,204 @@ class ResumeGenerator:
         return custom_styles
     
     def _get_sections(self):
-        """Define and render all resume sections in order"""
+        """Build all resume sections with headers embedded in content.
+
+        Every section follows the same pattern:
+        1. Create header Paragraph
+        2. Build content items
+        3. Wrap header + first content item(s) in KeepTogether to prevent orphaning
+        4. Remaining items are separate flowables for flexible page breaking
+        """
         sections = []
-        
-        # Get colors for highlighting quantitative metrics
         colors = self.config if self.config else {}
         highlight_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
-        
-        # Professional Summary
+
+        # --- PROFESSIONAL SUMMARY ---
         summary = self.data.get("summary", "")
         if summary:
-            sections.append({
-                "name": "PROFESSIONAL SUMMARY",
-                "content": self._create_keep_together_section([Paragraph(summary, self.styles["Body"])])
-            })
-        
-        # Key Achievements and Impact (abbreviated like Deepak)
+            header = Paragraph("PROFESSIONAL SUMMARY", self.styles["SectionHeader"])
+            body = Paragraph(summary, self.styles["Body"])
+            sections.append({"content": [KeepTogether([header, body])]})
+
+        # --- KEY ACHIEVEMENTS AND IMPACT ---
         achievements = self.data.get("achievements", {})
         if achievements:
-            achievement_content = []
-            # Single line with bullet separators (abbreviated format)
             all_achievements = []
             for category, achievement_list in achievements.items():
                 if isinstance(achievement_list, list) and achievement_list:
-                    # Add all achievements from the list
                     all_achievements.extend(achievement_list)
-            
-            # Single line format like Deepak with bullet separators
-            achievement_text = " • ".join(all_achievements)
-            # Highlight quantitative metrics in achievement text
-            highlighted_achievement_text = highlight_quantitative_metrics(achievement_text, "pdf", highlight_color)
-            achievement_content.append(Paragraph(highlighted_achievement_text, self.styles["CompetencyDetail"]))
-            
-            sections.append({
-                "name": "KEY ACHIEVEMENTS AND IMPACT",
-                "content": self._create_keep_together_section(achievement_content)
-            })
-        
-        # CORE COMPETENCIES - Use actual categories from data
+            if all_achievements:
+                achievement_text = " • ".join(all_achievements)
+                highlighted = highlight_quantitative_metrics(achievement_text, "pdf", highlight_color)
+                header = Paragraph("KEY ACHIEVEMENTS AND IMPACT", self.styles["SectionHeader"])
+                body = Paragraph(highlighted, self.styles["CompetencyDetail"])
+                sections.append({"content": [KeepTogether([header, body])]})
+
+        # --- CORE COMPETENCIES ---
         competencies_data = self.data.get("competencies", {})
         if competencies_data:
             core_competencies = list(competencies_data.keys())
-            
-            # Single line with bullet separators (like Deepak)
             competency_text = " • ".join(core_competencies)
-            competency_content = [Paragraph(competency_text, self.styles["CompetencyDetail"])]
-        else:
-            competency_content = []
-        
-        sections.append({
-            "name": "CORE COMPETENCIES",
-            "content": self._create_keep_together_section(competency_content)
-        })
-        
-        # Professional Experience
+            header = Paragraph("CORE COMPETENCIES", self.styles["SectionHeader"])
+            body = Paragraph(competency_text, self.styles["CompetencyDetail"])
+            sections.append({"content": [KeepTogether([header, body])]})
+
+        # --- PROFESSIONAL EXPERIENCE ---
         experience = self.data.get("experience", [])
         if experience:
-            # Sort experience chronologically (most recent first)
             experience = self._sort_experience_chronologically(experience)
             experience_content = []
-            for job in experience:
-                job_title = job.get("title", "")
-                company = job.get("company", "")
-                location = job.get("location", "")
-                dates = job.get("dates", "")
-                
-                # Company, job title, and dates on one line
-                company_line = company
-                if job_title:
-                    company_line += f" | {job_title}"
-                if location:
-                    company_line += f" - {location}"
-                if dates:
-                    company_line += f" {dates}"
-                
-                # Intelligent job unit splitting logic
-                job_unit = []
-                job_unit.append(Paragraph(company_line, self.styles["Company"]))
-                
+            header = Paragraph("PROFESSIONAL EXPERIENCE", self.styles["SectionHeader"])
+
+            for idx, job in enumerate(experience):
+                company_line = job.get("company", "")
+                if job.get("title"):
+                    company_line += f" | {job['title']}"
+                if job.get("location"):
+                    company_line += f" - {job['location']}"
+                if job.get("dates"):
+                    company_line += f" {job['dates']}"
+
+                job_unit = [Paragraph(company_line, self.styles["Company"])]
+
                 if job.get("subtitle"):
-                    job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))  # Spacing between company and subtitle
+                    job_unit.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
                     job_unit.append(Paragraph(job["subtitle"], self.styles["SubCompetency"]))
-                
+
                 responsibilities = job.get("responsibilities", [])
-                
-                # No additional spacing - JobTitle.spaceAfter already provides the correct spacing
-                
-                # If job has many responsibilities, allow splitting but keep header together
-                if len(responsibilities) > 4:  # Increased threshold to 4
-                    # Keep company + title + subtitle + first bullet together
-                    header_unit = job_unit.copy()
-                    # Add first bullet to header to ensure at least one stays with header
-                    highlighted_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
-                    header_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
-                    experience_content.append(KeepTogether(header_unit))
-                    
-                    # Add remaining bullets (can split across pages)
+
+                if len(responsibilities) > MAX_BULLETS_FOR_KEEP_TOGETHER:
+                    # Many bullets: keep header + first bullet together, rest can split
+                    first_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
+                    job_unit.append(Paragraph(f"• {first_resp}", self.styles["BulletPoint"]))
+
+                    if idx == 0:
+                        experience_content.append(KeepTogether([header] + job_unit))
+                    else:
+                        experience_content.append(KeepTogether(job_unit))
+
                     for resp in responsibilities[1:]:
-                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
-                        experience_content.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
-                elif len(responsibilities) > 1:  # For jobs with 2-4 responsibilities
-                    # Keep header + at least one bullet together
-                    header_unit = job_unit.copy()
-                    # Add first bullet to header to ensure at least one stays with header
-                    highlighted_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
-                    header_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
-                    experience_content.append(KeepTogether(header_unit))
-                    
-                    # Add remaining bullets (can split across pages)
+                        highlighted = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        experience_content.append(Paragraph(f"• {highlighted}", self.styles["BulletPoint"]))
+
+                elif len(responsibilities) > BULLETS_WITH_HEADER:
+                    # Medium bullets: same split strategy
+                    first_resp = highlight_quantitative_metrics(responsibilities[0], "pdf", highlight_color)
+                    job_unit.append(Paragraph(f"• {first_resp}", self.styles["BulletPoint"]))
+
+                    if idx == 0:
+                        experience_content.append(KeepTogether([header] + job_unit))
+                    else:
+                        experience_content.append(KeepTogether(job_unit))
+
                     for resp in responsibilities[1:]:
-                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
-                        experience_content.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
+                        highlighted = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        experience_content.append(Paragraph(f"• {highlighted}", self.styles["BulletPoint"]))
+
                 else:
-                    # For shorter jobs, keep everything together
+                    # Few bullets: keep entire job together
                     for resp in responsibilities:
-                        highlighted_resp = highlight_quantitative_metrics(resp, "pdf", highlight_color)
-                        job_unit.append(Paragraph(f"• {highlighted_resp}", self.styles["BulletPoint"]))
-                    experience_content.append(KeepTogether(job_unit))
-                
-                # Add spacer between job units (but not after the last job)
-                if job != experience[-1]:  # Only add spacer if not the last job
+                        highlighted = highlight_quantitative_metrics(resp, "pdf", highlight_color)
+                        job_unit.append(Paragraph(f"• {highlighted}", self.styles["BulletPoint"]))
+
+                    if idx == 0:
+                        experience_content.append(KeepTogether([header] + job_unit))
+                    else:
+                        experience_content.append(KeepTogether(job_unit))
+
+                if job != experience[-1]:
                     experience_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_UNITS))
-            
-            sections.append({
-                "name": "PROFESSIONAL EXPERIENCE",
-                "content": experience_content
-            })
-        
-        # Key Projects - Keep header with first project (minimum 4 lines)
+
+            sections.append({"content": experience_content})
+
+        # --- KEY PROJECTS ---
         projects = self.data.get("projects", [])
         if projects:
             project_content = []
-            
-            # For the first project, include it in a KeepTogether with the section header
-            # to ensure the header doesn't appear alone at the bottom of a page
-            first_project = projects[0]
-            first_project_name = first_project.get("name", "")
-            first_dates = first_project.get("dates", "")
-            first_description = first_project.get("description", "")
-            first_technologies = first_project.get("technologies", [])
-            first_impact = first_project.get("impact", "")
-            
-            # Build first project unit with header
-            first_project_unit = []
-            
-            # Add section header as part of first project unit
-            first_project_unit.append(Paragraph("KEY PROJECTS", self.styles["SectionHeader"]))
-            
-            # Add first project content
-            first_title_line = convert_markdown_links(first_project_name, "pdf")
-            if first_dates:
-                first_title_line += f" ({first_dates})"
-            first_project_unit.append(Paragraph(first_title_line, self.styles["SubCompetency"]))
-            
-            if first_description:
-                # Add "About:" with different color formatting
-                colors = self.config if self.config else {}
-                medium_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
-                about_text = f'<font color="{medium_color}"><b>About:</b></font> {first_description}'
-                first_project_unit.append(Paragraph(about_text, self.styles["CompetencyDetail"]))
-            
-            if first_technologies:
-                # Add "Technologies:" with color formatting
-                colors = self.config if self.config else {}
-                tech_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
-                first_tech_text = f'<font color="{tech_color}"><b>Technologies:</b></font> {", ".join(first_technologies)}'
-                first_project_unit.append(Paragraph(first_tech_text, self.styles["CompetencyDetail"]))
-            
-            if first_impact:
-                # Add "Impact:" with color formatting
-                colors = self.config if self.config else {}
-                accent_color = colors.get("ACCENT_COLOR", "#4682B4")
-                impact_text = f'<font color="{accent_color}"><b>Impact:</b></font> {first_impact}'
-                first_project_unit.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
-            
-            # Keep header with first project together (ensures 4+ lines)
-            project_content.append(KeepTogether(first_project_unit))
-            
-            # Handle remaining projects normally
-            for project in projects[1:]:
+            header = Paragraph("KEY PROJECTS", self.styles["SectionHeader"])
+
+            for idx, project in enumerate(projects):
                 project_name = project.get("name", "")
                 dates = project.get("dates", "")
                 description = project.get("description", "")
                 technologies = project.get("technologies", [])
                 impact = project.get("impact", "")
-                
-                # Add spacing before each subsequent project
-                project_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
-                
-                # Build individual project unit
+
                 project_unit = []
-                
                 title_line = convert_markdown_links(project_name, "pdf")
                 if dates:
                     title_line += f" ({dates})"
                 project_unit.append(Paragraph(title_line, self.styles["SubCompetency"]))
-                
+
                 if description:
-                    # Add "About:" with different color formatting
-                    colors = self.config if self.config else {}
                     medium_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
                     about_text = f'<font color="{medium_color}"><b>About:</b></font> {description}'
                     project_unit.append(Paragraph(about_text, self.styles["CompetencyDetail"]))
-                
+
                 if technologies:
-                    # Add "Technologies:" with color formatting
-                    colors = self.config if self.config else {}
                     tech_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
                     tech_text = f'<font color="{tech_color}"><b>Technologies:</b></font> {", ".join(technologies)}'
                     project_unit.append(Paragraph(tech_text, self.styles["CompetencyDetail"]))
-                
+
                 if impact:
-                    # Add "Impact:" with color formatting
-                    colors = self.config if self.config else {}
                     accent_color = colors.get("ACCENT_COLOR", "#4682B4")
                     impact_text = f'<font color="{accent_color}"><b>Impact:</b></font> {impact}'
                     project_unit.append(Paragraph(impact_text, self.styles["CompetencyDetail"]))
-                
-                # Keep each individual project together
-                project_content.append(KeepTogether(project_unit))
-            
-            # Add section without separate header (header is included in first project)
-            sections.append({
-                "name": "", 
-                "content": project_content
-            })
-        
-        # Education - Individual education KeepTogether logic
+
+                if idx == 0:
+                    project_content.append(KeepTogether([header] + project_unit))
+                else:
+                    project_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
+                    project_content.append(KeepTogether(project_unit))
+
+            sections.append({"content": project_content})
+
+        # --- EDUCATION ---
         education = self.data.get("education", [])
         if education:
             education_content = []
-            for edu in education:
-                degree = edu.get("degree", "")
-                institution = edu.get("institution", "")
-                location = edu.get("location", "")
-                dates = edu.get("dates", "")
-                gpa = edu.get("gpa", "")
-                honors = edu.get("honors", "")
-                
-                # Build individual education unit
+            header = Paragraph("EDUCATION", self.styles["SectionHeader"])
+
+            for idx, edu in enumerate(education):
                 edu_unit = []
-                
-                title_line = degree
-                if institution:
-                    title_line += f" - {institution}"
-                if location:
-                    title_line += f" ({location})"
-                if dates:
-                    title_line += f" | {dates}"
-                
+                title_line = edu.get("degree", "")
+                if edu.get("institution"):
+                    title_line += f" - {edu['institution']}"
+                if edu.get("location"):
+                    title_line += f" ({edu['location']})"
+                if edu.get("dates"):
+                    title_line += f" | {edu['dates']}"
                 edu_unit.append(Paragraph(title_line, self.styles["JobTitle"]))
-                
-                if gpa:
-                    edu_unit.append(Paragraph(f"GPA: {gpa}", self.styles["Body"]))
-                
-                if honors:
-                    edu_unit.append(Paragraph(f"Honors: {honors}", self.styles["Body"]))
-                
-                # Keep each education entry together
-                education_content.append(KeepTogether(edu_unit))
-                
-                # Add spacing between education entries (but not after last)
-                if edu != education[-1]:
+                if edu.get("gpa"):
+                    edu_unit.append(Paragraph(f"GPA: {edu['gpa']}", self.styles["Body"]))
+                if edu.get("honors"):
+                    edu_unit.append(Paragraph(f"Honors: {edu['honors']}", self.styles["Body"]))
+
+                if idx == 0:
+                    education_content.append(KeepTogether([header] + edu_unit))
+                else:
                     education_content.append(Spacer(1, self.SPACE_BETWEEN_JOB_COMPONENTS))
-            
-            sections.append({
-                "name": "EDUCATION",
-                "content": education_content
-            })
-        
-        # Additional info for abbreviated versions only (at the very end)
+                    education_content.append(KeepTogether(edu_unit))
+
+            sections.append({"content": education_content})
+
+        # --- ADDITIONAL INFO (short resumes only) ---
         if self.length_variant == "short":
             additional_info = self.data.get("additional_info", "")
             if additional_info:
-                # Create clickable links for LinkedIn and Personal Site
                 linkedin_url = "https://www.linkedin.com/in/dheerajchand/"
                 personal_site_url = "https://www.dheerajchand.com"
-                
-                # Replace the entire text with URLs included
-                additional_info_with_links = f"For a more detailed, full description of my experience, please visit my LinkedIn ({linkedin_url}) and Personal Site ({personal_site_url})."
-                
-                sections.append({
-                    "name": "",
-                    "content": [Paragraph(additional_info_with_links, self.styles["Body"])]
-                })
-        
-        # Technical Skills (moved to end like Deepak) - WITH VISUAL HIERARCHY
+                info_text = f"For a more detailed, full description of my experience, please visit my LinkedIn ({linkedin_url}) and Personal Site ({personal_site_url})."
+                sections.append({"content": [Paragraph(info_text, self.styles["Body"])]})
+
+        # --- TECHNICAL SKILLS ---
         competencies = self.data.get("competencies", {})
         if competencies:
             technical_skills_content = []
             for main_category, sub_skills in competencies.items():
                 if isinstance(sub_skills, list):
-                    # Technical skills - format as Deepak does with visual hierarchy
-                    colors = self.config if self.config else {}
-                    accent_color = colors.get("ACCENT_COLOR", "#4682B4") 
+                    accent_color = colors.get("ACCENT_COLOR", "#4682B4")
                     muted_color = colors.get("MEDIUM_TEXT_COLOR", "#666666")
-                    
                     sub_content = []
                     for skill_line in sub_skills:
                         if ": " in skill_line:
@@ -679,46 +582,22 @@ class ResumeGenerator:
                             sub_content.append(f'<font color="{accent_color}"><i>{sub_category}</i></font> <font color="{muted_color}">({details})</font>')
                         else:
                             sub_content.append(f'<font color="{accent_color}">{skill_line}</font>')
-                    
-                    # Create single paragraph with main category and all sub-skills using color hierarchy
+
                     main_color = colors.get("COMPETENCY_HEADER_COLOR", "#2C3E50")
                     skill_text = "; ".join(sub_content)
                     full_text = f'<font color="{main_color}"><b>{main_category.upper()}</b></font> {skill_text}'
                     technical_skills_content.append(Paragraph(full_text, self.styles["CompetencyDetail"]))
-            
+
             if technical_skills_content:
-                # Technical Skills - use minimal KeepTogether for entire section to prevent orphaned headers
+                header = Paragraph("TECHNICAL SKILLS", self.styles["SectionHeader"])
+                # Keep header with first skill category; rest can flow across pages
+                first_skill = technical_skills_content[0]
+                remaining = technical_skills_content[1:]
                 sections.append({
-                    "name": "TECHNICAL SKILLS",
-                    "content": self._create_keep_together_section(technical_skills_content, min_lines=1)
+                    "content": [KeepTogether([header, first_skill])] + remaining
                 })
-        
+
         return sections
-    
-    def _create_keep_together_section(self, content_lines, min_lines=3):
-        """
-        Create a KeepTogether section with configurable minimum lines
-        
-        NOTE: This method should only be used for short sections like:
-        - Professional Summary (single paragraph)
-        - Key Achievements (single line with bullets)
-        - Core Competencies (single line with bullets)
-        
-        For longer sections like Projects, Education, Experience, use individual
-        KeepTogether logic to prevent excessive spacing issues.
-        
-        Args:
-            content_lines: List of content elements (Paragraphs, etc.)
-            min_lines: Minimum number of lines to keep together (default: 3)
-        
-        Returns:
-            KeepTogether object containing all content
-        """
-        if not content_lines:
-            return []
-        
-        # Always wrap in KeepTogether for these short sections
-        return [KeepTogether(content_lines)]
     
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
@@ -808,10 +687,9 @@ class ResumeGenerator:
         # No additional spacing needed - topMargin already accounts for proper spacing
         # The dimensions calculation ensures consistent spacing across all pages
         
-        # Render each section
-        for i, section in enumerate(sections):
+        # Render sections — headers are embedded in content via KeepTogether
+        for section in sections:
             if section["content"]:
-                story.append(Paragraph(section["name"], self.styles["SectionHeader"]))
                 story.extend(section["content"])
         
         
