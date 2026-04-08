@@ -58,7 +58,7 @@ def generate_output_readme(output_dir="outputs"):
     lines.append("---")
     lines.append("")
 
-    total = len(RESUME_TYPE_DISPLAY) * len(COLOR_SCHEMES) * 2 * 2 * 4  # types * colors * lengths * output_types * formats
+    total = len(RESUME_TYPE_DISPLAY) * len(COLOR_SCHEMES) * 3 * 2 * 4  # types * colors * lengths * output_types * formats
     lines.append(f"**{total} professionally formatted resumes** systematically generated for different industries and use cases.")
     lines.append("")
 
@@ -68,7 +68,7 @@ def generate_output_readme(output_dir="outputs"):
         lines.append(description)
         lines.append("")
 
-        for length in ["long", "short"]:
+        for length in ["long", "short", "brief"]:
             lines.append(f"### {length.title()} Format")
             lines.append("")
             lines.append("| Color Scheme | PDF | DOCX | RTF | Markdown |")

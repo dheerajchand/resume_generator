@@ -559,7 +559,7 @@ class ResumeGenerator:
             sections.append({"content": education_content})
 
         # --- ADDITIONAL INFO (short resumes only) ---
-        if self.length_variant == "short":
+        if self.length_variant in ("short", "brief"):
             additional_info = self.data.get("additional_info", "")
             if additional_info:
                 linkedin_url = "https://www.linkedin.com/in/dheerajchand/"
@@ -1464,7 +1464,8 @@ class ResumeManager:
         # Length variants for each version
         self.length_variants = {
             "long": "full",
-            "short": "abbreviated"
+            "short": "abbreviated",
+            "brief": "brief"
         }
         
         self.color_schemes = [
@@ -1494,6 +1495,8 @@ class ResumeManager:
             input_basename += "_human"
         if length_variant == "short":
             input_basename += "_abbreviated"
+        elif length_variant == "brief":
+            input_basename += "_brief"
         
         input_dir = Path("inputs") / input_basename
         

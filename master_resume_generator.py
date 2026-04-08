@@ -231,8 +231,63 @@ def create_abbreviated_resume(full_resume, resume_type):
     return abbreviated
 
 
+def create_brief_resume(full_resume, resume_type):
+    """Create a brief (1-2 page) version of a full resume.
+
+    Rules:
+    - Summary: first 1-2 sentences only
+    - Achievements: max 2
+    - Responsibilities per job: 1 (Siege Analytics: 2)
+    - Top 4 positions only
+    - Projects: top 2 only, no technical_details
+    - No technical skills section (competencies kept as category names only)
+    - Additional info: footer pointing to full version
+    """
+    import copy
+    brief = copy.deepcopy(full_resume)
+
+    # Truncate summary to first 1-2 sentences
+    summary = brief["summary"]
+    sentences = []
+    current = ""
+    for char in summary:
+        current += char
+        if char in ".!?" and len(sentences) < 2:
+            if len(current.strip()) > 20:
+                sentences.append(current.strip())
+                current = ""
+    if sentences:
+        brief["summary"] = " ".join(sentences[:2])
+
+    # Limit achievements to 2
+    for category in brief["achievements"]:
+        brief["achievements"][category] = brief["achievements"][category][:2]
+
+    # Limit to top 4 positions, 1 bullet each (Siege: 2)
+    brief["experience"] = brief["experience"][:4]
+    for position in brief["experience"]:
+        if position["company"] == "Siege Analytics":
+            position["responsibilities"] = position["responsibilities"][:2]
+        else:
+            position["responsibilities"] = position["responsibilities"][:1]
+
+    # Limit projects to top 2, no technical_details
+    brief["projects"] = brief["projects"][:2]
+    for project in brief["projects"]:
+        if "technical_details" in project:
+            del project["technical_details"]
+
+    # Strip competencies down to category names only (no skill details)
+    brief["competencies"] = {}
+
+    # Add footer
+    brief["additional_info"] = "For a more detailed description of my experience, please visit https://www.dheerajchand.com"
+
+    return brief
+
+
 def generate_all_specialized_resumes():
-    """Generate all specialized resume types from master data — both long and abbreviated"""
+    """Generate all specialized resume types from master data — long, abbreviated, and brief"""
 
     master_data = load_master_achievements()
 
@@ -291,6 +346,20 @@ def generate_all_specialized_resumes():
                 json.dump(abbreviated_resume, f, indent=2, ensure_ascii=False)
 
             print(f"✅ Generated: {abbrev_output_file}")
+            generated += 1
+
+            # --- Brief variant ---
+            brief_resume = create_brief_resume(specialized_resume, resume_type)
+
+            brief_dir_name = dir_name + "_brief"
+            brief_output_dir = Path("inputs") / brief_dir_name
+            brief_output_dir.mkdir(exist_ok=True)
+
+            brief_output_file = brief_output_dir / "resume_data.json"
+            with open(brief_output_file, 'w', encoding='utf-8') as f:
+                json.dump(brief_resume, f, indent=2, ensure_ascii=False)
+
+            print(f"✅ Generated: {brief_output_file}")
             generated += 1
 
     print(f"\n🎯 Generated {generated} specialized resumes from master data!")
