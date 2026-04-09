@@ -126,11 +126,11 @@ class Project(models.Model):
 
     name = models.CharField(max_length=300)
     dates = models.CharField(max_length=100, blank=True)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     impact = models.TextField(blank=True)
-    technical_description = models.TextField(blank=True)
-    business_description = models.TextField(blank=True)
-    spatial_description = models.TextField(blank=True)
+    technical_description = models.TextField(blank=True, default="")
+    business_description = models.TextField(blank=True, default="")
+    spatial_description = models.TextField(blank=True, default="")
     sort_order = models.PositiveIntegerField(default=0)
 
     class Meta:
