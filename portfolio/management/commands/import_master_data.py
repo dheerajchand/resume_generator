@@ -231,13 +231,24 @@ class Command(BaseCommand):
             if proj:
                 project_map[key] = proj
 
+        archetype_descriptions = {
+            "comprehensive": "Complete career overview showcasing the full breadth of experience across data science, software engineering, and political analytics. Best for senior-level positions.",
+            "data_engineering": "Data infrastructure focus: federated medallion architectures, Databricks/PySpark/dbt pipelines, and geospatial data warehousing. Best for data platform and analytics engineering roles.",
+            "software_engineering": "Software development expertise: full-stack systems, distributed computing, and production platforms. Best for backend, full-stack, and systems engineering roles.",
+            "gis": "Mapping and spatial analysis: PostGIS, GDAL, custom tile servers, LiDAR/PointCloud processing, and geospatial ML. Best for GIS analyst and spatial data science roles.",
+            "product": "Business strategy focus: team leadership, platform development, and revenue generation. Best for product management and data leadership roles.",
+            "marketing": "Data-driven marketing: consumer segmentation, testing, and optimization. Best for marketing analytics and audience strategy roles.",
+            "data_analysis_visualization": "Data science specialization: building analytical infrastructure, ML algorithms, demographic analysis, and spatial visualization. Best for data analyst and analytics engineer roles.",
+            "polling_research_redistricting": "Research and redistricting: survey methodology, electoral prediction, and demographic modeling. Best for political research and redistricting roles.",
+        }
+
         for type_key, config in type_defs.items():
             is_electoral = type_key == "polling_research_redistricting"
             archetype, _ = ResumeArchetype.objects.update_or_create(
                 slug=type_key,
                 defaults={
                     "name": type_key.replace("_", " ").title(),
-                    "description": "",
+                    "description": archetype_descriptions.get(type_key, ""),
                     "is_electoral": is_electoral,
                     "max_achievements": config["achievements"].get("total_max", 4),
                     "max_responsibilities_per_job": config["experience"].get("max_responsibilities_per_job", 3),
