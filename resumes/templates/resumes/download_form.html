@@ -79,23 +79,23 @@
 <body>
     <section class="hero">
         <div class="container">
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-4 flex-nowrap">
                 {% if info.logo_url %}
-                <img src="{{ info.logo_url }}" alt="{{ info.name }}" style="width: 72px; height: 72px; border-radius: 8px; object-fit: cover;">
+                <img src="{{ info.logo_url }}" alt="{{ info.name }}" style="width: 120px; height: 120px; border-radius: 10px; object-fit: cover; flex-shrink: 0;">
                 {% endif %}
                 <div>
                     <h1 class="fw-bold mb-1">{{ info.name|default:"Resume Generator" }}</h1>
                     <p class="lead mb-1">{{ info.title|default:"" }}</p>
+                    {% if info.slogan %}<p class="tagline mb-1">{{ info.slogan }}</p>{% endif %}
+                    <p class="mb-0" style="font-size: 0.9rem;">
+                        {% if info.website %}<a href="{{ info.website }}">{{ info.website|cut:"https://www." }}</a>{% endif %}
+                        {% for link in social_links %}
+                            &nbsp;&bull;&nbsp;
+                            <a href="{{ link.url }}">{{ link.platform }}</a>
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
-            {% if info.slogan %}<p class="tagline mb-2 mt-1">{{ info.slogan }}</p>{% endif %}
-            <p class="mb-0" style="font-size: 0.9rem;">
-                {% if info.website %}<a href="{{ info.website }}">{{ info.website|cut:"https://www." }}</a>{% endif %}
-                {% for link in social_links %}
-                    &nbsp;&bull;&nbsp;
-                    <a href="{{ link.url }}">{{ link.platform }}</a>
-                {% endfor %}
-            </p>
         </div>
     </section>
 
