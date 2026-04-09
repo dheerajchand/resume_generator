@@ -39,6 +39,9 @@ loaddata:  ## Import JSON master data into database
 test:  ## Run legibility tests
 	$(DC) exec web python -m pytest tests/ -v
 
+smoketest:  ## Smoke test all admin and public URLs
+	$(DC) exec web python manage.py smoke_test_urls
+
 generate:  ## Generate all static resume outputs
 	$(DC) exec web python master_resume_generator.py
 	$(DC) exec web python generate_all_resumes.py
