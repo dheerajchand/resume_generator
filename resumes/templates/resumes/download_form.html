@@ -82,10 +82,16 @@
                                 <div class="col-md-6">
                                     <label for="resume_type" class="form-label fw-semibold">Resume Type</label>
                                     <select class="form-select" id="resume_type" name="resume_type" required>
-                                        {% for value, label in resume_types %}
-                                        <option value="{{ value }}">{{ label }}</option>
+                                        {% for archetype in archetypes %}
+                                        <option value="{{ archetype.slug }}">{{ archetype.name }}</option>
                                         {% endfor %}
                                     </select>
+                                </div>
+
+                                <div class="col-12" id="archetype-description" style="display:none;">
+                                    <div class="alert alert-light border-start border-4" style="border-color: var(--primary) !important;">
+                                        <em id="archetype-description-text"></em>
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6">
@@ -167,5 +173,25 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    const archetypes = {{ archetype_json|safe }};
+    const select = document.getElementById('resume_type');
+    const descDiv = document.getElementById('archetype-description');
+    const descText = document.getElementById('archetype-description-text');
+
+    function updateDescription() {
+        const slug = select.value;
+        const arch = archetypes.find(a => a.slug === slug);
+        if (arch && arch.description) {
+            descText.textContent = arch.description;
+            descDiv.style.display = 'block';
+        } else {
+            descDiv.style.display = 'none';
+        }
+    }
+
+    select.addEventListener('change', updateDescription);
+    updateDescription();
+    </script>
 </body>
 </html>

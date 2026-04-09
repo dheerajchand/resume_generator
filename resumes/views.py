@@ -31,18 +31,6 @@ from .serializers import (
 
 User = get_user_model()
 
-# Resume type display names and descriptions
-RESUME_TYPES = {
-    "comprehensive": "Comprehensive",
-    "data_engineering": "Data Engineering",
-    "software_engineering": "Software Engineering",
-    "gis": "GIS & Geospatial",
-    "product": "Product Management",
-    "marketing": "Marketing Analytics",
-    "data_analysis_visualization": "Data Analysis & Visualization",
-    "polling_research_redistricting": "Political Research & Redistricting",
-}
-
 LENGTH_VARIANTS = {
     "long": "Long (Full Detail)",
     "short": "Short (3-4 Pages)",
@@ -63,9 +51,19 @@ FORMAT_CONTENT_TYPES = {
 
 
 def download_form(request):
-    """Public form page for downloading resumes — no login required."""
+    """Public form page for downloading resumes — no login required.
+
+    Populates archetype dropdown from database. Archetype metadata
+    (names, slugs, descriptions) is embedded as JSON for JS dropdown
+    descriptions.
+    """
+    from portfolio.services import get_archetype_metadata
+    import json as json_module
+
+    archetypes = get_archetype_metadata()
     context = {
-        "resume_types": RESUME_TYPES.items(),
+        "archetypes": archetypes,
+        "archetype_json": json_module.dumps(archetypes),
         "length_variants": LENGTH_VARIANTS.items(),
         "color_schemes": [(s, s.replace("_", " ").title()) for s in COLOR_SCHEMES],
         "formats": [("pdf", "PDF"), ("docx", "Word (DOCX)"), ("rtf", "RTF"), ("md", "Markdown")],
@@ -77,18 +75,16 @@ def download_form(request):
 def generate_on_demand(request):
     """Generate a resume on-demand and stream it as a download — no login required.
 
-    Reads master data, builds specialized resume, applies length truncation,
+    Reads from database via portfolio.services, applies length truncation,
     generates the requested format in memory, and returns it.
     """
-    resume_type = request.POST.get("resume_type", "comprehensive")
+    archetype_slug = request.POST.get("resume_type", "comprehensive")
     length_variant = request.POST.get("length_variant", "long")
     color_scheme = request.POST.get("color_scheme", "default_professional")
     format_type = request.POST.get("format_type", "pdf")
     output_type = request.POST.get("output_type", "ats")
 
-    # Validate inputs
-    if resume_type not in RESUME_TYPES:
-        return HttpResponse("Invalid resume type", status=400)
+    # Validate
     if length_variant not in LENGTH_VARIANTS:
         return HttpResponse("Invalid length variant", status=400)
     if color_scheme not in COLOR_SCHEMES:
@@ -96,30 +92,31 @@ def generate_on_demand(request):
     if format_type not in FORMAT_CONTENT_TYPES:
         return HttpResponse("Invalid format", status=400)
 
-    # Add project root to path so master_resume_generator can be imported
+    # Build resume data from database
+    from portfolio.services import build_resume_data_from_db
+    from portfolio.models import ResumeArchetype
+
+    try:
+        ResumeArchetype.objects.get(slug=archetype_slug)
+    except ResumeArchetype.DoesNotExist:
+        return HttpResponse("Invalid resume type", status=400)
+
+    resume_data = build_resume_data_from_db(archetype_slug, output_type)
+
+    # Apply length truncation
     project_root = Path(__file__).resolve().parent.parent
     if str(project_root) not in sys.path:
         sys.path.insert(0, str(project_root))
 
-    from master_resume_generator import (
-        load_master_achievements,
-        create_specialized_resume,
-        create_abbreviated_resume,
-        create_brief_resume,
-    )
-    from .core_services import ResumeGenerator
+    from master_resume_generator import create_abbreviated_resume, create_brief_resume
 
-    # Build resume data from master
-    master_data = load_master_achievements()
-    resume_data = create_specialized_resume(master_data, resume_type, output_type)
-
-    # Apply length truncation
     if length_variant == "short":
-        resume_data = create_abbreviated_resume(resume_data, resume_type)
+        resume_data = create_abbreviated_resume(resume_data, archetype_slug)
     elif length_variant == "brief":
-        resume_data = create_brief_resume(resume_data, resume_type)
+        resume_data = create_brief_resume(resume_data, archetype_slug)
 
     # Load color scheme config
+    from .core_services import ResumeGenerator
     color_config_path = project_root / "color_schemes" / f"{color_scheme}.json"
     config = {}
     if color_config_path.exists():
@@ -136,14 +133,13 @@ def generate_on_demand(request):
     )
 
     # Generate to memory buffer
-    filename = f"dheeraj_chand_{resume_type}_{length_variant}_{color_scheme}.{format_type}"
+    filename = f"dheeraj_chand_{archetype_slug}_{length_variant}_{color_scheme}.{format_type}"
     buffer = io.BytesIO()
 
     if format_type == "pdf":
         generator.generate_pdf(buffer)
         buffer.seek(0)
     elif format_type == "docx":
-        # python-docx can save to BytesIO
         import tempfile
         with tempfile.NamedTemporaryFile(suffix=".docx", delete=True) as tmp:
             generator.generate_docx(tmp.name)
