@@ -187,3 +187,120 @@ class Skill(models.Model):
 
     def __str__(self):
         return f"{self.category.name}: {self.name}"
+
+
+# ─── Composition Models ──────────────────────────────────────────────────────
+
+
+class ResumeArchetype(models.Model):
+    """Domain template defining which content is included and how.
+
+    Archetypes are the "classes" — Data Engineering, GIS, etc.
+    Instances inherit from archetypes for specific opportunities.
+    """
+
+    DETAIL_LEVEL_CHOICES = [
+        ("comprehensive", "Comprehensive"),
+        ("focused", "Focused"),
+        ("business_focused", "Business Focused"),
+    ]
+
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(blank=True, help_text="Shown on the public download form when this archetype is selected")
+    is_electoral = models.BooleanField(default=False, help_text="If True, uses electoral-specific responsibility text")
+    max_achievements = models.PositiveIntegerField(default=4)
+    max_responsibilities_per_job = models.PositiveIntegerField(default=3)
+    siege_analytics_max = models.PositiveIntegerField(default=6, help_text="Max responsibilities for Siege Analytics position")
+    show_project_technical_details = models.BooleanField(default=True)
+    competency_detail_level = models.CharField(max_length=20, choices=DETAIL_LEVEL_CHOICES, default="focused")
+
+    # M2M through-tables for content selection with ordering
+    positions = models.ManyToManyField(Position, through="ResumeArchetypePosition", blank=True)
+    achievements = models.ManyToManyField(Achievement, through="ResumeArchetypeAchievement", blank=True)
+    projects = models.ManyToManyField(Project, through="ResumeArchetypeProject", blank=True)
+    skill_categories = models.ManyToManyField(SkillCategory, through="ResumeArchetypeSkillCategory", blank=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+
+class ProfessionalSummary(models.Model):
+    """One summary per archetype — the type-specific professional summary."""
+
+    archetype = models.OneToOneField(
+        ResumeArchetype, on_delete=models.CASCADE, related_name="summary"
+    )
+    text = models.TextField()
+
+    class Meta:
+        verbose_name_plural = "Professional Summaries"
+
+    def __str__(self):
+        return f"Summary for {self.archetype.name}"
+
+
+# ─── Through-Tables (M2M with ordering) ──────────────────────────────────────
+
+
+class ResumeArchetypePosition(models.Model):
+    """Which positions an archetype includes, and in what order."""
+
+    archetype = models.ForeignKey(ResumeArchetype, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
+        unique_together = ["archetype", "position"]
+
+    def __str__(self):
+        return f"{self.archetype.name} → {self.position.company}"
+
+
+class ResumeArchetypeAchievement(models.Model):
+    """Which achievements an archetype includes, and in what order."""
+
+    archetype = models.ForeignKey(ResumeArchetype, on_delete=models.CASCADE)
+    achievement = models.ForeignKey(Achievement, on_delete=models.CASCADE)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
+        unique_together = ["archetype", "achievement"]
+
+    def __str__(self):
+        return f"{self.archetype.name} → {self.achievement.slug}"
+
+
+class ResumeArchetypeProject(models.Model):
+    """Which projects an archetype includes, and in what order."""
+
+    archetype = models.ForeignKey(ResumeArchetype, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
+        unique_together = ["archetype", "project"]
+
+    def __str__(self):
+        return f"{self.archetype.name} → {self.project.name}"
+
+
+class ResumeArchetypeSkillCategory(models.Model):
+    """Which skill categories an archetype includes, and in what order."""
+
+    archetype = models.ForeignKey(ResumeArchetype, on_delete=models.CASCADE)
+    skill_category = models.ForeignKey(SkillCategory, on_delete=models.CASCADE)
+    sort_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["sort_order"]
+        unique_together = ["archetype", "skill_category"]
+
+    def __str__(self):
+        return f"{self.archetype.name} → {self.skill_category.name}"
