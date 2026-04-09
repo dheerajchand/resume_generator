@@ -72,6 +72,7 @@ class Command(BaseCommand):
                 "location": contact.get("location", ""),
                 "location_display": data.get("location_display", ""),
                 "slogan": data.get("slogan", ""),
+                "footer_text": 'Built with <a href="https://www.djangoproject.com/">Django</a> and <a href="https://docs.reportlab.com/">ReportLab</a>.',
             },
         )
         # Social links

@@ -28,6 +28,10 @@ class PersonalInfo(models.Model):
         help_text="Display version with coordinates, e.g., Austin, TX (30.2672°N, 97.7431°W)"
     )
     slogan = models.CharField(max_length=300, blank=True, help_text="Tagline shown in header")
+    footer_text = models.CharField(
+        max_length=500, blank=True,
+        help_text="Footer text (HTML allowed). e.g., Built with <a href='...'>Django</a> and <a href='...'>ReportLab</a>"
+    )
 
     class Meta:
         verbose_name = "Personal Info"
