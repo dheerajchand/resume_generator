@@ -79,9 +79,16 @@
 <body>
     <section class="hero">
         <div class="container">
-            <h1 class="fw-bold mb-1">{{ info.name|default:"Resume Generator" }}</h1>
-            <p class="lead mb-1">{{ info.title|default:"" }}</p>
-            {% if info.slogan %}<p class="tagline mb-2">{{ info.slogan }}</p>{% endif %}
+            <div class="d-flex align-items-center gap-3">
+                {% if info.logo_url %}
+                <img src="{{ info.logo_url }}" alt="{{ info.name }}" style="width: 72px; height: 72px; border-radius: 8px; object-fit: cover;">
+                {% endif %}
+                <div>
+                    <h1 class="fw-bold mb-1">{{ info.name|default:"Resume Generator" }}</h1>
+                    <p class="lead mb-1">{{ info.title|default:"" }}</p>
+                </div>
+            </div>
+            {% if info.slogan %}<p class="tagline mb-2 mt-1">{{ info.slogan }}</p>{% endif %}
             <p class="mb-0" style="font-size: 0.9rem;">
                 {% if info.website %}<a href="{{ info.website }}">{{ info.website|cut:"https://www." }}</a>{% endif %}
                 {% for link in social_links %}

@@ -96,7 +96,7 @@ class ArchetypeSkillCategoryInline(admin.TabularInline):
 class PersonalInfoAdmin(admin.ModelAdmin):
     inlines = [SocialLinkInline]
     fieldsets = [
-        ("Identity", {"fields": ["name", "title", "slogan"]}),
+        ("Identity", {"fields": ["name", "title", "slogan", "logo_url"]}),
         ("Contact", {"fields": ["email", "phone", "website"]}),
         ("Location", {"fields": ["location", "location_display"]}),
         ("Footer", {"fields": ["footer_text"], "description": "HTML allowed. If blank, defaults to 'Built with Django and ReportLab' with links."}),
