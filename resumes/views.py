@@ -58,10 +58,20 @@ def download_form(request):
     descriptions.
     """
     from portfolio.services import get_archetype_metadata
+    from portfolio.models import PersonalInfo as PortfolioPersonalInfo
     import json as json_module
 
     archetypes = get_archetype_metadata()
+
+    # Load personal info for hero, footer, links
+    try:
+        info = PortfolioPersonalInfo.objects.prefetch_related("social_links").get()
+    except PortfolioPersonalInfo.DoesNotExist:
+        info = None
+
     context = {
+        "info": info,
+        "social_links": info.social_links.all() if info else [],
         "archetypes": archetypes,
         "archetype_json": json_module.dumps(archetypes),
         "length_variants": LENGTH_VARIANTS.items(),

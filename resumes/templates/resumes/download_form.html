@@ -79,15 +79,15 @@
 <body>
     <section class="hero">
         <div class="container">
-            <h1 class="fw-bold mb-1">Dheeraj Chand</h1>
-            <p class="lead mb-1">Data Scientist & Software Engineer</p>
-            <p class="tagline mb-2">Ex Oriente Lux, Ex Occidente Lex</p>
+            <h1 class="fw-bold mb-1">{{ info.name|default:"Resume Generator" }}</h1>
+            <p class="lead mb-1">{{ info.title|default:"" }}</p>
+            {% if info.slogan %}<p class="tagline mb-2">{{ info.slogan }}</p>{% endif %}
             <p class="mb-0" style="font-size: 0.9rem;">
-                <a href="https://www.dheerajchand.com">dheerajchand.com</a>
-                &nbsp;&bull;&nbsp;
-                <a href="https://www.linkedin.com/in/dheerajchand/">LinkedIn</a>
-                &nbsp;&bull;&nbsp;
-                <a href="https://github.com/dheerajchand">GitHub</a>
+                {% if info.website %}<a href="{{ info.website }}">{{ info.website|cut:"https://www." }}</a>{% endif %}
+                {% for link in social_links %}
+                    &nbsp;&bull;&nbsp;
+                    <a href="{{ link.url }}">{{ link.platform }}</a>
+                {% endfor %}
             </p>
         </div>
     </section>
@@ -190,7 +190,11 @@
 
     <footer>
         <div class="container text-center">
-            <small>&copy; 2026 <a href="https://www.dheerajchand.com">Dheeraj Chand</a>. Built with Django and ReportLab.</small>
+            <small>
+                &copy; {% now "Y" %}
+                {% if info.website %}<a href="{{ info.website }}">{{ info.name }}</a>{% else %}{{ info.name|default:"" }}{% endif %}.
+                {% if info.footer_text %}{{ info.footer_text|safe }}{% else %}Built with <a href="https://www.djangoproject.com/">Django</a> and <a href="https://docs.reportlab.com/">ReportLab</a>.{% endif %}
+            </small>
         </div>
     </footer>
 
