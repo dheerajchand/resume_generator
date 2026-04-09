@@ -304,3 +304,134 @@ class ResumeArchetypeSkillCategory(models.Model):
 
     def __str__(self):
         return f"{self.archetype.name} → {self.skill_category.name}"
+
+
+# ─── Instance & Recipient Models ─────────────────────────────────────────────
+
+
+class Recipient(models.Model):
+    """Who receives a resume — recruiter, hiring manager, etc."""
+
+    RELATIONSHIP_CHOICES = [
+        ("recruiter", "Recruiter"),
+        ("hiring_manager", "Hiring Manager"),
+        ("referral", "Referral"),
+        ("direct_application", "Direct Application"),
+    ]
+
+    name = models.CharField(max_length=200)
+    company = models.CharField(max_length=200)
+    role = models.CharField(max_length=200, blank=True, help_text="e.g., Senior Recruiter")
+    email = models.EmailField(blank=True)
+    job_url = models.URLField(blank=True, help_text="Link to the job posting")
+    job_title = models.CharField(max_length=300, blank=True, help_text="e.g., Senior Data Analyst (Databricks)")
+    relationship_type = models.CharField(max_length=20, choices=RELATIONSHIP_CHOICES, default="recruiter")
+    linkedin_url = models.URLField(blank=True)
+    notes = models.TextField(blank=True, help_text="How you were introduced, context")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.name} ({self.company})"
+
+
+class ResumeInstance(models.Model):
+    """A concrete resume for a specific opportunity.
+
+    Inherits content from its archetype. Most instances are unmodified
+    (pure archetype). summary_override allows targeting a specific job.
+    """
+
+    name = models.CharField(max_length=300, help_text="e.g., John Sanford — Databricks Senior Analyst")
+    archetype = models.ForeignKey(
+        ResumeArchetype, on_delete=models.CASCADE, related_name="instances"
+    )
+    recipient = models.ForeignKey(
+        Recipient, on_delete=models.SET_NULL, null=True, blank=True, related_name="instances"
+    )
+    summary_override = models.TextField(
+        blank=True, help_text="If set, replaces the archetype's professional summary for this instance"
+    )
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.name
+
+
+class GenerationRecord(models.Model):
+    """Audit trail: every resume generation is logged."""
+
+    FORMAT_CHOICES = [
+        ("pdf", "PDF"),
+        ("docx", "DOCX"),
+        ("rtf", "RTF"),
+        ("md", "Markdown"),
+    ]
+
+    OUTPUT_TYPE_CHOICES = [
+        ("ats", "ATS-Optimized"),
+        ("human", "Human-Readable"),
+    ]
+
+    LENGTH_CHOICES = [
+        ("long", "Long"),
+        ("short", "Short"),
+        ("brief", "Brief"),
+    ]
+
+    instance = models.ForeignKey(
+        ResumeInstance, on_delete=models.SET_NULL, null=True, blank=True, related_name="generations"
+    )
+    archetype_slug = models.CharField(max_length=100, help_text="Archetype slug at time of generation")
+    format_type = models.CharField(max_length=10, choices=FORMAT_CHOICES)
+    output_type = models.CharField(max_length=10, choices=OUTPUT_TYPE_CHOICES)
+    color_scheme = models.CharField(max_length=100)
+    length_variant = models.CharField(max_length=10, choices=LENGTH_CHOICES)
+    generated_at = models.DateTimeField(auto_now_add=True)
+    was_emailed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-generated_at"]
+
+    def __str__(self):
+        label = self.instance.name if self.instance else self.archetype_slug
+        return f"{label} — {self.format_type}/{self.length_variant} ({self.generated_at:%Y-%m-%d %H:%M})"
+
+
+class EmailTemplate(models.Model):
+    """Reusable email body templates for sending resumes."""
+
+    name = models.CharField(max_length=200, help_text="e.g., Generic recruiter intro")
+    slug = models.SlugField(unique=True)
+    subject_template = models.CharField(
+        max_length=500,
+        help_text="Supports placeholders: {recipient_name}, {job_title}, {company}, {archetype_name}"
+    )
+    body_template = models.TextField(
+        help_text="Supports placeholders: {recipient_name}, {job_title}, {company}, {archetype_name}, {your_name}"
+    )
+    is_default = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if self.is_default:
+            EmailTemplate.objects.filter(is_default=True).exclude(pk=self.pk).update(is_default=False)
+        super().save(*args, **kwargs)
+
+    def render_subject(self, **context):
+        return self.subject_template.format(**context)
+
+    def render_body(self, **context):
+        return self.body_template.format(**context)
