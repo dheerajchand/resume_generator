@@ -4,17 +4,18 @@ Generate human-friendly resume versions
 """
 
 import sys
-import os
+
 sys.path.append('.')
 
 from resumes.core_services import ResumeManager
 
+
 def main():
     manager = ResumeManager()
-    
+
     # Generate human-friendly versions for comprehensive resume
     print("Generating human-friendly comprehensive resumes...")
-    
+
     # Generate all formats for comprehensive resume
     for color_scheme in manager.color_schemes:
         for format_type in manager.formats:

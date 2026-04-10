@@ -42,6 +42,15 @@ test:  ## Run legibility tests
 smoketest:  ## Smoke test all admin and public URLs
 	$(DC) exec web python manage.py smoke_test_urls
 
+lint:  ## Run ruff linter
+	$(DC) exec web ruff check .
+
+lintfix:  ## Fix auto-fixable lint issues
+	$(DC) exec web ruff check --fix .
+
+deadcode:  ## Find dead code with vulture
+	$(DC) exec web vulture portfolio/ resumes/views.py resumes/urls.py --min-confidence 80
+
 generate:  ## Generate all static resume outputs
 	$(DC) exec web python master_resume_generator.py
 	$(DC) exec web python generate_all_resumes.py

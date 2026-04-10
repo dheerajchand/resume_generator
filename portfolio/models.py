@@ -10,7 +10,6 @@ archetypes via M2M through-tables.
 
 from django.db import models
 
-
 # ─── Content Models ───────────────────────────────────────────────────────────
 
 

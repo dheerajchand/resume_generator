@@ -4,21 +4,19 @@ Admin configuration for user-related models
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.html import format_html
 from django.urls import reverse
-from django.utils.safestring import mark_safe
-from .models import CustomUser, UserProfile, UserResumeData, UserDirectory
+from django.utils.html import format_html
 
 
 class CustomUserAdmin(BaseUserAdmin):
     """Admin interface for CustomUser"""
-    
-    list_display = ('username', 'email', 'full_name', 'professional_title', 
+
+    list_display = ('username', 'email', 'full_name', 'professional_title',
                    'subscription_tier', 'is_verified', 'resume_count', 'date_joined')
     list_filter = ('subscription_tier', 'is_verified', 'email_verified', 'is_staff', 'is_active', 'date_joined')
     search_fields = ('username', 'email', 'first_name', 'last_name', 'professional_title')
     ordering = ('-date_joined',)
-    
+
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal Info', {'fields': ('first_name', 'last_name', 'email', 'phone', 'website', 'linkedin', 'github', 'location')}),
@@ -28,16 +26,16 @@ class CustomUserAdmin(BaseUserAdmin):
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important Dates', {'fields': ('last_login', 'date_joined', 'last_login_at')}),
     )
-    
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('username', 'email', 'password1', 'password2'),
         }),
     )
-    
+
     readonly_fields = ('date_joined', 'last_login', 'last_login_at')
-    
+
     def resume_count(self, obj):
         """Display number of resumes created by user"""
         count = obj.resume_count
@@ -50,14 +48,14 @@ class CustomUserAdmin(BaseUserAdmin):
 
 class UserProfileAdmin(admin.ModelAdmin):
     """Admin interface for UserProfile"""
-    
-    list_display = ('user', 'default_resume_template', 'auto_generate_on_update', 
+
+    list_display = ('user', 'default_resume_template', 'auto_generate_on_update',
                    'profile_public', 'created_at')
-    list_filter = ('default_resume_template', 'auto_generate_on_update', 
+    list_filter = ('default_resume_template', 'auto_generate_on_update',
                   'profile_public', 'allow_public_resumes', 'created_at')
     search_fields = ('user__username', 'user__email', 'user__first_name', 'user__last_name')
     raw_id_fields = ('user',)
-    
+
     fieldsets = (
         ('User', {'fields': ('user',)}),
         ('Professional Summary', {'fields': ('professional_summary',)}),
@@ -69,22 +67,22 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class UserResumeDataAdmin(admin.ModelAdmin):
     """Admin interface for UserResumeData"""
-    
-    list_display = ('user', 'resume_type', 'length_variant', 'is_active', 
+
+    list_display = ('user', 'resume_type', 'length_variant', 'is_active',
                    'last_generated', 'created_at')
     list_filter = ('resume_type', 'length_variant', 'is_active', 'created_at', 'last_generated')
     search_fields = ('user__username', 'user__email')
     raw_id_fields = ('user',)
-    
+
     fieldsets = (
         ('Basic Info', {'fields': ('user', 'resume_type', 'length_variant', 'is_active')}),
-        ('Content', {'fields': ('personal_info', 'summary', 'competencies', 'experience', 
+        ('Content', {'fields': ('personal_info', 'summary', 'competencies', 'experience',
                                'achievements', 'education', 'projects', 'certifications', 'additional_info')}),
         ('File Management', {'fields': ('input_file_path', 'output_directory', 'last_generated')}),
     )
-    
+
     readonly_fields = ('created_at', 'updated_at', 'last_generated')
-    
+
     def get_queryset(self, request):
         """Optimize queryset"""
         return super().get_queryset(request).select_related('user')
@@ -92,22 +90,22 @@ class UserResumeDataAdmin(admin.ModelAdmin):
 
 class UserDirectoryAdmin(admin.ModelAdmin):
     """Admin interface for UserDirectory"""
-    
+
     list_display = ('user', 'is_initialized', 'last_synced', 'created_at')
     list_filter = ('is_initialized', 'created_at', 'last_synced')
     search_fields = ('user__username', 'user__email')
     raw_id_fields = ('user',)
-    
+
     fieldsets = (
         ('User', {'fields': ('user',)}),
         ('Directories', {'fields': ('input_directory', 'output_directory')}),
         ('Status', {'fields': ('is_initialized', 'last_synced')}),
     )
-    
+
     readonly_fields = ('created_at', 'updated_at')
-    
+
     actions = ['initialize_directories']
-    
+
     def initialize_directories(self, request, queryset):
         """Initialize directories for selected users"""
         count = 0
@@ -117,6 +115,6 @@ class UserDirectoryAdmin(admin.ModelAdmin):
                 count += 1
             except Exception as e:
                 self.message_user(request, f"Error initializing directories for {directory.user.username}: {e}", level='ERROR')
-        
+
         self.message_user(request, f"Successfully initialized directories for {count} users.")
     initialize_directories.short_description = "Initialize directories for selected users"

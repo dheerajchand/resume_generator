@@ -4,16 +4,28 @@ fieldsets, and filter widgets for all portfolio models.
 """
 
 from django.contrib import admin
-from .models import (
-    PersonalInfo, SocialLink, Position, Responsibility,
-    Achievement, Project, ProjectTechnology,
-    SkillCategory, Skill,
-    ResumeArchetype, ProfessionalSummary,
-    ResumeArchetypePosition, ResumeArchetypeAchievement,
-    ResumeArchetypeProject, ResumeArchetypeSkillCategory,
-    Recipient, ResumeInstance, GenerationRecord, EmailTemplate,
-)
 
+from .models import (
+    Achievement,
+    EmailTemplate,
+    GenerationRecord,
+    PersonalInfo,
+    Position,
+    ProfessionalSummary,
+    Project,
+    ProjectTechnology,
+    Recipient,
+    Responsibility,
+    ResumeArchetype,
+    ResumeArchetypeAchievement,
+    ResumeArchetypePosition,
+    ResumeArchetypeProject,
+    ResumeArchetypeSkillCategory,
+    ResumeInstance,
+    Skill,
+    SkillCategory,
+    SocialLink,
+)
 
 # ─── Content Inlines ─────────────────────────────────────────────────────────
 

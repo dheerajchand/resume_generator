@@ -7,14 +7,25 @@ creates all portfolio model instances. Idempotent: safe to re-run.
 
 import json
 from pathlib import Path
+
 from django.core.management.base import BaseCommand
+
 from portfolio.models import (
-    PersonalInfo, SocialLink, Position, Responsibility,
-    Achievement, Project, ProjectTechnology,
-    SkillCategory, Skill,
-    ResumeArchetype, ProfessionalSummary,
-    ResumeArchetypePosition, ResumeArchetypeAchievement,
-    ResumeArchetypeProject, ResumeArchetypeSkillCategory,
+    Achievement,
+    PersonalInfo,
+    Position,
+    ProfessionalSummary,
+    Project,
+    ProjectTechnology,
+    Responsibility,
+    ResumeArchetype,
+    ResumeArchetypeAchievement,
+    ResumeArchetypePosition,
+    ResumeArchetypeProject,
+    ResumeArchetypeSkillCategory,
+    Skill,
+    SkillCategory,
+    SocialLink,
 )
 
 
@@ -38,7 +49,7 @@ class Command(BaseCommand):
             self.stderr.write(self.style.ERROR(f"Not found: {master_path}"))
             return
 
-        with open(master_path, "r", encoding="utf-8") as f:
+        with open(master_path, encoding="utf-8") as f:
             master = json.load(f)["comprehensive_master_achievements"]
 
         self.stdout.write("Importing master data...")
@@ -50,7 +61,7 @@ class Command(BaseCommand):
         self._import_skills(master["technical_skills_comprehensive"])
 
         if types_path.exists():
-            with open(types_path, "r", encoding="utf-8") as f:
+            with open(types_path, encoding="utf-8") as f:
                 type_defs = json.load(f)["resume_type_configurations"]
             self._import_archetypes(type_defs, master["professional_summary"])
         else:
@@ -100,7 +111,7 @@ class Command(BaseCommand):
 
     def _import_positions(self, data):
         # Map of JSON keys to position data
-        for idx, (key, pos_data) in enumerate(data.items()):
+        for idx, (_key, pos_data) in enumerate(data.items()):
             position, _ = Position.objects.update_or_create(
                 company=pos_data["company"],
                 title=pos_data["title"],
@@ -129,7 +140,7 @@ class Command(BaseCommand):
         self.stdout.write(f"  Imported {len(data)} positions with responsibilities")
 
     def _import_projects(self, data):
-        for idx, (key, proj_data) in enumerate(data.items()):
+        for idx, (_key, proj_data) in enumerate(data.items()):
             project, _ = Project.objects.update_or_create(
                 name=proj_data["name"],
                 defaults={

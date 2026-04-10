@@ -3,10 +3,10 @@
 Django management command to generate all resume combinations
 """
 
+
 from django.core.management.base import BaseCommand
-from django.conf import settings
+
 from resumes.core_services import ResumeManager
-import os
 
 
 class Command(BaseCommand):
@@ -33,18 +33,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         output_dir = options['output_dir']
         confirm = options['confirm'] or options['force']
-        
+
         # Calculate total combinations
         manager = ResumeManager()
         output_types = ["ats", "human"]
         total_combinations = (
-            len(manager.versions) * 
+            len(manager.versions) *
             len(manager.length_variants) *
-            len(manager.color_schemes) * 
+            len(manager.color_schemes) *
             len(manager.formats) *
             len(output_types)
         )
-        
+
         self.stdout.write(
             self.style.SUCCESS('☢️  NUCLEAR OPTION: Generating EVERYTHING')
         )
@@ -60,36 +60,36 @@ class Command(BaseCommand):
         self.stdout.write('⏰ This will take several minutes...')
         self.stdout.write('☕ Perfect time for a coffee break!')
         self.stdout.write('')
-        
+
         if not confirm:
             response = input('🤔 Are you sure you want to generate ALL resumes with ALL color schemes? (y/N): ')
             if response.lower() != 'y':
                 self.stdout.write(self.style.WARNING('Operation cancelled.'))
                 return
-        
+
         self.stdout.write('🚀 Launching nuclear generation sequence...')
         self.stdout.write('=' * 60)
-        
+
         # Generate all combinations for both ATS and human versions
         results = {"success": 0, "failed": 0}
-        
+
         for output_type in output_types:
             self.stdout.write(f'🎯 Generating {output_type.upper()} versions...')
             type_results = manager.generate_all_combinations(output_dir, output_type)
             results["success"] += type_results["success"]
             results["failed"] += type_results["failed"]
-        
+
         self.stdout.write('')
         self.stdout.write('☢️  NUCLEAR GENERATION COMPLETE!')
         self.stdout.write('=' * 60)
         self.stdout.write(f'✅ Successfully generated: {results["success"]} files')
         self.stdout.write(f'❌ Failed: {results["failed"]} files')
-        
+
         if results["failed"] == 0:
             success_rate = 100.0
         else:
             success_rate = (results["success"] / total_combinations) * 100
-        
+
         self.stdout.write(f'📊 Success rate: {success_rate:.1f}%')
         self.stdout.write('')
         self.stdout.write(f'📁 Find your nuclear arsenal in the {output_dir}/ directory!')

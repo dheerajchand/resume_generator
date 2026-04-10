@@ -8,50 +8,64 @@ For the minimal/backup format, see core_services_minimal.py
 """
 
 import json
-import os
+import re
 from pathlib import Path
-from typing import Dict, List, Optional, Any
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.units import inch
-from reportlab.lib.colors import HexColor, black, white
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, Table, TableStyle, PageTemplate, BaseDocTemplate
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY, TA_RIGHT
-from reportlab.platypus.frames import Frame
-from reportlab.platypus.doctemplate import PageTemplate
+from typing import Any
+
 from docx import Document
-from docx.shared import Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-import tempfile
-from resume_generator_django.resume_generator.constants import (
-    SPACE_BASE, SPACE_BETWEEN_SECTIONS, SPACE_BETWEEN_JOB_UNITS, 
-    SPACE_BETWEEN_JOB_COMPONENTS, SPACE_HEADER_TO_CONTENT, SPACE_SUBHEADER_TO_BULLETS, SPACE_HEADER_TOP,
-    SPACE_HEADER_BAR_TO_CONTENT, SPACE_HEADER_HEIGHT, SPACE_FOOTER_HEIGHT, SPACE_HEADER_TO_MAIN_BODY,
-    FONT_SIZE_SECTION_HEADER, FONT_SIZE_COMPANY, FONT_SIZE_MAIN_COMPETENCY,
-    FONT_SIZE_JOB_TITLE, FONT_SIZE_BODY, FONT_SIZE_SUB_COMPETENCY,
-    FONT_SIZE_BULLET_POINT, FONT_SIZE_COMPETENCY_DETAIL, FONT_SIZE_FOOTER,
-    COLOR_MAPPINGS, PARAGRAPH_SPACING, SECTION_ORDER,
-    MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, PAGE_HEIGHT,
-    HEADER_LEFT_X, HEADER_TOP_Y, HEADER_RIGHT_X, HEADER_FOOTER_Y,
-    HEADER_PHONE_OFFSET, HEADER_GITHUB_OFFSET, HEADER_GITHUB_LINK_OFFSET,
-    HEADER_NAME_OFFSET, HEADER_LOCATION_OFFSET, HEADER_LOCATION_LINK_OFFSET,
-    FOOTER_LINK_OFFSET, FOOTER_BAR_POSITION, SPACE_MULTIPLIER_TINY, SPACE_MULTIPLIER_MINIMAL, SPACE_MULTIPLIER_SMALL, 
-    SPACE_MULTIPLIER_MEDIUM, SPACE_MULTIPLIER_LARGE, FONT_SIZE_8, FONT_SIZE_9, 
-    FONT_SIZE_10, FONT_SIZE_11, FONT_SIZE_12, FONT_SIZE_14, BAR_WIDTH, BAR_HEIGHT,
-    BAR_LINE_WIDTH, BAR_LINE_WIDTH_FOOTER, PAGE_CONTENT_WIDTH, PAGE_LEFT_MARGIN,
-    PAGE_RIGHT_MARGIN, HEADER_FIRST_PHONE_Y, HEADER_FIRST_GITHUB_Y, 
-    HEADER_FIRST_NAME_Y, HEADER_FIRST_LOCATION_Y, HEADER_RECURRING_NAME_Y,
-    HEADER_RECURRING_EMAIL_Y, HEADER_RECURRING_PHONE_Y, HEADER_RECURRING_GITHUB_Y,
-    FOOTER_Y, FONT_THEMES, FONT_ROLES, FONT_SIZE_THEMES,
-    get_spacing_constant, get_font_size, get_color_role, get_theme_font, get_theme_font_size,
-    MAX_BULLETS_FOR_KEEP_TOGETHER, BULLETS_WITH_HEADER
+from docx.shared import Inches
+from reportlab.lib.colors import HexColor
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.units import inch
+from reportlab.platypus import (
+    KeepTogether,
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+    Table,
+    TableStyle,
 )
 
-
-
-
-import re
+from resume_generator_django.resume_generator.constants import (
+    BAR_LINE_WIDTH,
+    BAR_LINE_WIDTH_FOOTER,
+    BAR_WIDTH,
+    BULLETS_WITH_HEADER,
+    FONT_SIZE_8,
+    FONT_SIZE_9,
+    FONT_SIZE_11,
+    FONT_SIZE_14,
+    FOOTER_BAR_POSITION,
+    FOOTER_LINK_OFFSET,
+    FOOTER_Y,
+    HEADER_GITHUB_OFFSET,
+    HEADER_LEFT_X,
+    HEADER_NAME_OFFSET,
+    HEADER_PHONE_OFFSET,
+    HEADER_TOP_Y,
+    MARGIN_LEFT,
+    MARGIN_RIGHT,
+    MAX_BULLETS_FOR_KEEP_TOGETHER,
+    PAGE_HEIGHT,
+    PAGE_LEFT_MARGIN,
+    PAGE_RIGHT_MARGIN,
+    SPACE_BASE,
+    SPACE_BETWEEN_JOB_COMPONENTS,
+    SPACE_BETWEEN_JOB_UNITS,
+    SPACE_BETWEEN_SECTIONS,
+    SPACE_HEADER_TO_CONTENT,
+    SPACE_MULTIPLIER_LARGE,
+    SPACE_MULTIPLIER_MEDIUM,
+    SPACE_MULTIPLIER_MINIMAL,
+    SPACE_MULTIPLIER_SMALL,
+    SPACE_SUBHEADER_TO_BULLETS,
+    get_font_size,
+    get_spacing_constant,
+    get_theme_font,
+)
 
 
 def convert_markdown_links(text: str, format_type: str = "pdf") -> str:
@@ -100,7 +114,7 @@ def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: s
             return f"\\b {match_text}\\b0"
         else:
             return match_text
-    
+
     # Convert markdown-style links before processing metrics
     text = convert_markdown_links(text, format_type)
 
@@ -114,8 +128,8 @@ def highlight_quantitative_metrics(text: str, format_type: str = "pdf", color: s
 
 class ResumeGenerator:
     """Core resume generator supporting all formats"""
-    
-    def __init__(self, data_file: str, config_file: Optional[str] = None, color_scheme: str = 'default_professional', length_variant: str = 'long', output_type: str = 'ats'):
+
+    def __init__(self, data_file: str, config_file: str | None = None, color_scheme: str = 'default_professional', length_variant: str = 'long', output_type: str = 'ats'):
         self.data = self._load_json(data_file)
         self.config = self._load_json(config_file) if config_file else {}
         self.color_scheme = color_scheme
@@ -136,7 +150,7 @@ class ResumeGenerator:
         instance.styles = instance._create_styles()
         instance._init_spacing_constants()
         return instance
-    
+
     def _get_contact_info(self, personal_info: dict) -> dict:
         """
         Get contact information from personal_info, handling both nested and flat structures.
@@ -149,7 +163,7 @@ class ResumeGenerator:
         """
         # Try nested structure first (long resumes)
         contact_info = personal_info.get("contact", {})
-        
+
         # If nested structure is empty, try flat structure (short resumes)
         if not contact_info:
             contact_info = {
@@ -160,9 +174,9 @@ class ResumeGenerator:
                 "location": personal_info.get("location", ""),
                 "github": personal_info.get("github", "")
             }
-        
+
         return contact_info
-    
+
     def _parse_date_for_sorting(self, date_string: str) -> tuple:
         """
         Parse a date string and return a tuple for sorting (most recent first).
@@ -174,17 +188,17 @@ class ResumeGenerator:
             Tuple (end_year, start_year) for sorting, with "Present" treated as 9999
         """
         import re
-        
+
         # Handle "Present" as current year (9999 for sorting)
         if "Present" in date_string:
             # Extract start year from "2005 - Present"
             match = re.search(r'(\d{4})', date_string)
             start_year = int(match.group(1)) if match else 0
             return (9999, start_year)
-        
+
         # Extract all 4-digit years from the date string
         years = re.findall(r'\b(\d{4})\b', date_string)
-        
+
         if len(years) >= 2:
             # Assume first year is start, last year is end
             start_year = int(years[0])
@@ -197,7 +211,7 @@ class ResumeGenerator:
         else:
             # No years found, put at bottom
             return (0, 0)
-    
+
     def _sort_experience_chronologically(self, experience: list) -> list:
         """
         Sort experience entries by most recent first.
@@ -213,9 +227,9 @@ class ResumeGenerator:
             end_year, start_year = self._parse_date_for_sorting(dates)
             # Sort by end year descending, then start year descending
             return (-end_year, -start_year)
-        
+
         return sorted(experience, key=sort_key)
-    
+
     def _init_spacing_constants(self):
         """Initialize spacing constants as instance variables"""
         # Spacing system constants (imported from settings)
@@ -225,33 +239,33 @@ class ResumeGenerator:
         self.SPACE_BETWEEN_JOB_COMPONENTS = SPACE_BETWEEN_JOB_COMPONENTS
         self.SPACE_HEADER_TO_CONTENT = SPACE_HEADER_TO_CONTENT
         self.SPACE_SUBHEADER_TO_BULLETS = SPACE_SUBHEADER_TO_BULLETS
-    
-    def _load_json(self, file_path: str) -> Dict[str, Any]:
+
+    def _load_json(self, file_path: str) -> dict[str, Any]:
         """Load JSON data from file"""
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 return json.load(f)
         except Exception as e:
             raise Exception(f"Error loading {file_path}: {e}")
-    
-    def _create_styles(self) -> Dict[str, ParagraphStyle]:
+
+    def _create_styles(self) -> dict[str, ParagraphStyle]:
         """Create paragraph styles based on config with theme-specific fonts"""
         styles = getSampleStyleSheet()
-        
+
         # Get colors from config (color schemes have colors directly, not wrapped in "colors")
         colors = self.config if self.config else {}
-        
+
         # Get color scheme name for font theme selection
         color_scheme = getattr(self, 'color_scheme', 'default_professional')
-        
+
         # Helper function to get theme-specific font with proper bold/italic handling
         def get_font(role, bold=False, italic=False):
             base_font = get_theme_font(color_scheme, role)
-            
+
             # If the theme already specifies bold/italic, use it directly
             if '-Bold' in base_font or '-Oblique' in base_font:
                 return base_font
-            
+
             # Handle font variations for ReportLab
             if bold and italic:
                 return f"{base_font}-BoldOblique"
@@ -261,7 +275,7 @@ class ResumeGenerator:
                 return f"{base_font}-Oblique"
             else:
                 return base_font
-        
+
         custom_styles = {
             "Name": ParagraphStyle(
                 "CustomName",
@@ -293,7 +307,7 @@ class ResumeGenerator:
             # DESIGN SYSTEM: Consistent spacing scale (0.25, 0.5, 1, 2, 4 units)
             # Typography hierarchy: 8, 9, 10, 11, 12, 14pt
             # Color hierarchy: primary, secondary, accent, muted
-            
+
             "SectionHeader": ParagraphStyle(
                 "CustomSectionHeader",
                 parent=styles["Heading2"],
@@ -386,9 +400,9 @@ class ResumeGenerator:
                 fontName=get_font('secondary'),
             ),
         }
-        
+
         return custom_styles
-    
+
     def _get_sections(self):
         """Build all resume sections with headers embedded in content.
 
@@ -611,7 +625,7 @@ class ResumeGenerator:
                 })
 
         return sections
-    
+
     def _create_horizontal_bar(self, color="#2C3E50", height=2):
         """Create a horizontal bar for section separation"""
         table = Table([['']], colWidths=[BAR_WIDTH], rowHeights=[height/72*inch])
@@ -620,52 +634,52 @@ class ResumeGenerator:
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
         ]))
         return table
-    
+
     def _calculate_header_footer_dimensions(self):
         """SYSTEMATIC APPROACH: Calculate header bar position for first page (most content)"""
         # Use the first page header content for spacing calculation since it has the most content
         # This ensures consistent spacing regardless of page type
         personal_info = self.data.get("personal_info", {})
         contact_info = self._get_contact_info(personal_info)
-        
+
         # Find the lowest text line using the same logic as the header function
         # This represents the actual header bar position on the first page
         lowest_line_y = HEADER_TOP_Y  # Start with email line
-        
+
         # Check if phone exists
         phone = contact_info.get("phone", "")
         if phone:
             phone_y = HEADER_TOP_Y - HEADER_PHONE_OFFSET
             lowest_line_y = min(lowest_line_y, phone_y)
-        
+
         # Check if GitHub exists
         github_url = contact_info.get("github", "")
         if github_url:
             github_y = HEADER_TOP_Y - HEADER_GITHUB_OFFSET
             lowest_line_y = min(lowest_line_y, github_y)
-        
+
         # Right side text positions (first page has all elements)
         name_y = HEADER_TOP_Y - HEADER_NAME_OFFSET
         slogan_y = name_y - 12
         austin_y = name_y - 24
-        
+
         lowest_line_y = min(lowest_line_y, name_y, slogan_y, austin_y)
-        
+
         # Header bar position: one line height below lowest text
         header_bar_y = lowest_line_y - FONT_SIZE_9
-        
+
         # Footer bar position: fixed at bottom
         footer_bar_y = FOOTER_BAR_POSITION
-        
+
         # Body content spacing: use proper spacing constant
         # This spacing will be the same for all pages since we use the same Spacer
         body_start_y = header_bar_y - SPACE_HEADER_TO_CONTENT
         body_end_y = footer_bar_y + FONT_SIZE_11
-        
+
         # Calculate margins based on actual positions
         top_margin = PAGE_HEIGHT - body_start_y
         bottom_margin = body_end_y
-        
+
         return {
             'header_bar_y': header_bar_y,
             'footer_bar_y': footer_bar_y,
@@ -679,10 +693,10 @@ class ResumeGenerator:
         """Generate PDF resume using systematic header/footer approach"""
         # SYSTEMATIC APPROACH: Calculate dimensions first
         dimensions = self._calculate_header_footer_dimensions()
-        
-        doc = SimpleDocTemplate(filename, pagesize=letter, 
+
+        doc = SimpleDocTemplate(filename, pagesize=letter,
                               rightMargin=MARGIN_RIGHT, leftMargin=MARGIN_LEFT,
-                              topMargin=dimensions['top_margin'], 
+                              topMargin=dimensions['top_margin'],
                               bottomMargin=dimensions['bottom_margin'],
                               # Optimized quality settings for maximum quality within size limits
                               compress=1,  # Light compression for reasonable file size
@@ -693,98 +707,98 @@ class ResumeGenerator:
                               subject="Professional Resume",
                               keywords="resume, professional, career")
         story = []
-        
+
         # Define sections in order
         sections = self._get_sections()
-        
+
         # No additional spacing needed - topMargin already accounts for proper spacing
         # The dimensions calculation ensures consistent spacing across all pages
-        
+
         # Render sections — headers are embedded in content via KeepTogether
         for section in sections:
             if section["content"]:
                 story.extend(section["content"])
-        
-        
-        
+
+
+
         # Build with custom header and footer using systematic approach
         def add_header(canvas, doc):
             """Add header with dynamic bar positioning for all pages"""
             canvas.saveState()
-            
+
             # High quality rendering settings
             canvas.setLineCap(1)  # Round line caps for smoother lines
             canvas.setLineJoin(1)  # Round line joins for smoother lines
             canvas.setLineWidth(1.0)  # Ensure consistent line width
-            
+
             personal_info = self.data.get("personal_info", {})
             contact_info = self._get_contact_info(personal_info)
-            
+
             # Three-cell layout: Email/Phone (left) | Empty (middle) | Name (right)
             name = personal_info.get("name", "NAME")
             email = contact_info.get("email", "")
             phone = contact_info.get("phone", "").replace(".", "").replace("-", "").replace(" ", "")
-            
+
             # Add US country code to phone if it doesn't have one
             if phone and not phone.startswith("+1") and not phone.startswith("1"):
                 phone = f"+1 {phone}"
             elif phone and phone.startswith("1") and not phone.startswith("+1"):
                 phone = f"+{phone}"
-            
+
             # Left cell: Email and phone stacked vertically
             left_x = HEADER_LEFT_X
             top_y = HEADER_TOP_Y  # Lowered to prevent bleeding off page
-            
+
             # Use the same logic as dimensions calculation for consistency
             # This ensures header bar position matches the spacing calculation
             lowest_line_y = top_y  # Start with email line
-            
+
             if phone:
                 phone_y = top_y - HEADER_PHONE_OFFSET
                 lowest_line_y = min(lowest_line_y, phone_y)
-            
+
             # GitHub link under phone on left side with equal spacing
             github_url = contact_info.get("github", "")
             if github_url:
                 github_y = top_y - HEADER_GITHUB_OFFSET
                 lowest_line_y = min(lowest_line_y, github_y)
-            
+
             # Right side text
             name_y = top_y - HEADER_NAME_OFFSET
             slogan_y = name_y - 12
             austin_y = name_y - 24
-            
+
             lowest_line_y = min(lowest_line_y, name_y, slogan_y, austin_y)
-            
+
             # Get colors from config for better visual hierarchy
             primary_color = self.config.get("ACCENT_COLOR", "#4682B4")
-            secondary_color = self.config.get("COMPANY_COLOR", "#2C3E50") 
+            secondary_color = self.config.get("COMPANY_COLOR", "#2C3E50")
             text_color = self.config.get("DARK_TEXT_COLOR", "#2C3E50")
             muted_color = self.config.get("MEDIUM_TEXT_COLOR", "#666666")
             link_color = self.config.get("LINK_COLOR", "#4682B4")
-            
+
             # LEFT SIDE: Email and Phone (primary accent color)
             if email:
                 canvas.setFont("Helvetica", FONT_SIZE_11)
                 canvas.setFillColor(HexColor(primary_color))
                 canvas.drawString(left_x, top_y, email)
-            
+
             if phone:
                 canvas.setFont("Helvetica", FONT_SIZE_11)
                 canvas.setFillColor(HexColor(primary_color))
                 canvas.drawString(left_x, phone_y, phone)
-            
+
             # RIGHT SIDE: Name (bigger, aligned with email/phone)
             canvas.setFont("Helvetica-Bold", FONT_SIZE_14)  # Bigger name
             canvas.setFillColor(HexColor(text_color))
             canvas.drawRightString(PAGE_RIGHT_MARGIN, top_y, name)  # Aligned with email
-            
+
             # Slogan (smaller, between name and coordinates)
             canvas.setFont("Helvetica", FONT_SIZE_9)
             canvas.setFillColor(HexColor(muted_color))
             slogan = personal_info.get("slogan", "")
             canvas.drawRightString(PAGE_RIGHT_MARGIN, top_y - 14, slogan)
-            
+
             # GitHub (aligned with coordinates, different color)
             if github_url:
                 canvas.setFont("Helvetica", FONT_SIZE_9)
@@ -792,16 +806,16 @@ class ResumeGenerator:
                 canvas.setFillColor(HexColor(secondary_color))
                 canvas.drawString(left_x, austin_y, "GitHub: ")
                 github_label_width = canvas.stringWidth("GitHub: ", "Helvetica", FONT_SIZE_9)
-                
+
                 # Link in different color
                 canvas.setFillColor(HexColor(link_color))
                 github_text = github_url.replace('https://', '').replace('http://', '')
                 github_x = left_x + github_label_width
                 # Create clickable link
-                canvas.linkURL(github_url, 
+                canvas.linkURL(github_url,
                              (github_x, austin_y - 2, github_x + canvas.stringWidth(github_text, "Helvetica", FONT_SIZE_9), austin_y + 10))
                 canvas.drawString(github_x, austin_y, github_text)
-            
+
             # Austin, TX with coordinates (aligned with GitHub)
             canvas.setFont("Helvetica", FONT_SIZE_9)
             canvas.setFillColor(HexColor(muted_color))
@@ -809,105 +823,105 @@ class ResumeGenerator:
             austin_width = canvas.stringWidth(austin_text, "Helvetica", FONT_SIZE_9)
             austin_x = PAGE_RIGHT_MARGIN - austin_width
             # Create clickable link to OpenStreetMap
-            canvas.linkURL("https://www.openstreetmap.org/?mlat=30.2672&mlon=-97.7431&zoom=12", 
+            canvas.linkURL("https://www.openstreetmap.org/?mlat=30.2672&mlon=-97.7431&zoom=12",
                          (austin_x, austin_y - 2, PAGE_RIGHT_MARGIN, austin_y + 10))
             canvas.drawRightString(PAGE_RIGHT_MARGIN, austin_y, austin_text)
-            
+
             # Add horizontal bar separator - simple: one line height below lowest text
             bar_y = lowest_line_y - FONT_SIZE_9  # One line height below lowest text
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(BAR_LINE_WIDTH)
             canvas.line(PAGE_LEFT_MARGIN, bar_y, PAGE_RIGHT_MARGIN, bar_y)
-            
+
             canvas.restoreState()
             add_footer(canvas, doc)
-        
-        
+
+
         def add_footer(canvas, doc):
             """Add footer with two-cell structure and dynamic bar positioning"""
             canvas.saveState()
-            
+
             # High quality rendering settings
             canvas.setLineCap(1)  # Round line caps for smoother lines
             canvas.setLineJoin(1)  # Round line joins for smoother lines
             canvas.setLineWidth(1.0)  # Ensure consistent line width
-            
+
             personal_info = self.data.get("personal_info", {})
             contact_info = self._get_contact_info(personal_info)
-            
+
             canvas.setFont("Helvetica", FONT_SIZE_8)
             footer_y = FOOTER_Y
-            
+
             # Calculate where the bar should go BEFORE drawing any text
             # Bar should be 8 points above the footer text
             bar_y = footer_y + 8
-            
+
             # Draw the bar FIRST (above the text)
             canvas.setStrokeColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
             canvas.setLineWidth(BAR_LINE_WIDTH_FOOTER)
             canvas.line(PAGE_LEFT_MARGIN, bar_y, PAGE_RIGHT_MARGIN, bar_y)
-            
+
             # Two-cell footer structure
             website_url = contact_info.get("website", "")
             linkedin_url = contact_info.get("linkedin", "")
-            
+
             # Left cell: Site and LinkedIn with pipe separator
             if website_url or linkedin_url:
                 current_x = PAGE_LEFT_MARGIN
-                
+
                 # Draw labels in accent color, links in different color
                 if website_url:
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "Site: ")
                     current_x += canvas.stringWidth("Site: ", "Helvetica", FONT_SIZE_8)
-                    
+
                     # Link in different color (use medium text color for contrast)
                     canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(website_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(website_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, website_url)
                     current_x += canvas.stringWidth(website_url, "Helvetica", FONT_SIZE_8)
-                
+
                 if linkedin_url:
                     # Pipe separator
                     if website_url:
                         canvas.setFillColor(HexColor("#666666"))
                         canvas.drawString(current_x, footer_y, " | ")
                         current_x += canvas.stringWidth(" | ", "Helvetica", FONT_SIZE_8)
-                    
+
                     # Label in accent color
                     canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
                     canvas.drawString(current_x, footer_y, "LinkedIn: ")
                     current_x += canvas.stringWidth("LinkedIn: ", "Helvetica", FONT_SIZE_8)
-                    
+
                     # Link in different color (use medium text color for contrast)
                     canvas.setFillColor(HexColor(self.config.get("MEDIUM_TEXT_COLOR", "#666666")))
                     canvas.linkURL(linkedin_url, (current_x, footer_y - FOOTER_LINK_OFFSET, current_x + len(linkedin_url)*FOOTER_LINK_OFFSET, footer_y + FOOTER_LINK_OFFSET*2))
                     canvas.drawString(current_x, footer_y, linkedin_url)
-            
+
             # Right cell: Page number
             canvas.setFillColor(HexColor(self.config.get("ACCENT_COLOR", "#4682B4")))
             page_num = canvas.getPageNumber()
             canvas.drawRightString(PAGE_RIGHT_MARGIN, footer_y, f"Page {page_num}")
-            
+
             canvas.restoreState()
-        
+
         doc.build(story, onFirstPage=add_header, onLaterPages=add_header)
         return filename
-    
+
     def _process_docx_highlights(self, doc, text):
         """Process DOCX metric highlighting markers and apply formatting"""
         if "**METRIC_HIGHLIGHT_START**" not in text:
             return doc.add_paragraph(text)
-        
+
         # Split text by highlighting markers
         parts = text.split("**METRIC_HIGHLIGHT_START**")
         p = doc.add_paragraph()
-        
+
         # Add first part (before any highlights)
         if parts[0]:
             p.add_run(parts[0])
-        
+
         # Process highlighted parts
         for part in parts[1:]:
             if "**METRIC_HIGHLIGHT_END**" in part:
@@ -926,13 +940,13 @@ class ResumeGenerator:
                     p.add_run(remaining)
             else:
                 p.add_run(part)
-        
+
         return p
 
     def generate_docx(self, filename: str) -> str:
         """Generate DOCX resume with high quality settings"""
         doc = Document()
-        
+
         # High quality DOCX settings
         doc.core_properties.title = f"Resume - {self.data.get('personal_info', {}).get('name', 'Professional')}"
         doc.core_properties.author = self.data.get('personal_info', {}).get('name', 'Professional')
@@ -940,18 +954,18 @@ class ResumeGenerator:
         doc.core_properties.subject = "Professional Resume"
         doc.core_properties.keywords = "resume, professional, career"
         doc.core_properties.comments = "Generated by Resume Generator Pro"
-        
+
         # Personal info
         personal_info = self.data.get("personal_info", {})
         contact_info = self._get_contact_info(personal_info)
-        
+
         # Name
         name_para = doc.add_paragraph()
         name_run = name_para.add_run(personal_info.get("name", "NAME"))
         name_run.font.size = Inches(0.2)  # Keep this as it's a reasonable size for DOCX
         name_run.font.bold = True
         name_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        
+
         # Contact info
         contact_parts = []
         if contact_info.get("phone"):
@@ -964,17 +978,17 @@ class ResumeGenerator:
             contact_parts.append(contact_info["linkedin"])
         if contact_info.get("location"):
             contact_parts.append(contact_info["location"])
-        
+
         if contact_parts:
             contact_para = doc.add_paragraph(" | ".join(contact_parts))
             contact_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        
+
         # Summary
         summary = self.data.get("summary", "")
         if summary:
             doc.add_heading("PROFESSIONAL SUMMARY", level=2)
             doc.add_paragraph(summary)
-        
+
         # CORE COMPETENCIES - Horizontal bullet format
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -982,12 +996,12 @@ class ResumeGenerator:
             for main_category, sub_skills in competencies.items():
                 if isinstance(sub_skills, list):
                     competency_categories.append(main_category)
-            
+
             # Single line with bullet separators
             competency_text = " • ".join(competency_categories)
             doc.add_heading("CORE COMPETENCIES", level=2)
             doc.add_paragraph(competency_text)
-        
+
         # Experience
         experience = self.data.get("experience", [])
         if experience:
@@ -999,7 +1013,7 @@ class ResumeGenerator:
                 company = job.get("company", "")
                 location = job.get("location", "")
                 dates = job.get("dates", "")
-                
+
                 title_line = f"{job_title}"
                 if company:
                     title_line += f" - {company}"
@@ -1007,17 +1021,17 @@ class ResumeGenerator:
                     title_line += f" ({location})"
                 if dates:
                     title_line += f" | {dates}"
-                
+
                 doc.add_heading(title_line, level=3)
-                
+
                 if job.get("subtitle"):
                     doc.add_paragraph(job["subtitle"])
-                
+
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
                     highlighted_resp = highlight_quantitative_metrics(resp, "docx")
                     self._process_docx_highlights(doc, f"• {highlighted_resp}")
-        
+
         # Projects
         projects = self.data.get("projects", [])
         if projects:
@@ -1028,22 +1042,22 @@ class ResumeGenerator:
                 description = project.get("description", "")
                 technologies = project.get("technologies", [])
                 impact = project.get("impact", "")
-                
+
                 title_line = project_name
                 if dates:
                     title_line += f" ({dates})"
-                
+
                 doc.add_heading(title_line, level=3)
-                
+
                 if description:
                     doc.add_paragraph(description)
-                
+
                 if technologies:
                     doc.add_paragraph(f"Technologies: {', '.join(technologies)}")
-                
+
                 if impact:
                     doc.add_paragraph(f"Impact: {impact}")
-        
+
         # Education
         education = self.data.get("education", [])
         if education:
@@ -1055,7 +1069,7 @@ class ResumeGenerator:
                 dates = edu.get("dates", "")
                 gpa = edu.get("gpa", "")
                 honors = edu.get("honors", "")
-                
+
                 title_line = degree
                 if institution:
                     title_line += f" - {institution}"
@@ -1063,15 +1077,15 @@ class ResumeGenerator:
                     title_line += f" ({location})"
                 if dates:
                     title_line += f" | {dates}"
-                
+
                 doc.add_heading(title_line, level=3)
-                
+
                 if gpa:
                     doc.add_paragraph(f"GPA: {gpa}")
-                
+
                 if honors:
                     doc.add_paragraph(f"Honors: {honors}")
-        
+
         # Achievements
         achievements = self.data.get("achievements", {})
         if achievements:
@@ -1082,7 +1096,7 @@ class ResumeGenerator:
                     for achievement in achievement_list:
                         highlighted_achievement = highlight_quantitative_metrics(achievement, "docx")
                         self._process_docx_highlights(doc, f"• {highlighted_achievement}")
-        
+
         # Technical Skills (moved to end like Deepak)
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -1092,26 +1106,26 @@ class ResumeGenerator:
                     # Technical skills - format as Deepak does with specific technologies
                     skill_text = "; ".join([skill.split(": ")[0] if ": " in skill else skill for skill in sub_skills])
                     doc.add_paragraph(f"{main_category.upper()} {skill_text}")
-        
+
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
             doc.add_paragraph(additional_info)
-        
+
         doc.save(filename)
         return filename
-    
+
     def generate_rtf(self, filename: str) -> str:
         """Generate RTF resume"""
         # RTF is a text format, so we'll create a simple text version
         content = []
-        
+
         # Personal info
         personal_info = self.data.get("personal_info", {})
         contact_info = self._get_contact_info(personal_info)
         content.append(f"\\b {personal_info.get('name', 'NAME')}\\b0")
         content.append("")
-        
+
         # Contact info
         contact_parts = []
         if contact_info.get("phone"):
@@ -1124,19 +1138,19 @@ class ResumeGenerator:
             contact_parts.append(contact_info["linkedin"])
         if contact_info.get("location"):
             contact_parts.append(contact_info["location"])
-        
+
         if contact_parts:
             content.append(" | ".join(contact_parts))
-        
+
         content.append("")
-        
+
         # Summary
         summary = self.data.get("summary", "")
         if summary:
             content.append("\\b PROFESSIONAL SUMMARY\\b0")
             content.append(summary)
             content.append("")
-        
+
         # Achievements (moved to top)
         achievements = self.data.get("achievements", {})
         if achievements:
@@ -1149,7 +1163,7 @@ class ResumeGenerator:
                         content.append(f"• {highlighted_achievement}")
                     content.append("")
             content.append("")
-        
+
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
@@ -1159,7 +1173,7 @@ class ResumeGenerator:
             else:
                 content.append(additional_info)
             content.append("")
-        
+
         # CORE COMPETENCIES - Space-efficient skills section
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -1168,7 +1182,7 @@ class ResumeGenerator:
                 if isinstance(skills, list):
                     content.append(f"• {category}")
             content.append("")
-            
+
             content.append("\\b TECHNICAL SKILLS\\b0")
             for category, skills in competencies.items():
                 if isinstance(skills, list):
@@ -1183,7 +1197,7 @@ class ResumeGenerator:
                                 skill_name = skill.split(": ")[0] if ": " in skill else skill
                                 content.append(f"• {skill_name}")
             content.append("")
-        
+
         # Experience
         experience = self.data.get("experience", [])
         if experience:
@@ -1195,7 +1209,7 @@ class ResumeGenerator:
                 company = job.get("company", "")
                 location = job.get("location", "")
                 dates = job.get("dates", "")
-                
+
                 title_line = f"{job_title}"
                 if company:
                     title_line += f" - {company}"
@@ -1203,19 +1217,19 @@ class ResumeGenerator:
                     title_line += f" ({location})"
                 if dates:
                     title_line += f" | {dates}"
-                
+
                 content.append(f"\\b {title_line}\\b0")
-                
+
                 if job.get("subtitle"):
                     content.append(job["subtitle"])
-                
+
                 responsibilities = job.get("responsibilities", [])
                 for resp in responsibilities:
                     highlighted_resp = highlight_quantitative_metrics(resp, "rtf")
                     content.append(f"• {highlighted_resp}")
-                
+
                 content.append("")
-        
+
         # Projects
         projects = self.data.get("projects", [])
         if projects:
@@ -1226,24 +1240,24 @@ class ResumeGenerator:
                 description = project.get("description", "")
                 technologies = project.get("technologies", [])
                 impact = project.get("impact", "")
-                
+
                 title_line = project_name
                 if dates:
                     title_line += f" ({dates})"
-                
+
                 content.append(f"\\b {title_line}\\b0")
-                
+
                 if description:
                     content.append(description)
-                
+
                 if technologies:
                     content.append(f"Technologies: {', '.join(technologies)}")
-                
+
                 if impact:
                     content.append(f"Impact: {impact}")
-                
+
                 content.append("")
-        
+
         # Education
         education = self.data.get("education", [])
         if education:
@@ -1255,7 +1269,7 @@ class ResumeGenerator:
                 dates = edu.get("dates", "")
                 gpa = edu.get("gpa", "")
                 honors = edu.get("honors", "")
-                
+
                 title_line = degree
                 if institution:
                     title_line += f" - {institution}"
@@ -1263,36 +1277,36 @@ class ResumeGenerator:
                     title_line += f" ({location})"
                 if dates:
                     title_line += f" | {dates}"
-                
+
                 content.append(f"\\b {title_line}\\b0")
-                
+
                 if gpa:
                     content.append(f"GPA: {gpa}")
-                
+
                 if honors:
                     content.append(f"Honors: {honors}")
-                
+
                 content.append("")
-        
-        
+
+
         # Write RTF file
         rtf_content = "{\\rtf1\\ansi\\deff0\\par " + "\\par ".join(content) + "\\par }"
-        
+
         with open(filename, "w", encoding="utf-8") as f:
             f.write(rtf_content)
-        
+
         return filename
-    
+
     def generate_markdown(self, filename: str) -> str:
         """Generate Markdown resume"""
         content = []
-        
+
         # Personal info
         personal_info = self.data.get("personal_info", {})
         contact_info = self._get_contact_info(personal_info)
         content.append(f"# {personal_info.get('name', 'NAME')}")
         content.append("")
-        
+
         # Contact information
         contact_parts = []
         if contact_info.get('phone'):
@@ -1305,11 +1319,11 @@ class ResumeGenerator:
             contact_parts.append(f"**LinkedIn:** {contact_info['linkedin']}")
         if contact_info.get('location'):
             contact_parts.append(f"**Location:** {contact_info['location']}")
-        
+
         if contact_parts:
             content.append(" | ".join(contact_parts))
             content.append("")
-        
+
         # Summary
         summary = self.data.get("summary", "")
         if summary:
@@ -1317,7 +1331,7 @@ class ResumeGenerator:
             content.append("")
             content.append(summary)
             content.append("")
-        
+
         # Achievements (moved to top)
         achievements = self.data.get("achievements", {})
         if achievements:
@@ -1330,7 +1344,7 @@ class ResumeGenerator:
                         highlighted_achievement = highlight_quantitative_metrics(achievement, "md")
                         content.append(f"- {highlighted_achievement}")
                 content.append("")
-        
+
         # Additional info for abbreviated versions
         additional_info = self.data.get("additional_info", "")
         if additional_info:
@@ -1340,7 +1354,7 @@ class ResumeGenerator:
             else:
                 content.append(additional_info)
             content.append("")
-        
+
         # CORE COMPETENCIES - Space-efficient skills section
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -1350,7 +1364,7 @@ class ResumeGenerator:
                 if isinstance(skills, list):
                     content.append(f"• **{category}**")
             content.append("")
-        
+
         # Experience (enhanced formatting with visual hierarchy)
         experience = self.data.get("experience", [])
         if experience:
@@ -1361,7 +1375,7 @@ class ResumeGenerator:
             for job in experience:
                 # Job title: ### header (like primary color)
                 content.append(f"### {job.get('title', '')}")
-                
+
                 # Company info: **bold** (like accent color)
                 company_info = job.get('company', '')
                 if job.get('location'):
@@ -1370,12 +1384,12 @@ class ResumeGenerator:
                     company_info += f" | {job['dates']}"
                 content.append(f"**{company_info}**")
                 content.append("")
-                
+
                 # Subtitle: *italics* (like muted color)
                 if job.get('subtitle'):
                     content.append(f"*{job['subtitle']}*")
                     content.append("")
-                
+
                 # Responsibilities - clean formatting without tech term highlighting
                 responsibilities = job.get('responsibilities', [])
                 if responsibilities:
@@ -1383,7 +1397,7 @@ class ResumeGenerator:
                         highlighted_resp = highlight_quantitative_metrics(resp, "md")
                         content.append(f"- {highlighted_resp}")
                 content.append("")
-        
+
         # Projects
         projects = self.data.get("projects", [])
         if projects:
@@ -1402,7 +1416,7 @@ class ResumeGenerator:
                 if project.get('impact'):
                     content.append(f"**Impact:** {project['impact']}")
                 content.append("")
-        
+
         # Education
         education = self.data.get("education", [])
         if education:
@@ -1421,8 +1435,8 @@ class ResumeGenerator:
                 if edu.get('honors'):
                     content.append(f"**Honors:** {edu['honors']}")
                 content.append("")
-        
-        
+
+
         # Technical Skills (moved here from after file write)
         competencies = self.data.get("competencies", {})
         if competencies:
@@ -1435,33 +1449,33 @@ class ResumeGenerator:
                         if isinstance(skill, str):
                             content.append(f"• **{skill}**")
             content.append("")
-        
+
         # Footer with contact information
         content.append("---")
         content.append("")
-        
+
         # Add footer contact info similar to PDF footer
         personal_info = self.data.get("personal_info", {})
         contact_info = self._get_contact_info(personal_info)
         footer_parts = []
-        
+
         if contact_info.get("website"):
             footer_parts.append(f"**Website:** {contact_info['website']}")
         if contact_info.get("linkedin"):
             footer_parts.append(f"**LinkedIn:** {contact_info['linkedin']}")
-            
+
         if footer_parts:
             content.append(" | ".join(footer_parts))
-        
+
         with open(filename, "w", encoding="utf-8") as f:
             f.write("\n".join(content))
-        
+
         return filename
 
 
 class ResumeManager:
     """Manages resume generation with color schemes and formats"""
-    
+
     def __init__(self):
         self.versions = {
             "comprehensive": "dheeraj_chand_comprehensive_full",
@@ -1473,17 +1487,17 @@ class ResumeManager:
             "software_engineering": "dheeraj_chand_software_engineering",
             "gis": "dheeraj_chand_gis"
         }
-        
+
         # Length variants for each version
         self.length_variants = {
             "long": "full",
             "short": "abbreviated",
             "brief": "brief"
         }
-        
+
         self.color_schemes = [
             "default_professional",
-            "corporate_blue", 
+            "corporate_blue",
             "modern_tech",
             "modern_clean",
             "satellite_imagery",
@@ -1491,17 +1505,17 @@ class ResumeManager:
             "cartographic_professional",
             "topographic_classic"
         ]
-        
+
         self.formats = ["pdf", "docx", "rtf", "md"]
-    
+
     def generate_single_resume(self, version: str, color_scheme: str, format_type: str, output_dir: str = "outputs", length_variant: str = "long", output_type: str = "ats") -> bool:
         """Generate a single resume with specified parameters"""
         if version not in self.versions:
             return False
-        
+
         if length_variant not in self.length_variants:
             return False
-        
+
         # Determine input directory based on length variant and output type
         input_basename = self.versions[version]
         if output_type == "human":
@@ -1510,18 +1524,18 @@ class ResumeManager:
             input_basename += "_abbreviated"
         elif length_variant == "brief":
             input_basename += "_brief"
-        
+
         input_dir = Path("inputs") / input_basename
-        
+
         if not input_dir.exists():
             return False
-        
+
         data_file = input_dir / "resume_data.json"
         config_file = input_dir / "config.json"
-        
+
         if not data_file.exists():
             return False
-        
+
         try:
             # Load color scheme
             color_scheme_file = Path("color_schemes") / f"{color_scheme}.json"
@@ -1529,15 +1543,15 @@ class ResumeManager:
                 generator = ResumeGenerator(str(data_file), str(color_scheme_file), color_scheme, length_variant, output_type)
             else:
                 generator = ResumeGenerator(str(data_file), str(config_file) if config_file.exists() else None, color_scheme, length_variant, output_type)
-            
+
             # Create output directory using the correct structure: output_type/version/length/color_scheme/format
             base_output_dir = Path(output_dir) / output_type
             output_path = base_output_dir / version / length_variant / color_scheme / format_type
             output_path.mkdir(parents=True, exist_ok=True)
-            
+
             # Generate file
             filename = output_path / f"dheeraj_chand_{version}_{length_variant}_{color_scheme}.{format_type}"
-            
+
             if format_type == "pdf":
                 generator.generate_pdf(str(filename))
             elif format_type == "docx":
@@ -1548,9 +1562,9 @@ class ResumeManager:
                 generator.generate_markdown(str(filename))
             else:
                 return False
-            
+
             return True
-            
+
         except FileNotFoundError as e:
             print(f"ERROR: Input file not found for {version} {color_scheme} {format_type}: {e}")
             return False
@@ -1564,11 +1578,11 @@ class ResumeManager:
             print(f"ERROR: Unexpected error generating {version} {color_scheme} {format_type}: {e}")
             print(f"ERROR: Exception type: {type(e).__name__}")
             return False
-    
-    def generate_all_combinations(self, output_dir: str = "outputs", output_type: str = "ats") -> Dict[str, int]:
+
+    def generate_all_combinations(self, output_dir: str = "outputs", output_type: str = "ats") -> dict[str, int]:
         """Generate all combinations of versions, lengths, color schemes, and formats"""
         results = {"success": 0, "failed": 0}
-        
+
         for version in self.versions:
             for length_variant in self.length_variants:
                 for color_scheme in self.color_schemes:
@@ -1577,5 +1591,5 @@ class ResumeManager:
                             results["success"] += 1
                         else:
                             results["failed"] += 1
-        
+
         return results

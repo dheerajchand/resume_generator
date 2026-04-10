@@ -3,16 +3,25 @@ Cache invalidation signals — clear cached resume data when content changes.
 """
 
 import logging
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
+
 from django.core.cache import cache
+from django.db.models.signals import post_delete, post_save
 
 from .models import (
-    PersonalInfo, Position, Responsibility, Achievement,
-    Project, ProjectTechnology, SkillCategory, Skill,
-    ResumeArchetype, ProfessionalSummary,
-    ResumeArchetypePosition, ResumeArchetypeAchievement,
-    ResumeArchetypeProject, ResumeArchetypeSkillCategory,
+    Achievement,
+    PersonalInfo,
+    Position,
+    ProfessionalSummary,
+    Project,
+    ProjectTechnology,
+    Responsibility,
+    ResumeArchetype,
+    ResumeArchetypeAchievement,
+    ResumeArchetypePosition,
+    ResumeArchetypeProject,
+    ResumeArchetypeSkillCategory,
+    Skill,
+    SkillCategory,
 )
 
 logger = logging.getLogger(__name__)

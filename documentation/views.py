@@ -4,10 +4,10 @@ Documentation Views
 Serves documentation pages as static web pages
 """
 
-from django.shortcuts import render
-from django.http import Http404
 from pathlib import Path
-import os
+
+from django.http import Http404
+from django.shortcuts import render
 
 
 def docs_index(request):
@@ -103,7 +103,7 @@ def docs_index(request):
 
 def docs_page(request, page_name):
     """Serve individual documentation pages"""
-    
+
     # Map page names to file names
     page_mapping = {
         'getting-started': 'getting-started.md',
@@ -118,24 +118,24 @@ def docs_page(request, page_name):
         'examples': 'examples.md',
         'complete-summary': 'COMPLETE_DOCUMENTATION_SUMMARY.md'
     }
-    
+
     if page_name not in page_mapping:
         raise Http404("Documentation page not found")
-    
+
     # Get the markdown file path
     docs_dir = Path(__file__).parent.parent / 'docs'
     md_file = docs_dir / page_mapping[page_name]
-    
+
     if not md_file.exists():
         raise Http404("Documentation file not found")
-    
+
     # Read the markdown content
     try:
-        with open(md_file, 'r', encoding='utf-8') as f:
+        with open(md_file, encoding='utf-8') as f:
             content = f.read()
     except Exception as e:
         raise Http404(f"Error reading documentation: {e}")
-    
+
     # Get page metadata
     page_metadata = {
         'getting-started': {
@@ -194,13 +194,13 @@ def docs_page(request, page_name):
             'icon': '📚'
         }
     }
-    
+
     metadata = page_metadata.get(page_name, {
         'title': page_name.replace('-', ' ').title(),
         'description': 'Documentation page',
         'icon': '📄'
     })
-    
+
     context = {
         'title': metadata['title'],
         'description': metadata['description'],
@@ -208,55 +208,55 @@ def docs_page(request, page_name):
         'content': content,
         'page_name': page_name
     }
-    
+
     return render(request, 'documentation/page.html', context)
 
 
 def docs_search(request):
     """Search documentation pages"""
     query = request.GET.get('q', '').strip()
-    
+
     if not query:
         return render(request, 'documentation/search.html', {
             'title': 'Search Documentation',
             'query': '',
             'results': []
         })
-    
+
     # Search through documentation files
     docs_dir = Path(__file__).parent.parent / 'docs'
     results = []
-    
+
     for md_file in docs_dir.glob('*.md'):
         try:
-            with open(md_file, 'r', encoding='utf-8') as f:
+            with open(md_file, encoding='utf-8') as f:
                 content = f.read()
-                
+
             # Simple search (case-insensitive)
             if query.lower() in content.lower():
                 # Get first few lines as preview
                 lines = content.split('\n')[:5]
                 preview = ' '.join(lines).strip()[:200] + '...' if len(' '.join(lines)) > 200 else ' '.join(lines)
-                
+
                 # Map filename to page name
                 page_name = md_file.stem.replace('_', '-').lower()
                 if page_name == 'complete-documentation-summary':
                     page_name = 'complete-summary'
-                
+
                 results.append({
                     'title': md_file.stem.replace('_', ' ').title(),
                     'preview': preview,
                     'url': f'/docs/{page_name}/',
                     'filename': md_file.name
                 })
-                
-        except Exception as e:
+
+        except Exception:
             continue
-    
+
     context = {
         'title': 'Search Documentation',
         'query': query,
         'results': results
     }
-    
+
     return render(request, 'documentation/search.html', context)

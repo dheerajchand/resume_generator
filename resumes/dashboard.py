@@ -3,16 +3,16 @@ Grappelli dashboard configuration for Resume Generator Admin
 """
 
 from django.utils.translation import ugettext_lazy as _
-from grappelli.dashboard import modules, Dashboard
-from grappelli.dashboard.modules import ModelList, LinkList, RecentActions
+from grappelli.dashboard import Dashboard, modules
+from grappelli.dashboard.modules import ModelList
 
 
 class CustomIndexDashboard(Dashboard):
     """Custom dashboard for Resume Generator Admin"""
-    
+
     def init_with_context(self, context):
         """Initialize dashboard with context"""
-        
+
         # User Management
         self.children.append(modules.Group(
             _('User Management'),
@@ -31,7 +31,7 @@ class CustomIndexDashboard(Dashboard):
                 ),
             ]
         ))
-        
+
         # Resume Management
         self.children.append(modules.Group(
             _('Resume Management'),
@@ -50,7 +50,7 @@ class CustomIndexDashboard(Dashboard):
                 ),
             ]
         ))
-        
+
         # Content Management
         self.children.append(modules.Group(
             _('Content Management'),
@@ -79,7 +79,7 @@ class CustomIndexDashboard(Dashboard):
                 ),
             ]
         ))
-        
+
         # Quick Actions
         self.children.append(modules.LinkList(
             _('Quick Actions'),
@@ -102,7 +102,7 @@ class CustomIndexDashboard(Dashboard):
                 },
             ]
         ))
-        
+
         # Recent Actions
         self.children.append(modules.RecentActions(
             _('Recent Actions'),
@@ -110,7 +110,7 @@ class CustomIndexDashboard(Dashboard):
             collapsible=False,
             column=2,
         ))
-        
+
         # System Information
         self.children.append(modules.LinkList(
             _('System Information'),
