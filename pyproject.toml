@@ -1,10 +1,9 @@
 [project]
 name = "resume-generator"
 version = "0.1.0"
-description = "Add your description here"
+description = "Professional identity system with on-demand resume generation"
 requires-python = ">=3.11"
 dependencies = [
-    "black>=23.0.0",
     "colorthief>=0.2.1",
     "dj-database-url>=2.0.0",
     "django>=4.2.0",
@@ -12,12 +11,48 @@ dependencies = [
     "django-grappelli>=4.0.2",
     "djangorestframework>=3.14.0",
     "gunicorn>=20.1.0",
-    "mypy>=1.0.0",
     "pillow>=9.0.0",
+    "psycopg2-binary>=2.9.0",
     "pydantic>=2.0.0",
+    "pymupdf>=1.23.0",
     "pytest>=7.0.0",
     "pytest-cov>=4.0.0",
     "python-docx>=0.8.11",
     "reportlab>=3.6.0",
+    "resend>=2.0.0",
+    "ruff>=0.4.0",
+    "vulture>=2.10",
     "whitenoise>=6.0.0",
 ]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+ignore = [
+    "E501",   # Line too long — handled by formatter
+    "B905",   # zip without strict
+    "SIM108", # Ternary operator — readability preference
+]
+
+[tool.ruff.lint.per-file-ignores]
+"resumes/models.py" = ["F401"]  # Unused imports in legacy models
+"resumes/views.py" = ["F401"]   # Unused imports from legacy models
+"*/migrations/*.py" = ["E501", "F401"]  # Auto-generated migrations
+"resumes/core_services.py" = ["W293", "B007", "E722", "SIM116", "B904"]  # PDF engine — legacy code, careful changes only
+"resumes/core_services_minimal.py" = ["W293", "B007", "B904"]  # Backup PDF engine
+"resumes/tests.py" = ["F403"]  # Star imports for test discovery
+"resumes/test_api.py" = ["F841"]  # Test setup variables
+"resumes/test_models.py" = ["F841"]  # Test setup variables
+"resumes/test_services.py" = ["SIM115"]  # Legacy test style
+"resume_generator_django/settings_production.py" = ["F403", "F405"]  # Star import from base settings
+"deploy_heroku.py" = ["SIM102"]  # Deploy script — not critical
+"documentation/views.py" = ["B904"]  # Legacy documentation app
+"master_resume_generator.py" = ["SIM102"]  # Sentence splitting logic — nested ifs are clearer
+"resumes/management/commands/*.py" = ["B904", "F841"]  # Legacy management commands
+"resume_generator_django/resume_generator/constants.py" = ["W293"]  # Constants file — whitespace only
+
+[tool.ruff.format]
+quote-style = "double"

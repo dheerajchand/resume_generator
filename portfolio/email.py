@@ -2,9 +2,8 @@
 Email sending via Resend — send resumes to recipients with template support.
 """
 
-import os
-import io
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 

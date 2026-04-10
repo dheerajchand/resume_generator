@@ -9,24 +9,25 @@ then derives specialized resume types by selecting and emphasizing relevant cont
 import json
 from pathlib import Path
 
+
 # Load the comprehensive master achievements
 def load_master_achievements():
     """Load the comprehensive master achievements file"""
-    with open('comprehensive_master_achievements.json', 'r', encoding='utf-8') as f:
+    with open('comprehensive_master_achievements.json', encoding='utf-8') as f:
         return json.load(f)
 
 def load_resume_type_definitions():
     """Load the resume type configuration definitions"""
-    with open('resume_type_definitions.json', 'r', encoding='utf-8') as f:
+    with open('resume_type_definitions.json', encoding='utf-8') as f:
         return json.load(f)
 
 def create_specialized_resume(master_data, resume_type, output_type="ats"):
     """Create a specialized resume from master data using configuration-driven inheritance"""
-    
+
     master = master_data["comprehensive_master_achievements"]
     type_definitions = load_resume_type_definitions()
     config = type_definitions["resume_type_configurations"].get(resume_type, type_definitions["resume_type_configurations"]["comprehensive"])
-    
+
     # INHERIT EVERYTHING from master (like abstract class inheritance)
     resume = {
         "personal_info": master["personal_info"],
@@ -38,20 +39,20 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
         "education": [],  # Keep empty as requested
         "additional_info": ""
     }
-    
+
     # OVERRIDE: Select summary from master using configuration
     summary_key = config["summary_key"]
     if summary_key in master["professional_summary"]:
         resume["summary"] = master["professional_summary"][summary_key]
     else:
         resume["summary"] = master["professional_summary"]["comprehensive"]
-    
+
     # REFINE: Build achievements from master using configuration
     achievement_config = config["achievements"]
     # Use curated key achievements from master file
     key_achievements = master["key_achievements"]
     selected_achievements = []
-    
+
     for achievement_key in achievement_config["include_achievements"]:
         if achievement_key in key_achievements:
             # Split pipe-delimited achievements into separate bullet points
@@ -62,14 +63,14 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
                 selected_achievements.extend(parts)
             else:
                 selected_achievements.append(achievement_text)
-    
+
     # Apply total_max limit after processing all achievements
     resume["achievements"] = {"Impact": selected_achievements[:achievement_config["total_max"]]}
-    
+
     # REFINE: Build work experience from master using configuration
     work_exp = master["work_experience"]
     experience_config = config["experience"]
-    
+
     # Build positions from master data using configuration (everything traceable to master)
     resume["experience"] = []
     for position_key in experience_config["include_positions"]:
@@ -79,16 +80,16 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
                 max_resp = experience_config.get("siege_analytics_max", 10)
             else:
                 max_resp = experience_config["max_responsibilities_per_job"]
-                
+
             # Use neutral language for non-electoral resume types
             is_electoral_resume = resume_type in ["polling_research_redistricting"]
-            
+
             if is_electoral_resume:
                 responsibilities_key = "comprehensive_responsibilities"
             else:
                 # Use neutral version if available, otherwise fall back to comprehensive
                 responsibilities_key = "comprehensive_responsibilities_neutral" if "comprehensive_responsibilities_neutral" in work_exp[position_key] else "comprehensive_responsibilities"
-            
+
             position = {
                 "title": work_exp[position_key]["title"],
                 "company": work_exp[position_key]["company"],
@@ -98,11 +99,11 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
                 "responsibilities": work_exp[position_key][responsibilities_key][:max_resp]
             }
             resume["experience"].append(position)
-    
+
     # REFINE: Build projects from master using configuration
     key_projects = master["key_projects"]
     projects_config = config["projects"]
-    
+
     # Build projects from master data using configuration (everything traceable to master)
     resume["projects"] = []
     for project_key in projects_config["include_projects"]:
@@ -114,7 +115,7 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
             else:
                 # Use neutral version if available, otherwise fall back to standard impact
                 impact_text = project_data.get("impact_neutral", project_data["impact"])
-            
+
             project = {
                 "name": project_data["name"],
                 "dates": project_data.get("dates", ""),
@@ -125,13 +126,13 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
             # Add technical details if configuration specifies
             if projects_config["show_technical_details"] and "technical_details" in project_data:
                 project["technical_details"] = project_data["technical_details"][:2]
-            
+
             resume["projects"].append(project)
-    
+
     # REFINE: Build competencies from master using configuration
     competencies_config = config["competencies"]
     tech_skills = master["technical_skills_comprehensive"]
-    
+
     # Build competencies by selecting categories from master (everything traceable to master)
     resume["competencies"] = {}
     for category_key in competencies_config["include_categories"]:
@@ -140,19 +141,19 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
             # Map technical category names to display names
             display_name = {
                 "programming_expertise": "Programming and Development",
-                "geospatial_stack": "Geospatial Technologies", 
+                "geospatial_stack": "Geospatial Technologies",
                 "machine_learning_ai": "Machine Learning & AI",
                 "data_engineering": "Data Infrastructure",
                 "cloud_devops": "Cloud & DevOps"
             }.get(category_key, category_key.title())
-            
+
             # Build skills list from master data with proper formatting
             skills_list = []
             for skill_key, skill_detail in category_data.items():
                 # Format skill names properly
                 formatted_skill_name = {
                     "python": "Python",
-                    "r": "R", 
+                    "r": "R",
                     "sql": "SQL/PostGIS",
                     "javascript": "JavaScript",
                     "java": "Java",
@@ -169,15 +170,15 @@ def create_specialized_resume(master_data, resume_type, output_type="ats"):
                     "storage": "Storage",
                     "streaming": "Streaming",
                     "aws": "AWS",
-                    "containerization": "Containerization", 
+                    "containerization": "Containerization",
                     "monitoring": "Monitoring",
                     "cicd": "CI/CD"
                 }.get(skill_key, skill_key.title())
-                
+
                 skills_list.append(f"{formatted_skill_name}: {skill_detail}")
-            
+
             resume["competencies"][display_name] = skills_list
-    
+
     return resume
 
 def create_abbreviated_resume(full_resume, resume_type):

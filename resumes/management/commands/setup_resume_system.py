@@ -2,19 +2,18 @@
 Django management command to set up the resume generation system
 """
 
-from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
-from resumes.models import (
-    ResumeTemplate, CompetencyCategory, Competency, ColorScheme
-)
-from resumes.services import ContentManagementService
-import json
 import os
+
+from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+
+from resumes.models import ColorScheme, Competency, CompetencyCategory, ResumeTemplate
+from resumes.services import ContentManagementService
 
 
 class Command(BaseCommand):
     help = 'Set up the resume generation system with templates, competencies, and color schemes'
-    
+
     def add_arguments(self, parser):
         parser.add_argument(
             '--create-superuser',
@@ -39,48 +38,48 @@ class Command(BaseCommand):
             default='admin123',
             help='Password for superuser',
         )
-    
+
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS('🚀 Setting up Resume Generation System'))
-        
+
         # Create superuser if requested
         if options['create_superuser']:
             self.create_superuser(options)
-        
+
         # Set up templates
         self.setup_templates()
-        
+
         # Set up competency categories
         self.setup_competency_categories()
-        
+
         # Set up color schemes
         self.setup_color_schemes()
-        
+
         # Set up content management
         self.setup_content_management()
-        
+
         self.stdout.write(self.style.SUCCESS('✅ Resume system setup complete!'))
-    
+
     def create_superuser(self, options):
         """Create superuser account"""
         self.stdout.write('Creating superuser...')
-        
+
         if User.objects.filter(username=options['username']).exists():
             self.stdout.write(f'Superuser {options["username"]} already exists')
             return
-        
+
         User.objects.create_superuser(
             username=options['username'],
             email=options['email'],
             password=options['password']
         )
-        
+
         self.stdout.write(f'✅ Created superuser: {options["username"]}')
-    
+
     def setup_templates(self):
         """Set up resume templates"""
         self.stdout.write('Setting up resume templates...')
-        
+
         templates = [
             {
                 'name': 'Software Engineer - Long',
@@ -131,23 +130,23 @@ class Command(BaseCommand):
                 'description': 'General purpose concise resume'
             },
         ]
-        
+
         for template_data in templates:
             template, created = ResumeTemplate.objects.get_or_create(
                 role=template_data['role'],
                 version=template_data['version'],
                 defaults=template_data
             )
-            
+
             if created:
                 self.stdout.write(f'  ✅ Created template: {template.name}')
             else:
                 self.stdout.write(f'  ℹ️  Template already exists: {template.name}')
-    
+
     def setup_competency_categories(self):
         """Set up competency categories and skills"""
         self.stdout.write('Setting up competency categories...')
-        
+
         categories_data = [
             {
                 'name': 'Programming Languages',
@@ -239,7 +238,7 @@ class Command(BaseCommand):
                 ]
             }
         ]
-        
+
         for category_data in categories_data:
             category, created = CompetencyCategory.objects.get_or_create(
                 name=category_data['name'],
@@ -248,12 +247,12 @@ class Command(BaseCommand):
                     'order': category_data['order']
                 }
             )
-            
+
             if created:
                 self.stdout.write(f'  ✅ Created category: {category.name}')
             else:
                 self.stdout.write(f'  ℹ️  Category already exists: {category.name}')
-            
+
             # Add competencies
             for comp_name, proficiency, years in category_data['competencies']:
                 competency, created = Competency.objects.get_or_create(
@@ -265,14 +264,14 @@ class Command(BaseCommand):
                         'order': len(category.competencies.all())
                     }
                 )
-                
+
                 if created:
                     self.stdout.write(f'    ✅ Added competency: {comp_name}')
-    
+
     def setup_color_schemes(self):
         """Set up color schemes"""
         self.stdout.write('Setting up color schemes...')
-        
+
         color_schemes = [
             {
                 'name': 'Professional Blue',
@@ -390,35 +389,35 @@ class Command(BaseCommand):
                 }
             }
         ]
-        
+
         for scheme_data in color_schemes:
             scheme, created = ColorScheme.objects.get_or_create(
                 name=scheme_data['name'],
                 defaults=scheme_data
             )
-            
+
             if created:
                 self.stdout.write(f'  ✅ Created color scheme: {scheme.name}')
             else:
                 self.stdout.write(f'  ℹ️  Color scheme already exists: {scheme.name}')
-    
+
     def setup_content_management(self):
         """Set up content management system"""
         self.stdout.write('Setting up content management...')
-        
+
         # Create content directories
         content_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'content')
         os.makedirs(content_dir, exist_ok=True)
         os.makedirs(os.path.join(content_dir, 'role_overrides'), exist_ok=True)
-        
+
         # Initialize content manager
         content_service = ContentManagementService()
-        
+
         self.stdout.write('  ✅ Content management system initialized')
         self.stdout.write('  ✅ Content directories created')
-        
+
         # Create logs directory
         logs_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'logs')
         os.makedirs(logs_dir, exist_ok=True)
-        
+
         self.stdout.write('  ✅ Logs directory created')

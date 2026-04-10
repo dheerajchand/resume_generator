@@ -3,15 +3,22 @@ Serializers for Resume Generator API
 """
 
 from rest_framework import serializers
+
 from .models import (
-    CustomUser, UserProfile, UserResumeData, UserDirectory,
-    Resume, ResumeTemplate, ColorScheme, UserColorScheme, ResumeGenerationJob
+    ColorScheme,
+    CustomUser,
+    Resume,
+    ResumeGenerationJob,
+    ResumeTemplate,
+    UserColorScheme,
+    UserProfile,
+    UserResumeData,
 )
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializer for UserProfile"""
-    
+
     class Meta:
         model = UserProfile
         fields = [
@@ -24,7 +31,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     """Serializer for CustomUser"""
     profile = UserProfileSerializer(read_only=True)
-    
+
     class Meta:
         model = CustomUser
         fields = [
@@ -39,7 +46,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 class UserResumeDataSerializer(serializers.ModelSerializer):
     """Serializer for UserResumeData"""
-    
+
     class Meta:
         model = UserResumeData
         fields = [
@@ -53,7 +60,7 @@ class UserResumeDataSerializer(serializers.ModelSerializer):
 
 class ResumeTemplateSerializer(serializers.ModelSerializer):
     """Serializer for ResumeTemplate"""
-    
+
     class Meta:
         model = ResumeTemplate
         fields = [
@@ -64,7 +71,7 @@ class ResumeTemplateSerializer(serializers.ModelSerializer):
 
 class ColorSchemeSerializer(serializers.ModelSerializer):
     """Serializer for ColorScheme"""
-    
+
     class Meta:
         model = ColorScheme
         fields = [
@@ -77,7 +84,7 @@ class ResumeSerializer(serializers.ModelSerializer):
     """Serializer for Resume"""
     template_name = serializers.CharField(source='template.name', read_only=True)
     user_name = serializers.CharField(source='user.username', read_only=True)
-    
+
     class Meta:
         model = Resume
         fields = [
@@ -94,7 +101,7 @@ class ResumeSerializer(serializers.ModelSerializer):
 
 class UserColorSchemeSerializer(serializers.ModelSerializer):
     """Serializer for UserColorScheme"""
-    
+
     class Meta:
         model = UserColorScheme
         fields = [
@@ -104,7 +111,7 @@ class UserColorSchemeSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
-    
+
     def create(self, validated_data):
         """Automatically assign the current user when creating"""
         validated_data['user'] = self.context['request'].user
@@ -115,7 +122,7 @@ class ResumeGenerationJobSerializer(serializers.ModelSerializer):
     """Serializer for ResumeGenerationJob"""
     resume_title = serializers.CharField(source='resume.title', read_only=True)
     color_scheme_name = serializers.CharField(source='color_scheme.name', read_only=True)
-    
+
     class Meta:
         model = ResumeGenerationJob
         fields = [

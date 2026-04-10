@@ -2,13 +2,15 @@
 Management command to set up user system and migrate existing resume data
 """
 
-from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth import get_user_model
-from resumes.models import UserProfile, UserDirectory, UserResumeData, ColorScheme
-import os
 import json
+import os
 import shutil
 from pathlib import Path
+
+from django.contrib.auth import get_user_model
+from django.core.management.base import BaseCommand, CommandError
+
+from resumes.models import ColorScheme, UserDirectory, UserProfile, UserResumeData
 
 User = get_user_model()
 
@@ -108,7 +110,7 @@ class Command(BaseCommand):
     def create_color_schemes(self):
         """Create color schemes from existing JSON files"""
         color_schemes_dir = Path('color_schemes')
-        
+
         if not color_schemes_dir.exists():
             self.stdout.write(
                 self.style.WARNING('Color schemes directory not found, skipping...')
@@ -117,13 +119,13 @@ class Command(BaseCommand):
 
         for scheme_file in color_schemes_dir.glob('*.json'):
             scheme_name = scheme_file.stem
-            
+
             # Skip if scheme already exists
             if ColorScheme.objects.filter(name=scheme_name).exists():
                 continue
 
             try:
-                with open(scheme_file, 'r') as f:
+                with open(scheme_file) as f:
                     colors = json.load(f)
 
                 ColorScheme.objects.create(
@@ -146,7 +148,7 @@ class Command(BaseCommand):
     def migrate_existing_data(self, user, input_dir, output_dir):
         """Migrate existing resume data to user system"""
         existing_inputs = Path('inputs')
-        
+
         if not existing_inputs.exists():
             self.stdout.write(
                 self.style.WARNING('No existing inputs directory found, skipping migration...')
@@ -161,7 +163,7 @@ class Command(BaseCommand):
             if resume_dir.is_dir() and resume_dir.name.startswith('dheeraj_chand_'):
                 # Determine resume type and length variant
                 name_parts = resume_dir.name.split('_')
-                
+
                 if len(name_parts) >= 4:
                     resume_type = '_'.join(name_parts[2:-1]) if 'abbreviated' in resume_dir.name else '_'.join(name_parts[2:])
                     length_variant = 'short' if 'abbreviated' in resume_dir.name else 'long'
@@ -186,9 +188,9 @@ class Command(BaseCommand):
                     resume_file = resume_dir / 'resume_data.json'
                     if resume_file.exists():
                         try:
-                            with open(resume_file, 'r') as f:
+                            with open(resume_file) as f:
                                 content = json.load(f)
-                            
+
                             resume_data.personal_info = content.get('personal_info', {})
                             resume_data.summary = content.get('summary', '')
                             resume_data.competencies = content.get('competencies', {})

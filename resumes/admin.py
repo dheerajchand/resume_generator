@@ -1,11 +1,25 @@
 from django.contrib import admin
+
 from .models import (
-    CustomUser, UserProfile, UserResumeData, UserDirectory,
-    ResumeTemplate, PersonalInfo, CompetencyCategory, Competency,
-    Experience, Project, Education, Certification, Achievement,
-    Resume, ColorScheme, UserColorScheme, ResumeGenerationJob
+    Achievement,
+    Certification,
+    ColorScheme,
+    Competency,
+    CompetencyCategory,
+    CustomUser,
+    Education,
+    Experience,
+    PersonalInfo,
+    Project,
+    Resume,
+    ResumeGenerationJob,
+    ResumeTemplate,
+    UserColorScheme,
+    UserDirectory,
+    UserProfile,
+    UserResumeData,
 )
-from .user_admin import CustomUserAdmin, UserProfileAdmin, UserResumeDataAdmin, UserDirectoryAdmin
+from .user_admin import CustomUserAdmin, UserDirectoryAdmin, UserProfileAdmin, UserResumeDataAdmin
 
 # Register user models
 admin.site.register(CustomUser, CustomUserAdmin)

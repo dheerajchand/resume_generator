@@ -7,9 +7,10 @@ Tests:
 3. Long resumes are 2-5 pages
 4. No excessive whitespace (>1.5 inches blank before page bottom)
 """
-import pymupdf
 from glob import glob
 from pathlib import Path
+
+import pymupdf
 import pytest
 
 OUTPUT_DIR = Path(__file__).parent.parent / "outputs"

@@ -4,7 +4,9 @@ Optimized for Heroku deployment
 """
 
 import os
+
 import dj_database_url
+
 from .settings import *
 
 # Production security settings

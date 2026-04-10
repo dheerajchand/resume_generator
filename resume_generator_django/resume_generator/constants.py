@@ -51,11 +51,11 @@ COLOR_MAPPINGS = {
     'SECTION_HEADER_COLOR': 'primary',      # Section titles
     'COMPANY_COLOR': 'primary',             # Company names
     'COMPETENCY_HEADER_COLOR': 'primary',   # Main competency categories
-    
-    # Secondary colors  
+
+    # Secondary colors
     'DARK_TEXT_COLOR': 'secondary',         # Body text, competency details
     'NAME_COLOR': 'secondary',              # Person's name
-    
+
     # Accent colors
     'ACCENT_COLOR': 'accent',               # Sub-competencies, contact info
     'JOB_TITLE_COLOR': 'muted',             # Job titles (muted)
@@ -210,7 +210,7 @@ FONT_THEMES = {
 FONT_ROLES = {
     'name': 'primary',           # Name on first page
     'section_header': 'primary',
-    'company': 'primary', 
+    'company': 'primary',
     'job_title': 'accent',
     'body': 'secondary',
     'bullet_point': 'secondary',
@@ -312,10 +312,10 @@ def get_theme_font(color_scheme, role):
     """
     # Get the font theme for this color scheme
     theme_fonts = FONT_THEMES.get(color_scheme, FONT_THEMES['default_professional'])
-    
+
     # Get the font role (primary, secondary, accent, technical)
     font_role = FONT_ROLES.get(role, 'secondary')
-    
+
     # Return the appropriate font with fallback
     return theme_fonts.get(font_role, theme_fonts.get('fallback', 'Helvetica'))
 
@@ -332,7 +332,7 @@ def get_theme_font_size(color_scheme, role):
     """
     # Get the font size theme for this color scheme
     theme_sizes = FONT_SIZE_THEMES.get(color_scheme, FONT_SIZE_THEMES['default_professional'])
-    
+
     # Return the appropriate font size with fallback
     return theme_sizes.get(role, theme_sizes.get('body', 10))
 
@@ -387,7 +387,7 @@ PARAGRAPH_SPACING = {
 # Define the order of sections in the resume
 SECTION_ORDER = [
     'PROFESSIONAL SUMMARY',
-    'KEY ACHIEVEMENTS AND IMPACT', 
+    'KEY ACHIEVEMENTS AND IMPACT',
     'CORE COMPETENCIES',
     'PROFESSIONAL EXPERIENCE',
     'KEY PROJECTS',

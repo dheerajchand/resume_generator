@@ -2,20 +2,14 @@
 Test suite for Resume Generator Models
 """
 
-import json
 from django.test import TestCase
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
-from .models import (
-    CustomUser, PersonalInfo, UserProfile, UserResumeData, 
-    ResumeTemplate, ColorScheme, UserColorScheme
-)
+from .models import ColorScheme, CustomUser, PersonalInfo, UserColorScheme, UserResumeData
 
 
 class CustomUserModelTests(TestCase):
     """Test the CustomUser model"""
-    
+
     def setUp(self):
         self.user_data = {
             'username': 'testuser',
@@ -29,11 +23,11 @@ class CustomUserModelTests(TestCase):
             'professional_title': 'Data Scientist',
             'bio': 'Test bio content'
         }
-    
+
     def test_create_custom_user(self):
         """Test creating a custom user with all fields"""
         user = CustomUser.objects.create_user(**self.user_data)
-        
+
         self.assertEqual(user.username, 'testuser')
         self.assertEqual(user.email, 'test@example.com')
         self.assertEqual(user.phone, '+1234567890')
@@ -48,7 +42,7 @@ class CustomUserModelTests(TestCase):
         self.assertFalse(user.is_verified)
         self.assertFalse(user.email_verified)
         self.assertEqual(user.subscription_tier, 'free')
-    
+
     def test_phone_validation(self):
         """Test phone number validation"""
         # Valid phone numbers
@@ -60,7 +54,7 @@ class CustomUserModelTests(TestCase):
             user_data['email'] = f'user{i}@example.com'
             user = CustomUser.objects.create_user(**user_data)
             self.assertEqual(user.phone, phone)
-    
+
     def test_user_str_representation(self):
         """Test string representation of user"""
         user = CustomUser.objects.create_user(**self.user_data)
@@ -69,14 +63,14 @@ class CustomUserModelTests(TestCase):
 
 class PersonalInfoModelTests(TestCase):
     """Test the PersonalInfo model"""
-    
+
     def setUp(self):
         self.user = CustomUser.objects.create_user(
             username='testuser',
             email='test@example.com',
             password='testpass123'
         )
-        
+
         self.personal_info_data = {
             'user': self.user,
             'full_name': 'John Doe',
@@ -88,28 +82,28 @@ class PersonalInfoModelTests(TestCase):
             'location': 'Austin, TX',
             'summary': 'Experienced data scientist with 10+ years...'
         }
-    
+
     def test_create_personal_info(self):
         """Test creating personal info"""
         personal_info = PersonalInfo.objects.create(**self.personal_info_data)
-        
+
         self.assertEqual(personal_info.user, self.user)
         self.assertEqual(personal_info.full_name, 'John Doe')
         self.assertEqual(personal_info.email, 'john@example.com')
         self.assertEqual(personal_info.phone, '+1234567890')
         self.assertEqual(str(personal_info), 'John Doe - Personal Info')
-    
+
     def test_one_to_one_relationship(self):
         """Test that PersonalInfo has one-to-one relationship with User"""
         personal_info = PersonalInfo.objects.create(**self.personal_info_data)
-        
+
         # Test accessing from user
         self.assertEqual(self.user.personal_info, personal_info)
 
 
 class ColorSchemeModelTests(TestCase):
     """Test the ColorScheme model"""
-    
+
     def setUp(self):
         self.color_scheme_data = {
             'name': 'Test Scheme',
@@ -125,11 +119,11 @@ class ColorSchemeModelTests(TestCase):
             'typography': {},
             'layout': {}
         }
-    
+
     def test_create_color_scheme(self):
         """Test creating a color scheme"""
         scheme = ColorScheme.objects.create(**self.color_scheme_data)
-        
+
         self.assertEqual(scheme.name, 'Test Scheme')
         self.assertEqual(scheme.colors['primary_color'], '#FF0000')
         self.assertTrue(scheme.is_active)
@@ -139,20 +133,20 @@ class ColorSchemeModelTests(TestCase):
 
 class MultiUserTests(TestCase):
     """Test multi-user functionality"""
-    
+
     def setUp(self):
         self.user1 = CustomUser.objects.create_user(
             username='user1',
             email='user1@example.com',
             password='pass123'
         )
-        
+
         self.user2 = CustomUser.objects.create_user(
             username='user2',
-            email='user2@example.com', 
+            email='user2@example.com',
             password='pass123'
         )
-    
+
     def test_user_custom_color_schemes(self):
         """Test that users can create custom color schemes"""
         # Create a custom color scheme for user1
@@ -165,14 +159,14 @@ class MultiUserTests(TestCase):
             accent_color='#0000FF',
             muted_color='#CCCCCC'
         )
-        
+
         self.assertEqual(custom_scheme.user, self.user1)
         self.assertEqual(custom_scheme.name, 'My Custom Scheme')
-        
+
         # User2 should not see user1's custom scheme
         user2_schemes = UserColorScheme.objects.filter(user=self.user2)
         self.assertEqual(len(user2_schemes), 0)
-    
+
     def test_user_resume_data_isolation(self):
         """Test that user resume data is properly isolated"""
         # Create resume data for user1
@@ -183,11 +177,11 @@ class MultiUserTests(TestCase):
             personal_info={'name': 'User One'},
             summary='User 1 summary'
         )
-        
+
         # User2 should not see user1's resume data
         user2_resumes = UserResumeData.objects.filter(user=self.user2)
         self.assertEqual(len(user2_resumes), 0)
-        
+
         # User1 should see their own data
         user1_resumes = UserResumeData.objects.filter(user=self.user1)
         self.assertEqual(len(user1_resumes), 1)

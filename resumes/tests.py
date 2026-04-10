@@ -5,6 +5,6 @@ This module imports all test suites to ensure they're discovered by Django's tes
 """
 
 # Import all test modules
+from .test_api import *
 from .test_models import *
 from .test_services import *
-from .test_api import *

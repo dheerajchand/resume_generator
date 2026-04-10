@@ -4,12 +4,11 @@ Generate all resume versions (ATS and Human) for all resume types
 """
 
 import sys
-import os
 from pathlib import Path
+
 sys.path.append('.')
 
 from resumes.core_services import ResumeManager
-
 
 GITHUB_BASE = "https://raw.githubusercontent.com/dheerajchand/resume_generator/main/outputs"
 
@@ -102,11 +101,11 @@ def generate_output_readme(output_dir="outputs"):
 
 def main():
     manager = ResumeManager()
-    
+
     # All resume types from the configuration
     resume_types = [
         "comprehensive",
-        "data_engineering", 
+        "data_engineering",
         "software_engineering",
         "gis",
         "product",
@@ -114,21 +113,21 @@ def main():
         "data_analysis_visualization",
         "polling_research_redistricting"
     ]
-    
+
     # All output types
     output_types = ["ats", "human"]
-    
+
     total_generated = 0
     total_failed = 0
-    
+
     for output_type in output_types:
         print(f"\n{'='*60}")
         print(f"Generating {output_type.upper()} resumes...")
         print(f"{'='*60}")
-        
+
         for resume_type in resume_types:
             print(f"\nGenerating {output_type} {resume_type} resumes...")
-            
+
             for color_scheme in manager.color_schemes:
                 for format_type in manager.formats:
                     for length_variant in manager.length_variants:
@@ -146,9 +145,9 @@ def main():
                         else:
                             print(f"✗ Failed to generate {output_type} {resume_type} {length_variant} {color_scheme} {format_type}")
                             total_failed += 1
-    
+
     print(f"\n{'='*60}")
-    print(f"GENERATION COMPLETE")
+    print("GENERATION COMPLETE")
     print(f"{'='*60}")
     print(f"Total generated: {total_generated}")
     print(f"Total failed: {total_failed}")

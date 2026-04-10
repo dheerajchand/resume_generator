@@ -11,9 +11,9 @@ invalidated by post_save signals in portfolio/signals.py.
 from django.core.cache import cache
 
 from .models import (
-    PersonalInfo, ResumeArchetype, ProfessionalSummary,
-    ResumeArchetypePosition, ResumeArchetypeAchievement,
-    ResumeArchetypeProject, ResumeArchetypeSkillCategory,
+    PersonalInfo,
+    ProfessionalSummary,
+    ResumeArchetype,
 )
 
 CACHE_TTL = 60 * 60 * 24  # 24 hours
@@ -50,8 +50,8 @@ def build_resume_data_from_db(archetype_slug, output_type="ats"):
     # Personal info
     try:
         info = PersonalInfo.objects.prefetch_related("social_links").get()
-    except PersonalInfo.DoesNotExist:
-        raise ValueError("No PersonalInfo record found. Run import_master_data first.")
+    except PersonalInfo.DoesNotExist as e:
+        raise ValueError("No PersonalInfo record found. Run import_master_data first.") from e
 
     personal_info = {
         "name": info.name,

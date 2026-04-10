@@ -3,7 +3,6 @@ URL smoke test — verifies all admin and public pages load without errors.
 Run after any model or admin changes.
 """
 
-import os
 from django.core.management.base import BaseCommand
 from django.test import Client
 
@@ -39,7 +38,7 @@ class Command(BaseCommand):
         ]
 
         # Add change pages for loaded data
-        from portfolio.models import ResumeArchetype, Position
+        from portfolio.models import Position, ResumeArchetype
         for arch in ResumeArchetype.objects.all():
             urls.append((f"/admin/portfolio/resumearchetype/{arch.pk}/change/", f"Archetype: {arch.name}"))
         for pos in Position.objects.all():

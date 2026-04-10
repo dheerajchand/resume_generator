@@ -2,31 +2,36 @@
 Views for Resume Generator
 """
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
-from django.http import JsonResponse, HttpResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.core.paginator import Paginator
-from django.db.models import Q
-from rest_framework import viewsets, status
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+import io
 import json
 import os
-import io
 import sys
 from pathlib import Path
 
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.views.decorators.http import require_http_methods
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from .models import (
-    CustomUser, UserProfile, UserResumeData, UserDirectory,
-    Resume, ResumeTemplate, ColorScheme, UserColorScheme, ResumeGenerationJob
+    ColorScheme,
+    Resume,
+    ResumeGenerationJob,
+    ResumeTemplate,
+    UserColorScheme,
+    UserResumeData,
 )
 from .serializers import (
-    UserResumeDataSerializer, ResumeSerializer, ColorSchemeSerializer,
-    UserColorSchemeSerializer, ResumeGenerationJobSerializer
+    ColorSchemeSerializer,
+    ResumeGenerationJobSerializer,
+    ResumeSerializer,
+    UserColorSchemeSerializer,
+    UserResumeDataSerializer,
 )
 
 User = get_user_model()
@@ -57,9 +62,10 @@ def download_form(request):
     (names, slugs, descriptions) is embedded as JSON for JS dropdown
     descriptions.
     """
-    from portfolio.services import get_archetype_metadata
-    from portfolio.models import PersonalInfo as PortfolioPersonalInfo
     import json as json_module
+
+    from portfolio.models import PersonalInfo as PortfolioPersonalInfo
+    from portfolio.services import get_archetype_metadata
 
     archetypes = get_archetype_metadata()
 
@@ -88,8 +94,10 @@ def _generate_resume_response(resume_data, archetype_slug, length_variant, color
     Logs a GenerationRecord for every generation.
     """
     import tempfile
-    from .core_services import ResumeGenerator
+
     from portfolio.models import GenerationRecord
+
+    from .core_services import ResumeGenerator
 
     project_root = Path(__file__).resolve().parent.parent
     if str(project_root) not in sys.path:
@@ -107,7 +115,7 @@ def _generate_resume_response(resume_data, archetype_slug, length_variant, color
     color_config_path = project_root / "color_schemes" / f"{color_scheme}.json"
     config = {}
     if color_config_path.exists():
-        with open(color_config_path, "r") as f:
+        with open(color_config_path) as f:
             config = json.load(f)
 
     generator = ResumeGenerator.from_data(
@@ -175,8 +183,8 @@ def generate_on_demand(request):
     if format_type not in FORMAT_CONTENT_TYPES:
         return HttpResponse("Invalid format", status=400)
 
-    from portfolio.services import build_resume_data_from_db
     from portfolio.models import ResumeArchetype
+    from portfolio.services import build_resume_data_from_db
 
     try:
         ResumeArchetype.objects.get(slug=archetype_slug)
@@ -231,22 +239,22 @@ def generate_instance(request, instance_id):
 def dashboard(request):
     """User dashboard view"""
     user = request.user
-    
+
     # Get user's resume data
     resume_data = UserResumeData.objects.filter(user=user, is_active=True)
-    
+
     # Get user's generated resumes
     resumes = Resume.objects.filter(user=user)
-    
+
     # Get recent generation jobs
     recent_jobs = ResumeGenerationJob.objects.filter(user=user).order_by('-created_at')[:5]
-    
+
     # Get available color schemes
     color_schemes = ColorScheme.objects.filter(is_active=True)
-    
+
     # Get available templates
     templates = ResumeTemplate.objects.filter(is_active=True)
-    
+
     context = {
         'user': user,
         'resume_data': resume_data,
@@ -267,7 +275,7 @@ def dashboard(request):
             ('short', 'Short (1-2 pages)'),
         ]
     }
-    
+
     return render(request, 'resumes/dashboard.html', context)
 
 
@@ -275,12 +283,12 @@ def dashboard(request):
 def resume_detail(request, resume_id):
     """Resume detail view"""
     resume = get_object_or_404(Resume, id=resume_id, user=request.user)
-    
+
     context = {
         'resume': resume,
         'file_paths': resume.get_file_paths() if hasattr(resume, 'get_file_paths') else [],
     }
-    
+
     return render(request, 'resumes/resume_detail.html', context)
 
 
@@ -294,7 +302,7 @@ def generate_resume(request):
         length_variant = data.get('length_variant')
         color_scheme = data.get('color_scheme', 'default_professional')
         formats = data.get('formats', ['pdf', 'docx'])
-        
+
         # Get or create user resume data
         resume_data, created = UserResumeData.objects.get_or_create(
             user=request.user,
@@ -302,7 +310,7 @@ def generate_resume(request):
             length_variant=length_variant,
             defaults={'is_active': True}
         )
-        
+
         # Create generation job
         job = ResumeGenerationJob.objects.create(
             user=request.user,
@@ -312,16 +320,16 @@ def generate_resume(request):
             color_scheme=ColorScheme.objects.get(name=color_scheme) if color_scheme else None,
             status='queued'
         )
-        
+
         # TODO: Start background task for resume generation
         # For now, just return success
-        
+
         return JsonResponse({
             'success': True,
             'job_id': job.job_id,
             'message': 'Resume generation started'
         })
-        
+
     except Exception as e:
         return JsonResponse({
             'success': False,
@@ -333,7 +341,7 @@ def generate_resume(request):
 def download_resume(request, resume_id, format_type):
     """Download generated resume file"""
     resume = get_object_or_404(Resume, id=resume_id, user=request.user)
-    
+
     # Get file path based on format
     file_path = None
     if format_type == 'pdf':
@@ -342,10 +350,10 @@ def download_resume(request, resume_id, format_type):
         file_path = resume.docx_path
     elif format_type == 'rtf':
         file_path = resume.rtf_path
-    
+
     if not file_path or not os.path.exists(file_path):
         return HttpResponse('File not found', status=404)
-    
+
     # Return file for download
     with open(file_path, 'rb') as f:
         response = HttpResponse(f.read(), content_type='application/octet-stream')
@@ -357,15 +365,15 @@ class UserResumeDataViewSet(viewsets.ModelViewSet):
     """API viewset for user resume data"""
     serializer_class = UserResumeDataSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
         return UserResumeData.objects.filter(user=self.request.user)
-    
+
     @action(detail=True, methods=['post'])
     def generate(self, request, pk=None):
         """Generate resume from user data"""
         resume_data = self.get_object()
-        
+
         # Create generation job
         job = ResumeGenerationJob.objects.create(
             user=request.user,
@@ -374,9 +382,9 @@ class UserResumeDataViewSet(viewsets.ModelViewSet):
             formats=request.data.get('formats', ['pdf']),
             status='queued'
         )
-        
+
         # TODO: Start background task
-        
+
         return Response({
             'job_id': job.job_id,
             'status': 'queued'
@@ -387,10 +395,10 @@ class ResumeViewSet(viewsets.ModelViewSet):
     """API viewset for resumes"""
     serializer_class = ResumeSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
         return Resume.objects.filter(user=self.request.user)
-    
+
     @action(detail=True, methods=['get'])
     def files(self, request, pk=None):
         """Get generated files for resume"""
@@ -409,20 +417,20 @@ class UserColorSchemeViewSet(viewsets.ModelViewSet):
     """API viewset for user custom color schemes"""
     serializer_class = UserColorSchemeSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
         """Return only the current user's color schemes"""
         return UserColorScheme.objects.filter(user=self.request.user)
-    
+
     def perform_create(self, serializer):
         """Automatically assign the current user when creating"""
         serializer.save(user=self.request.user)
-    
+
     @action(detail=True, methods=['post'])
     def duplicate(self, request, pk=None):
         """Duplicate a color scheme"""
         original = self.get_object()
-        
+
         # Create a copy with a new name
         copy_data = {
             'name': f"{original.name} (Copy)",
@@ -435,11 +443,11 @@ class UserColorSchemeViewSet(viewsets.ModelViewSet):
             'background_color': original.background_color,
             'text_color': original.text_color,
         }
-        
+
         serializer = self.get_serializer(data=copy_data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -447,6 +455,6 @@ class ResumeGenerationJobViewSet(viewsets.ReadOnlyModelViewSet):
     """API viewset for generation jobs"""
     serializer_class = ResumeGenerationJobSerializer
     permission_classes = [IsAuthenticated]
-    
+
     def get_queryset(self):
         return ResumeGenerationJob.objects.filter(user=self.request.user)
