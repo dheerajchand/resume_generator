@@ -48,7 +48,7 @@ def send_resume_email(instance, resume_buffer, filename, email_template=None):
         "your_name": your_name,
     }
 
-    # Use template or defaults
+    # Use template or defaults for subject and body
     if email_template:
         subject = email_template.render_subject(**context)
         body = email_template.render_body(**context)
@@ -60,6 +60,10 @@ def send_resume_email(instance, resume_buffer, filename, email_template=None):
             body = default.render_body(**context)
         else:
             subject = f"{your_name} — {context['job_title']}"
+
+    # Instance-level subject override takes precedence
+    if hasattr(instance, 'subject_override') and instance.subject_override:
+        subject = instance.subject_override
             body = (
                 f"Dear {context['recipient_name']},\n\n"
                 f"Please find attached my resume for the {context['job_title']} position "
