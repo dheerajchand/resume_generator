@@ -40,8 +40,29 @@ PREFERRED_COLOR = {
 }
 
 
+def _get_resume_types_from_db():
+    """Try to read archetype names/descriptions from Django DB. Falls back to hardcoded dict."""
+    try:
+        import django
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "resume_generator_django.settings")
+        django.setup()
+        from portfolio.models import ResumeArchetype
+        archetypes = ResumeArchetype.objects.all().order_by("name")
+        if archetypes.exists():
+            return {a.slug: (a.name, a.description or "") for a in archetypes}
+    except Exception:
+        pass
+    return RESUME_TYPE_DISPLAY
+
+
 def generate_output_readme(output_dir="outputs"):
-    """Generate outputs/README.md with download links for all resume files."""
+    """Generate outputs/README.md with download links for all resume files.
+
+    Reads archetype names and descriptions from the database if available,
+    falling back to the hardcoded RESUME_TYPE_DISPLAY dict.
+    """
+    resume_types = _get_resume_types_from_db()
+
     lines = []
     lines.append("# Resume Portfolio - Complete Collection")
     lines.append("")
@@ -49,19 +70,19 @@ def generate_output_readme(output_dir="outputs"):
     lines.append("")
     lines.append("This is a selection of resumes I've made. For quick navigation, without browsing anything else, here are human-oriented, PDF formatted, longer form resumes oriented towards different roles:")
     lines.append("")
-    for idx, (type_key, (display_name, _)) in enumerate(RESUME_TYPE_DISPLAY.items(), 1):
-        color = PREFERRED_COLOR[type_key]
+    for idx, (type_key, (display_name, _)) in enumerate(resume_types.items(), 1):
+        color = PREFERRED_COLOR.get(type_key, "default_professional")
         url = f"{GITHUB_BASE}/human/{type_key}/long/{color}/pdf/dheeraj_chand_{type_key}_long_{color}.pdf"
         lines.append(f"{idx}. **[{display_name}]({url})** - {display_name}")
     lines.append("")
     lines.append("---")
     lines.append("")
 
-    total = len(RESUME_TYPE_DISPLAY) * len(COLOR_SCHEMES) * 3 * 2 * 4  # types * colors * lengths * output_types * formats
+    total = len(resume_types) * len(COLOR_SCHEMES) * 3 * 2 * 4  # types * colors * lengths * output_types * formats
     lines.append(f"**{total} professionally formatted resumes** systematically generated for different industries and use cases.")
     lines.append("")
 
-    for type_key, (display_name, description) in RESUME_TYPE_DISPLAY.items():
+    for type_key, (display_name, description) in resume_types.items():
         lines.append(f"## {display_name}")
         lines.append("")
         lines.append(description)
