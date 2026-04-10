@@ -81,20 +81,93 @@ def download_form(request):
     return render(request, "resumes/download_form.html", context)
 
 
+def _generate_resume_response(resume_data, archetype_slug, length_variant, color_scheme, format_type, output_type, instance=None):
+    """Internal helper: generate a resume and return an HttpResponse.
+
+    Shared by both public download and instance-based download.
+    Logs a GenerationRecord for every generation.
+    """
+    import tempfile
+    from .core_services import ResumeGenerator
+    from portfolio.models import GenerationRecord
+
+    project_root = Path(__file__).resolve().parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+
+    from master_resume_generator import create_abbreviated_resume, create_brief_resume
+
+    # Apply length truncation
+    if length_variant == "short":
+        resume_data = create_abbreviated_resume(resume_data, archetype_slug)
+    elif length_variant == "brief":
+        resume_data = create_brief_resume(resume_data, archetype_slug)
+
+    # Load color scheme config
+    color_config_path = project_root / "color_schemes" / f"{color_scheme}.json"
+    config = {}
+    if color_config_path.exists():
+        with open(color_config_path, "r") as f:
+            config = json.load(f)
+
+    generator = ResumeGenerator.from_data(
+        resume_data=resume_data,
+        config=config,
+        color_scheme=color_scheme,
+        length_variant=length_variant,
+        output_type=output_type,
+    )
+
+    filename = f"dheeraj_chand_{archetype_slug}_{length_variant}_{color_scheme}.{format_type}"
+    buffer = io.BytesIO()
+
+    if format_type == "pdf":
+        generator.generate_pdf(buffer)
+        buffer.seek(0)
+    elif format_type == "docx":
+        with tempfile.NamedTemporaryFile(suffix=".docx", delete=True) as tmp:
+            generator.generate_docx(tmp.name)
+            with open(tmp.name, "rb") as f:
+                buffer.write(f.read())
+            buffer.seek(0)
+    elif format_type == "rtf":
+        with tempfile.NamedTemporaryFile(suffix=".rtf", delete=True, mode="w") as tmp:
+            generator.generate_rtf(tmp.name)
+            with open(tmp.name, "rb") as f:
+                buffer.write(f.read())
+            buffer.seek(0)
+    elif format_type == "md":
+        with tempfile.NamedTemporaryFile(suffix=".md", delete=True, mode="w") as tmp:
+            generator.generate_markdown(tmp.name)
+            with open(tmp.name, "rb") as f:
+                buffer.write(f.read())
+            buffer.seek(0)
+
+    # Log the generation
+    GenerationRecord.objects.create(
+        instance=instance,
+        archetype_slug=archetype_slug,
+        format_type=format_type,
+        output_type=output_type,
+        color_scheme=color_scheme,
+        length_variant=length_variant,
+    )
+
+    content_type = FORMAT_CONTENT_TYPES[format_type]
+    response = HttpResponse(buffer.read(), content_type=content_type)
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    return response
+
+
 @require_http_methods(["POST"])
 def generate_on_demand(request):
-    """Generate a resume on-demand and stream it as a download — no login required.
-
-    Reads from database via portfolio.services, applies length truncation,
-    generates the requested format in memory, and returns it.
-    """
+    """Generate a resume on-demand and stream it as a download — no login required."""
     archetype_slug = request.POST.get("resume_type", "comprehensive")
     length_variant = request.POST.get("length_variant", "long")
     color_scheme = request.POST.get("color_scheme", "default_professional")
     format_type = request.POST.get("format_type", "pdf")
     output_type = request.POST.get("output_type", "ats")
 
-    # Validate
     if length_variant not in LENGTH_VARIANTS:
         return HttpResponse("Invalid length variant", status=400)
     if color_scheme not in COLOR_SCHEMES:
@@ -102,7 +175,6 @@ def generate_on_demand(request):
     if format_type not in FORMAT_CONTENT_TYPES:
         return HttpResponse("Invalid format", status=400)
 
-    # Build resume data from database
     from portfolio.services import build_resume_data_from_db
     from portfolio.models import ResumeArchetype
 
@@ -112,69 +184,47 @@ def generate_on_demand(request):
         return HttpResponse("Invalid resume type", status=400)
 
     resume_data = build_resume_data_from_db(archetype_slug, output_type)
-
-    # Apply length truncation
-    project_root = Path(__file__).resolve().parent.parent
-    if str(project_root) not in sys.path:
-        sys.path.insert(0, str(project_root))
-
-    from master_resume_generator import create_abbreviated_resume, create_brief_resume
-
-    if length_variant == "short":
-        resume_data = create_abbreviated_resume(resume_data, archetype_slug)
-    elif length_variant == "brief":
-        resume_data = create_brief_resume(resume_data, archetype_slug)
-
-    # Load color scheme config
-    from .core_services import ResumeGenerator
-    color_config_path = project_root / "color_schemes" / f"{color_scheme}.json"
-    config = {}
-    if color_config_path.exists():
-        with open(color_config_path, "r") as f:
-            config = json.load(f)
-
-    # Create generator from data
-    generator = ResumeGenerator.from_data(
-        resume_data=resume_data,
-        config=config,
-        color_scheme=color_scheme,
-        length_variant=length_variant,
-        output_type=output_type,
+    return _generate_resume_response(
+        resume_data, archetype_slug, length_variant, color_scheme, format_type, output_type
     )
 
-    # Generate to memory buffer
-    filename = f"dheeraj_chand_{archetype_slug}_{length_variant}_{color_scheme}.{format_type}"
-    buffer = io.BytesIO()
 
-    if format_type == "pdf":
-        generator.generate_pdf(buffer)
-        buffer.seek(0)
-    elif format_type == "docx":
-        import tempfile
-        with tempfile.NamedTemporaryFile(suffix=".docx", delete=True) as tmp:
-            generator.generate_docx(tmp.name)
-            with open(tmp.name, "rb") as f:
-                buffer.write(f.read())
-            buffer.seek(0)
-    elif format_type == "rtf":
-        import tempfile
-        with tempfile.NamedTemporaryFile(suffix=".rtf", delete=True, mode="w") as tmp:
-            generator.generate_rtf(tmp.name)
-            with open(tmp.name, "rb") as f:
-                buffer.write(f.read())
-            buffer.seek(0)
-    elif format_type == "md":
-        import tempfile
-        with tempfile.NamedTemporaryFile(suffix=".md", delete=True, mode="w") as tmp:
-            generator.generate_markdown(tmp.name)
-            with open(tmp.name, "rb") as f:
-                buffer.write(f.read())
-            buffer.seek(0)
+@login_required
+@require_http_methods(["POST"])
+def generate_instance(request, instance_id):
+    """Generate a resume for a specific instance — login required.
 
-    content_type = FORMAT_CONTENT_TYPES[format_type]
-    response = HttpResponse(buffer.read(), content_type=content_type)
-    response["Content-Disposition"] = f'attachment; filename="{filename}"'
-    return response
+    Uses archetype content with optional summary_override. Logs GenerationRecord
+    linked to the instance.
+    """
+    from portfolio.models import ResumeInstance
+    from portfolio.services import build_resume_data_from_db
+
+    instance = get_object_or_404(ResumeInstance, pk=instance_id)
+    archetype_slug = instance.archetype.slug
+
+    length_variant = request.POST.get("length_variant", "long")
+    color_scheme = request.POST.get("color_scheme", "default_professional")
+    format_type = request.POST.get("format_type", "pdf")
+    output_type = request.POST.get("output_type", "ats")
+
+    if length_variant not in LENGTH_VARIANTS:
+        return HttpResponse("Invalid length variant", status=400)
+    if color_scheme not in COLOR_SCHEMES:
+        return HttpResponse("Invalid color scheme", status=400)
+    if format_type not in FORMAT_CONTENT_TYPES:
+        return HttpResponse("Invalid format", status=400)
+
+    resume_data = build_resume_data_from_db(archetype_slug, output_type)
+
+    # Apply summary override if present
+    if instance.summary_override:
+        resume_data["summary"] = instance.summary_override
+
+    return _generate_resume_response(
+        resume_data, archetype_slug, length_variant, color_scheme, format_type, output_type,
+        instance=instance,
+    )
 
 
 @login_required

@@ -22,6 +22,7 @@ urlpatterns = [
     path('download/', views.generate_on_demand, name='generate_on_demand'),
 
     # Authenticated views
+    path('download/instance/<int:instance_id>/', views.generate_instance, name='generate_instance'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('resume/<int:resume_id>/', views.resume_detail, name='resume_detail'),
     path('resume/<int:resume_id>/download/<str:format_type>/', views.download_resume, name='download_resume'),
