@@ -21,6 +21,6 @@ COPY . .
 # Collect static files
 RUN SECRET_KEY=build-only DEBUG=False python manage.py collectstatic --no-input 2>/dev/null || true
 
-EXPOSE 8000
+EXPOSE ${PORT:-8000}
 
-CMD ["gunicorn", "resume_generator_django.wsgi", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "2", "--log-file", "-"]
+CMD gunicorn resume_generator_django.wsgi --bind 0.0.0.0:${PORT:-8000} --workers 2 --threads 2 --log-file -
