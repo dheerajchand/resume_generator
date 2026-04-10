@@ -3,13 +3,20 @@ Build resume data dicts from database models.
 
 This replaces master_resume_generator.py's create_specialized_resume()
 by reading from the portfolio database models instead of JSON files.
+
+Caching: resume data is cached per archetype+output_type. Cache is
+invalidated by post_save signals in portfolio/signals.py.
 """
+
+from django.core.cache import cache
 
 from .models import (
     PersonalInfo, ResumeArchetype, ProfessionalSummary,
     ResumeArchetypePosition, ResumeArchetypeAchievement,
     ResumeArchetypeProject, ResumeArchetypeSkillCategory,
 )
+
+CACHE_TTL = 60 * 60 * 24  # 24 hours
 
 
 def build_resume_data_from_db(archetype_slug, output_type="ats"):
@@ -18,7 +25,16 @@ def build_resume_data_from_db(archetype_slug, output_type="ats"):
     Returns the same structure as create_specialized_resume() from
     master_resume_generator.py, so ResumeGenerator.from_data() can
     consume it without changes.
+
+    Cached per archetype+output_type. Invalidated by post_save signals.
     """
+    # Check cache (versioned to handle invalidation)
+    version = cache.get("resume_cache_version", 0)
+    cache_key = f"resume_data:{archetype_slug}:{output_type}:v{version}"
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+
     archetype = (
         ResumeArchetype.objects
         .select_related()
@@ -122,7 +138,7 @@ def build_resume_data_from_db(archetype_slug, output_type="ats"):
                 skills_list.append(skill.name)
         competencies[cat.name] = skills_list
 
-    return {
+    result = {
         "personal_info": personal_info,
         "summary": summary_text,
         "achievements": {"Impact": achievements_list},
@@ -133,11 +149,22 @@ def build_resume_data_from_db(archetype_slug, output_type="ats"):
         "additional_info": "",
     }
 
+    # Cache the result
+    cache.set(cache_key, result, timeout=CACHE_TTL)
+    return result
+
 
 def get_archetype_metadata():
-    """Return metadata for all archetypes (for the form page dropdown)."""
+    """Return metadata for all archetypes (for the form page dropdown).
+
+    Cached and invalidated by post_save signals.
+    """
+    cached = cache.get("archetype_metadata")
+    if cached is not None:
+        return cached
+
     archetypes = ResumeArchetype.objects.all().order_by("name")
-    return [
+    result = [
         {
             "slug": a.slug,
             "name": a.name,
@@ -145,3 +172,5 @@ def get_archetype_metadata():
         }
         for a in archetypes
     ]
+    cache.set("archetype_metadata", result, timeout=CACHE_TTL)
+    return result
