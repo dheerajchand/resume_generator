@@ -1,49 +1,58 @@
 # Resume Generator Documentation
 
-## 📚 Complete Documentation Index
+A Django-based professional identity system that generates targeted resumes in multiple formats. Content is managed through a Grappelli admin interface, organized into archetypes and instances, and delivered as PDF, DOCX, RTF, or Markdown.
 
-This folder contains comprehensive, step-by-step documentation for the Resume Generator system. Everything is written for absolute beginners - no technical knowledge required!
+## Documentation Index
 
-### 📖 Documentation Structure
+| Document | Description |
+|----------|-------------|
+| [Architecture](architecture.md) | System overview, apps, data flow, how content moves from database to rendered PDF |
+| [Data Model](data-model.md) | Every model, every field, every relationship -- the complete schema reference |
+| [Admin Guide](admin-guide.md) | Using the Grappelli admin: editing content, creating archetypes, managing instances, sending resumes, tracking follow-ups |
+| [Development](development.md) | Docker setup, Make commands, running locally, testing workflows |
+| [Deployment](deployment.md) | Railway hosting, environment variables, database management, redeployment procedures |
+| [Email Setup](email-setup.md) | Resend configuration, email templates, placeholder variables, the sending flow |
+| [Resume Types](resume-types.md) | What each archetype emphasizes, how to create new ones, customization options |
+| [PDF Engine](pdf-engine.md) | How `core_services.py` works, color schemes, KeepTogether architecture, multi-format generation |
+| [Testing](testing.md) | Legibility tests, smoke tests, ruff linting, vulture dead-code analysis |
 
-1. **[Getting Started Guide](getting-started.md)** - Start here! Complete setup from zero
-2. **[User Manual](user-manual.md)** - How to use the system (for end users)
-3. **[Developer Guide](developer-guide.md)** - How to modify and extend the system
-4. **[API Documentation](api-documentation.md)** - Complete API reference
-5. **[Troubleshooting](troubleshooting.md)** - Fix common problems
-6. **[FAQ](faq.md)** - Frequently asked questions
-7. **[Video Tutorials](video-tutorials.md)** - Step-by-step video guides
-8. **[Examples](examples.md)** - Real-world examples and templates
+## Quick Start
 
-### 🚀 Quick Start (TL;DR)
+```bash
+# Clone and build
+git clone <repo-url> resume_generator
+cd resume_generator
+make build
 
-If you just want to get started immediately:
+# Start services (Django + PostgreSQL 16)
+make up
 
-1. **Install Python** (if you don't have it)
-2. **Run these commands:**
-   ```bash
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py setup_resume_system --create-superuser
-   python manage.py runserver
-   ```
-3. **Open your browser** to http://127.0.0.1:8000/
-4. **Login** with username: `admin`, password: `admin123`
-5. **Start creating resumes!**
+# Run migrations and load data
+make migrate
+make loaddata
 
-### 🆘 Need Help?
+# Open in browser
+open http://localhost:8000
+```
 
-- **Stuck?** Check [Troubleshooting](troubleshooting.md)
-- **Confused?** Read [Getting Started Guide](getting-started.md)
-- **Want to customize?** See [Developer Guide](developer-guide.md)
-- **API questions?** Check [API Documentation](api-documentation.md)
+## Project Structure
 
-### 📞 Support
-
-- **Email**: support@resumegenerator.com
-- **GitHub Issues**: [Create an issue](https://github.com/your-repo/issues)
-- **Documentation**: This folder contains everything you need!
-
----
-
-**Remember**: This documentation is written for absolute beginners. If you're confused, it's not your fault - the documentation needs to be clearer. Let us know!
+```
+resume_generator/
+├── portfolio/                 # Professional Portfolio app
+│   ├── models.py              # All content and workflow models
+│   ├── admin.py               # Grappelli admin configuration
+│   ├── services.py            # Data assembly services
+│   ├── signals.py             # Cache invalidation
+│   ├── email.py               # Resend email integration
+│   └── management/commands/   # import_master_data, smoke_test_urls
+├── resumes/                   # Resume generation engine
+│   ├── core_services.py       # ResumeGenerator (PDF, DOCX, RTF, MD)
+│   └── views.py               # Download and generation endpoints
+├── generate_all_resumes.py    # Batch generation script
+├── master_resume_generator.py # Legacy JSON-based builder
+├── Dockerfile                 # Container definition
+├── docker-compose.yml         # Web + PostgreSQL orchestration
+├── Makefile                   # Developer task runner
+└── docs/                      # This documentation
+```
