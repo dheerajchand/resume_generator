@@ -222,12 +222,86 @@ class RecipientAdmin(admin.ModelAdmin):
     ]
 
 
+def send_resume_to_recipient(modeladmin, request, queryset):
+    """Admin action: generate and email resume to each selected instance's recipient."""
+    import io
+    import sys
+    from pathlib import Path
+
+    from .email import send_resume_email
+    from .models import GenerationRecord
+    from .services import build_resume_data_from_db
+
+    project_root = Path(__file__).resolve().parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+
+    from master_resume_generator import create_brief_resume
+    from resumes.core_services import ResumeGenerator
+
+    sent = 0
+    errors = []
+
+    for instance in queryset:
+        if not instance.recipient or not instance.recipient.email:
+            errors.append(f"{instance.name}: no recipient email")
+            continue
+
+        # Build resume data from archetype
+        resume_data = build_resume_data_from_db(instance.archetype.slug, "ats")
+        if instance.summary_override:
+            resume_data["summary"] = instance.summary_override
+
+        # Use brief for email attachments
+        resume_data = create_brief_resume(resume_data, instance.archetype.slug)
+
+        # Load color scheme
+        color_config_path = project_root / "color_schemes" / "default_professional.json"
+        config = {}
+        if color_config_path.exists():
+            import json
+            with open(color_config_path, "r") as f:
+                config = json.load(f)
+
+        generator = ResumeGenerator.from_data(
+            resume_data=resume_data, config=config,
+            color_scheme="default_professional", length_variant="brief", output_type="ats",
+        )
+
+        buffer = io.BytesIO()
+        generator.generate_pdf(buffer)
+        buffer.seek(0)
+
+        filename = f"dheeraj_chand_{instance.archetype.slug}_brief_default_professional.pdf"
+        result = send_resume_email(instance, buffer, filename)
+
+        if result.get("success"):
+            GenerationRecord.objects.create(
+                instance=instance, archetype_slug=instance.archetype.slug,
+                format_type="pdf", output_type="ats",
+                color_scheme="default_professional", length_variant="brief",
+                was_emailed=True,
+            )
+            sent += 1
+        else:
+            errors.append(f"{instance.name}: {result.get('error', 'unknown')}")
+
+    if sent:
+        modeladmin.message_user(request, f"Sent {sent} resume(s) successfully.")
+    if errors:
+        modeladmin.message_user(request, f"Errors: {'; '.join(errors)}", level="error")
+
+
+send_resume_to_recipient.short_description = "Send resume (brief PDF) to recipient via email"
+
+
 @admin.register(ResumeInstance)
 class ResumeInstanceAdmin(admin.ModelAdmin):
-    list_display = ["name", "archetype", "recipient", "created_at"]
+    list_display = ["name", "archetype", "recipient", "generation_count", "created_at"]
     list_filter = ["archetype"]
     search_fields = ["name", "recipient__name", "recipient__company"]
     autocomplete_fields = ["archetype", "recipient"]
+    actions = [send_resume_to_recipient]
     fieldsets = [
         (None, {"fields": ["name", "archetype", "recipient"]}),
         ("Overrides", {
@@ -236,6 +310,10 @@ class ResumeInstanceAdmin(admin.ModelAdmin):
         }),
         ("Notes", {"fields": ["notes"]}),
     ]
+
+    def generation_count(self, obj):
+        return obj.generations.count()
+    generation_count.short_description = "Generations"
 
 
 @admin.register(GenerationRecord)
