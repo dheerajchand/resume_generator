@@ -282,6 +282,18 @@ def send_resume_to_recipient(modeladmin, request, queryset):
                 color_scheme="default_professional", length_variant="brief",
                 was_emailed=True,
             )
+            # Auto-set follow-up to 5 business days from now
+            import datetime
+            today = datetime.date.today()
+            days_added = 0
+            follow_up = today
+            while days_added < 5:
+                follow_up += datetime.timedelta(days=1)
+                if follow_up.weekday() < 5:  # Mon-Fri
+                    days_added += 1
+            instance.follow_up_date = follow_up
+            instance.follow_up_status = "pending"
+            instance.save(update_fields=["follow_up_date", "follow_up_status"])
             sent += 1
         else:
             errors.append(f"{instance.name}: {result.get('error', 'unknown')}")
@@ -297,8 +309,9 @@ send_resume_to_recipient.short_description = "Send resume (brief PDF) to recipie
 
 @admin.register(ResumeInstance)
 class ResumeInstanceAdmin(admin.ModelAdmin):
-    list_display = ["name", "archetype", "recipient", "generation_count", "created_at"]
-    list_filter = ["archetype"]
+    list_display = ["name", "archetype", "recipient", "follow_up_status", "follow_up_date", "generation_count", "created_at"]
+    list_filter = ["archetype", "follow_up_status"]
+    list_editable = ["follow_up_status"]
     search_fields = ["name", "recipient__name", "recipient__company"]
     autocomplete_fields = ["archetype", "recipient"]
     actions = [send_resume_to_recipient]
@@ -306,8 +319,10 @@ class ResumeInstanceAdmin(admin.ModelAdmin):
         (None, {"fields": ["name", "archetype", "recipient"]}),
         ("Overrides", {
             "classes": ["grp-collapse grp-closed"],
-            "fields": ["summary_override"],
+            "fields": ["summary_override", "subject_override"],
+            "description": "Override the archetype summary or email subject line for this specific send.",
         }),
+        ("Follow-Up", {"fields": ["follow_up_date", "follow_up_status", "follow_up_notes"]}),
         ("Notes", {"fields": ["notes"]}),
     ]
 

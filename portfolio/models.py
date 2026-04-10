@@ -348,6 +348,12 @@ class ResumeInstance(models.Model):
     (pure archetype). summary_override allows targeting a specific job.
     """
 
+    FOLLOWUP_STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("done", "Done"),
+        ("not_needed", "Not Needed"),
+    ]
+
     name = models.CharField(max_length=300, help_text="e.g., John Sanford — Databricks Senior Analyst")
     archetype = models.ForeignKey(
         ResumeArchetype, on_delete=models.CASCADE, related_name="instances"
@@ -358,15 +364,37 @@ class ResumeInstance(models.Model):
     summary_override = models.TextField(
         blank=True, help_text="If set, replaces the archetype's professional summary for this instance"
     )
+    subject_override = models.CharField(
+        max_length=500, blank=True,
+        help_text="If set, replaces the email template's subject line for this instance"
+    )
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Follow-up tracking
+    follow_up_date = models.DateField(
+        null=True, blank=True,
+        help_text="When to follow up on this send"
+    )
+    follow_up_notes = models.TextField(blank=True, help_text="Notes about the follow-up")
+    follow_up_status = models.CharField(
+        max_length=20, choices=FOLLOWUP_STATUS_CHOICES, default="not_needed"
+    )
 
     class Meta:
         ordering = ["-created_at"]
 
     def __str__(self):
         return self.name
+
+    @property
+    def is_followup_overdue(self):
+        """True if follow_up_date is past and status is still pending."""
+        import datetime
+        if self.follow_up_status == "pending" and self.follow_up_date:
+            return self.follow_up_date < datetime.date.today()
+        return False
 
 
 class GenerationRecord(models.Model):
