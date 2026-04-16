@@ -315,6 +315,7 @@ class ResumeInstanceAdmin(admin.ModelAdmin):
     search_fields = ["name", "recipient__name", "recipient__company"]
     autocomplete_fields = ["archetype", "recipient"]
     actions = [send_resume_to_recipient]
+    change_form_template = "portfolio/admin/resumeinstance_change_form.html"
     fieldsets = [
         (None, {"fields": ["name", "archetype", "recipient"]}),
         ("Overrides", {
@@ -329,6 +330,150 @@ class ResumeInstanceAdmin(admin.ModelAdmin):
     def generation_count(self, obj):
         return obj.generations.count()
     generation_count.short_description = "Generations"
+
+    def get_urls(self):
+        from django.urls import path
+        custom_urls = [
+            path(
+                "<int:instance_id>/generate-download/",
+                self.admin_site.admin_view(self.generate_download_view),
+                name="portfolio_resumeinstance_generate",
+            ),
+            path(
+                "<int:instance_id>/send-email/",
+                self.admin_site.admin_view(self.send_email_view),
+                name="portfolio_resumeinstance_send",
+            ),
+        ]
+        return custom_urls + super().get_urls()
+
+    def generate_download_view(self, request, instance_id):
+        """Generate a brief PDF for this instance and stream as download."""
+        import io
+        import sys
+        from pathlib import Path as FilePath
+
+        from .models import GenerationRecord
+        from .services import build_resume_data_from_db
+
+        instance = ResumeInstance.objects.get(pk=instance_id)
+
+        project_root = FilePath(__file__).resolve().parent.parent
+        if str(project_root) not in sys.path:
+            sys.path.insert(0, str(project_root))
+
+        from master_resume_generator import create_brief_resume
+        from resumes.core_services import ResumeGenerator
+
+        resume_data = build_resume_data_from_db(instance.archetype.slug, "ats")
+        if instance.summary_override:
+            resume_data["summary"] = instance.summary_override
+
+        resume_data = create_brief_resume(resume_data, instance.archetype.slug)
+
+        import json
+        color_config_path = project_root / "color_schemes" / "default_professional.json"
+        config = {}
+        if color_config_path.exists():
+            with open(color_config_path, "r") as f:
+                config = json.load(f)
+
+        generator = ResumeGenerator.from_data(
+            resume_data=resume_data, config=config,
+            color_scheme="default_professional", length_variant="brief", output_type="ats",
+        )
+
+        buffer = io.BytesIO()
+        generator.generate_pdf(buffer)
+        buffer.seek(0)
+
+        GenerationRecord.objects.create(
+            instance=instance, archetype_slug=instance.archetype.slug,
+            format_type="pdf", output_type="ats",
+            color_scheme="default_professional", length_variant="brief",
+        )
+
+        from django.http import HttpResponse
+        filename = f"dheeraj_chand_{instance.archetype.slug}_brief.pdf"
+        response = HttpResponse(buffer.read(), content_type="application/pdf")
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        return response
+
+    def send_email_view(self, request, instance_id):
+        """Generate a brief PDF and send it to the recipient."""
+        import io
+        import sys
+        import datetime
+        from pathlib import Path as FilePath
+
+        from django.contrib import messages
+        from django.shortcuts import redirect
+
+        from .email import send_resume_email
+        from .models import GenerationRecord
+        from .services import build_resume_data_from_db
+
+        instance = ResumeInstance.objects.get(pk=instance_id)
+
+        if not instance.recipient or not instance.recipient.email:
+            messages.error(request, f"No recipient email for {instance.name}")
+            return redirect(f"../../{instance_id}/change/")
+
+        project_root = FilePath(__file__).resolve().parent.parent
+        if str(project_root) not in sys.path:
+            sys.path.insert(0, str(project_root))
+
+        from master_resume_generator import create_brief_resume
+        from resumes.core_services import ResumeGenerator
+
+        resume_data = build_resume_data_from_db(instance.archetype.slug, "ats")
+        if instance.summary_override:
+            resume_data["summary"] = instance.summary_override
+
+        resume_data = create_brief_resume(resume_data, instance.archetype.slug)
+
+        import json
+        color_config_path = project_root / "color_schemes" / "default_professional.json"
+        config = {}
+        if color_config_path.exists():
+            with open(color_config_path, "r") as f:
+                config = json.load(f)
+
+        generator = ResumeGenerator.from_data(
+            resume_data=resume_data, config=config,
+            color_scheme="default_professional", length_variant="brief", output_type="ats",
+        )
+
+        buffer = io.BytesIO()
+        generator.generate_pdf(buffer)
+        buffer.seek(0)
+
+        filename = f"dheeraj_chand_{instance.archetype.slug}_brief.pdf"
+        result = send_resume_email(instance, buffer, filename)
+
+        if result.get("success"):
+            GenerationRecord.objects.create(
+                instance=instance, archetype_slug=instance.archetype.slug,
+                format_type="pdf", output_type="ats",
+                color_scheme="default_professional", length_variant="brief",
+                was_emailed=True,
+            )
+            # Auto-set follow-up
+            today = datetime.date.today()
+            days_added = 0
+            follow_up = today
+            while days_added < 5:
+                follow_up += datetime.timedelta(days=1)
+                if follow_up.weekday() < 5:
+                    days_added += 1
+            instance.follow_up_date = follow_up
+            instance.follow_up_status = "pending"
+            instance.save(update_fields=["follow_up_date", "follow_up_status"])
+            messages.success(request, f"Resume sent to {instance.recipient.email}")
+        else:
+            messages.error(request, f"Send failed: {result.get('error', 'unknown')}")
+
+        return redirect(f"../../{instance_id}/change/")
 
 
 @admin.register(GenerationRecord)
