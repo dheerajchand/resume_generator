@@ -1,36 +1,31 @@
 """
-Email sending via Resend — send resumes to recipients with template support.
+Email sending via Django send_mail — Gmail SMTP.
 """
 
 import logging
 import os
 
+from django.core.mail import EmailMessage
+
 logger = logging.getLogger(__name__)
 
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
-FROM_EMAIL = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
+FROM_EMAIL = os.environ.get("FROM_EMAIL", "dheeraj.chand@gmail.com")
 
 
 def send_resume_email(instance, resume_buffer, filename, email_template=None):
-    """Send a resume to the instance's recipient via Resend.
+    """Send a resume to the instance's recipient via Gmail SMTP.
 
     Args:
         instance: ResumeInstance with recipient
         resume_buffer: BytesIO containing the generated resume
-        filename: e.g., "dheeraj_chand_data_engineering_long_corporate_blue.pdf"
+        filename: e.g., "dheeraj_chand_data_engineering_brief.pdf"
         email_template: EmailTemplate instance (optional, uses default if None)
 
     Returns:
         dict with send result or error
     """
-    if not RESEND_API_KEY:
-        return {"error": "RESEND_API_KEY not configured"}
-
     if not instance.recipient or not instance.recipient.email:
         return {"error": "Instance has no recipient with email address"}
-
-    import resend
-    resend.api_key = RESEND_API_KEY
 
     # Build template context
     from .models import PersonalInfo
@@ -68,7 +63,7 @@ def send_resume_email(instance, resume_buffer, filename, email_template=None):
             )
 
     # Instance-level subject override takes precedence
-    if hasattr(instance, 'subject_override') and instance.subject_override:
+    if hasattr(instance, "subject_override") and instance.subject_override:
         subject = instance.subject_override
 
     # Read buffer content
@@ -85,21 +80,17 @@ def send_resume_email(instance, resume_buffer, filename, email_template=None):
     }
 
     try:
-        result = resend.Emails.send({
-            "from": FROM_EMAIL,
-            "to": [instance.recipient.email],
-            "subject": subject,
-            "text": body,
-            "attachments": [
-                {
-                    "filename": filename,
-                    "content": list(file_content),
-                    "content_type": content_types.get(ext, "application/octet-stream"),
-                }
-            ],
-        })
-        logger.info(f"Email sent to {instance.recipient.email}: {result}")
-        return {"success": True, "id": result.get("id", "")}
+        email = EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=FROM_EMAIL,
+            to=[instance.recipient.email],
+        )
+        email.attach(filename, file_content, content_types.get(ext, "application/octet-stream"))
+        email.send()
+
+        logger.info(f"Email sent to {instance.recipient.email}: {subject}")
+        return {"success": True}
     except Exception as e:
         logger.error(f"Email send failed: {e}")
         return {"error": str(e)}
