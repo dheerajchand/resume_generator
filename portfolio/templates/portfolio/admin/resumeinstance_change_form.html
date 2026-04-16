@@ -1,0 +1,31 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block after_related_objects %}
+{{ block.super }}
+
+{% if original %}
+<div style="margin: 20px 0; padding: 15px; background: #f0f4f0; border: 1px solid #ccc; border-radius: 8px;">
+    <h3 style="margin: 0 0 10px 0; color: #333;">Quick Actions</h3>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="{% url 'admin:portfolio_resumeinstance_generate' original.pk %}"
+           class="grp-button"
+           style="background: #00643C; color: white; padding: 8px 20px; text-decoration: none; border-radius: 4px; display: inline-block;">
+            📄 Generate & Download PDF
+        </a>
+        {% if original.recipient and original.recipient.email %}
+        <a href="{% url 'admin:portfolio_resumeinstance_send' original.pk %}"
+           class="grp-button"
+           style="background: #D4AF37; color: #333; padding: 8px 20px; text-decoration: none; border-radius: 4px; display: inline-block;"
+           onclick="return confirm('Send resume to {{ original.recipient.email }}?');">
+            ✉️ Send Email to {{ original.recipient.name }}
+        </a>
+        {% else %}
+        <span style="padding: 8px 20px; background: #ddd; color: #999; border-radius: 4px; display: inline-block;">
+            ✉️ No recipient email set
+        </span>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
