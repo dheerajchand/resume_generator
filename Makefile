@@ -57,3 +57,28 @@ generate:  ## Generate all static resume outputs
 
 clean:  ## Remove containers and volumes
 	$(DC) down -v
+
+# ─── Railway Deployment ──────────────────────────────────────────────────────
+
+RAILWAY_DB_URL ?= $(shell echo $$DATABASE_URL)
+
+deploy:  ## Deploy to Railway (build + push)
+	railway up
+
+railway-logs:  ## Show Railway logs
+	railway logs
+
+railway-migrate:  ## Run migrations on Railway database
+	DJANGO_SETTINGS_MODULE=resume_generator_django.settings DEBUG=True SECRET_KEY=temp DATABASE_URL="$(RAILWAY_DB_URL)" python manage.py migrate
+
+railway-loaddata:  ## Import master data into Railway database
+	DJANGO_SETTINGS_MODULE=resume_generator_django.settings DEBUG=True SECRET_KEY=temp DATABASE_URL="$(RAILWAY_DB_URL)" python manage.py import_master_data
+
+railway-createsuperuser:  ## Create superuser on Railway database
+	DJANGO_SETTINGS_MODULE=resume_generator_django.settings DEBUG=True SECRET_KEY=temp DATABASE_URL="$(RAILWAY_DB_URL)" python manage.py createsuperuser
+
+railway-createcachetable:  ## Create cache table on Railway database
+	DJANGO_SETTINGS_MODULE=resume_generator_django.settings DEBUG=True SECRET_KEY=temp DATABASE_URL="$(RAILWAY_DB_URL)" python manage.py createcachetable
+
+railway-shell:  ## Django shell connected to Railway database
+	DJANGO_SETTINGS_MODULE=resume_generator_django.settings DEBUG=True SECRET_KEY=temp DATABASE_URL="$(RAILWAY_DB_URL)" python manage.py shell
